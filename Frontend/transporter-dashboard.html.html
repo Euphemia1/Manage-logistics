@@ -1,0 +1,273 @@
+<html>
+ <head>
+  <title>
+   Transporter Dashboard - Logistics SaaS Platform
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <style>
+   body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #333;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 20px;
+        }
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .sidebar a {
+            display: block;
+            color: #fff;
+            padding: 15px;
+            text-decoration: none;
+            margin: 5px 0;
+        }
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .header {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .header .user-info {
+            display: flex;
+            align-items: center;
+        }
+        .header .user-info img {
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .card {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .card h3 {
+            margin-top: 0;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table th, .table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .table th {
+            background-color: #f4f4f4;
+        }
+        .table tr:hover {
+            background-color: #f1f1f1;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #575757;
+        }
+  </style>
+ </head>
+ <body>
+  <div class="sidebar">
+   <h2>
+    Transporter Dashboard
+   </h2>
+   <a href="#">
+    <i class="fas fa-home">
+    </i>
+    Home
+   </a>
+   <a href="#">
+    <i class="fas fa-box">
+    </i>
+    Available Loads
+   </a>
+   <a href="#">
+    <i class="fas fa-cogs">
+    </i>
+    Settings
+   </a>
+   <a href="#">
+    <i class="fas fa-sign-out-alt">
+    </i>
+    Logout
+   </a>
+  </div>
+  <div class="main-content">
+   <div class="header">
+    <h1>
+     Dashboard
+    </h1>
+    <div class="user-info">
+     <img alt="Transporter profile picture" height="50" src="https://storage.googleapis.com/a1aa/image/0DsAIzPBeAztSaTGdSP8my4sUbD41IUpY4mXEmE6km2jx0DKA.jpg" width="50"/>
+     <span>
+      Transporter
+     </span>
+    </div>
+   </div>
+   <div class="card">
+    <h3>
+     Available Loads
+    </h3>
+    <table class="table">
+     <thead>
+      <tr>
+       <th>
+        Order ID
+       </th>
+       <th>
+        Cargo Type
+       </th>
+       <th>
+        Weight
+       </th>
+       <th>
+        Origin
+       </th>
+       <th>
+        Destination
+       </th>
+       <th>
+        Cargo Owner
+       </th>
+       <th>
+        Phone
+       </th>
+       <th>
+        Instructions
+       </th>
+       <th>
+        Actions
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td>
+        1001
+       </td>
+       <td>
+        Electronics
+       </td>
+       <td>
+        500kg
+       </td>
+       <td>
+        New York
+       </td>
+       <td>
+        Los Angeles
+       </td>
+       <td>
+        John Doe
+       </td>
+       <td>
+        123-456-7890
+       </td>
+       <td>
+        Handle with care
+       </td>
+       <td>
+        <button class="btn">
+         Proceed
+        </button>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        1002
+       </td>
+       <td>
+        Furniture
+       </td>
+       <td>
+        1000kg
+       </td>
+       <td>
+        Chicago
+       </td>
+       <td>
+        Houston
+       </td>
+       <td>
+        Jane Smith
+       </td>
+       <td>
+        098-765-4321
+       </td>
+       <td>
+        Fragile items
+       </td>
+       <td>
+        <button class="btn">
+         Proceed
+        </button>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        1003
+       </td>
+       <td>
+        Machinery
+       </td>
+       <td>
+        2000kg
+       </td>
+       <td>
+        Miami
+       </td>
+       <td>
+        Seattle
+       </td>
+       <td>
+        Michael Johnson
+       </td>
+       <td>
+        555-555-5555
+       </td>
+       <td>
+        Requires special handling
+       </td>
+       <td>
+        <button class="btn">
+         Proceed
+        </button>
+       </td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+  </div>
+ </body>
+</html>

@@ -1,0 +1,430 @@
+<html>
+ <head>
+  <title>
+   Admin Dashboard - Logistics SaaS Platform
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #333;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 20px;
+        }
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .sidebar a {
+            display: block;
+            color: #fff;
+            padding: 15px;
+            text-decoration: none;
+            margin: 5px 0;
+        }
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .header {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .header .user-info {
+            display: flex;
+            align-items: center;
+        }
+        .header .user-info img {
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .card {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .card h3 {
+            margin-top: 0;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table th, .table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .table th {
+            background-color: #f4f4f4;
+        }
+        .table tr:hover {
+            background-color: #f1f1f1;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #575757;
+        }
+  </style>
+ </head>
+ <body>
+  <div class="sidebar">
+   <h2>
+    Admin Dashboard
+   </h2>
+   <a href="#">
+    <i class="fas fa-home">
+    </i>
+    Home
+   </a>
+   <a href="#">
+    <i class="fas fa-users">
+    </i>
+    Manage Cargo Owners
+   </a>
+   <a href="#">
+    <i class="fas fa-truck">
+    </i>
+    Manage Transporters
+   </a>
+   <a href="#">
+    <i class="fas fa-box">
+    </i>
+    Manage Orders
+   </a>
+   <a href="#">
+    <i class="fas fa-cogs">
+    </i>
+    Settings
+   </a>
+   <a href="#">
+    <i class="fas fa-sign-out-alt">
+    </i>
+    Logout
+   </a>
+  </div>
+  <div class="main-content">
+   <div class="header">
+    <h1>
+     Dashboard
+    </h1>
+    <div class="user-info">
+     <img alt="Admin profile picture" height="50" src="https://storage.googleapis.com/a1aa/image/z5OoaeeOKwoE20Gep5dZFQxdbnfSfVaxku7IhCnUSBle4U6BF.jpg" width="50"/>
+     <span>
+      Admin
+     </span>
+    </div>
+   </div>
+   <div class="card">
+    <h3>
+     Manage Cargo Owners
+    </h3>
+    <table class="table">
+     <thead>
+      <tr>
+       <th>
+        ID
+       </th>
+       <th>
+        Name
+       </th>
+       <th>
+        Email
+       </th>
+       <th>
+        Phone
+       </th>
+       <th>
+        Actions
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td>
+        1
+       </td>
+       <td>
+        Euphemia Chikungulu
+       </td>
+       <td>
+        euphemiachikungulu347@gmail.com
+       </td>
+       <td>
+       0762273483
+       </td>
+       <td>
+        <button class="btn">
+         Edit
+        </button>
+        <button class="btn">
+         Delete
+        </button>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        2
+       </td>
+       <td>
+        Faith Mukumbiri
+       </td>
+       <td>
+        faith@example.com
+       </td>
+       <td>
+        0762273483
+       </td>
+       <td>
+        <button class="btn">
+         Edit
+        </button>
+        <button class="btn">
+         Delete
+        </button>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        3
+       </td>
+       <td>
+        Zoe Chengelo
+       </td>
+       <td>
+        Zoe@example.com
+       </td>
+       <td>
+        0762273483
+       </td>
+       <td>
+        <button class="btn">
+         Edit
+        </button>
+        <button class="btn">
+         Delete
+        </button>
+       </td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <div class="card">
+    <h3>
+     Manage Transporters
+    </h3>
+    <table class="table">
+     <thead>
+      <tr>
+       <th>
+        ID
+       </th>
+       <th>
+        Name
+       </th>
+       <th>
+        Email
+       </th>
+       <th>
+        Phone
+       </th>
+       <th>
+        Actions
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td>
+        1
+       </td>
+       <td>
+        Faith Tembiso
+       </td>
+       <td>
+        tfaith@example.com
+       </td>
+       <td>
+       0779572036
+       </td>
+       <td>
+        <button class="btn">
+         Edit
+        </button>
+        <button class="btn">
+         Delete
+        </button>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        2
+       </td>
+       <td>
+        Muraga Stephen
+       </td>
+       <td>
+        muraga@example.com
+       </td>
+       <td>
+        077938838
+       </td>
+       <td>
+        <button class="btn">
+         Edit
+        </button>
+        <button class="btn">
+         Delete
+        </button>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        3
+       </td>
+       <td>
+        Theresa
+       </td>
+       <td>
+        theresa@example.com
+       </td>
+       <td>
+        093483993
+       </td>
+       <td>
+        <button class="btn">
+         Edit
+        </button>
+        <button class="btn">
+         Delete
+        </button>
+       </td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+   <div class="card">
+    <h3>
+     Manage Orders
+    </h3>
+    <table class="table">
+     <thead>
+      <tr>
+       <th>
+        Order ID
+       </th>
+       <th>
+        Cargo Owner
+       </th>
+       <th>
+        Transporter
+       </th>
+       <th>
+        Status
+       </th>
+       <th>
+        Actions
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td>
+        1001
+       </td>
+       <td>
+        John Doe
+       </td>
+       <td>
+        Transporter A
+       </td>
+       <td>
+        Pending
+       </td>
+       <td>
+        <button class="btn">
+         View
+        </button>
+        <button class="btn">
+         Update
+        </button>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        1002
+       </td>
+       <td>
+        Jane Smith
+       </td>
+       <td>
+        Transporter B
+       </td>
+       <td>
+        In Transit
+       </td>
+       <td>
+        <button class="btn">
+         View
+        </button>
+        <button class="btn">
+         Update
+        </button>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        1003
+       </td>
+       <td>
+        Michael Johnson
+       </td>
+       <td>
+        Transporter C
+       </td>
+       <td>
+        Delivered
+       </td>
+       <td>
+        <button class="btn">
+         View
+        </button>
+        <button class="btn">
+         Update
+        </button>
+       </td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+  </div>
+ </body>
+</html>
