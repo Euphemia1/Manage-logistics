@@ -77,8 +77,13 @@
                 <label for="password"><i class="fa fa-lock"></i>Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your password" required>
             </div>
-            <button type="submit" class="login-btn">Login</button>
+            <button type="button" class="login-btn" id="loginBtn">Login</button>
         </form>
+        <script>
+            document.getElementById('loginBtn').onclick = function() {
+                window.location.href = 'cargo-dashboard.html'; // Redirect to the cargo owner dashboard
+            };
+        </script>
     </div>
 </body>
 </html>
