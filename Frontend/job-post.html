@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Post Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #jobPosts {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #228525;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .btn {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container mx-auto p-4">
+    <div id="jobPosts">
+        <h2 class="text-xl font-bold mb-4">Job Posts</h2>
+        <table class="min-w-full bg-white">
+            <thead>
+                <tr>
+                    <th class="py-2 px-4 border-b">Item</th>
+                    <th class="py-2 px-4 border-b">Pick up</th>
+                    <th class="py-2 px-4 border-b">Drop off</th>
+                    <th class="py-2 px-4 border-b">Weight (mt)</th>
+                    <th class="py-2 px-4 border-b">State</th>
+                    <th class="py-2 px-4 border-b">Price per tn</th>
+                    <th class="py-2 px-4 border-b">Job start date</th>
+                </tr>
+            </thead>
+            <tbody id="jobPostList">
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    document.getElementById('pickup').addEventListener('input', function() {
+        document.getElementById('formPickup').value = this.value;
+    });
+
+    document.getElementById('dropoff').addEventListener('input', function() {
+        document.getElementById('formDropoff').value = this.value;
+    });
+
+    function clearSearch() {
+        document.getElementById('pickup').value = '';
+        document.getElementById('dropoff').value = '';
+        document.getElementById('weightRange').value = 0;
+    }
+
+    function submitForm(event) {
+        event.preventDefault();
+        const item = document.querySelector('input[placeholder="Enter item"]').value;
+        const pickup = document.getElementById('formPickup').value;
+        const dropoff = document.getElementById('formDropoff').value;
+        const weight = document.querySelector('input[placeholder="Enter weight"]').value;
+        const state = document.querySelector('input[placeholder="Enter state"]').value;
+        const price = document.querySelector('input[placeholder="Enter price per tn"]').value;
+        const startDate = document.querySelector('input[placeholder="Enter job start date"]').value;
+
+        const jobPost = {
+            item,
+            pickup,
+            dropoff,
+            weight,
+            state,
+            price,
+            startDate
+        };
+
+        showJobPost(jobPost);
+    }
+
+    function showJobPost(jobPost) {
+        const jobPostList = document.getElementById('jobPostList');
+        const jobPostRow = document.createElement('tr');
+        jobPostRow.innerHTML = `
+            <td class="py-2 px-4 border-b">${jobPost.item}</td>
+            <td class="py-2 px-4 border-b">${jobPost.pickup}</td>
+            <td class="py-2 px-4 border-b">${jobPost.dropoff}</td>
+            <td class="py -2 px-4 border-b">${jobPost.weight}</td>
+            <td class="py-2 px-4 border-b">${jobPost.state}</td>
+            <td class="py-2 px-4 border-b">${jobPost.price}</td>
+            <td class="py-2 px-4 border-b">${jobPost.startDate}</td>
+        `;
+        jobPostList.appendChild(jobPostRow);
+    }
+</script>
+</body>
+</html>
