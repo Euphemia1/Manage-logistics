@@ -1,8 +1,7 @@
 <?php
-// Database connection parameters
 $servername = "localhost"; 
-$username = "your_username"; // Your database username
-$password = "your_password"; // Your database password
+$username = "root"; // Your database username
+$password = ""; // Your database password
 $dbname = "logistics"; // Your database name
 
 // Create connection
@@ -15,21 +14,30 @@ if ($conn->connect_error) {
 
 // Prepare and bind
 $stmt = $conn->prepare("INSERT INTO cargo_owners (cargo_owner_name, email, phone_number, password, company) VALUES (?, ?, ?, ?, ?)");
-$stmt->bind_param("sssss", $cargo_owner_name, $email, $phone_number, $password, $company);
+$stmt->bind_param("sssss", $cargo_owner_name, $email, $phone_number, $hashed_password, $company);
 
-// Set parameters and execute
-$cargo_owner_name = $_POST['cargo_owner_name'];
-$email = $_POST['email'];
-$phone_number = $_POST['phone_number'];
-$password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash the password for security
-$company = $_POST['company'];
+// Check if form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Set parameters
+    $cargo_owner_name = $_POST['cargo_owner_name'];
+    $email = $_POST['email'];
+    $phone_number = $_POST['phone_number'];
+    $password = $_POST['password'];
+    $company = $_POST['company'];
+//before inserting check if email exists
+    // Hash the password for security
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-if ($stmt->execute()) {
-    // Redirect to the login page after successful signup
-    header("Location: cargo-owner-login.html");
-    exit();
-} else {
-    echo "Error: " . $stmt->error;
+    // Execute query
+    if ($stmt->execute()) {
+        // Redirect to the login page after successful signup
+        header("Location: ../Frontend/cargo-owner-login.html");
+        exit();
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+} else{
+    echo $_SERVER['REQUEST_METHOD'];
 }
 
 // Close connections

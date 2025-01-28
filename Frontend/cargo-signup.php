@@ -73,33 +73,33 @@
   <div class="signup-container">
    <h2>
     Cargo Owner Signup </h2>
-   <form>
-    <div class="form-group">
-     <label for="fullName">
-      Full Name
-     </label>
-     <input id="fullName" name="fullName" placeholder="Enter your full name" type="text"/>
-    </div>
-    <div class="form-group">
-     <label for="email">
-      Email
-     </label>
-     <input id="email" name="email" placeholder="Enter your email" type="email"/>
-    </div>
-    <div class="form-group">
-     <label for="password">Password</label>
-     <input id="password" name="password" placeholder="Enter your password" type="password"/>
-    </div>
-    <div class="form-group">
-     <label for="companyName">  Company Name </label>
-     <input id="companyName" name="companyName" placeholder="Enter your company name" type="text"/>
-    </div>
-    <div class="form-group">
-     <label for="phoneNumber">Phone Number</label>
-     <input id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number" type="text"/>
-    </div>
-    <button class="btn" type="submit"> Signup</button>
-   </form>
+    <form action="../Backend/cargo-owner-signup.php"  method="POST">
+        <div class="form-group">
+         <label for="cargo_owner_name">
+          Full Name
+         </label>
+         <input id="cargo_owner_name" name="cargo_owner_name" placeholder="Enter your full name" type="text"/>
+        </div>
+        <div class="form-group">
+         <label for="email">
+          Email
+         </label>
+         <input id="email" name="email" placeholder="Enter your email" type="email"/>
+        </div>
+        <div class="form-group">
+         <label for="password">Password</label>
+         <input id="password" name="password" placeholder="Enter your password" type="password"/>
+        </div>
+        <div class="form-group">
+         <label for="company">  Company Name </label>
+         <input id="company" name="company" placeholder="Enter your company name" type="text"/>
+        </div>
+        <div class="form-group">
+         <label for="phone_number">Phone Number</label>
+         <input id="phone_number" name="phone_number" placeholder="Enter your phone number" type="text"/>
+        </div>
+        <button class="btn" type="submit"> Signup</button>
+       </form>
    <div class="login-link">
     Already have an account?
     <a href="cargo-owner-login.html">Login here</a>
