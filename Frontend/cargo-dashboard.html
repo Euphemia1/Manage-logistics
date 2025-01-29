@@ -1,224 +1,318 @@
-<html>
-  <head>
-    <title>
-      Cargo Owner Dashboard - Logistics SaaS Platform
-    </title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      body {
-        font-family: 'Roboto', sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-      }
-      .sidebar {
-        width: 250px;
-        height: 100vh;
-        background-color: #333;
-        color: #fff;
-        position: fixed;
-        top: 0;
-        left: 0;
-        padding-top: 20px;
-      }
-      .sidebar h2 {
-        text-align: center;
-        margin-bottom: 30px;
-      }
-      .sidebar a {
-        display: block;
-        color: #fff;
-        padding: 15px;
-        text-decoration: none;
-        margin: 5px 0;
-      }
-      .sidebar a:hover {
-        background-color: #575757;
-      }
-      .main-content {
-        margin-left: 250px;
-        padding: 20px;
-      }
-      .header {
-        background-color: #fff;
-        padding: 20px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .header h1 {
-        margin: 0;
-      }
-      .header .user-info {
-        display: flex;
-        align-items: center;
-      }
-      .header .user-info img {
-        border-radius: 50%;
-        margin-right: 10px;
-      }
-      .card {
-        background-color: #fff;
-        padding: 20px;
-        margin-bottom: 20px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      }
-      .card h3 {
-        margin-top: 0;
-      }
-      .form-group {
-        margin-bottom: 15px;
-      }
-      .form-group label {
-        display: block;
-        margin-bottom: 5px;
-      }
-      .form-group input, .form-group textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-      }
-      .btn {
-        padding: 10px 20px;
-        background-color: #333;
-        color: #fff;
-        border: none;
-        cursor: pointer;
-      }
-      .btn:hover {
-        background-color: #575757;
-      }
-      .cargo-entry {
-        margin-bottom: 20px;
-        border: 1px solid #ddd;
-        padding: 20px;
-        border-radius: 5px;
-      }
-      .cargo-entry h4 {
-        margin-bottom: 10px;
-      }
-      .cargo-entry .cargo-info {
-        display: flex;
-        flex-direction: column;
-      }
-      .cargo-entry .cargo-info div {
-        margin-bottom: 10px;
-      }
-      .cargo-entry .cargo-info label {
-        font-weight: bold;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="sidebar">
-      <h2>Cargo Owner Dashboard</h2>
-      <a href="#"><i class="fas fa-home"></i> Home</a>
-      <a href="view" id="postCargoLink"><i class="fas fa-box"></i> Post Cargo</a>
-      <a href="#" id="viewPostedCargosLink" onclick="viewPostedCargos()"><i class="fas fa-eye"></i> View Posted Cargos</a>
-      <a href="#"> <i class="fas fa-cogs"></i> Settings </a>
-      <a href="index.html"> <i class="fas fa-sign-out-alt"></i> Logout </a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cargo Owner Dashboard - Logistics SaaS Platform</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      background-color: #333;
+      color: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding-top: 20px;
+    }
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .sidebar a {
+      display: block;
+      color: #fff;
+      padding: 15px;
+      text-decoration: none;
+      margin: 5px 0;
+    }
+    .sidebar a:hover {
+      background-color: #575757;
+    }
+    .main-content {
+      margin-left: 250px;
+      padding: 20px;
+    }
+    .header {
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 {
+      margin: 0;
+    }
+    .user-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px; /* Add space below the user info */
+    }
+    .user-info img {
+      border-radius: 50%; /* Make the image circular */
+      border: 2px solid #333; /* Add a border around the image */
+      margin-right: 10px; /* Space between image and username */
+    }
+    .user-info span {
+      font-size: 1.2em; /* Increase font size for the username */
+      font-weight: bold; /* Make the username bold */
+      color: #333; /* Set a color for the username */
+    }
+    .card {
+      background-color: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .card h3 {
+      margin-top: 0;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .btn {
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #575757;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Cargo Owner Dashboard</h2>
+    <a href="#"><i class="fas fa-home"></i> Home</a>
+    <a href="" id="postCargoLink"><i class="fas fa-box"></i> Post Cargo</a>
+    <a href="#" id="viewPostedCargosLink" onclick="viewPostedCargos()"><i class="fas fa-eye"></i> View Posted Cargos</a>
+    <a href="#" id="settingsLink"><i class="fas fa-cogs"></i> Settings </a>
+    <a href="index.html"> <i class="fas fa-sign-out-alt"></i> Logout </a>
+  </div>
+
+  <div class="main-content">
+    <div class="header">
+      <h1> Dashboard </h1>
+      <div class="user-info">
+        <img alt="Cargo owner profile picture" id="profilePicture" height="50" width="50"/>
+        <span id="cargoOwnerName">Cargo Owner</span>
+      </div>
     </div>
-    <div class="main-content">
-      <div class="header">
-        <h1> Dashboard </h1>
-        <div class="user-info">
-          <img alt="Cargo owner profile picture" height="50" src="https://storage.googleapis.com/a1aa/image/Kw6jXHFeQCx7N6CtgwPv7UTdkt72ixifPcg6GGcIg7GWopHUA.jpg" width="50"/>
-          <span> Cargo Owner </span>
+
+    <!-- Settings Section -->
+    <div id="settingsSection" class="card" style="display:none;">
+      <!-- <h3>Update Profile Picture and Name</h3> -->
+      <form id="profileForm">
+        <div class="form-group">
+          <label for="profileImage">Upload Profile Picture</label>
+          <input type="file" id="profileImage" accept="image/*"/>
         </div>
-      </div>
-
-      <!-- Post Cargo Form Section -->
-      <div id="postCargoSection" class="card">
-        <h3>Post Available Cargo</h3>
-        <form id="postCargoForm">
-          <div class="form-group">
-            <label for="pickupDate">Pick Up Date</label>
-            <input id="pickupDate" name="pickupDate" type="date" />
-          </div>
-          <div class="form-group">
-            <label for="weight">Weight</label>
-            <div style="display: flex; align-items: center;">
-                <button type="button" onclick="adjustWeight(-1)">-</button>
-                <input id="weight" name="weight" placeholder="Enter weight of cargo" type="number" value="0" />
-                <button type="button" onclick="adjustWeight(1)">+</button>
-            </div>
-            <label for="cargoType">Type of Cargo</label>
-            <input id="cargoType" name="cargoType" placeholder="Enter type of cargo" type="text"/>
-          </div>
-          <div class="form-group">
-            <label for="origin">Origin</label>
-            <input id="origin" name="origin" placeholder="Enter origin location" type="text"/>
-          </div>
-          <div class="form-group">
-            <label for="destination">Destination</label>
-            <input id="destination" name="destination" placeholder="Enter destination location" type="text"/>
-          </div>
-          <div class="form-group">
-            <label for="phone">Phone Number</label>
-            <input id="phone" name="phone" placeholder="Enter contact phone number" type="text"/>
-          </div>
-          <div class="form-group">
-            <label for="instructions">Instructions</label>
-            <textarea id="instructions" name="instructions" placeholder="Enter any special instructions" rows="4"></textarea>
-          </div>
-          <button class="btn" type="submit">Post Cargo</button>
-        </form>
-      </div>
-
-      <!-- View Posted Cargos Section -->
-      <div id="postedCargos" class="card" style="display:none;">
-        <h3>Your Posted Cargos</h3>
-        <div id="cargoList"></div>
-      </div>
+        <div class="form-group">
+          <label for="ownerName">Cargo Owner Name</label>
+          <input type="text" id="ownerName" placeholder="Enter your name" />
+        </div>
+        <button type="submit" class="btn">Update Profile</button>
+      </form>
     </div>
 
-    <script>
-      // Function to show the "View Posted Cargos" section and hide the "Post Cargo" section
-      function viewPostedCargos() {
-        document.getElementById('postCargoSection').style.display = 'none'; // Hide post cargo section
-        document.getElementById('postedCargos').style.display = 'block'; // Show posted cargos section
+    <!-- Post Cargo Form Section -->
+    <div id="postCargoSection" class="card">
+      <h3 style="text-align: center; margin: 100px 0;">
+        <span style="color: green;">Post Available</span> <span style="color: black;">Cargo</span>
+      </h3>
+      <form id="postCargoForm">
+        <div class="form-group">
+          <label for="pickupDate">Pick Up Date</label>
+          <input id="pickupDate" name="pickupDate" type="date" required />
+        </div>
+        <div class="form-group">
+          <label for="weight">Weight</label>
+          <div style="display: flex; align-items: center;">
+            <button type="button" onclick="adjustWeight(-1)">-</button>
+            <input id="weight" name="weight" placeholder="Enter weight of cargo" type="number" value="0" required />
+            <button type="button" onclick="adjustWeight(1)">+</button>
+          </div>
+        </div>
 
-        const cargoList = document.getElementById('cargoList');
-        cargoList.innerHTML = ''; // Clear previous entries
+        <div class="form-group">
+          <label for="dimensions">Dimensions</label>
+          <input id="dimensions" name="dimensions" placeholder="Enter the dimensions" type="text" required />
+        </div>
 
-        // Example data, replace with actual data retrieval logic
-        const cargos = [
-            { id: 1, type: '', weight: '', origin: '', destination: '', pickupDate: '', phone: '', instructions: '' },
-            { id: 2, type: '', weight: '', origin: '', destination: '', pickupDate: '', phone: '', instructions: '' }
-        ];
+        <div class="form-group">
+          <label for="cargoType">Type of Cargo</label>
+          <input id="cargoType" name="cargoType" placeholder="Enter type of cargo" type="text" required />
+        </div>
+        <div class="form-group">
+          <label for="origin">Origin</label>
+          <input id="origin" name="origin" placeholder="Enter origin location" type="text" required />
+        </div>
+        <div class="form-group">
+          <label for="destination">Destination</label>
+          <input id="destination" name="destination" placeholder="Enter destination location" type="text" required />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input id="phone" name="phone" placeholder="Enter contact phone number" type="text" required />
+        </div>
+        <div class="form-group">
+          <label for="instructions">Instructions</label>
+          <textarea id="instructions" name="instructions" placeholder="Enter any special instructions" rows="4"></textarea>
+        </div>
+        <button class="btn" type="submit">Post Cargo</button>
+      </form>
+    </div>
 
-        cargos.forEach(cargo => {
-            const cargoEntry = document.createElement('div');
-            cargoEntry.classList.add('cargo-entry');
+    <!-- View Posted Cargos Section -->
+    <div id="postedCargos" class="card" style="display:none;">
+      <h3>Your Posted Cargos</h3>
+      <div id="cargoList"></div>
+    </div>
+  </div>
 
-            cargoEntry.innerHTML = `
-              <h4>Cargo #${cargo.id}</h4>
-              <div class="cargo-info">
-                <div><label>Type:</label> ${cargo.type}</div>
-                <div><label>Weight:</label> ${cargo.weight}</div>
-                <div><label>Origin:</label> ${cargo.origin}</div>
-                <div><label>Destination:</label> ${cargo.destination}</div>
-                <div><label>Pick Up Date:</label> ${cargo.pickupDate}</div>
-                <div><label>Phone:</label> ${cargo.phone}</div>
-                <div><label>Instructions:</label> ${cargo.instructions}</div>
-              </div>
-            `;
-            cargoList.appendChild(cargoEntry);
-        });
+  <script>
+    // Load profile data from localStorage
+    let cargoOwnerName = localStorage.getItem('cargo_owner_name') || "";
+    let profilePicUrl = localStorage.getItem('profilePicUrl') || "https://via.placeholder.com/50"; // Default placeholder picture
+
+    // Load posted cargos from localStorage
+    let postedCargos = JSON.parse(localStorage.getItem('postedCargos')) || [];
+
+    // Update profile info dynamically
+    document.getElementById("cargoOwnerName").textContent = cargoOwnerName;
+    document.getElementById("profilePicture").src = profilePicUrl;
+
+    // Show Settings Section
+    document.getElementById("settingsLink").addEventListener("click", function() {
+      document.getElementById("settingsSection").style.display = "block";
+      document.getElementById("postCargoSection").style.display = "none"; // Hide other sections
+      document.getElementById("postedCargos").style.display = "none"; // Hide other sections
+    });
+
+    // Handle profile image upload
+    document.getElementById("profileForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const ownerName = document.getElementById("ownerName").value;
+      const profileImage = document.getElementById("profileImage").files[0];
+
+      if (ownerName) {
+        cargoOwnerName = ownerName; // Update name
+        document.getElementById("cargoOwnerName").textContent = cargoOwnerName;
+        localStorage.setItem('cargoOwnerName', cargoOwnerName);
       }
 
-      // Function to toggle visibility back to the Post Cargo form
-      function showPostCargoForm() {
-        document.getElementById('postedCargos').style.display = 'none'; // Hide posted cargos section
-        document.getElementById('postCargoSection').style.display = 'block'; // Show post cargo section
+      if (profileImage) {
+        const reader = new FileReader();
+        reader.onload = function() {
+          profilePicUrl = reader.result; // Update profile picture
+          document.getElementById("profilePicture").src = profilePicUrl;
+          localStorage.setItem('profilePicUrl', profilePicUrl);
+        };
+        reader.readAsDataURL(profileImage);
       }
+    });
 
-      // Listen for clicks on the 'Post Cargo' link to switch to the post cargo section
-      document.getElementById('postCargoLink').addEventListener('click', showPostCargoForm);
-    </script>
-  </body>
+   // Handle post cargo form submission
+document.getElementById("postCargoForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent the form from refreshing the page
+    
+    const formData = new FormData();
+    // formData.append('cargo_owner_name', cargoOwnerName); // Use the logged-in user's name
+    formData.append('pickupDate', document.getElementById("pickupDate").value);
+    formData.append('weight', document.getElementById("weight").value);
+    formData.append('dimensions', document.getElementById("dimensions").value);  // If dimensions is not the same as cargoType
+    formData.append('cargoType', document.getElementById("cargoType").value);
+    formData.append('origin', document.getElementById("origin").value);
+    formData.append('destination', document.getElementById("destination").value);
+    formData.append('phone', document.getElementById("phone").value);
+    formData.append('instructions', document.getElementById("instructions").value);
+
+    // Send the form data to the backend
+    fetch('./Backend/submit-cargo.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert(data.message);
+            document.getElementById("postCargoForm").reset();  // Reset the form
+        } else {
+            alert(data.message);  // Show an error message
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("Something went wrong! Please try again.");
+    });
+});
+
+    // Function to view posted cargos
+    function viewPostedCargos() {
+      fetch('../Backend/fetch-cargo.php')
+          .then(response => response.json())
+          .then(cargos => {
+              const cargoList = document.getElementById("cargoList");
+              cargoList.innerHTML = ""; // Clear previous content
+
+              if (cargos.length === 0) {
+                  cargoList.innerHTML = "<p>No cargos posted yet.</p>";
+              } else {
+                  cargos.forEach((cargo, index) => {
+                      const cargoItem = document.createElement("div");
+                      cargoItem.className = "cargo-item";
+                      cargoItem.innerHTML = `
+                          <p><strong>Cargo Owner:</strong> ${cargo.owner_name}</p>
+                          <p><strong>Cargo ${index + 1}:</strong></p>
+                          <p>Pickup Date: ${cargo.pickup_date}</p>
+                          <p>Weight: ${cargo.weight}</p>
+                          <p>Type: ${cargo.cargo_type}</p>
+                          <p>Origin: ${cargo.origin}</p>
+                          <p>Destination: ${cargo.destination}</p>
+                          <p>Phone: ${cargo.phone}</p>
+                          <p>Instructions: ${cargo.instructions}</p>
+                          <hr>
+                      `;
+                      cargoList.appendChild(cargoItem);
+                  });
+              }
+          })
+          .catch(error => {
+              console.error('Error:', error);
+          });
+    }
+
+    // Example of other functions for post cargo (unchanged)
+    function adjustWeight(change) {
+      const weightInput = document.getElementById('weight');
+      let weight = parseInt(weightInput.value) || 0;
+      weight += change;
+      if (weight < 0) weight = 0;
+      weightInput.value = weight;
+    }
+  </script>
+</body>
 </html>
