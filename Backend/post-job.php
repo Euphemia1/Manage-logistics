@@ -18,7 +18,7 @@ $dropoff = $_POST['dropoff'];
 $weight = $_POST['weight'];
 $state = $_POST['state'];
 $price = $_POST['price'];
-$start_date = $_POST['start_date'];
+$start_date = $_POST['startDate'];
 
 $sql = "INSERT INTO job_posts (item, pickup, dropoff, weight, state, price, start_date)
 VALUES ('$item', '$pickup', '$dropoff', '$weight', '$state', '$price', '$start_date')";
