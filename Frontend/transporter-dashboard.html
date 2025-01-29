@@ -186,16 +186,16 @@
   </div>
  </body>
  <script>
- document.addEventListener('DOMContentLoaded', function() {
-    fetch('get-jobs.php')
-        .then(response => response.json())
-        .then(jobs => {
-            jobs.forEach(job => {
-                showJobPost(job);
-            });
-        })
-        .catch(error => console.error('Error fetching jobs:', error));
-});
+//  document.addEventListener('DOMContentLoaded', function() {
+//     fetch('get-jobs.php')
+//         .then(response => response.json())
+//         .then(jobs => {
+//             jobs.forEach(job => {
+//                 showJobPost(job);
+//             });
+//         })
+//         .catch(error => console.error('Error fetching jobs:', error));
+// });
 
 function showJobPost(jobPost) {
     const jobPostList = document.getElementById('jobPostList');

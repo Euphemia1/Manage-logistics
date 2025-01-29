@@ -133,7 +133,7 @@
       <tr>
        <td>  </td>
        <td></td>
-       <td> </td>
+       <td> /td>
        <td> </td>
        <td>
         <button class="btn"> Edit </button>
@@ -225,7 +225,7 @@
      <tbody>
       <tr>
        <td> </td>
-       <td> </td>
+       <td> /td>
        <td>  </td>
        <td> </td>
        <td>
@@ -275,47 +275,6 @@
     function updateCargoOwner(id) {
         alert(`Update functionality for Cargo Owner with ID: ${id}`);
     }
-
-
-    function submitForm(event) {
-    event.preventDefault();
-    const item = document.querySelector('input[placeholder="Enter item"]').value;
-    const pickup = document.getElementById('formPickup').value;
-    const dropoff = document.getElementById('formDropoff').value;
-    const weight = document.querySelector('input[placeholder="Enter weight"]').value;
-    const state = document.querySelector('input[placeholder="Enter state"]').value;
-    const price = document.querySelector('input[placeholder="Enter price per tn"]').value;
-    const startDate = document.querySelector('input[placeholder="Enter job start date"]').value;
-
-    const jobPost = {
-        item,
-        pickup,
-        dropoff,
-        weight,
-        state,
-        price,
-        startDate
-    };
-
-    // Send the job post to the backend
-    fetch('post-job.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(jobPost)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            showJobPost(jobPost); // Show the job post in the table
-            alert('Job posted successfully!');
-        } else {
-            alert('Error posting job: ' + data.message);
-        }
-    })
-    .catch(error => console.error('Error:', error));
-}
   </script>
  </body>
 </html>

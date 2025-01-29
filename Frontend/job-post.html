@@ -92,7 +92,16 @@
         document.getElementById('dropoff').value = '';
         document.getElementById('weightRange').value = 0;
     }
-
+    document.addEventListener('DOMContentLoaded', function() {
+    fetch('../Backend/get-jobs.php')
+        .then(response => response.json())
+        .then(jobs => {
+            jobs.forEach(job => {
+                showJobPost(job);
+            });
+        })
+        .catch(error => console.error('Error fetching jobs:', error));
+});
     function submitForm(event) {
         event.preventDefault();
         const item = document.querySelector('input[placeholder="Enter item"]').value;
