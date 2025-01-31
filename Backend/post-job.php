@@ -6,7 +6,6 @@ $dbname = "logistics";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
-
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -20,7 +19,7 @@ $state = $_POST['state'];
 $price = $_POST['price'];
 $start_date = $_POST['startDate'];
 
-$sql = "INSERT INTO job_posts (item, pickup, dropoff, weight, state, price, start_date)
+$sql = "INSERT INTO jobs (item, pickup, dropoff, weight, state, price, start_date)
 VALUES ('$item', '$pickup', '$dropoff', '$weight', '$state', '$price', '$start_date')";
 
 if ($conn->query($sql) === TRUE) {
@@ -34,6 +33,7 @@ if ($conn->query($sql) === TRUE) {
         'start_date' => $start_date
     ];
     echo json_encode(['success' => true, 'jobPost' => $jobPost]);
+    header("Location: ../Frontend/job-board.html");
 } else {
     echo json_encode(['success' => false]);
 }
