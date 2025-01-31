@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard - Logistics SaaS Platform</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
@@ -169,7 +170,7 @@
   <div class="sidebar">
     <h2>Admin Dashboard</h2>
     <a href="#"><i class="fas fa-home"></i> <span>Home</span></a>
-    <a href="job-board.html"><i class="fas fa-users"></i> <span>Job Post</span></a>
+    <a href="job-board.html"><i class="fas fa-briefcase"></i> <span>Job Post</span></a>
     <a href="../Backend/manage-cargo-owners.php"><i class="fas fa-users"></i> <span>Manage Cargo Owners</span></a>
     <a href="../Backend/manage-transporters.php"><i class="fas fa-truck"></i> <span>Manage Transporters</span></a>
     <a href="../Backend/manage-orders.php"><i class="fas fa-box"></i> <span>Manage Orders</span></a>
@@ -199,14 +200,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr id="cargo-owner-1">
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td>
-              <button class="btn">Edit</button>
-              <button class="btn btn-danger">Delete</button>
+              <button class="btn" onclick="editCargoOwner(1)">Edit</button>
+              <button class="btn btn-danger" onclick="deleteCargoOwner(1)">Delete</button>
             </td>
           </tr>
           <!-- Add more rows as needed -->
@@ -227,14 +228,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr id="transporter-1">
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td>
-              <button class="btn">Edit</button>
-              <button class="btn btn-danger">Delete</button>
+              <button class="btn" onclick="editCargoOwner(1)">Edit</button>
+              <button class="btn btn-danger" onclick="deleteCargoOwner(1)">Delete</button>
             </td>
           </tr>
           <!-- Add more rows as needed -->
@@ -255,14 +256,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr id="order-1">
             <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td>
-              <button class="btn">View</button>
-              <button class="btn">Update</button>
+              <button class="btn" onclick="viewCargoOwner(1)">View</button>
+              <button class="btn" onclick="updateCargoOwner(1)">Update</button>
             </td>
           </tr>
           <!-- Add more rows as needed -->
@@ -274,20 +275,24 @@
   <script>
     function editCargoOwner(id) {
       alert(`Edit Cargo Owner with ID: ${id}`);
+      // Add actual edit functionality here
     }
 
     function deleteCargoOwner(id) {
       if (confirm(`Are you sure you want to delete Cargo Owner with ID: ${id}?`)) {
         alert(`Deleted Cargo Owner with ID: ${id}`);
+        // Add actual delete functionality here
       }
     }
 
     function viewCargoOwner(id) {
       alert(`Viewing details for Cargo Owner with ID: ${id}`);
+      // Add actual view functionality here
     }
 
     function updateCargoOwner(id) {
       alert(`Update functionality for Cargo Owner with ID: ${id}`);
+      // Add actual update functionality here
     }
   </script>
 </body>
