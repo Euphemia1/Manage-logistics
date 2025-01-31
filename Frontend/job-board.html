@@ -45,7 +45,7 @@
             </div>
 
             <!-- Job Post Form -->
-            <form class="p-4" method="POST" action="../Backend/post-job.php">
+            <form class="p-4" method="POST" action="../Backend/post-job.php" onsubmit="submitForm(event)">
                 <div class="table-container">
                     <table class="min-w-full bg-white">
                         <thead>
@@ -61,13 +61,13 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="py-2 px-4 border-b"><input name="item" class="p-2 w-full rounded-md border" placeholder="Enter item" type="text"/></td>
-                                <td class="py-2 px-4 border-b"><input name="pickup" class="p-2 w-full rounded-md border" id="formPickup" placeholder="Enter pick up location" type="text"/></td>
-                                <td class="py-2 px-4 border-b"><input name="dropoff" class="p-2 w-full rounded-md border" id="formDropoff" placeholder="Enter drop off location" type="text"/></td>
-                                <td class="py-2 px-4 border-b"><input name="weight" class="p-2 w-full rounded-md border" placeholder="Enter weight" type="number"/></td>
-                                <td class="py-2 px-4 border-b"><input name="state" class="p-2 w-full rounded-md border" placeholder="Enter state" type="text"/></td>
-                                <td class="py-2 px-4 border-b"><input name="price" class="p-2 w-full rounded-md border" placeholder="Enter price per tn" type="text"/></td>
-                                <td class="py-2 px-4 border-b"><input name="startDate" class="p-2 w-full rounded-md border" placeholder="Enter job start date" type="date"/></td>
+                                <td class="py-2 px-4 border-b"><input name="item" class="p-2 w-full rounded-md border" placeholder="Enter item" type="text" required/></td>
+                                <td class="py-2 px-4 border-b"><input name="pickup" class="p-2 w-full rounded-md border" id="formPickup" placeholder="Enter pick up location" type="text" required/></td>
+                                <td class="py-2 px-4 border-b"><input name="dropoff" class="p-2 w-full rounded-md border" id="formDropoff" placeholder="Enter drop off location" type="text" required/></td>
+                                <td class="py-2 px-4 border-b"><input name="weight" class="p-2 w-full rounded-md border" placeholder="Enter weight" type="number" min="0" max="40" required/></td>
+                                <td class="py-2 px-4 border-b"><input name="state" class="p-2 w-full rounded-md border" placeholder="Enter state" type="text" required/></td>
+                                <td class="py-2 px-4 border-b"><input name="price" class="p-2 w-full rounded-md border" placeholder="Enter price per tn" type="text" required/></td>
+                                <td class="py-2 px-4 border-b"><input name="startDate" class="p-2 w-full rounded-md border" placeholder="Enter job start date" type="date" required/></td>
                             </tr>
                         </tbody>
                     </table>
@@ -105,6 +105,7 @@
     </div>
 
     <script>
+        // Sync search inputs with form inputs
         document.getElementById('pickup').addEventListener('input', function() {
             document.getElementById('formPickup').value = this.value;
         });
@@ -113,12 +114,14 @@
             document.getElementById('formDropoff').value = this.value;
         });
 
+        // Clear search inputs
         function clearSearch() {
             document.getElementById('pickup').value = '';
             document.getElementById('dropoff').value = '';
             document.getElementById('weightRange').value = 0;
         }
 
+        // Submit form and add job post dynamically
         function submitForm(event) {
             event.preventDefault();
             const item = document.querySelector('input[placeholder="Enter item"]').value;
@@ -154,6 +157,7 @@
                 .catch(error => console.error('Error fetching jobs:', error));
         }
 
+        // Display job post in the table
         function showJobPost(jobPost) {
             const jobPostList = document.getElementById('jobPostList');
             const jobPostRow = document.createElement('tr');
