@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -6,24 +7,83 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+    <style>
+        /* Custom scrollbar for tables */
+        .table-container {
+            overflow-x: auto;
+        }
+        .table-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .table-container::-webkit-scrollbar-thumb {
+            background: #4ade80;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 
 <body class="bg-green-100 font-roboto">
     <div class="container mx-auto p-4">
+        <!-- Search Section -->
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
-            <div class="bg-green-700 text-white p-4 flex flex-col md:flex-row justify-between items-center">
-                <img src="images/Nyamula_Logo_White__1_-output-removebg-preview.png" alt="Nyamula Logistics Logo" class="h-12 w-auto mr-4">
-                <div class="flex flex-col md:flex-row items-center space-x-4 mb-4 md:mb-0">
-                    <input class="p-2 rounded-md" id="pickup" placeholder="Enter pick up town / city" type="text"/>
-                    <input class="p-2 rounded-md" id="dropoff" placeholder="Enter drop off town / city" type="text"/>
+            <div class="bg-green-700 text-white p-4 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <!-- Logo -->
+                <img src="images/Nyamula_Logo_White__1_-output-removebg-preview.png" alt="Nyamula Logistics Logo" class="h-12 w-auto">
+                
+                <!-- Search Inputs -->
+                <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 w-full md:w-auto">
+                    <input class="p-2 rounded-md w-full md:w-48" id="pickup" placeholder="Enter pick up town / city" type="text"/>
+                    <input class="p-2 rounded-md w-full md:w-48" id="dropoff" placeholder="Enter drop off town / city" type="text"/>
                 </div>
-                <div class="flex items-center space-x-4">
+                
+                <!-- Weight Range and Clear Button -->
+                <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 w-full md:w-auto">
                     <label for="weightRange" class="mr-2">Min: 0 ton Max: 40 ton</label>
                     <input class="w-32" id="weightRange" max="40" min="0" type="range"/>
-                    <button class="bg-green-500 text-white p-2 rounded-md" onclick="clearSearch()">Clear search</button>
+                    <button class="bg-green-500 text-white p-2 rounded-md hover:bg-green-600 transition-colors w-full md:w-auto" onclick="clearSearch()">Clear search</button>
                 </div>
             </div>
-            <form class="p-4" method = "POST" action="../Backend/post-job.php">
+
+            <!-- Job Post Form -->
+            <form class="p-4" method="POST" action="../Backend/post-job.php">
+                <div class="table-container">
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-4 border-b">Item</th>
+                                <th class="py-2 px-4 border-b">Pick up</th>
+                                <th class="py-2 px-4 border-b">Drop off</th>
+                                <th class="py-2 px-4 border-b">Weight (mt)</th>
+                                <th class="py-2 px-4 border-b">State</th>
+                                <th class="py-2 px-4 border-b">Price per tn</th>
+                                <th class="py-2 px-4 border-b">Job start date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-2 px-4 border-b"><input name="item" class="p-2 w-full rounded-md border" placeholder="Enter item" type="text"/></td>
+                                <td class="py-2 px-4 border-b"><input name="pickup" class="p-2 w-full rounded-md border" id="formPickup" placeholder="Enter pick up location" type="text"/></td>
+                                <td class="py-2 px-4 border-b"><input name="dropoff" class="p-2 w-full rounded-md border" id="formDropoff" placeholder="Enter drop off location" type="text"/></td>
+                                <td class="py-2 px-4 border-b"><input name="weight" class="p-2 w-full rounded-md border" placeholder="Enter weight" type="number"/></td>
+                                <td class="py-2 px-4 border-b"><input name="state" class="p-2 w-full rounded-md border" placeholder="Enter state" type="text"/></td>
+                                <td class="py-2 px-4 border-b"><input name="price" class="p-2 w-full rounded-md border" placeholder="Enter price per tn" type="text"/></td>
+                                <td class="py-2 px-4 border-b"><input name="startDate" class="p-2 w-full rounded-md border" placeholder="Enter job start date" type="date"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-4">
+                    <button class="bg-green-500 text-white p-2 rounded-md hover:bg-green-600 transition-colors w-full md:w-auto" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Job Posts Section -->
+    <div class="container mx-auto p-4">
+        <div id="jobPosts" class="bg-white shadow-md rounded-lg p-4">
+            <h2 class="text-xl font-bold mb-4">Job Posts</h2>
+            <div class="table-container">
                 <table class="min-w-full bg-white">
                     <thead>
                         <tr>
@@ -36,44 +96,14 @@
                             <th class="py-2 px-4 border-b">Job start date</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td class="py-2 px-4 border-b"><input name="item" class="p-2 w-full" placeholder="Enter item" type="text"/></td>
-                            <td class="py-2 px-4 border-b"><input name="pickup" class="p-2 w-full" id="formPickup" placeholder="Enter pick up location" type="text"/></td>
-                            <td class="py-2 px-4 border-b"><input name="dropoff" class="p-2 w-full" id="formDropoff" placeholder="Enter drop off location" type="text"/></td>
-                            <td class="py-2 px-4 border-b"><input name="weight" class="p-2 w-full" placeholder="Enter weight" type="number"/></td>
-                            <td class="py-2 px-4 border-b"><input name="state" class="p-2 w-full" placeholder="Enter state" type="text"/></td>
-                            <td class="py-2 px-4 border-b"><input name="price" class="p-2 w-full" placeholder="Enter price per tn" type="text"/></td>
-                            <td class="py-2 px-4 border-b"><input name="startDate" class="p-2 w-full" placeholder="Enter job start date" type="date"/></td>
-                        </tr>
+                    <tbody id="jobPostList">
+                        <!-- Job posts will be dynamically added here -->
                     </tbody>
                 </table>
-                <div class="mt-4">
-                    <button class="bg-green-500 text-white p-2 rounded-md" type="submit">Submit</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
-    <div class="container mx-auto p-4">
-        <div id="jobPosts" class="bg-white shadow-md rounded-lg p-4">
-            <h2 class="text-xl font-bold mb-4">Job Posts</h2>
-            <table class="min-w-full bg-white">
-                <thead>
-                    <tr>
-                        <th class="py-2 px-4 border-b">Item</th>
-                        <th class="py-2 px-4 border-b">Pick up</th>
-                        <th class="py-2 px-4 border-b">Drop off</th>
-                        <th class="py-2 px-4 border-b">Weight (mt)</th>
-                        <th class="py-2 px-4 border-b">State</th>
-                        <th class="py-2 px-4 border-b">Price per tn</th>
-                        <th class="py-2 px-4 border-b">Job start date</th>
-                    </tr>
-                </thead>
-                <tbody id="jobPostList">
-                </tbody>
-            </table>
-        </div>
-    </div>
+
     <script>
         document.getElementById('pickup').addEventListener('input', function() {
             document.getElementById('formPickup').value = this.value;
@@ -110,7 +140,7 @@
             };
 
             showJobPost(jobPost);
-            fetch('../Backend/post-job.php',{
+            fetch('../Backend/post-job.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
