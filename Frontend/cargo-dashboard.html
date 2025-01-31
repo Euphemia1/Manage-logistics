@@ -139,7 +139,77 @@
     }
 
     // JavaScript for handling form submissions and dynamic content
-    // (Same as your existing JavaScript logic)
+    document.addEventListener('DOMContentLoaded', function () {
+      const postCargoForm = document.getElementById('postCargoForm');
+      const viewPostedCargosLink = document.getElementById('viewPostedCargosLink');
+      const postCargoSection = document.getElementById('postCargoSection');
+      const postedCargosSection = document.getElementById('postedCargos');
+      const cargoList = document.getElementById('cargoList');
+
+      // Handle Post Cargo form submission
+      postCargoForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const formData = new FormData(postCargoForm);
+
+        fetch('post-cargo.php', {
+          method: 'POST',
+          body: formData
+        })
+          .then(response => response.text())
+          .then(data => {
+            alert(data); // Show success or error message
+            postCargoForm.reset(); // Clear the form
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+          });
+      });
+
+      // Handle View Posted Cargos link click
+      viewPostedCargosLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        postCargoSection.classList.add('hidden');
+        postedCargosSection.classList.remove('hidden');
+
+        // Fetch posted cargos from the server
+        fetch('fetch-cargos.php')
+          .then(response => response.json())
+          .then(data => {
+            cargoList.innerHTML = ''; // Clear previous content
+            if (data.length > 0) {
+              data.forEach(cargo => {
+                const cargoItem = document.createElement('div');
+                cargoItem.className = 'bg-gray-50 p-4 mb-4 rounded-lg shadow-sm';
+                cargoItem.innerHTML = `
+                  <p><strong>Pickup Date:</strong> ${cargo.pickupDate}</p>
+                  <p><strong>Weight:</strong> ${cargo.weight} kg</p>
+                  <p><strong>Dimensions:</strong> ${cargo.dimensions}</p>
+                  <p><strong>Type:</strong> ${cargo.cargoType}</p>
+                  <p><strong>Origin:</strong> ${cargo.origin}</p>
+                  <p><strong>Destination:</strong> ${cargo.destination}</p>
+                  <p><strong>Status:</strong> ${cargo.status}</p>
+                `;
+                cargoList.appendChild(cargoItem);
+              });
+            } else {
+              cargoList.innerHTML = '<p class="text-gray-600">No cargos posted yet.</p>';
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            cargoList.innerHTML = '<p class="text-red-500">Failed to load cargos. Please try again.</p>';
+          });
+      });
+    });
+
+    // Adjust weight input value
+    function adjustWeight(change) {
+      const weightInput = document.getElementById('weight');
+      let weight = parseInt(weightInput.value) + change;
+      if (weight < 0) weight = 0;
+      weightInput.value = weight;
+    }
   </script>
 </body>
 </html>
