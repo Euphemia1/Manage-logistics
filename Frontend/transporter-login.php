@@ -68,7 +68,7 @@
 <body>
     <div class="login-container">
         <h2>Transporter Login</h2>
-        <form>
+        <form action="backend/transporter-login.php" method="POST">
             <div class="form-group">
                 <label for="email"><i class="fa fa-envelope"></i>Email</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email" required>
