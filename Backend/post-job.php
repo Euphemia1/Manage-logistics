@@ -33,7 +33,7 @@ if ($conn->query($sql) === TRUE) {
         'start_date' => $start_date
     ];
     echo json_encode(['success' => true, 'jobPost' => $jobPost]);
-    header("Location: ../Frontend/job-board.html");
+    header("Location: ../Frontend/job-board.php");
 } else {
     echo json_encode(['success' => false]);
 }

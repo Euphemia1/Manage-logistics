@@ -160,7 +160,7 @@
 
       <p class="mt-6 text-center text-gray-600">
         Already have an account?
-        <a href="transporter-login.html" class="text-blue-600 hover:text-blue-700 font-medium">
+        <a href="transporter-login.php" class="text-blue-600 hover:text-blue-700 font-medium">
           Sign in
         </a>
       </p>

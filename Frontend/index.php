@@ -1,3 +1,5 @@
+<?php
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -517,15 +519,15 @@
                 <div class="dropdown">
                     <button class="dropbtn">CARGO OWNER</button>
                     <div class="dropdown-content">
-                        <a href="cargo-signup.html">REGISTER</a>
-                        <a href="cargo-owner-login.html">LOGIN</a>
+                        <a href="cargo-signup.php">REGISTER</a>
+                        <a href="cargo-owner-login.php">LOGIN</a>
                     </div>
                 </div>
                 <div class="dropdown">
                     <button class="dropbtn">TRANSPORTER</button>
                     <div class="dropdown-content">
-                        <a href="transporter-signup.html">REGISTER</a>
-                        <a href="transporter-login.html">LOGIN</a>
+                        <a href="transporter-signup.php">REGISTER</a>
+                        <a href="transporter-login.php">LOGIN</a>
                     </div>
                 </div>
                 <a href="#contact" class="nav-link">CONTACT US</a>

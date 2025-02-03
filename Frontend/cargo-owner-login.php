@@ -81,7 +81,7 @@
         </form>
         <script>
             document.getElementById('loginBtn').onclick = function() {
-                window.location.href = 'cargo-dashboard.html'; // Redirect to the cargo owner dashboard
+                window.location.href = 'cargo-dashboard.php'; // Redirect to the cargo owner dashboard
             };
         </script>
     </div>

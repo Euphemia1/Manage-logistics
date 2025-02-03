@@ -61,7 +61,7 @@
 <body>
   <div class="login-container">
     <h2>Admin Login</h2>
-    <form onsubmit="window.location.href='admin-dashboard.html'; return false;">
+    <form onsubmit="window.location.href='admin-dashboard.php'; return false;">
       <div class="form-group">
         <label for="username">Username</label>
         <input id="username" name="username" placeholder="Enter your username" type="text"/>
