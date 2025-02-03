@@ -68,7 +68,7 @@
 <body>
     <div class="login-container">
         <h2>Transporter Login</h2>
-        <form action="backend/transporter-login.php" method="POST">
+       
             <div class="form-group">
                 <label for="email"><i class="fa fa-envelope"></i>Email</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email" required>
@@ -80,5 +80,10 @@
             <button type="submit" class="login-btn">Login</button>
         </form>
     </div>
+    <script>
+            document.getElementById('loginBtn').onclick = function() {
+                window.location.href = 'transporter-dashboard.php'; // Redirect to the transporter dashboard
+            };
+        </script>
 </body>
 </html>
