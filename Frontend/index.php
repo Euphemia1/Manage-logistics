@@ -10,7 +10,7 @@
     <style>
         /* Reset and base styles */
         :root {
-            --primary-color: #2563eb;
+            --primary-color:rgb(43, 198, 82);
             --secondary-color: #1e40af;
             --text-color: #1f2937;
             --light-text: #6b7280;
