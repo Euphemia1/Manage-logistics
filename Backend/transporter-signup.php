@@ -1,8 +1,9 @@
 <?php
 $servername = "localhost"; 
-$username = "root"; // Your database username
-$password = ""; // Your database password
-$dbname = "logistics"; // Your database name
+$username = "root"; 
+$password = ""; 
+$dbname = "logistics";
+
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -43,12 +44,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "Error: " . $stmt->error;
         }
-    } else {
-        echo "Error: All fields are required.";
+        } else{
+            echo $_SERVER['REQUEST_METHOD'];
+        }
+        
+        // Close connections
+        $stmt->close();
+        $conn->close();
     }
-}else{
-    
-}
-$stmt->close();
-$conn->close();
-?>
+    ?>
