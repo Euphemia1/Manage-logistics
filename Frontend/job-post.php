@@ -198,45 +198,31 @@
         </div>
     </div>
     <script>
-        document.getElementById('pickup').addEventListener('input', function () {
-            document.getElementById('formPickup').value = this.value;
-        });
+    document.addEventListener('DOMContentLoaded', function () {
+    fetch('../Backend/get-jobs.php')
+        .then(response => response.json())
+        .then(jobs => {
+            jobs.forEach(job => {
+                showJobPost(job);
+            });
+        })
+        .catch(error => console.error('Error fetching jobs:', error));
+});
 
-        document.getElementById('dropoff').addEventListener('input', function () {
-            document.getElementById('formDropoff').value = this.value;
-        });
-
-        function clearSearch() {
-            document.getElementById('pickup').value = '';
-            document.getElementById('dropoff').value = '';
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            fetch('../Backend/get-jobs.php')
-                .then(response => response.json())
-                .then(jobs => {
-                    jobs.forEach(job => {
-                        showJobPost(job);
-                    });
-                })
-                .catch(error => console.error('Error fetching jobs:', error));
-        });
-
-        function showJobPost(jobPost) {
-            const jobPostList = document.getElementById('jobPostList');
-            const jobPostRow = document.createElement('tr');
-            jobPostRow.innerHTML = `
-                <td>${jobPost.item}</td>
-                <td>${jobPost.pickup}</td>
-                <td>${jobPost.dropoff}</td>
-                <td>${jobPost.weight}</td>
-                <td>${jobPost.state}</td>
-                <td>${jobPost.price}</td>
-                <td>${jobPost.startDate}</td>
-            `;
-            jobPostList.appendChild(jobPostRow);
-        }
-    </script>
+function showJobPost(jobPost) {
+    const jobPostList = document.getElementById('jobPostList');
+    const jobPostRow = document.createElement('tr');
+    jobPostRow.innerHTML = `
+        <td>${jobPost.item}</td>
+        <td>${jobPost.pickup}</td>
+        <td>${jobPost.dropoff}</td>
+        <td>${jobPost.weight}</td>
+        <td>${jobPost.state}</td>
+        <td>${jobPost.price}</td>
+        <td>${jobPost.start_date}</td>
+    `;
+    jobPostList.appendChild(jobPostRow);
+}
+</script>
 </body>
-
 </html>

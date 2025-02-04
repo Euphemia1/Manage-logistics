@@ -529,6 +529,9 @@
                         <a href="transporter-signup.php">REGISTER</a>
                         <a href="transporter-login.php">LOGIN</a>
                     </div>
+                    </div>
+                <a href="job-board.php" class="nav-link">AVAILABLE LOADS</a>
+            </div>
                 </div>
                 <a href="#contact" class="nav-link">CONTACT US</a>
             </div>
