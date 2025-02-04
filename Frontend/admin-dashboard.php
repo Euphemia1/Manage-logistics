@@ -273,27 +273,84 @@
   </div>
 
   <script>
-    function editCargoOwner(id) {
-      alert(`Edit Cargo Owner with ID: ${id}`);
-      // Add actual edit functionality here
-    }
+  document.addEventListener('DOMContentLoaded', function() {
+    fetchCargoOwners();
+    fetchTransporters();
+  });
 
-    function deleteCargoOwner(id) {
-      if (confirm(`Are you sure you want to delete Cargo Owner with ID: ${id}?`)) {
-        alert(`Deleted Cargo Owner with ID: ${id}`);
-        // Add actual delete functionality here
-      }
-    }
+  function fetchCargoOwners() {
+    fetch('../Backend/manage-cargo-owners.php')
+      .then(response => response.json())
+      .then(data => {
+        const tbody = document.querySelector('table:nth-of-type(1) tbody');
+        tbody.innerHTML = ''; // Clear existing rows
+        data.forEach(owner => {
+          const row = document.createElement('tr');
+          row.id = `cargo-owner-${owner.id}`;
+          row.innerHTML = `
+            <td>${owner.id}</td>
+            <td>${owner.name}</td>
+            <td>${owner.email}</td>
+            <td>${owner.phone}</td>
+            <td>
+              <button class="btn" onclick="editCargoOwner(${owner.id})">Edit</button>
+              <button class="btn btn-danger" onclick="deleteCargoOwner(${owner.id})">Delete</button>
+            </td>
+          `;
+          tbody.appendChild(row);
+        });
+      })
+      .catch(error => console.error('Error fetching cargo owners:', error));
+  }
 
-    function viewCargoOwner(id) {
-      alert(`Viewing details for Cargo Owner with ID: ${id}`);
-      // Add actual view functionality here
-    }
+  function fetchTransporters() {
+    fetch('../Backend/manage-transporters.php')
+      .then(response => response.json())
+      .then(data => {
+        const tbody = document.querySelector('table:nth-of-type(2) tbody');
+        tbody.innerHTML = ''; // Clear existing rows
+        data.forEach(transporter => {
+          const row = document.createElement('tr');
+          row.id = `transporter-${transporter.id}`;
+          row.innerHTML = `
+            <td>${transporter.id}</td>
+            <td>${transporter.name}</td>
+            <td>${transporter.email}</td>
+            <td>${transporter.phone}</td>
+            <td>
+              <button class="btn" onclick="editTransporter(${transporter.id})">Edit</button>
+              <button class="btn btn-danger" onclick="deleteTransporter(${transporter.id})">Delete</button>
+            </td>
+          `;
+          tbody.appendChild(row);
+        });
+      })
+      .catch(error => console.error('Error fetching transporters:', error));
+  }
 
-    function updateCargoOwner(id) {
-      alert(`Update functionality for Cargo Owner with ID: ${id}`);
-      // Add actual update functionality here
+  function editCargoOwner(id) {
+    alert(`Edit Cargo Owner with ID: ${id}`);
+    // Add actual edit functionality here
+  }
+
+  function deleteCargoOwner(id) {
+    if (confirm(`Are you sure you want to delete Cargo Owner with ID: ${id}?`)) {
+      alert(`Deleted Cargo Owner with ID: ${id}`);
+      // Add actual delete functionality here
     }
-  </script>
+  }
+
+  function editTransporter(id) {
+    alert(`Edit Transporter with ID: ${id}`);
+    // Add actual edit functionality here
+  }
+
+  function deleteTransporter(id) {
+    if (confirm(`Are you sure you want to delete Transporter with ID: ${id}?`)) {
+      alert(`Deleted Transporter with ID: ${id}`);
+      // Add actual delete functionality here
+    }
+  }
+</script>
 </body>
 </html>
