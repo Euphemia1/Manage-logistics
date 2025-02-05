@@ -1,12 +1,18 @@
 <?php
-// Database connection
-$conn = new mysqli('localhost', 'root', '', 'logistics');
+header('Content-Type: application/json');
 
-// Create connection
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "logistics";
+
 $conn = new mysqli($servername, $username, $password, $dbname);
+
 // Check connection
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    echo json_encode(["error" => "Connection failed: " . $conn->connect_error]);
+    exit();
 }
 
 // Prepare and bind
@@ -23,9 +29,9 @@ $price = $_POST['price'];
 $startDate = $_POST['startDate'];
 
 if ($stmt->execute()) {
-    echo "New job posted successfully";
+    echo json_encode(["success" => "New job posted successfully"]);
 } else {
-    echo "Error: " . $stmt->error;
+    echo json_encode(["error" => "Error: " . $stmt->error]);
 }
 
 $stmt->close();
