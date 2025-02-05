@@ -530,7 +530,7 @@
                         <a href="transporter-login.php">LOGIN</a>
                     </div>
                     </div>
-                <a href="job-board.php" class="nav-link">AVAILABLE LOADS</a>
+                <a href="job-post.php" class="nav-link">AVAILABLE LOADS</a>
             </div>
                 </div>
                 <a href="#contact" class="nav-link">CONTACT US</a>
