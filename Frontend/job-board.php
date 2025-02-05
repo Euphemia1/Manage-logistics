@@ -132,66 +132,47 @@
         }
 
         // Display job post in the table
-        // Display job post in the table
-function showJobPost(jobPost) {
-    const jobPostList = document.getElementById('jobPostList');
-    const jobPostRow = document.createElement('tr');
-    jobPostRow.setAttribute('data-id', jobPost.id); // Set data-id for easy access
-    jobPostRow.innerHTML = `
-        <td class="py-2 px-4 border-b">${jobPost.item}</td>
-        <td class="py-2 px-4 border-b">${jobPost.pickup}</td>
-        <td class="py-2 px-4 border-b">${jobPost.dropoff}</td>
-        <td class="py-2 px-4 border-b">${jobPost.weight}</td>
-        <td class="py-2 px-4 border-b">${jobPost.state}</td>
-        <td class="py-2 px-4 border-b">${jobPost.price}</td>
-        <td class="py-2 px-4 border-b">${jobPost.start_date}</td>
-        <td class="py-2 px-4 border-b">
-            <a href="../Backend/edit.php?id=${jobPost.id}" class="bg-blue-500 text-white p-1 rounded-md hover:bg-blue-600">Edit</a>
-          <form method="POST" action="../Backend/delete.php" style="display:inline;">
-    <input type="hidden" name="id" value="${jobPost.id}">
-    <button type="submit" class="bg-red-500 text-white p-1 rounded-md hover:bg-red-600" onclick="return confirm('Are you sure you want to delete this job?');">Delete</button>
-</form>
-        </td>
-    `;
-    jobPostList.appendChild(jobPostRow);
-}
-
-        // Edit job
-        function editJob(id) {
-            const jobRow = document.querySelector(`tr[data-id="${id}"]`);
-            const cells = jobRow.querySelectorAll('td');
-
-            document.querySelector('input[placeholder="Enter item"]').value = cells[0].innerText;
-            document.getElementById('formPickup').value = cells[1].innerText;
-            document.getElementById('formDropoff').value = cells[2].innerText;
-            document.querySelector('input[placeholder="Enter weight"]').value = cells[3].innerText;
-            document.querySelector('input[placeholder="Enter state"]').value = cells[4].innerText;
-            document.querySelector('input[placeholder="Enter price per tn"]').value = cells[5].innerText;
-            document.querySelector('input[placeholder="Enter job start date"]').value = cells[6].innerText;
-
-            // Remove job from the database for re-adding
-            deleteJob(id);
+        function showJobPost(jobPost) {
+            const jobPostList = document.getElementById('jobPostList');
+            const jobPostRow = document.createElement('tr');
+            jobPostRow.setAttribute('data-id', jobPost.id); // Set data-id for easy access
+            jobPostRow.innerHTML = `
+                <td class="py-2 px-4 border-b">${jobPost.item}</td>
+                <td class="py-2 px-4 border-b">${jobPost.pickup}</td>
+                <td class="py-2 px-4 border-b">${jobPost.dropoff}</td>
+                <td class="py-2 px-4 border-b">${jobPost.weight}</td>
+                <td class="py-2 px-4 border-b">${jobPost.state}</td>
+                <td class="py-2 px-4 border-b">${jobPost.price}</td>
+                <td class="py-2 px-4 border-b">${jobPost.start_date}</td>
+                <td class="py-2 px-4 border-b">
+                    <a href="../Backend/edit.php?id=${jobPost.id}" class="bg-blue-500 text-white p-1 rounded-md hover:bg-blue-600">Edit</a>
+                    <button class="bg-red-500 text-white p-1 rounded-md hover:bg-red-600" onclick="deleteJob(${jobPost.id})">Delete</button>
+                </td>
+            `;
+            jobPostList.appendChild(jobPostRow);
         }
 
         // Delete job
         function deleteJob(id) {
-            fetch('../Backend/delete-job.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: new URLSearchParams({ id })
-            })
-                .then(response => response.json())
-                .then(response => {
-                    if (response.success) {
-                        alert(response.success);
-                        loadJobs(); // Reload jobs to reflect the deletion
-                    } else {
-                        alert(response.error);
-                    }
+            if (confirm('Are you sure you want to delete this job?')) {
+                fetch('../Backend/delete-job.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({ id })
                 })
-                .catch(error => console.error('Error deleting job:', error));
+                    .then(response => response.json())
+                    .then(response => {
+                        if (response.success) {
+                            alert(response.success);
+                            loadJobs(); // Reload jobs to reflect the deletion
+                        } else {
+                            alert(response.error);
+                        }
+                    })
+                    .catch(error => console.error('Error deleting job:', error));
+            }
         }
     </script>
 </body>
