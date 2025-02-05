@@ -185,15 +185,22 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            loadJobs(); // Load jobs on page load
+            setInterval(loadJobs, 5000); // Reload jobs every 5 seconds
+        });
+
+        function loadJobs() {
             fetch('../Backend/get-jobs.php')
                 .then(response => response.json())
                 .then(jobs => {
+                    const jobPostList = document.getElementById('jobPostList');
+                    jobPostList.innerHTML = ''; // Clear existing jobs
                     jobs.forEach(job => {
                         showJobPost(job);
                     });
                 })
                 .catch(error => console.error('Error fetching jobs:', error));
-        });
+        }
 
         function showJobPost(jobPost) {
             const jobPostList = document.getElementById('jobPostList');

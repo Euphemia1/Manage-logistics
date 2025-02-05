@@ -40,7 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("sssssssi", $item, $pickup, $dropoff, $weight, $state, $price, $startDate, $id);
 
     if ($stmt->execute()) {
-        echo json_encode(["success" => "Job updated successfully"]);
+        // Redirect back to the job board after successful update
+        header("Location: ../Frontend/job-board.php");
+        exit();
     } else {
         echo json_encode(["error" => "Error: " . $stmt->error]);
     }
