@@ -95,20 +95,6 @@
             background-color: #f1f1f1;
         }
 
-        .btn {
-            background-color: #007BFF;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .btn:hover {
-            background-color: #0056b3;
-        }
-
         /* Responsive Styles */
         @media (max-width: 768px) {
             .header {
@@ -198,31 +184,36 @@
         </div>
     </div>
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    fetch('../Backend/get-jobs.php')
-        .then(response => response.json())
-        .then(jobs => {
-            jobs.forEach(job => {
-                showJobPost(job);
-            });
-        })
-        .catch(error => console.error('Error fetching jobs:', error));
-});
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('../Backend/get-jobs.php')
+                .then(response => response.json())
+                .then(jobs => {
+                    jobs.forEach(job => {
+                        showJobPost(job);
+                    });
+                })
+                .catch(error => console.error('Error fetching jobs:', error));
+        });
 
-function showJobPost(jobPost) {
-    const jobPostList = document.getElementById('jobPostList');
-    const jobPostRow = document.createElement('tr');
-    jobPostRow.innerHTML = `
-        <td>${jobPost.item}</td>
-        <td>${jobPost.pickup}</td>
-        <td>${jobPost.dropoff}</td>
-        <td>${jobPost.weight}</td>
-        <td>${jobPost.state}</td>
-        <td>${jobPost.price}</td>
-        <td>${jobPost.start_date}</td>
-    `;
-    jobPostList.appendChild(jobPostRow);
-}
-</script>
+        function showJobPost(jobPost) {
+            const jobPostList = document.getElementById('jobPostList');
+            const jobPostRow = document.createElement('tr');
+            jobPostRow.innerHTML = `
+                <td>${jobPost.item}</td>
+                <td>${jobPost.pickup}</td>
+                <td>${jobPost.dropoff}</td>
+                <td>${jobPost.weight}</td>
+                <td>${jobPost.state}</td>
+                <td>${jobPost.price}</td>
+                <td>${jobPost.start_date}</td>
+            `;
+            jobPostList.appendChild(jobPostRow);
+        }
+
+        function clearSearch() {
+            document.getElementById('pickup').value = '';
+            document.getElementById('dropoff').value = '';
+        }
+    </script>
 </body>
 </html>

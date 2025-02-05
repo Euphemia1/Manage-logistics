@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Job Post Dashboard</title>
@@ -28,16 +27,11 @@
         <!-- Search Section -->
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
             <div class="bg-green-700 text-white p-4 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                <!-- Logo -->
                 <img src="images/Nyamula_Logo_White__1_-output-removebg-preview.png" alt="Nyamula Logistics Logo" class="h-12 w-auto">
-                
-                <!-- Search Inputs -->
                 <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 w-full md:w-auto">
                     <input class="p-2 rounded-md w-full md:w-48" id="pickup" placeholder="Enter pick up town / city" type="text"/>
                     <input class="p-2 rounded-md w-full md:w-48" id="dropoff" placeholder="Enter drop off town / city" type="text"/>
                 </div>
-                
-                <!-- Weight Range and Clear Button -->
                 <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 w-full md:w-auto">
                     <label for="weightRange" class="mr-2">Min: 0 ton Max: 40 ton</label>
                     <input class="w-32" id="weightRange" max="40" min="0" type="range"/>
@@ -67,7 +61,7 @@
                                 <td class="py-2 px-4 border-b"><input name="dropoff" class="p-2 w-full rounded-md border" id="formDropoff" placeholder="Enter drop off location" type="text" required/></td>
                                 <td class="py-2 px-4 border-b"><input name="weight" class="p-2 w-full rounded-md border" placeholder="Enter weight" type="number" min="0" max="40" required/></td>
                                 <td class="py-2 px-4 border-b"><input name="state" class="p-2 w-full rounded-md border" placeholder="Enter state" type="text" required/></td>
-                                <td class="py-2 px-4 border-b"><input name="price" class="p-2 w-full rounded-md border" placeholder="Enter price per tn" type="text" required/></td>
+                                <td class="py-2 px-4 border-b"><input name="price" class="p-2 w-full rounded-md border" placeholder="Enter price per tn" type="number" required/></td>
                                 <td class="py-2 px-4 border-b"><input name="startDate" class="p-2 w-full rounded-md border" placeholder="Enter job start date" type="date" required/></td>
                             </tr>
                         </tbody>
@@ -151,9 +145,16 @@
                 },
                 body: new URLSearchParams(jobPost)
             })
-                .then(response => response.text())
+                .then(response => response.json())
                 .then(response => {
                     console.log(response);
+                    if (response.success) {
+                        alert(response.success);
+                        // Optionally clear the form fields
+                        document.querySelector('form').reset();
+                    } else {
+                        alert(response.error);
+                    }
                 })
                 .catch(error => console.error('Error fetching jobs:', error));
         }

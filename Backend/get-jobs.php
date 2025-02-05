@@ -14,6 +14,7 @@ if ($conn->connect_error) {
 $result = $conn->query("SELECT * FROM jobs");
 $jobs = [];
 
+
 while ($row = $result->fetch_assoc()) {
     $jobs[] = $row;
 }
