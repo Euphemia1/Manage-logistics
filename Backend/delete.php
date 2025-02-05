@@ -15,19 +15,28 @@ if ($conn->connect_error) {
     exit();
 }
 
-// Prepare and bind
-$stmt = $conn->prepare("DELETE FROM jobs WHERE id=?");
-$stmt->bind_param("i", $id);
+// Handle deletion
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['id'])) {
+        $id = $_POST['id'];
 
-// Set parameters and execute
-$id = $_POST['id'];
+        // Prepare and bind
+        $stmt = $conn->prepare("DELETE FROM jobs WHERE id=?");
+        $stmt->bind_param("i", $id);
 
-if ($stmt->execute()) {
-    echo json_encode(["success" => "Job deleted successfully"]);
+        if ($stmt->execute()) {
+            echo json_encode(["success" => "Job deleted successfully"]);
+        } else {
+            echo json_encode(["error" => "Error: " . $stmt->error]);
+        }
+
+        $stmt->close();
+    } else {
+        echo json_encode(["error" => "ID not provided"]);
+    }
 } else {
-    echo json_encode(["error" => "Error: " . $stmt->error]);
+    echo json_encode(["error" => "Invalid request method"]);
 }
 
-$stmt->close();
 $conn->close();
 ?>

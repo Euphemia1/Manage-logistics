@@ -146,8 +146,11 @@ function showJobPost(jobPost) {
         <td class="py-2 px-4 border-b">${jobPost.price}</td>
         <td class="py-2 px-4 border-b">${jobPost.start_date}</td>
         <td class="py-2 px-4 border-b">
-            <a href="edit.php?id=${jobPost.id}" class="bg-blue-500 text-white p-1 rounded-md hover:bg-blue-600">Edit</a>
-            <a href="delete.php?id=${jobPost.id}" class="bg-red-500 text-white p-1 rounded-md hover:bg-red-600">Delete</a>
+            <a href="../Backend/edit.php?id=${jobPost.id}" class="bg-blue-500 text-white p-1 rounded-md hover:bg-blue-600">Edit</a>
+          <form method="POST" action="../Backend/delete.php" style="display:inline;">
+    <input type="hidden" name="id" value="${jobPost.id}">
+    <button type="submit" class="bg-red-500 text-white p-1 rounded-md hover:bg-red-600" onclick="return confirm('Are you sure you want to delete this job?');">Delete</button>
+</form>
         </td>
     `;
     jobPostList.appendChild(jobPostRow);
