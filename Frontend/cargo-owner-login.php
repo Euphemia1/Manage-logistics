@@ -1,6 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Transporter Login</title>
+
+    <title>Cargo Owner Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -68,7 +70,7 @@
 <body>
     <div class="login-container">
         <h2>Cargo Owner Login</h2>
-        <form>
+        <form id="loginForm" method="POST" action="../Backend/cargo-login.php">
             <div class="form-group">
                 <label for="email"><i class="fa fa-envelope"></i>Email</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email" required>
@@ -77,14 +79,13 @@
                 <label for="password"><i class="fa fa-lock"></i>Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your password" required>
             </div>
-            <button type="button" class="login-btn" id="loginBtn">Login</button>
+            <button type="submit" class="login-btn">Login</button>
         </form>
-        <script>
-            document.getElementById('loginBtn').onclick = function() {
-                window.location.href = 'cargo-dashboard.php'; // Redirect to the cargo owner dashboard
-            };
-        </script>
     </div>
-    
+    <script>
+        document.getElementById('loginForm').onsubmit = function() {
+            console.log("Form submitted");
+        };
+  </script>
 </body>
 </html>

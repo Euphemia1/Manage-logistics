@@ -1,7 +1,6 @@
 <?php
 require_once 'db.php'; // Include your database connection
 
-
 // Fetch orders from the database
 $result = $conn->query("SELECT * FROM orders");
 
@@ -61,7 +60,7 @@ if ($result) {
     <table class="table-green">
         <thead>
             <tr>
-                <th>order_id</th>
+                <th>Order ID</th>
                 <th>Cargo Owner Name</th>
                 <th>Cargo Type</th>
                 <th>Origin</th>
@@ -81,12 +80,11 @@ if ($result) {
                         <td><?php echo htmlspecialchars($order['origin']); ?></td>
                         <td><?php echo htmlspecialchars($order['destination']); ?></td>
                         <td><?php echo htmlspecialchars($order['status']); ?></td>
-                        <td><?php echo htmlspecialchars($order['order_date']); ?></td>
+                        <td><?php echo htmlspecialchars($order['created_at']); ?></td>
                         <td>
-    <button onclick="editOrder(<?php echo (int) $order['id']; ?>)">Edit</button>
-    <button onclick="deleteOrder(<?php echo (int) $order['id']; ?>)">Delete</button>
-</td>
-
+                            <button onclick="editOrder(<?php echo (int) $order['order_id']; ?>)">Edit</button>
+                            <button onclick="deleteOrder(<?php echo (int) $order['order_id']; ?>)">Delete</button>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>
