@@ -15,19 +15,30 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 // Prepare and bind
 $stmt = $conn->prepare("INSERT INTO cargo_owners (cargo_owner_name, email, phone_number, password, company) VALUES (?, ?, ?, ?, ?)");
 $stmt->bind_param("sssss", $cargo_owner_name, $email, $phone_number, $hashed_password, $company);
 
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['transporter_name'], $_POST['email'], $_POST['phone_number'], $_POST['password'], $_POST['company'])) {
+        // Set parameters
     // Set parameters
-    $cargo_owner_name = $_POST['cargo_owner_name'];
-    $email = $_POST['email'];
-    $phone_number = $_POST['phone_number'];
-    $password = $_POST['password'];
-    $company = $_POST['company'];
+    $cargo_owner_name =  trim(string: $_POST['cargo_owner_name']);
+    $email =  trim( $_POST['email']);
+    $phone_number =  trim( $_POST['phone_number']);
+    $password =  trim( $_POST['password']);
+    $company =   trim($_POST['company']);
+    }
 
+    // Check if cargo_owner_name is empty
+    if (empty($cargo_owner_name)) {
+        die("Error: transporter_name cannot be empty.");
+    }
     // Hash the password for security
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -40,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error: " . $stmt->error;
     }
 } else {
-    echo $_SERVER['REQUEST_METHOD'];
+    echo "Error: All fields are required.";
 }
 
 // Close connections
