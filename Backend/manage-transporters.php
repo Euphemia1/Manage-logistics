@@ -67,6 +67,6 @@ $conn->close();
             <?php endforeach; ?>
         </tbody>
     </table>
-    <a href="../Frontend/admin_dashboard.php" class="button">Back to Dashboard</a>
+    <a href="../Frontend/admin-dashboard.php" class="button">Back to Dashboard</a>
 </body>
 </html>
