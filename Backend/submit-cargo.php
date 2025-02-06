@@ -14,39 +14,33 @@ try {
     die("Database connection failed: " . $e->getMessage());
 }
 
-// Get form data (ensure these match the names from your JavaScript)
-// $cargo_owner_name = $_POST['cargo_owner_name'];  // Updated to match JS
-$pickupDate = $_POST['pickupDate'];
+// Get form data
+$order_id = $_POST['order_id'];
+$cargo_owner_name = $_POST['cargo_owner_name'];
+$pickupDate = $_POST['start_date'];
 $weight = $_POST['weight'];
-$dimensions = $_POST['dimensions']; // Adjust the field name in the frontend if necessary
-$cargoType = $_POST['cargoType'];
+$dimensions = $_POST['dimensions'];
+$cargoType = $_POST['cargo_type'];
 $origin = $_POST['origin'];
-$destination = $_POST['destination'];
-$phone = $_POST['phone'];
-$instructions = $_POST['instructions'];
 
-// Optionally, generate or retrieve order_id and cargo_owner_id from your database or session
-$order_id = uniqid();  // For example, generate a unique order ID (you might have another way)
+// Optionally, generate or retrieve cargo_owner_id from your database or session
 $cargo_owner_id = 1;  // Example: set cargo_owner_id from session or database
 
 // Insert data into the database
-$sql = "INSERT INTO orders ( pickup_date, weight, dimensions, cargo_type, origin, destination, phone, instructions)
-        VALUES ( :pickupDate, :weight, :dimensions, :cargoType, :origin, :destination, :phone, :instructions)";
+$sql = "INSERT INTO orders (order_id, cargo_owner_name, pickup_date, weight, dimensions, cargo_type, origin, cargo_owner_id)
+        VALUES (:order_id, :cargo_owner_name, :pickupDate, :weight, :dimensions, :cargoType, :origin, :cargo_owner_id)";
 
 $stmt = $conn->prepare($sql);
 
 // Bind the form data to the SQL query
-// $stmt->bindParam(':order_id', $order_id);
-// $stmt->bindParam(':cargo_owner_id', $cargo_owner_id);
-// $stmt->bindParam(':cargo_owner_name', $cargo_owner_name);
+$stmt->bindParam(':order_id', $order_id);
+$stmt->bindParam(':cargo_owner_name', $cargo_owner_name);
 $stmt->bindParam(':pickupDate', $pickupDate);
 $stmt->bindParam(':weight', $weight);
 $stmt->bindParam(':dimensions', $dimensions);
 $stmt->bindParam(':cargoType', $cargoType);
 $stmt->bindParam(':origin', $origin);
-$stmt->bindParam(':destination', $destination);
-$stmt->bindParam(':phone', $phone);
-$stmt->bindParam(':instructions', $instructions);
+$stmt->bindParam(':cargo_owner_id', $cargo_owner_id);
 
 // Execute the query and return a JSON response
 if ($stmt->execute()) {
@@ -55,3 +49,4 @@ if ($stmt->execute()) {
     echo json_encode(['status' => 'error', 'message' => 'Failed to post cargo.']);
 }
 ?>
+</create_file>
