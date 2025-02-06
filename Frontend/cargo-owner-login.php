@@ -68,9 +68,9 @@
     </style>
 </head>
 <body>
-    <div class="login-container">
+<div class="login-container">
         <h2>Cargo Owner Login</h2>
-        <form id="loginForm" method="POST" action="../Backend/cargo-login.php">
+        <form id="loginForm">
             <div class="form-group">
                 <label for="email"><i class="fa fa-envelope"></i>Email</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email" required>
@@ -79,13 +79,17 @@
                 <label for="password"><i class="fa fa-lock"></i>Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your password" required>
             </div>
-            <button type="submit" class="login-btn">Login</button>
+            <button type="submit" id="loginBtn" class="login-btn">Login</button>
         </form>
     </div>
     <script>
-        document.getElementById('loginForm').onsubmit = function() {
-            console.log("Form submitted");
+        document.getElementById('loginForm').onsubmit = function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            window.location.href = '../Frontend/cargo-dashboard.php'; // Redirect to the cargo dashboard
         };
-  </script>
+    </script>
 </body>
 </html>
+
+
+

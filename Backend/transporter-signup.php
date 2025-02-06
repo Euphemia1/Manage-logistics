@@ -1,8 +1,6 @@
 <?php
 require 'db.php'; // Include PHPMailer's autoloader
 
-
-
 $servername = "localhost"; 
 $username = "root"; 
 $password = ""; 

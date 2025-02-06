@@ -1,11 +1,11 @@
 <?php
-require 'db.php'; // Include PHPMailer's autoloader
+require 'db.php'; 
 
 
 $servername = "localhost"; 
-$username = "root"; // Your database username
-$password = ""; // Your database password
-$dbname = "logistics"; // Your database name
+$username = "root";
+$password = ""; 
+$dbname = "logistics"; 
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -15,17 +15,13 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 // Prepare and bind
 $stmt = $conn->prepare("INSERT INTO cargo_owners (cargo_owner_name, email, phone_number, password, company) VALUES (?, ?, ?, ?, ?)");
 $stmt->bind_param("sssss", $cargo_owner_name, $email, $phone_number, $hashed_password, $company);
 
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['transporter_name'], $_POST['email'], $_POST['phone_number'], $_POST['password'], $_POST['company'])) {
+    if (isset($_POST['cargo_owner_name'], $_POST['email'], $_POST['phone_number'], $_POST['password'], $_POST['company'])) {
         // Set parameters
     // Set parameters
     $cargo_owner_name =  trim(string: $_POST['cargo_owner_name']);
@@ -36,9 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Check if cargo_owner_name is empty
-    if (empty($cargo_owner_name)) {
-        die("Error: transporter_name cannot be empty.");
-    }
+   
     // Hash the password for security
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
