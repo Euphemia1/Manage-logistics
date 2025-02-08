@@ -587,7 +587,14 @@
     <section class="about" id="about">
         <div class="container">
             <h2>About Us</h2>
-            <p>Nyamula Logistics is dedicated to providing seamless, efficient, and reliable logistics services. We provide a technology-driven platform that connects cargo owners with trusted and reliable small-scale truck operators, offering cost-effective and timely logistics solutions for businesses of all sizes.</p>
+            <p>Nyamula Logistics is dedicated to providing seamless, efficient, and reliable logistics services.
+                 We provide a technology-driven platform that connects cargo owners with trusted and reliable small-scale truck operators,
+                  offering cost-effective and timely logistics solutions for businesses of all sizes.
+                  Nyamula Logistics is a Zambian logistics company tackling the challenge of high carbon emissions in mining and agriculture. 
+                  We aggregate small-scale truck operators and optimize their routes, 
+                  while also developing a groundbreaking solution that combines fuel-efficient hardware retrofits for existing trucks with advanced carbon capture technology at mining sites. 
+                  This integrated approach empowers small-scale operators to optimize their capacity and helps mining companies reduce their carbon footprint, enhancing operational efficiency and promoting sustainability.
+                   By collaborating with a network of technology providers across the globe, we deliver cutting-edge solutions tailored to the African context, driving a greener future for the mining and agricultural sectors.</p>
         </div>
     </section>
 
@@ -643,7 +650,7 @@
                 <img src="../images/Mtaja.jpg" alt="" class="team-member-image">
                 <div class="team-member-info">
                     <h3 class="team-member-name">Faith Mtaja</h3>
-                    <p class="team-member-title">Startegic Asistant</p>
+                    <p class="team-member-title">Startegic Assistant</p>
                     <div class="team-social-links">
                         <a href="https://www.linkedin.com/in/faith-mtaja-a59968263?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="team-social-link" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
                         <!-- <a href="#" class="team-social-link" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a> -->
@@ -692,7 +699,7 @@
                     <div class="contact-card">
                         <h3>Contact</h3>
                         <p>Phone: +260975509196</p>
-                        <p>Email: admin@nyamula.com</p>
+                        <p>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e6f6a6367604e60776f637b626f206d6163">[email&#160;protected]</a></p>
                     </div>
                 </div>
                 <form class="contact-form">
@@ -726,7 +733,7 @@
                 <div class="footer-section">
                     <h3>Contact Us</h3>
                     <p>+260975509196</p>
-                    <p>inquiries@nyamula.com</p>
+                    <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dfb6b1aeaab6adb6baac9fb1a6beb2aab3bef1bcb0b2">[email&#160;protected]</a></p>
                     <p>Oak Hill Business Park, 2237 Kabelenga Road, Lusaka, Zambia</p>
                 </div>
                 <div class="footer-section">
@@ -745,10 +752,40 @@
     </footer>
 
     <script>
-        // Simple mobile menu toggle
+        // Mobile menu toggle
         document.querySelector('.nav-toggle').addEventListener('click', function() {
             document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Dropdown functionality for mobile
+        document.querySelectorAll('.dropbtn').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    this.nextElementSibling.classList.toggle('active');
+                }
+            });
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.matches('.dropbtn')) {
+                document.querySelectorAll('.dropdown-content').forEach(function(content) {
+                    content.classList.remove('active');
+                });
+            }
+        });
+
+        // Resize handler to reset mobile menu state
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                document.querySelector('.nav-links').classList.remove('active');
+                document.querySelectorAll('.dropdown-content').forEach(function(content) {
+                    content.classList.remove('active');
+                });
+            }
         });
     </script>
 </body>
 </html>
+
