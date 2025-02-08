@@ -54,10 +54,37 @@
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-image {
+            height: 40px; /* Reduced from 50px */
+            width: auto;
+            display: block;
+            object-fit: contain; /* Ensures the image maintains its aspect ratio */
+        }
+
+        @media (max-width: 768px) {
+            .logo-image {
+                height: 30px; /* Reduced from 40px for mobile devices */
+            }
+        }
+
+        .logo-text {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary-color);
-            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .logo-image {
+                height: 30px;
+            }
+            .logo-text {
+                font-size: 1.2rem;
+            }
         }
 
         .nav-links {
@@ -501,13 +528,49 @@
                 justify-content: center;
             }
         }
+
+        .site-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .site-title .green {
+            color: var(--primary-color);
+        }
+
+        .site-title .black {
+            color: #000;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        @media (max-width: 768px) {
+            .site-title {
+                font-size: 2.5rem;
+            }
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
-            <a href="/" class="logo">Nyamula Logistics</a>
+            <a href="/" class="logo">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <img src="../images/logo.png" alt="Nyamula Logistics" class="logo-image">
+              
+                </div>
+            </a>
             <div class="nav-toggle">
                 <span></span>
                 <span></span>
@@ -541,8 +604,13 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Your Trusted Partner for Seamless Shipping and Delivery</h1>
-            <p>At Nyamula Logistics, we provide fast, reliable, and cost-effective shipping solutions tailored to your needs. With a network of trusted partners and real-time tracking, we ensure your goods are delivered securely and efficiently, every time.</p>
+            <h1 class="site-title">
+                <span class="green">Nyamula</span> <span class="black">Logistics</span>
+            </h1>
+            <h2>Your Trusted Partner for Seamless Shipping and Delivery</h2>
+            <p>At Nyamula Logistics, we provide fast, reliable, and cost-effective shipping solutions tailored to your needs. With a network of trusted partners and real-time tracking, we ensure your goods are delivered securely and efficiently, every time.
+                
+            </p>
             <a href="#services" class="cta-button">Learn More</a>
         </div>
     </section>
@@ -587,14 +655,12 @@
     <section class="about" id="about">
         <div class="container">
             <h2>About Us</h2>
-            <p>Nyamula Logistics is dedicated to providing seamless, efficient, and reliable logistics services.
-                 We provide a technology-driven platform that connects cargo owners with trusted and reliable small-scale truck operators,
-                  offering cost-effective and timely logistics solutions for businesses of all sizes.
-                  Nyamula Logistics is a Zambian logistics company tackling the challenge of high carbon emissions in mining and agriculture. 
-                  We aggregate small-scale truck operators and optimize their routes, 
-                  while also developing a groundbreaking solution that combines fuel-efficient hardware retrofits for existing trucks with advanced carbon capture technology at mining sites. 
-                  This integrated approach empowers small-scale operators to optimize their capacity and helps mining companies reduce their carbon footprint, enhancing operational efficiency and promoting sustainability.
-                   By collaborating with a network of technology providers across the globe, we deliver cutting-edge solutions tailored to the African context, driving a greener future for the mining and agricultural sectors.</p>
+            <p>Nyamula Logistics is dedicated to providing seamless, efficient, and reliable logistics services. 
+                We provide a technology-driven platform that connects cargo owners with trusted and reliable small-scale truck operators, offering cost-effective and timely logistics solutions for businesses of all sizes.
+                Nyamula Logistics is a Zambian logistics company tackling the challenge of high carbon emissions in mining and agriculture. 
+                We aggregate small-scale truck operators and optimize their routes, while also developing a groundbreaking solution that combines fuel-efficient hardware retrofits for existing trucks with advanced carbon capture technology at mining sites.
+                 This integrated approach empowers small-scale operators to optimize their capacity and helps mining companies reduce their carbon footprint, enhancing operational efficiency and promoting sustainability. 
+                 By collaborating with a network of technology providers across the globe, we deliver cutting-edge solutions tailored to the African context, driving a greener future for the mining and agricultural sectors.</p>
         </div>
     </section>
 
@@ -624,7 +690,7 @@
                     <p class="team-member-title">Chief Business Development Officer</p>
                     <div class="team-social-links">
                         <a href="#" class="team-social-link" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
-                        <!-- <a href="#" class="team-social-link" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a> -->
+                        <!-- <a href="#" class="team-social-link" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 94-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a> -->
                         <a href="#" class="team-social-link" title="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
                         <!-- <a href="#" class="team-social-link" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
                         <a href="#" class="team-social-link" title="TikTok"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2H7a5 5 0 0 0-5 5v10a5 5 0 0 0 5 5h10a5 5 0 0 0 5-5V7a5 5 0 0 0-5-5Z"></path><path d="M12 12a5 5 0 0 1 5 5"></path><path d="M12 12v9"></path><path d="M12 12a5 5 0 0 0 5-5"></path></svg></a> -->
@@ -635,12 +701,12 @@
                 <img src="../images/Euphemia.jpg" alt="" class="team-member-image">
                 <div class="team-member-info">
                     <h3 class="team-member-name">Euphemia Chikungulu</h3>
-                    <p class="team-member-title">Chief Technology Lead</p>
+                    <p class="team-member-title">Chief Technology Officer</p>
                     <div class="team-social-links">
                         <a href="https://www.linkedin.com/in/euphemia-chikungulu-a37745349?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="team-social-link" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
-                        <a href="https://x.com/tech_em_press?t=CVyhvBemik8OnYbhh7zZvA&s=09" class="team-social-link" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+                        <a href="https://x.com/tech_em_press?t=CVyhvBemik8OnYbhh7zZvA&s=09" class="team-social-link" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-1811.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 94.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
                         <a href="https://www.facebook.com/euphemia.willards" class="team-social-link" title="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-                        <a href="https://www.instagram.com/_eu_phemia?igsh=MTBsbG5vMXgyeXphcQ==" class="team-social-link" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                        <a href="https://www.instagram.com/_eu_phemia?igsh=MTBsbG5vMXgyex==" class="team-social-link" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
                         <a href="https://www.tiktok.com/@girl_developer?_r=1&_d=e76fcibdach2c0&sec_uid=MS4wLjABAAAASqg9HuZLzSdn86GtfOVWo3pH7euYLgg4cvcFuDuAusWw8bQyQOu6CvflNAHHw-Sd&share_author_id=6826340459217323013&sharer_language=en&source=h5_m&u_code=dcb9l8ijjj8hhk&timestamp=1738407526&user_id=6826340459217323013&sec_user_id=MS4wLjABAAAASqg9HuZLzSdn86GtfOVWo3pH7euYLgg4cvcFuDuAusWw8bQyQOu6CvflNAHHw-Sd&utm_source=copy&utm_campaign=client_share&utm_medium=android&share_iid=7464515162671646470&share_link_id=5c052ba0-2b5c-44bf-85fa-db8d4c57916d&share_app_id=1233&ugbiz_name=ACCOUNT&ug_btm=b8727%2Cb7360&social_share_type=5&enable_checksum=1" class="team-social-link" title="TikTok"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2H7a5 5 0 0 0-5 5v10a5 5 0 0 0 5 5h10a5 5 0 0 0 5-5V7a5 5 0 0 0-5-5Z"></path><path d="M12 12a5 5 0 0 1 5 5"></path><path d="M12 12v9"></path><path d="M12 12a5 5 0 0 0 5-5"></path></svg></a>
                     </div>
                 </div>
@@ -699,7 +765,7 @@
                     <div class="contact-card">
                         <h3>Contact</h3>
                         <p>Phone: +260975509196</p>
-                        <p>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e6f6a6367604e60776f637b626f206d6163">[email&#160;protected]</a></p>
+                        <p>Email: <a href="mailto:admin@nyamula.com">admin@nyamula.com</a></p>
                     </div>
                 </div>
                 <form class="contact-form">
@@ -733,7 +799,7 @@
                 <div class="footer-section">
                     <h3>Contact Us</h3>
                     <p>+260975509196</p>
-                    <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dfb6b1aeaab6adb6baac9fb1a6beb2aab3bef1bcb0b2">[email&#160;protected]</a></p>
+                    <p><a href="mailto:admin@nyamula.com">admin@nyamula.com</a></p>
                     <p>Oak Hill Business Park, 2237 Kabelenga Road, Lusaka, Zambia</p>
                 </div>
                 <div class="footer-section">
