@@ -1,3 +1,11 @@
+
+<?php
+session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?>
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>Transporter Login</title>
@@ -68,7 +76,14 @@
 <body>
     <div class="login-container">
         <h2>Transporter Login</h2>
-        <form id="loginForm">
+        <?php
+        if (isset($_SESSION['login_error'])) {
+            echo '<p style="color: red;">' . $_SESSION['login_error'] . '</p>';
+            unset($_SESSION['login_error']);
+        }
+        ?>
+
+<form id="loginForm" action="../Backend/transporter-login.php" method="POST">
             <div class="form-group">
                 <label for="email"><i class="fa fa-envelope"></i>Email</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email" required>
@@ -80,12 +95,12 @@
             <button type="submit" id="loginBtn" class="login-btn">Login</button>
         </form>
     </div>
-    <script>
+    <!-- <script>
         document.getElementById('loginForm').onsubmit = function(event) {
             event.preventDefault(); // Prevent the default form submission
             window.location.href = '../Frontend/transporter-dashboard.php'; // Redirect to the transporter dashboard
         };
-    </script>
+    </script> -->
 </body>
 </html>
 
