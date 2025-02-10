@@ -22,17 +22,17 @@ $stmt->bind_param("sssss", $cargo_owner_name, $email, $phone_number, $hashed_pas
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if all required fields are set
-    if (isset($_POST['cargo_name'], $_POST['email'], $_POST['phone_number'], $_POST['password'], $_POST['company'])) {
+    if (isset($_POST['cargo_owner_name'], $_POST['email'], $_POST['phone_number'], $_POST['password'], $_POST['company'])) {
         // Set parameters
-        $transporter_name = trim($_POST['transporter_name']);
+        $cargo_owner_name = trim($_POST['cargo_owner_name']);
         $email = trim($_POST['email']);
         $phone_number = trim($_POST['phone_number']);
         $password = $_POST['password'];
         $company = trim($_POST['company']);
 
         // Check if transporter_name is empty
-        if (empty($transporter_name)) {
-            die("Error: transporter_name cannot be empty.");
+        if (empty($cargo_owner_name)) {
+            die("Error: cargo_owner_name cannot be empty.");
         }
 
         // Hash the password for security

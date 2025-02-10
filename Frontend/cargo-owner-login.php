@@ -1,7 +1,14 @@
+<?php
+session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?>
+
+<!DOCTYPE html>
 <html>
 <head>
 
-    <title>Transporter Login</title>
+    <title>Cargo Owner Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -69,7 +76,15 @@
 <body>
     <div class="login-container">
         <h2>Cargo Owner Login</h2>
-<form id="loginForm" action="Backend/cargo-owner-signup.php" method="POST">
+        <?php
+        if (isset($_SESSION['login_error'])) {
+            echo '<p style="color: red;">' . $_SESSION['login_error'] . '</p>';
+            unset($_SESSION['login_error']);
+        }
+        ?>
+
+
+        <form id="loginForm" action="../Backend/cargo-login.php" method="POST">
 
             <div class="form-group">
                 <label for="email"><i class="fa fa-envelope"></i>Email</label>
@@ -82,11 +97,12 @@
             <button type="submit" id="loginBtn" class="login-btn">Login</button>
         </form>
     </div>
-    <script>
+    <!-- <script>
         document.getElementById('loginForm').onsubmit = function(event) {
             event.preventDefault(); // Prevent the default form submission
             window.location.href = '../Frontend/cargo-dashboard.php'; // Redirect to the cargo owner dashboard
         };
-    </script>
+    </script> -->
 </body>
 </html>
+
