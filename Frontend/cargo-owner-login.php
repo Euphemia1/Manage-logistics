@@ -1,8 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 
-    <title>Cargo Owner Login</title>
+    <title>Transporter Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -68,9 +67,10 @@
     </style>
 </head>
 <body>
-<div class="login-container">
+    <div class="login-container">
         <h2>Cargo Owner Login</h2>
-        <form id="loginForm">
+<form id="loginForm" action="Backend/cargo-owner-signup.php" method="POST">
+
             <div class="form-group">
                 <label for="email"><i class="fa fa-envelope"></i>Email</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email" required>
@@ -85,11 +85,8 @@
     <script>
         document.getElementById('loginForm').onsubmit = function(event) {
             event.preventDefault(); // Prevent the default form submission
-            window.location.href = '../Frontend/cargo-dashboard.php'; // Redirect to the cargo dashboard
+            window.location.href = '../Frontend/cargo-dashboard.php'; // Redirect to the cargo owner dashboard
         };
     </script>
 </body>
 </html>
-
-
-
