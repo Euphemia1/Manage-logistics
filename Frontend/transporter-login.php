@@ -95,12 +95,10 @@ ini_set('display_errors', 1);
             <button type="submit" id="loginBtn" class="login-btn">Login</button>
         </form>
     </div>
-    <!-- <script>
-        document.getElementById('loginForm').onsubmit = function(event) {
-            event.preventDefault(); // Prevent the default form submission
-            window.location.href = '../Frontend/transporter-dashboard.php'; // Redirect to the transporter dashboard
-        };
-    </script> -->
+    <p class="mt-3 text-center">
+    <a href="forgot-password.php?type=cargo_owner" class="text-blue-500 hover:underline">Forgot Password?</a>
+</p>
 </body>
 </html>
+
 
