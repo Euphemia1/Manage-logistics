@@ -6,6 +6,7 @@ $username = "root";
 $password = ""; 
 $dbname = "logistics";
 
+
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -40,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Execute query
         if ($stmt->execute()) {
             // Redirect to the login page after successful signup
-            header("Location: ../Frontend/cargo-dashboard.php");
+            header("Location: ../Frontend/cargo-owner-login.php");
             exit();
         } else {
             echo "Error: " . $stmt->error;

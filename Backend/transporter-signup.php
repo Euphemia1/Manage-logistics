@@ -1,5 +1,5 @@
 <?php
-require 'db.php'; // Include PHPMailer's autoloader
+require 'db.php'; 
 
 $servername = "localhost"; 
 $username = "root"; 
