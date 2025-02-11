@@ -26,11 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->execute();
 
         // Send email with reset link
-        $reset_link = "http://yourdomain.com/Frontend/reset-password.php?token=$token";
+        $reset_link = "http://nyamula.com/Frontend/reset-password.php?token=$token";
         $to = $email;
         $subject = "Password Reset Request";
         $message = "Click the following link to reset your password: $reset_link";
-        $headers = "From: noreply@yourdomain.com";
+        $headers = "From: noreply@nyamula.com";
 
         if (mail($to, $subject, $message, $headers)) {
             $_SESSION['reset_message'] = "Password reset link sent to your email.";
