@@ -98,9 +98,11 @@ ini_set('display_errors', 1);
             <button type="submit" id="loginBtn" class="login-btn">Login</button>
         </form>
     </div>
+    <div class="text-center mt-3">
     <p class="mt-3 text-center">
     <a href="forgot-password.php?type=cargo_owner" class="text-blue-500 hover:underline">Forgot Password?</a>
 </p>
+</div>
 </body>
 </html>
 

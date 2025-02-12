@@ -1,46 +1,45 @@
-
 <?php
 session_start();
-require 'db.php';
+require_once 'db.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = $_POST['email'];
-    $type = $_POST['type'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'] ?? '';
+    $type = $_POST['type'] ?? '';
 
-    $table = ($type == 'cargo_owner') ? 'cargo_owners' : 'transporters';
-    $id_column = ($type == 'cargo_owner') ? 'cargo_owner_id' : 'transporter_id';
+    if (empty($email) || empty($type) || ($type !== 'cargo_owner' && $type !== 'transporter')) {
+        $_SESSION['reset_message'] = "Invalid input.";
+        header("Location: ..Frontend/forgot-password.php?type=$type");
+        exit();
+    }
 
-    $stmt = $conn->prepare("SELECT $id_column FROM $table WHERE email = ?");
-    $stmt->bind_param('s', $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    // Check if the email exists in the database for the given user type
+    $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ? AND type = ?");
+    $stmt->execute([$email, $type]);
+    $user = $stmt->fetch();
 
-    if ($result->num_rows == 1) {
-        $user = $result->fetch_assoc();
-        $user_id = $user[$id_column];
+    if ($user) {
         $token = bin2hex(random_bytes(32));
         $expires = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
-        $stmt = $conn->prepare("INSERT INTO password_resets (user_id, token, expires, user_type) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param('isss', $user_id, $token, $expires, $type);
-        $stmt->execute();
+        $stmt = $pdo->prepare("INSERT INTO password_resets (email, token, expires, type) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$email, $token, $expires, $type]);
 
-        // Send email with reset link
-        $reset_link = "http://nyamula.com/Frontend/reset-password.php?token=$token";
+        $resetLink = "http://nyamula.com/reset-password.php?token=$token&type=$type";
         $to = $email;
         $subject = "Password Reset Request";
-        $message = "Click the following link to reset your password: $reset_link";
+        $message = "Click the following link to reset your password: $resetLink";
         $headers = "From: noreply@nyamula.com";
 
         if (mail($to, $subject, $message, $headers)) {
-            $_SESSION['reset_message'] = "Password reset link sent to your email.";
+            $_SESSION['reset_message'] = "A password reset link has been sent to your email.";
         } else {
-            $_SESSION['reset_message'] = "Failed to send password reset email.";
+            $_SESSION['reset_message'] = "Failed to send reset email. Please try again later.";
         }
     } else {
-        $_SESSION['reset_message'] = "No account found with that email address.";
+        $_SESSION['reset_message'] = "If the email exists in our system, a reset link will be sent.";
     }
 
-    header("Location: ../Frontend/forgot-password.php?type=$type");
+    header("Location: ..Frontend/forgot-password.php?type=$type");
     exit();
 }
+
