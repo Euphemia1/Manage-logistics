@@ -35,7 +35,7 @@
                 <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 w-full md:w-auto">
                     <label for="weightRange" class="mr-2">Min: 0 ton Max: 40 ton</label>
                     <input class="w-32" id="weightRange" max="40" min="0" type="range"/>
-                    <button class="bg-green-500 text-white p-2 rounded-md hover:bg-green-600 transition-colors w-full md:w-auto" onclick="clearSearch()">Clear search</button>
+                    <button class="bg-green-500 text-white p-2 rounded-md hover:bg-green-600 transition-colors w-full md:w-auto" onclick="clearSearch()"> search</button>
                 </div>
             </div>
 
