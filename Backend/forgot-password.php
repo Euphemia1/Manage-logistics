@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare("INSERT INTO password_resets (email, token, expires, type) VALUES (?, ?, ?, ?)");
         $stmt->execute([$email, $token, $expires, $type]);
 
-        $resetLink = "http://nyamula.com/reset-password.php?token=$token&type=$type";
+        $resetLink = "http:///reset-password.php?token=$token&type=$type";
         $to = $email;
         $subject = "Password Reset Request";
         $message = "Click the following link to reset your password: $resetLink";
@@ -42,4 +42,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: ..Frontend/forgot-password.php?type=$type");
     exit();
 }
+
 

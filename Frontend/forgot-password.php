@@ -82,7 +82,7 @@ if ($type !== 'cargo_owner' && $type !== 'transporter') {
             unset($_SESSION['reset_message']);
         }
         ?>
-        <form action="Backend/forgot-password.php" method="POST">
+        <form action="../Backend/forgot-password.php" method="POST">
             <input type="hidden" name="type" value="<?php echo htmlspecialchars($type); ?>">
             <div class="form-group">
                 <label for="email">Email:</label>
@@ -93,4 +93,6 @@ if ($type !== 'cargo_owner' && $type !== 'transporter') {
     </div>
 </body>
 </html>
+
+
 
