@@ -1,8 +1,13 @@
 <?php
 // Start session if not already started
 session_start();
+require 'vendor/autoload.php';
 
-// Database connection setup - this is what was missing
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+// Database connection setup
 $host = 'localhost';
 $dbname = 'logistics';
 $username = 'root';
@@ -12,12 +17,14 @@ try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
+    $_SESSION['reset_message'] = "Database connection failed: " . $e->getMessage();
+    header("Location: ../Frontend/forgot-password.php");
+    exit();
 }
 
 // Get email and user type from form
 $email = $_POST['email'] ?? '';
-$type = $_POST['type'] ?? '';   
+$type = $_POST['type'] ?? '';
 
 if (!empty($email) && !empty($type)) {
     // Determine which table to query based on user type
@@ -38,37 +45,52 @@ if (!empty($email) && !empty($type)) {
         $stmt = $pdo->prepare("INSERT INTO password_resets (email, token, expires, user_type, created_at) VALUES (?, ?, ?, ?, ?)");
         try {
             $stmt->execute([$email, $token, $expires, $type, $created_at]);
-
         } catch (PDOException $e) {
-            die("Failed to store reset token: " . $e->getMessage());
+            $_SESSION['reset_message'] = "Failed to store reset token: " . $e->getMessage();
+            header("Location: ../Frontend/forgot-password.php?type=$type");
+            exit();
         }
         
         // Send email with reset link
         $resetLink = "https://nyamula.com/reset-password.php?token=$token&email=$email&type=$type";
         
-         // Prepare email
-        $to = $email;
-        $subject = "Password Reset Request";
-        $message = "Hello,\n\nYou have requested to reset your password. Click the following link to reset your password:\n\n$resetLink\n\nIf you did not request this, please ignore this email.\n\nThis link will expire in 1 hour.";
-        $headers = "From: noreply@nyamula.com\r\n";
-        $headers .= "Reply-To: noreply@nyamula.com\r\n";
-        $headers .= "X-Mailer: PHP/" . phpversion();
+        // Prepare email
+        $mail = new PHPMailer(true);
 
-        // Send email
-        if (mail($to, $subject, $message, $headers)) {
+        try {
+            //Server settings
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.hostinger.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = ''; // Add your SMTP username here
+            $mail->Password   = 'P@55w07d@1#';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Changed to SMTPS for port 465
+            $mail->Port       = 465;
+
+            //Recipients
+            $mail->setFrom('noreply@Admin@nyamula.com', 'Nyamula Logistics');
+            $mail->addAddress($email);
+
+            //Content
+            $mail->isHTML(true);
+            $mail->Subject = 'Password Reset Request';
+            $mail->Body    = "Hello,<br><br>You have requested to reset your password. Click the following link to reset your password:<br><br><a href='$resetLink'>Reset Password</a><br><br>If you did not request this, please ignore this email.<br><br>This link will expire in 1 hour.";
+            $mail->AltBody = "Hello,\n\nYou have requested to reset your password. Click the following link to reset your password:\n\n$resetLink\n\nIf you did not request this, please ignore this email.\n\nThis link will expire in 1 hour.";
+
+            // Send email
+            $mail->send();
             $_SESSION['reset_message'] = "Password reset link has been sent to your email.";
-        } else {
-            $_SESSION['reset_message'] = "Failed to send password reset email. Please try again later.";
+        } catch (Exception $e) {
+            $_SESSION['reset_message'] = "Failed to send password reset email. Please try again later. Error: {$mail->ErrorInfo}";
         }
     } else {
         $_SESSION['reset_message'] = "Email not found.";
-    } 
-        // For example:
-        // mail($email, "Password Reset", "Click the following link to reset your password: $resetLink", "From: noreply@yourdomain.com");
-        
-        echo "Password reset link has been sent to your email.";
+    }
 } else {
-    echo "Email not found.";
+    $_SESSION['reset_message'] = "Please provide an email address and user type.";
 }
 
+// Redirect back to the forgot password page
+header("Location: ../Frontend/forgot-password.php" . (!empty($type) ? "?type=$type" : ""));
+exit();
 ?>
