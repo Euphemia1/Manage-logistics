@@ -46,15 +46,29 @@ if (!empty($email) && !empty($type)) {
         // Send email with reset link
         $resetLink = "https://nyamula.com/reset-password.php?token=$token&email=$email&type=$type";
         
-        // Here you would use mail() or a library like PHPMailer to send the email
+         // Prepare email
+        $to = $email;
+        $subject = "Password Reset Request";
+        $message = "Hello,\n\nYou have requested to reset your password. Click the following link to reset your password:\n\n$resetLink\n\nIf you did not request this, please ignore this email.\n\nThis link will expire in 1 hour.";
+        $headers = "From: noreply@nyamula.com\r\n";
+        $headers .= "Reply-To: noreply@nyamula.com\r\n";
+        $headers .= "X-Mailer: PHP/" . phpversion();
+
+        // Send email
+        if (mail($to, $subject, $message, $headers)) {
+            $_SESSION['reset_message'] = "Password reset link has been sent to your email.";
+        } else {
+            $_SESSION['reset_message'] = "Failed to send password reset email. Please try again later.";
+        }
+    } else {
+        $_SESSION['reset_message'] = "Email not found.";
+    } 
         // For example:
         // mail($email, "Password Reset", "Click the following link to reset your password: $resetLink", "From: noreply@yourdomain.com");
         
         echo "Password reset link has been sent to your email.";
-    } else {
-        echo "Email not found.";
-    }
 } else {
-    echo "Please provide an email address and user type.";
+    echo "Email not found.";
 }
+
 ?>
