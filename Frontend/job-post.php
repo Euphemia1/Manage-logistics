@@ -161,7 +161,7 @@
             <div class="search-bar">
                 <input type="text" id="pickup" placeholder="Pick up location">
                 <input type="text" id="dropoff" placeholder="Drop off location">
-                <button onclick="clearSearch()">Clear</button>
+                <button onclick="Search()">Search</button>
             </div>
         </div>
         <div id="jobPosts">
