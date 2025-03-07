@@ -163,6 +163,8 @@ if (!isset($_SESSION['user_name'])) {
                 .then(data => {
                     alert(data); // Show success or error message
                     postCargoForm.reset(); // Clear the form
+                    // Refresh the cargo list
+                    viewPostedCargosLink.click();
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -218,3 +220,4 @@ if (!isset($_SESSION['user_name'])) {
     </script>
 </body>
 </html>
+
