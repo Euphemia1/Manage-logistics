@@ -141,6 +141,15 @@ if (!isset($_SESSION['user_name'])) {
             const postedCargosSection = document.getElementById('postedCargos');
             const cargoList = document.getElementById('cargoList');
 
+            // Create the Back button once and reuse it
+            const backButton = document.createElement('button');
+            backButton.className = 'bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700';
+            backButton.textContent = 'Back to Dashboard';
+            backButton.addEventListener('click', function () {
+                postedCargosSection.classList.add('hidden');
+                postCargoSection.classList.remove('hidden');
+            });
+
             // Handle Post Cargo form submission
             postCargoForm.addEventListener('submit', function (e) {
                 e.preventDefault();
@@ -166,6 +175,7 @@ if (!isset($_SESSION['user_name'])) {
                 e.preventDefault();
                 postCargoSection.classList.add('hidden');
                 postedCargosSection.classList.remove('hidden');
+                postedCargosSection.insertBefore(backButton, cargoList);
 
                 // Fetch posted cargos from the server
                 fetch('fetch-cargos.php')
