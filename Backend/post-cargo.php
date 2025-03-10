@@ -2,7 +2,6 @@
 session_start();
 require_once 'db.php'; // Include your database connection
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the posted data
     $pickupDate = $_POST['pickupDate'];
@@ -13,11 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $destination = $_POST['destination'];
     $phone = $_POST['phone'];
     $instructions = $_POST['instructions'];
-    $cargoOwnerName = $_SESSION['user_name']; // Assuming the cargo owner's name is stored in the session
+    $cargoOwnerName = $_SESSION['user_name']; // Using the session user_name
+    $status = 'Available'; // Default status for newly posted cargo
 
     // Prepare and execute the insert statement
-    $stmt = $conn->prepare("INSERT INTO orders (pickup_date, weight, dimensions, cargo_type, origin, destination, phone, instructions, cargo_owner_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssssss", $pickupDate, $weight, $dimensions, $cargoType, $origin, $destination, $phone, $instructions, $cargoOwnerName);
+    $stmt = $conn->prepare("INSERT INTO orders (pickup_date, weight, dimensions, cargo_type, origin, destination, phone, instructions, cargo_owner_name, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssssssss", $pickupDate, $weight, $dimensions, $cargoType, $origin, $destination, $phone, $instructions, $cargoOwnerName, $status);
 
     if ($stmt->execute()) {
         echo "Cargo posted successfully!";
@@ -29,3 +29,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 $conn->close();
 ?>
+
+

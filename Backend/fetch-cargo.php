@@ -2,15 +2,34 @@
 session_start();
 require_once 'db.php'; // Include your database connection
 
-// Fetch cargos from the database
-$sql = "SELECT * FROM orders WHERE cargo_owner_name = ? ORDER BY created_at DESC";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $_SESSION['cargo_owner_name']); // Fetch cargos for the logged-in user
-$stmt->execute();
-$result = $stmt->get_result();
-$cargos = $result->fetch_all(MYSQLI_ASSOC);
+// Check if user is logged in
+if (!isset($_SESSION['user_name'])) {
+    header('Content-Type: application/json');
+    echo json_encode(['error' => 'User not logged in']);
+    exit();
+}
 
+// Get the cargo owner's name from the session
+$cargoOwnerName = $_SESSION['user_name'];
+
+// Prepare and execute the select statement to get cargos for this owner
+$stmt = $conn->prepare("SELECT * FROM orders WHERE cargo_owner_name = ? ORDER BY pickup_date DESC");
+$stmt->bind_param("s", $cargoOwnerName);
+$stmt->execute();
+
+$result = $stmt->get_result();
+$cargos = [];
+
+// Fetch all cargos
+while ($row = $result->fetch_assoc()) {
+    $cargos[] = $row;
+}
+
+// Return the cargos as JSON
+header('Content-Type: application/json');
 echo json_encode($cargos);
+
 $stmt->close();
 $conn->close();
 ?>
+
