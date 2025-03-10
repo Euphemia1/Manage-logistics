@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Post Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -64,6 +65,14 @@
             background-color: #0056b3;
         }
 
+        .search-bar button.clear {
+            background-color: #6c757d;
+        }
+
+        .search-bar button.clear:hover {
+            background-color: #5a6268;
+        }
+
         #jobPosts {
             background-color: #ffffff;
             border-radius: 8px;
@@ -93,6 +102,27 @@
 
         tr:hover {
             background-color: #f1f1f1;
+        }
+
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #007BFF;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* Responsive Styles */
@@ -161,10 +191,14 @@
             <div class="search-bar">
                 <input type="text" id="pickup" placeholder="Pick up location">
                 <input type="text" id="dropoff" placeholder="Drop off location">
-                <button onclick="Search()">Search</button>
+                <button onclick="searchJobs()">Search</button>
+                <button class="clear" onclick="clearSearch()">Clear</button>
             </div>
         </div>
         <div id="jobPosts">
+            <div class="loading" id="loading">
+                <div class="loading-spinner"></div>
+            </div>
             <table>
                 <thead>
                     <tr>
@@ -190,6 +224,8 @@
         });
 
         function loadJobs() {
+            const loading = document.getElementById('loading');
+            loading.style.display = 'flex';
             fetch('../Backend/get-jobs.php')
                 .then(response => response.json())
                 .then(jobs => {
@@ -199,7 +235,10 @@
                         showJobPost(job);
                     });
                 })
-                .catch(error => console.error('Error fetching jobs:', error));
+                .catch(error => console.error('Error fetching jobs:', error))
+                .finally(() => {
+                    loading.style.display = 'none';
+                });
         }
 
         function showJobPost(jobPost) {
@@ -217,9 +256,17 @@
             jobPostList.appendChild(jobPostRow);
         }
 
+        function searchJobs() {
+            const pickup = document.getElementById('pickup').value;
+            const dropoff = document.getElementById('dropoff').value;
+            // Implement search functionality here
+            console.log('Searching for jobs with pickup:', pickup, 'and dropoff:', dropoff);
+        }
+
         function clearSearch() {
             document.getElementById('pickup').value = '';
             document.getElementById('dropoff').value = '';
+            loadJobs(); // Reload all jobs after clearing search
         }
     </script>
 </body>
