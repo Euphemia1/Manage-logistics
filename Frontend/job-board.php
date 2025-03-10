@@ -77,7 +77,7 @@
         <header class="bg-primary-700 text-white shadow-md">
             <div class="container mx-auto px-4 py-3 flex justify-between items-center">
                 <div class="flex items-center space-x-2">
-                    <img src="images/logo.png" alt="Nyamula Logistics Logo" class="h-10 w-auto">
+                    <img src="../images/logo.png" alt="Nyamula Logistics Logo" class="h-10 w-auto">
                     <h1 class="text-xl font-bold hidden sm:block">Job Board Dashboard</h1>
                 </div>
                 <div class="flex items-center space-x-4">
