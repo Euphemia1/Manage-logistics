@@ -134,6 +134,43 @@ if (!isset($_SESSION['user_name'])) {
             const sidebar = document.querySelector('.sidebar');
             sidebar.classList.toggle('collapsed');
         }
+        
+    function validateForm() {
+        const fullName = document.querySelector('input[name="full_name"]').value.trim();
+        const phoneNumber = document.querySelector('input[name="phone_number"]').value.trim();
+        const email = document.querySelector('input[name="email"]').value.trim();
+        const truckType = document.querySelector('select[name="truck_type"]').value.trim();
+        const truckCapacity = document.querySelector('input[name="truck_capacity"]').value.trim();
+        const licensePlate = document.querySelector('input[name="license_plate"]').value.trim();
+
+        let errors = [];
+
+        if (!fullName) {
+            errors.push("Full name is required.");
+        }
+        if (!phoneNumber || !/^\+?\d{10,15}$/.test(phoneNumber)) {
+            errors.push("Invalid phone number.");
+        }
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            errors.push("Invalid email address.");
+        }
+        if (!truckType) {
+            errors.push("Truck type is required.");
+        }
+        if (!truckCapacity || isNaN(truckCapacity)) {
+            errors.push("Truck capacity must be a number.");
+        }
+        if (!licensePlate) {
+            errors.push("License plate number is required.");
+        }
+
+        if (errors.length > 0) {
+            alert(errors.join("\n"));
+            return false; // Prevent form submission
+        }
+        return true; // Allow form submission
+    }
+
     </script>
 </body>
 </html>
