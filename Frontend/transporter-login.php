@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 error_reporting(E_ALL);
@@ -71,6 +70,17 @@ ini_set('display_errors', 1);
         .login-container .fa {
             margin-right: 0.5rem;
         }
+        .forgot-password {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .forgot-password a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -83,7 +93,7 @@ ini_set('display_errors', 1);
         }
         ?>
 
-<form id="loginForm" action="../Backend/transporter-login.php" method="POST">
+        <form id="loginForm" action="../Backend/transporter-login.php" method="POST">
             <div class="form-group">
                 <label for="email"><i class="fa fa-envelope"></i>Email</label>
                 <input type="email" id="email" name="email" placeholder="Enter your email" required>
@@ -94,11 +104,9 @@ ini_set('display_errors', 1);
             </div>
             <button type="submit" id="loginBtn" class="login-btn">Login</button>
         </form>
+        <div class="forgot-password">
+            <a href="forgot-password.php?type=cargo_owner">Forgot Password?</a>
+        </div>
     </div>
-    <p class="mt-3 text-center">
-    <a href="forgot-password.php?type=cargo_owner" class="text-blue-500 hover:underline">Forgot Password?</a>
-</p>
 </body>
 </html>
-
-
