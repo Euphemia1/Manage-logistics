@@ -49,7 +49,7 @@ if (!isset($_SESSION['user_name'])) {
       <a href="#" class="block py-2 px-4 hover:bg-blue-600 rounded transition-colors"><i class="fas fa-home"></i> Home</a>
       <a href="#" class="block py-2 px-4 hover:bg-blue-600 rounded transition-colors"><i class="fas fa-box"></i> Available Loads</a>
       <a href="job-post.php" class="block py-2 px-4 hover:bg-blue-600 rounded transition-colors"><i class="fas fa-box"></i> Job Board</a>
-      <a href="#" class="block py-2 px-4 hover:bg-blue-600 rounded transition-colors"><i class="fas fa-cogs"></i> Settings</a>
+      <a href="settins.php" class="block py-2 px-4 hover:bg-blue-600 rounded transition-colors"><i class="fas fa-cogs"></i> Settings</a>
       <a href="index.php" class="block py-2 px-4 hover:bg-blue-600 rounded transition-colors"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
   </div>
