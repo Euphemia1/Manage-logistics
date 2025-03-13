@@ -72,58 +72,76 @@ if (!isset($_SESSION['user_name'])) {
         </div>
 
         <!-- Profile Management Section -->
-        <div class="card bg-white shadow-md rounded-lg p-6 mb-6">
-            <h3 class="text-xl font-bold mb-4">Profile Management</h3>
-            <form>
-                <!-- Name -->
-                <div class="mb-4">
-                    <label class="block text-gray-700">Full Name</label>
-                    <input type="text" class="w-full p-2 border rounded-lg" value="John Doe">
-                </div>
+       <!-- Profile Management Section -->
+<div class="card bg-white shadow-md rounded-lg p-6 mb-6">
+    <h3 class="text-xl font-bold mb-4">Profile Management</h3>
+    
+    <!-- Display Success/Error Messages -->
+    <?php if (!empty($errors)): ?>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            <?php foreach ($errors as $error): ?>
+                <p><?php echo $error; ?></p>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+    <?php if (isset($success)): ?>
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+            <p><?php echo $success; ?></p>
+        </div>
+    <?php endif; ?>
 
-                <!-- Profile Picture -->
-                <div class="mb-4">
-                    <label class="block text-gray-700">Profile Picture</label>
-                    <input type="file" class="w-full p-2 border rounded-lg">
-                </div>
+    <form method="POST" onsubmit="return validateForm()">
+        <!-- Name -->
+        <div class="mb-4">
+            <label class="block text-gray-700">Full Name</label>
+            <input type="text" name="full_name" class="w-full p-2 border rounded-lg" value="<?php echo htmlspecialchars($driver['full_name'] ?? ''); ?>">
+        </div>
 
-                <!-- Contact Information -->
-                <div class="mb-4">
-                    <label class="block text-gray-700">Phone Number</label>
-                    <input type="text" class="w-full p-2 border rounded-lg" value="+254 712 345 678">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700">Email Address</label>
-                    <input type="email" class="w-full p-2 border rounded-lg" value="johndoe@example.com">
-                </div>
+        <!-- Profile Picture -->
+        <div class="mb-4">
+            <label class="block text-gray-700">Profile Picture</label>
+            <input type="file" name="profile_picture" class="w-full p-2 border rounded-lg">
+        </div>
 
-                <!-- Truck Details -->
-                <div class="mb-4">
-                    <label class="block text-gray-700">Truck Type</label>
-                    <select class="w-full p-2 border rounded-lg">
-                        <option>Flatbed</option>
-                        <option>Refrigerated</option>
-                        <option>Container</option>
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700">Truck Capacity (Tons)</label>
-                    <input type="number" class="w-full p-2 border rounded-lg" value="10">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-gray-700">License Plate Number</label>
-                    <input type="text" class="w-full p-2 border rounded-lg" value="KAA 123A">
-                </div>
+        <!-- Contact Information -->
+        <div class="mb-4">
+            <label class="block text-gray-700">Phone Number</label>
+            <input type="text" name="phone_number" class="w-full p-2 border rounded-lg" value="<?php echo htmlspecialchars($driver['phone_number'] ?? ''); ?>">
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700">Email Address</label>
+            <input type="email" name="email" class="w-full p-2 border rounded-lg" value="<?php echo htmlspecialchars($driver['email'] ?? ''); ?>">
+        </div>
 
-                <!-- Availability Status -->
-                <div class="mb-4">
-                    <label class="flex items-center">
-                        <input type="checkbox" class="mr-2" checked> Mark as Available for Loads
-                    </label>
-                </div>
+        <!-- Truck Details -->
+        <div class="mb-4">
+            <label class="block text-gray-700">Truck Type</label>
+            <select name="truck_type" class="w-full p-2 border rounded-lg">
+                <option value="Flatbed" <?php echo ($driver['truck_type'] ?? '') === 'Flatbed' ? 'selected' : ''; ?>>Flatbed</option>
+                <option value="Refrigerated" <?php echo ($driver['truck_type'] ?? '') === 'Refrigerated' ? 'selected' : ''; ?>>Refrigerated</option>
+                <option value="Container" <?php echo ($driver['truck_type'] ?? '') === 'Container' ? 'selected' : ''; ?>>Container</option>
+            </select>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700">Truck Capacity (Tons)</label>
+            <input type="number" name="truck_capacity" class="w-full p-2 border rounded-lg" value="<?php echo htmlspecialchars($driver['truck_capacity'] ?? ''); ?>">
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700">License Plate Number</label>
+            <input type="text" name="license_plate" class="w-full p-2 border rounded-lg" value="<?php echo htmlspecialchars($driver['license_plate'] ?? ''); ?>">
+        </div>
 
-                <!-- Save Button -->
-                <button class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">Save Changes</button>
+        <!-- Availability Status -->
+        <div class="mb-4">
+            <label class="flex items-center">
+                <input type="checkbox" name="is_available" class="mr-2" <?php echo ($driver['is_available'] ?? 0) ? 'checked' : ''; ?>> Mark as Available for Loads
+            </label>
+        </div>
+
+        <!-- Save Button -->
+        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">Save Changes</button>
+    </form>
+</div>
             </form>
         </div>
     </div>
