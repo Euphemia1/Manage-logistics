@@ -1,8 +1,8 @@
 <?php
 session_start();
 $type = $_GET['type'] ?? '';
-if ($type !== 'cargo_owner' && $type !== 'transporter') {
-    die('Invalid user type');
+if ($type !== 'cargo_owner' && $type !== 'transporters') {
+    // die('Invalid user type');
 }
 ?>
 <!DOCTYPE html>
@@ -95,6 +95,6 @@ if ($type !== 'cargo_owner' && $type !== 'transporter') {
 </html>
 
 
-t
+
 
 

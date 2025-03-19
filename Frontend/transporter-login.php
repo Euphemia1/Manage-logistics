@@ -105,7 +105,7 @@ ini_set('display_errors', 1);
             <button type="submit" id="loginBtn" class="login-btn">Login</button>
         </form>
         <div class="forgot-password">
-            <a href="forgot-password.php?type=transporter">Forgot Password?</a>
+            <a href="../Backend/forgot-password.php?type=transporter">Forgot Password?</a>
         </div>
     </div>
 </body>

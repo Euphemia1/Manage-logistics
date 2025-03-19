@@ -29,6 +29,8 @@ $type = $_POST['type'] ?? '';
 if (!empty($email) && !empty($type)) {
     // Determine which table to query based on user type
     $table = ($type === 'cargo_owner') ? 'cargo_owners' : 'transporters';
+
+    $table = ($type === 'transporters') ? 'transporters' : 'cargo_owners';
     
     // Check if the email exists in the appropriate table
     $stmt = $pdo->prepare("SELECT email FROM $table WHERE email = ?");
