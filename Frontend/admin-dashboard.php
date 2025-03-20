@@ -372,7 +372,7 @@ $conn->close();
       </div>
     </div>
 
-    <!-- Recent Activity Card -->
+    <!-- Recent Activity Card
     <div class="card">
       <h3><i class="fas fa-chart-line"></i> Recent Activity</h3>
       <ul class="recent-activity" id="recent-activity-list">
@@ -418,7 +418,7 @@ $conn->close();
         </li>
       </ul>
     </div>
-  </div>
+  </div> -->
 
   <script>
     // Function to fetch updated counts from the server
