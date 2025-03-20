@@ -1,53 +1,95 @@
 <?php
 session_start();
-require_once 'db_connection.php'; // Ensure this file properly initializes $pdo
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $token = $_POST['token'] ?? '';
-    $type = $_POST['type'] ?? '';
-    $password = $_POST['password'] ?? '';
-    $confirm_password = $_POST['confirm_password'] ?? '';
+require '../vendor/autoload.php';
 
-    if (empty($token) || empty($type) || empty($password) || empty($confirm_password)) {
-        $_SESSION['reset_message'] = "All fields are required.";
-        header("Location: ../Frontend/reset-password.php?token=$token&type=$type");
-        exit();
-    }
+// Database connection setup
+$host = 'localhost';
+$dbname = 'logistics';
+$username = 'root';
+$password = '';
 
-    if ($password !== $confirm_password) {
-        $_SESSION['reset_message'] = "Passwords do not match.";
-        header("Location: ../Frontend/reset-password.php?token=$token&type=$type");
-        exit();
-    }
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    $_SESSION['reset_message'] = "Database connection failed: " . $e->getMessage();
+    header("Location: ../Frontend/forgot-password.php");
+    exit();
+}
 
-    // Verify token and get associated email
-    $stmt = $pdo->prepare("SELECT email FROM password_resets WHERE token = ? AND user_type = ? AND expires > NOW()");
-    $stmt->execute([$token, $type]);
-    $reset = $stmt->fetch();
+// Get email from form
+$email = $_POST['email'] ?? '';
 
-    if ($reset) {
-        $email = $reset['email'];
+// Check if email exists in either table
+$userType = null;
+$table = null;
 
-        // Hash the new password securely
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-        // Update user's password
-        $stmt = $pdo->prepare("UPDATE users SET password = ? WHERE email = ? AND type = ?");
-        $stmt->execute([$hashed_password, $email, $type]);
-
-        // Delete used token
-        $stmt = $pdo->prepare("DELETE FROM password_resets WHERE token = ?");
-        $stmt->execute([$token]);
-
-        $_SESSION['reset_message'] = "Your password has been successfully reset. You can now log in.";
-
-        // Redirect to the appropriate login page based on user type
-        $login_page = ($type === 'cargo_owner') ? 'cargo-owner-login.php' : 'transporter-login.php';
-        header("Location: ../Frontend/$login_page");
-        exit();
-    } else {
-        $_SESSION['reset_message'] = "Invalid or expired reset link. Please try again.";
-        header("Location: ../Frontend/forgot-password.php?type=$type");
-        exit();
+// Check in cargo owners
+$stmt = $pdo->prepare("SELECT email FROM cargo_owners WHERE email = ?");
+$stmt->execute([$email]);
+if ($stmt->fetch()) {
+    $userType = 'cargo_owner';
+    $table = 'cargo_owners';
+} else {
+    // Check in transporters
+    $stmt = $pdo->prepare("SELECT email FROM transporters WHERE email = ?");
+    $stmt->execute([$email]);
+    if ($stmt->fetch()) {
+        $userType = 'transporter';
+        $table = 'transporters';
     }
 }
+
+if ($userType) {
+    $token = bin2hex(random_bytes(32));
+    $expires = date('Y-m-d H:i:s', time() + 3600);
+    
+    // Store token
+    $stmt = $pdo->prepare("INSERT INTO password_resets (email, token, expires, user_type, created_at) VALUES (?, ?, ?, ?, NOW())");
+    $stmt->execute([$email, $token, $expires, $userType]);
+
+    // Construct the reset link
+    $scheme = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
+    $host = $_SERVER['HTTP_HOST'];
+    $resetLink = "$scheme://$host/Frontend/reset-password.php?token=$token&email=" . urlencode($email) . "&type=" . urlencode($userType);
+
+    // PHPMailer Setup
+    try {
+        $phpMailer = new PHPMailer(true);
+        $phpMailer->isSMTP();
+        $phpMailer->Host = "smtp.zoho.com";
+        $phpMailer->SMTPAuth = true;
+        $phpMailer->Username = 'bervinitsolutions@zohomail.com';
+        $phpMailer->Password = "!3erv!n@6!S4@Z0H0";
+        $phpMailer->SMTPSecure = "tls";
+        $phpMailer->Port = 587;
+        $phpMailer->isHTML(true);
+        $phpMailer->setFrom('bervinitsolutions@zohomail.com', 'Nyamula Logistics');
+        $phpMailer->addAddress($email);
+
+        // Email content
+        $phpMailer->Subject = 'Password Reset Request';
+        $phpMailer->Body = "Hello,<br><br>Click the following link to reset your password:<br><br><a href='$resetLink'>Reset Password</a><br><br>This link will expire in 1 hour.";
+        
+        $phpMailer->send();
+        $_SESSION['reset_message'] = "Password reset link has been sent.";
+    } catch (Exception $e) {
+        error_log("Mail error: " . $phpMailer->ErrorInfo);
+        $_SESSION['reset_message'] = "Failed to send password reset email.";
+    }
+// } else {
+//     $_SESSION['reset_message'] = "Email not found.";
+}
+
+// Redirect to the login page based on user type
+if ($userType === 'cargo_owner') {
+    header("Location: ../Frontend/cargo-owner-login.php");
+} elseif ($userType === 'transporter') {
+    header("Location: ../Frontend/transporter-login.php");
+} else {
+    header("Location: ../Frontend/forgot-password.php");
+}
+exit();

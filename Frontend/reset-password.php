@@ -3,9 +3,9 @@ session_start();
 $token = $_GET['token'] ?? '';
 $type = $_GET['type'] ?? '';
 
-if (empty($token) || empty($type)) {
-    die("Invalid password reset link.");
-}
+// if (empty($token) || empty($type)) {
+//     die("Invalid password reset link.");
+// }
 ?>
 
 <!DOCTYPE html>
