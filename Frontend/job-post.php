@@ -501,7 +501,7 @@
         <div class="table-container">
             <div class="table-header">
                 <h3><i class="fas fa-list"></i> Job Listings</h3>
-                <span class="job-count" id="jobCount">0 jobs</span>
+                <span class="job-count" id="jobCount"></span>
             </div>
             <div class="table-responsive">
                 <div class="loading" id="loading">
