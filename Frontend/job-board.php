@@ -804,7 +804,7 @@ $result = mysqli_query($conn, $query);
         <div class="table-container">
             <div class="table-header">
                 <h3><i class="fas fa-list"></i> Job Listings</h3>
-                <div class="job-count">5 Jobs</div>
+                <div class="job-count"></div>
             </div>
 
             <div class="table-responsive">
