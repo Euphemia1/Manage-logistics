@@ -51,7 +51,7 @@ if ($user) {
     } catch (PDOException $e) {
         error_log("Database error: " . $e->getMessage());
         $_SESSION['reset_message'] = "Failed to store reset token.";
-        header("Location: ../Frontend/forgot-password.php?type=$type");
+        header("Location: ../reset-password.php?type=$type");
         exit();
     }
 
@@ -59,8 +59,10 @@ if ($user) {
     $scheme = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
     $host = $_SERVER['HTTP_HOST'];
     $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
-    $resetLink = "$scheme://$host$basePath/reset-password.php?token=$token&email=" . urlencode($email) . "&type=" . urlencode($type);
-
+   
+    
+// Construct the reset link properly
+$resetLink = "https://".$_SERVER['HTTP_HOST']."../Frontend/reset-password.php?token=$token&email=".urlencode($email)."&type=".urlencode($type);
     // PHPMailer Setup
     try {
         $phpMailer = new PHPMailer(true);
@@ -90,5 +92,5 @@ if ($user) {
 }
 
 // Redirect
-header("Location: ../Frontend/forgot-password.php?type=$type");
+header("Location: ../Frontend/reset-password.php?type=$type");
 exit();

@@ -107,25 +107,27 @@ $type = $_GET['type'] ?? '';
             <p class="message"><?php echo $_SESSION['reset_message']; unset($_SESSION['reset_message']); ?></p>
         <?php endif; ?>
 
-        <form action="../Backend/reset-password.php" method="POST">
-            <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
-            <input type="hidden" name="type" value="<?php echo htmlspecialchars($type); ?>">
-
-            <div class="form-group">
-                <label for="password">New Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-
-            <div class="form-group">
-                <label for="confirm_password">Confirm Password:</label>
-                <input type="password" id="confirm_password" name="confirm_password" required>
-            </div>
-
-            <button type="submit">Reset Password</button>
-        </form>
+        <?php
+// Include the validation code shown above
+// If validation passes, show this form:
+?>
+<form action="process-reset.php" method="post">
+    <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
+    <input type="hidden" name="email" value="<?= htmlspecialchars($email) ?>">
+    <input type="hidden" name="type" value="<?= htmlspecialchars($type) ?>">
+    
+    <label>New Password:</label>
+    <input type="password" name="new_password" required>
+    
+    <label>Confirm Password:</label>
+    <input type="password" name="confirm_password" required>
+    
+    <button type="submit">Reset Password</button>
+</form>
     </div>
 </body>
 </html>
+
 
 
 
