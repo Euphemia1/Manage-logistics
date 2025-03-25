@@ -65,8 +65,10 @@ if (!isset($_SESSION['user_name'])) {
             <a href="#" id="postCargoLink" class="block py-2 px-4 hover:bg-green-600 rounded transition-colors"><i class="fas fa-box"></i> Post Cargo</a>
             <a href="#" id="viewPostedCargosLink" class="block py-2 px-4 hover:bg-green-600 rounded transition-colors"><i class="fas fa-eye"></i> View Posted Cargos</a>
             <a href="#" id="settingsLink" class="block py-2 px-4 hover:bg-green-600 rounded transition-colors"><i class="fas fa-cogs"></i> Settings</a>
-            <a href="logout.php" class="block py-2 px-4 hover:bg-green-600 rounded transition-colors"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            <a href="../Backend/logout.php" class="block py-2 px-4 hover:bg-green-600 rounded transition-colors"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </div>
+
+
     </div>
 
     <!-- Hamburger Menu for Mobile -->
