@@ -768,7 +768,7 @@
                         <p>Email: <a href="mailto:admin@nyamula.com">admin@nyamula.com</a></p>
                     </div>
                 </div>
-                <form class="contact-form">
+                <form class="contact-form" action="process-reset.php" method="POST">
                     <h3>Send us a message</h3>
                     <div class="form-group">
                         <input type="text" placeholder="Your Name" required>
