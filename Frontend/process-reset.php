@@ -18,39 +18,46 @@ try {
 }
 
 // Get form data
-$token = $_POST['token'] ?? '';
-$email = $_POST['email'] ?? '';
-$userType = $_POST['type'] ?? '';
-$newPassword = $_POST['new_password'] ?? '';
-$confirmPassword = $_POST['confirm_password'] ?? '';
+// Get and trim all input values to remove whitespace
+$token = trim($_POST['token'] ?? '');
+$email = trim($_POST['email'] ?? '');
+$userType = trim($_POST['type'] ?? '');
+$newPassword = trim($_POST['new_password'] ?? '');
+$confirmPassword = trim($_POST['confirm_password'] ?? '');
 
-// Validate input
-if (empty($token) || empty($email) || empty($userType) || 
-    empty($newPassword) || $newPassword !== $confirmPassword) {
-    $_SESSION['reset_message'] = "Invalid request or passwords don't match";
+// Enhanced validation
+if (empty($token) || empty($email) || empty($userType)) {
+    $_SESSION['reset_message'] = "Invalid reset request. Please try the reset link again.";
+    header("Location: ../Frontend/forgot-password.php");
+    exit();
+}
+
+if (empty($newPassword) || empty($confirmPassword)) {
+    $_SESSION['reset_message'] = "Both password fields are required.";
     header("Location: ../Frontend/reset-password.php?token=" . urlencode($token) . 
           "&email=" . urlencode($email) . "&type=" . urlencode($userType));
     exit();
 }
 
-// Verify token is still valid
-try {
-    $stmt = $pdo->prepare("SELECT * FROM password_resets 
-                          WHERE email = ? AND token = ? AND expires > NOW()");
-    $stmt->execute([$email, $token]);
-    $resetRequest = $stmt->fetch();
-
-    if (!$resetRequest) {
-        $_SESSION['reset_message'] = "Invalid or expired reset link";
-        header("Location: ../Frontend/forgot-password.php");
-        exit();
-    }
-} catch (PDOException $e) {
-    error_log("Token verification failed: " . $e->getMessage());
-    $_SESSION['reset_message'] = "Error verifying reset token";
-    header("Location: ../Frontend/forgot-password.php");
+if ($newPassword !== $confirmPassword) {
+    $_SESSION['reset_message'] = "The passwords you entered do not match. Please try again.";
+    header("Location: ../Frontend/reset-password.php?token=" . urlencode($token) . 
+          "&email=" . urlencode($email) . "&type=" . urlencode($userType));
     exit();
 }
+
+if (strlen($newPassword) < 8) {
+    $_SESSION['reset_message'] = "Password must be at least 8 characters long.";
+    header("Location: ../Frontend/reset-password.php?token=" . urlencode($token) . 
+          "&email=" . urlencode($email) . "&type=" . urlencode($userType));
+    exit();
+}
+// } catch (PDOException $e) {
+//     error_log("Token verification failed: " . $e->getMessage());
+//     $_SESSION['reset_message'] = "Error verifying reset token";
+//     header("Location: ../Frontend/forgot-password.php");
+//     exit();
+// }
 
 // Update password
 $table = ($userType === 'cargo_owner') ? 'cargo_owners' : 'transporters';

@@ -111,19 +111,61 @@ $type = $_GET['type'] ?? '';
 // Include the validation code shown above
 // If validation passes, show this form:
 ?>
-<form action="process-reset.php" method="post">
-    <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
-    <input type="hidden" name="email" value="<?= htmlspecialchars($email) ?>">
-    <input type="hidden" name="type" value="<?= htmlspecialchars($type) ?>">
+<!-- Add this JavaScript for client-side validation -->
+<script>
+function validatePasswords() {
+    const newPass = document.getElementById('new_password').value;
+    const confirmPass = document.getElementById('confirm_password').value;
     
-    <label>New Password:</label>
-    <input type="password" name="new_password" required>
+    if (newPass !== confirmPass) {
+        alert('Passwords do not match!');
+        return false;
+    }
+    return true;
+}
+</script>
+
+<form action="process-reset.php" method="POST" id="resetForm">
+    <!-- Ensure these hidden fields exactly match these names -->
+    <input type="hidden" name="reset_token" value="<?= htmlspecialchars($token) ?>">
+    <input type="hidden" name="reset_email" value="<?= htmlspecialchars($email) ?>">
+    <input type="hidden" name="user_type" value="<?= htmlspecialchars($userType) ?>">
     
-    <label>Confirm Password:</label>
-    <input type="password" name="confirm_password" required>
+    <div class="form-group">
+        <label for="new_password">New Password:</label>
+        <input type="password" id="new_password" name="new_password" required minlength="8">
+    </div>
+    
+    <div class="form-group">
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" id="confirm_password" name="confirm_password" required minlength="8">
+    </div>
     
     <button type="submit">Reset Password</button>
 </form>
+
+
+
+
+
+<script>
+function checkPasswordMatch() {
+    const newPass = document.getElementById('new_password').value;
+    const confirmPass = document.getElementById('confirm_password').value;
+    const message = document.getElementById('passwordMatchMessage');
+    
+    if (newPass && confirmPass) {
+        if (newPass !== confirmPass) {
+            message.textContent = "Passwords do not match!";
+        } else {
+            message.textContent = "Passwords match!";
+            message.style.color = "green";
+        }
+    } else {
+        message.textContent = "";
+    }
+}
+</script>
     </div>
 </body>
 </html>
