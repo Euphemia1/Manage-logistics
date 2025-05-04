@@ -768,20 +768,20 @@
                         <p>Email: <a href="mailto:admin@nyamula.com">admin@nyamula.com</a></p>
                     </div>
                 </div>
-                <form class="contact-form" action="https://formspree.io/f/mdkgeqbd" method="POST">
-                    <h3>Send us a message</h3>
-                    <div class="form-group">
-
-                        <input type="text" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea placeholder="Your Message" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-button">Send Message</button>
-                </form>
+                <form class="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+    <input type="hidden" name="_format" value="plain">
+    <h3>Send us a message</h3>
+    <div class="form-group">
+        <input type="text" name="name" placeholder="Your Name" required>
+    </div>
+    <div class="form-group">
+        <input type="email" name="email" placeholder="Your Email" required>
+    </div>
+    <div class="form-group">
+        <textarea name="message" placeholder="Your Message" required></textarea>
+    </div>
+    <button type="submit" class="submit-button">Send Message</button>
+</form>
             </div>
         </div>
     </section>
