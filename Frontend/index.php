@@ -768,7 +768,7 @@
                         <p>Email: <a href="mailto:admin@nyamula.com">admin@nyamula.com</a></p>
                     </div>
                 </div>
-                <form class="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+                <form class="contact-form" action="https://formspree.io/f/mdkgeqbd" method="POST">
     <input type="hidden" name="_format" value="plain">
     <h3>Send us a message</h3>
     <div class="form-group">
