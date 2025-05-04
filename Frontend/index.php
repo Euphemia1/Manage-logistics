@@ -768,9 +768,10 @@
                         <p>Email: <a href="mailto:admin@nyamula.com">admin@nyamula.com</a></p>
                     </div>
                 </div>
-                <form class="contact-form" action="process-reset.php" method="POST">
+                <form class="contact-form" action="https://formspree.io/f/mdkgeqbd" method="POST">
                     <h3>Send us a message</h3>
                     <div class="form-group">
+
                         <input type="text" placeholder="Your Name" required>
                     </div>
                     <div class="form-group">
@@ -851,6 +852,24 @@
                 });
             }
         });
+
+
+//         document.querySelector('.contact-form').addEventListener('submit', function(e) {
+//     e.preventDefault();
+//     fetch('your-server-endpoint', {
+//         method: 'POST',
+//         body: JSON.stringify({
+//             name: this.name.value,
+//             email: this.email.value,
+//             message: this.message.value
+//         }),
+//         headers: {
+//             'Content-Type': 'application/json'
+//         }
+//     })
+//     .then(response => alert('Message sent!'))
+//     .catch(error => alert('Error sending message'));
+// });
     </script>
 </body>
 </html>
