@@ -22,8 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cargo_owner_name = $_SESSION['user_name']; // Using the session user_name
     $status = 'Available'; // Default status for newly posted cargo
 
+    var_dump($cargoOwnerName); 
+    if (!$cargoOwnerName) {
+        die("Error: User not logged in or name not set.");
+    }
+    // Check what value is being passed
     // Prepare and execute the insert statement
-    $stmt = $conn->prepare("INSERT INTO orders (pickup_date, weight, dimensions, cargo_type, origin, destination, phone, instructions, cargo_owner_name, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO orders (pickup_date, weight, dimensions, cargo_type, origin, destination, phone_number, instructions, cargo_owner_name, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("ssssssssss", $pickupDate, $weight, $dimensions, $cargoType, $origin, $destination, $phone, $instructions, $cargoOwnerName, $status);
 
     if ($stmt->execute()) {

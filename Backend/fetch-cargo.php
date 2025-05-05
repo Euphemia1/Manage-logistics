@@ -8,7 +8,9 @@ if (!isset($_SESSION['user_name'])) {
     echo json_encode(['error' => 'User not logged in']);
     exit();
 }
-
+// After successful login (e.g., in login.php)
+session_start();
+$_SESSION['user_name'] = $user['name']; // Assuming $user['name'] contains the cargo owner's name
 // Get the cargo owner's name from the session
 $cargo_owner_name = $_SESSION['user_name'];
 
