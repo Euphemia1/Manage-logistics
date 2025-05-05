@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status = 'Available'; // Default status for newly posted cargo
 
     var_dump($cargo_owner_name); 
-    if (!$cargoOwnerName) {
+    if (!$cargo_owner_name) {
         die("Error: User not logged in or name not set.");
     }
     // Check what value is being passed
