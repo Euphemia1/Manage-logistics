@@ -64,6 +64,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             $response = curl_exec($ch);
             curl_close($ch);
+            
+            // Set congratulatory message in session
+            $_SESSION['signup_success'] = [
+                'name' => $cargo_owner_name,
+                'email' => $email,
+                'type' => 'cargo_owner'
+            ];
 
             // Redirect to the login page after successful signup
             header("Location: ../Frontend/cargo-owner-login.php");
