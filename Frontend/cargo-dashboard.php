@@ -476,42 +476,42 @@ if (!isset($_SESSION['user_name'])) {
                 setTimeout(() => {
                     // Sample data (replace with actual API call)
                     const sampleData = [
-                        {
-                            id: "",
-                            cargo_type: "",
-                            status: "",
-                            origin: "",
-                            destination: "",
-                            pickup_date: "",
-                            weight: "",
-                            dimensions: "",
-                            phone: "",
-                            instructions: "."
-                        },
-                        {
-                            id: "",
-                            cargo_type: "",
-                            status: "",
-                            origin: "",
-                            destination: "",
-                            pickup_date: "",
-                            weight: "",
-                            dimensions: "",
-                            phone: "",
-                            instructions: ""
-                        },
-                        {
-                            id: "",
-                            cargo_type: "",
-                            status: "",
-                            origin: "",
-                            destination: "",
-                            pickup_date: "",
-                            weight: "",
-                            dimensions: "",
-                            phone: "",
-                            instructions: ""
-                        }
+                        // {
+                        //     id: "",
+                        //     cargo_type: "",
+                        //     status: "",
+                        //     origin: "",
+                        //     destination: "",
+                        //     pickup_date: "",
+                        //     weight: "",
+                        //     dimensions: "",
+                        //     phone: "",
+                        //     instructions: "."
+                        // },
+                        // {
+                        //     id: "",
+                        //     cargo_type: "",
+                        //     status: "",
+                        //     origin: "",
+                        //     destination: "",
+                        //     pickup_date: "",
+                        //     weight: "",
+                        //     dimensions: "",
+                        //     phone: "",
+                        //     instructions: ""
+                        // },
+                        // {
+                        //     id: "",
+                        //     cargo_type: "",
+                        //     status: "",
+                        //     origin: "",
+                        //     destination: "",
+                        //     pickup_date: "",
+                        //     weight: "",
+                        //     dimensions: "",
+                        //     phone: "",
+                        //     instructions: ""
+                        // }
                     ];
                     
                     cargoLoader.classList.add('d-none');
