@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cargo_owner_name = $_SESSION['user_name']; // Using the session user_name
     $status = 'Available'; // Default status for newly posted cargo
 
-    var_dump($cargoOwnerName); 
+    var_dump($cargo_owner_name); 
     if (!$cargoOwnerName) {
         die("Error: User not logged in or name not set.");
     }
