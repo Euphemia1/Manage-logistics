@@ -478,39 +478,39 @@ if (!isset($_SESSION['user_name'])) {
                     const sampleData = [
                         {
                             id: 1,
-                            cargo_type: "",
-                            status: "",
-                            origin: "",
-                            destination: "",
-                            pickup_date: "",
-                            weight: "",
-                            dimensions: "",
-                            phone: "",
-                            instructions: ""
+                            cargo_type: "Electronics",
+                            status: "Available",
+                            origin: "Nairobi",
+                            destination: "Mombasa",
+                            pickup_date: "2023-06-15",
+                            weight: "500",
+                            dimensions: "2m x 1m x 1m",
+                            phone: "+254712345678",
+                            instructions: "Handle with care. Fragile items."
                         },
                         {
-                            id: "",
-                            cargo_type: "",
-                            status: "",
-                            origin: "",
-                            destination: "",
-                            pickup_date: "",
-                            weight: "",
-                            dimensions: "",
-                            phone: "",
-                            instructions: "."
+                            id: 2,
+                            cargo_type: "Furniture",
+                            status: "In Transit",
+                            origin: "Kisumu",
+                            destination: "Nakuru",
+                            pickup_date: "2023-06-18",
+                            weight: "1200",
+                            dimensions: "3m x 2m x 2m",
+                            phone: "+254723456789",
+                            instructions: "Heavy items. Need strong handlers."
                         },
                         {
-                            id: "",
-                            cargo_type: "",
-                            status: "",
-                            origin: "",
-                            destination: "",
-                            pickup_date: "",
-                            weight: "",
-                            dimensions: "",
-                            phone: "",
-                            instructions: ""
+                            id: 3,
+                            cargo_type: "Agricultural Products",
+                            status: "Available",
+                            origin: "Eldoret",
+                            destination: "Nairobi",
+                            pickup_date: "2023-06-20",
+                            weight: "800",
+                            dimensions: "2m x 2m x 1m",
+                            phone: "+254734567890",
+                            instructions: "Perishable goods. Need refrigerated transport."
                         }
                     ];
                     
@@ -814,44 +814,31 @@ if (!isset($_SESSION['user_name'])) {
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Posting...';
                 
-                // Simulate form submission (replace with actual fetch in production)
-                setTimeout(() => {
-                    // Re-enable submit button
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = originalText;
-                    
-                    // Show success message
-                    alert('Cargo posted successfully!');
-                    
-                    // Reset form and go to dashboard
-                    postCargoForm.reset();
-                    showSection(homeSection);
-                    
-                    // Refresh cargo data
-                    fetchCargos();
-                }, 1500);
-                
-                // In production, use actual fetch:
-                /*
+                // Send form data to backend
                 fetch('../Backend/post-cargo.php', {
                     method: 'POST',
                     body: formData
                 })
-                .then(response => response.text())
+                .then(response => response.json())
                 .then(data => {
                     // Re-enable submit button
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalText;
                     
-                    // Show success message
-                    alert(data);
-                    
-                    // Reset form and go to dashboard
-                    postCargoForm.reset();
-                    showSection(homeSection);
-                    
-                    // Refresh cargo data
-                    fetchCargos();
+                    if (data.success) {
+                        // Show success message
+                        alert('Cargo posted successfully!');
+                        
+                        // Reset form and go to dashboard
+                        postCargoForm.reset();
+                        showSection(homeSection);
+                        
+                        // Refresh cargo data
+                        fetchCargos();
+                    } else {
+                        // Show error message
+                        alert('Error: ' + data.message);
+                    }
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -862,7 +849,6 @@ if (!isset($_SESSION['user_name'])) {
                     
                     alert('An error occurred. Please try again.');
                 });
-                */
             });
             
             // Adjust weight input value
