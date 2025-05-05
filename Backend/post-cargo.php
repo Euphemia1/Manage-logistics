@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $destination = $_POST['destination'];
     $phone = $_POST['phone'];
     $instructions = $_POST['instructions'];
-    $cargoOwnerName = $_SESSION['user_name']; // Using the session user_name
+    $cargo_owner_name = $_SESSION['user_name']; // Using the session user_name
     $status = 'Available'; // Default status for newly posted cargo
 
     // Prepare and execute the insert statement
