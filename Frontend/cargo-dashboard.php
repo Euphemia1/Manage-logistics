@@ -501,16 +501,16 @@ if (!isset($_SESSION['user_name'])) {
                             instructions: "Heavy items. Need strong handlers."
                         },
                         {
-                            id: 3,
-                            cargo_type: "Agricultural Products",
-                            status: "Available",
-                            origin: "Eldoret",
-                            destination: "Nairobi",
-                            pickup_date: "2023-06-20",
-                            weight: "800",
-                            dimensions: "2m x 2m x 1m",
-                            phone: "+254734567890",
-                            instructions: "Perishable goods. Need refrigerated transport."
+                            id: "",
+                            cargo_type: "",
+                            status: "",
+                            origin: "",
+                            destination: "",
+                            pickup_date: "",
+                            weight: "",
+                            dimensions: "",
+                            phone: "",
+                            instructions: ""
                         }
                     ];
                     
