@@ -472,88 +472,7 @@ if (!isset($_SESSION['user_name'])) {
                 cargoLoader.classList.remove('d-none');
                 cargoList.innerHTML = '';
                 
-                // Simulate fetch with setTimeout (replace with actual fetch in production)
-                setTimeout(() => {
-                    // Sample data (replace with actual API call)
-                    const sampleData = [
-                        // {
-                        //     id: "",
-                        //     cargo_type: "",
-                        //     status: "",
-                        //     origin: "",
-                        //     destination: "",
-                        //     pickup_date: "",
-                        //     weight: "",
-                        //     dimensions: "",
-                        //     phone: "",
-                        //     instructions: "."
-                        // },
-                        // {
-                        //     id: "",
-                        //     cargo_type: "",
-                        //     status: "",
-                        //     origin: "",
-                        //     destination: "",
-                        //     pickup_date: "",
-                        //     weight: "",
-                        //     dimensions: "",
-                        //     phone: "",
-                        //     instructions: ""
-                        // },
-                        // {
-                        //     id: "",
-                        //     cargo_type: "",
-                        //     status: "",
-                        //     origin: "",
-                        //     destination: "",
-                        //     pickup_date: "",
-                        //     weight: "",
-                        //     dimensions: "",
-                        //     phone: "",
-                        //     instructions: ""
-                        // }
-                    ];
-                    
-                    cargoLoader.classList.add('d-none');
-                    
-                    if (sampleData.length > 0) {
-                        // Update dashboard counters
-                        cargoCount.textContent = sampleData.length;
-                        availableCount.textContent = sampleData.filter(cargo => cargo.status === 'Available').length;
-                        inTransitCount.textContent = sampleData.filter(cargo => cargo.status === 'In Transit').length;
-                        
-                        // Update recent activity
-                        updateRecentActivity(sampleData);
-                        
-                        // Display cargos
-                        displayCargos(sampleData);
-                    } else {
-                        cargoList.innerHTML = `
-                            <div class="text-center py-4">
-                                <p class="text-muted mb-3">You haven't posted any cargos yet.</p>
-                                <button id="noCargoPostBtn" class="btn btn-success">
-                                    <i class="fas fa-plus me-2"></i> Post Your First Cargo
-                                </button>
-                            </div>
-                        `;
-                        
-                        document.getElementById('noCargoPostBtn').addEventListener('click', function() {
-                            showSection(postCargoSection);
-                        });
-                        
-                        // Set dashboard counters to zero
-                        cargoCount.textContent = '0';
-                        availableCount.textContent = '0';
-                        inTransitCount.textContent = '0';
-                        
-                        // Clear recent activity
-                        recentActivity.innerHTML = '<p class="text-center text-muted py-3">No recent activity</p>';
-                    }
-                }, 1000);
-                
-                // In production, use actual fetch:
-                /*
-                fetch('fetch-cargos.php')
+                fetch('../Backend/fetch-cargos.php')
                 .then(response => response.json())
                 .then(data => {
                     cargoLoader.classList.add('d-none');
@@ -597,13 +516,14 @@ if (!isset($_SESSION['user_name'])) {
                     cargoLoader.classList.add('d-none');
                     cargoList.innerHTML = '<p class="text-danger text-center py-4">Failed to load cargos. Please try again.</p>';
                 });
-                */
             }
             
             // Function to update recent activity
             function updateRecentActivity(cargos) {
-                // Sort cargos by most recent (assuming there would be a date field)
-                const recentCargos = [...cargos].sort((a, b) => new Date(b.pickup_date) - new Date(a.pickup_date)).slice(0, 3);
+                // Sort cargos by most recent
+                const recentCargos = [...cargos].sort((a, b) => {
+                    return new Date(b.created_at || b.pickup_date) - new Date(a.created_at || a.pickup_date);
+                }).slice(0, 3);
                 
                 if (recentCargos.length === 0) {
                     recentActivity.innerHTML = '<p class="text-center text-muted py-3">No recent activity</p>';
@@ -642,13 +562,7 @@ if (!isset($_SESSION['user_name'])) {
                 });
                 
                 // Add event listeners to view details buttons
-                document.querySelectorAll('.view-details-btn').forEach(button => {
-                    button.addEventListener('click', function() {
-                        const cargoId = this.getAttribute('data-id');
-                        alert('View details for cargo ID: ' + cargoId);
-                        // You can implement a modal or redirect to a details page
-                    });
-                });
+                setupViewDetailsButtons(cargos);
             }
             
             // Function to display cargos with filtering
@@ -736,27 +650,56 @@ if (!isset($_SESSION['user_name'])) {
                 });
                 
                 // Add event listeners to view details buttons
+                setupViewDetailsButtons(cargos);
+            }
+            
+            // Function to show cargo details in modal
+            function showCargoDetails(cargo) {
+                // Get modal elements
+                const modalCargoType = document.getElementById('modalCargoType');
+                const modalStatus = document.getElementById('modalStatus');
+                const modalOrigin = document.getElementById('modalOrigin');
+                const modalDestination = document.getElementById('modalDestination');
+                const modalPickupDate = document.getElementById('modalPickupDate');
+                const modalWeight = document.getElementById('modalWeight');
+                const modalDimensions = document.getElementById('modalDimensions');
+                const modalPhone = document.getElementById('modalPhone');
+                const modalInstructions = document.getElementById('modalInstructions');
+                
+                // Set modal content
+                modalCargoType.textContent = cargo.cargo_type;
+                
+                // Set status with appropriate badge
+                let statusBadgeClass = 'badge-available';
+                if (cargo.status === 'In Transit') {
+                    statusBadgeClass = 'badge-transit';
+                } else if (cargo.status === 'Delivered') {
+                    statusBadgeClass = 'badge-delivered';
+                }
+                modalStatus.innerHTML = `<span class="badge rounded-pill ${statusBadgeClass}">${cargo.status}</span>`;
+                
+                modalOrigin.textContent = cargo.origin;
+                modalDestination.textContent = cargo.destination;
+                modalPickupDate.textContent = cargo.pickup_date;
+                modalWeight.textContent = `${cargo.weight} kg`;
+                modalDimensions.textContent = cargo.dimensions;
+                modalPhone.textContent = cargo.phone;
+                modalInstructions.textContent = cargo.instructions || 'No special instructions provided';
+                
+                // Show the modal
+                const cargoDetailsModal = new bootstrap.Modal(document.getElementById('cargoDetailsModal'));
+                cargoDetailsModal.show();
+            }
+            
+            // Function to setup view details buttons
+            function setupViewDetailsButtons(cargos) {
                 document.querySelectorAll('.view-details-btn').forEach(button => {
                     button.addEventListener('click', function() {
                         const cargoId = this.getAttribute('data-id');
-                        
-                        // Find the cargo details
                         const cargo = cargos.find(c => c.id == cargoId);
                         
                         if (cargo) {
-                            // You can implement a modal here
-                            alert(`
-                                Cargo Details:
-                                Type: ${cargo.cargo_type}
-                                Status: ${cargo.status}
-                                Origin: ${cargo.origin}
-                                Destination: ${cargo.destination}
-                                Pickup Date: ${cargo.pickup_date}
-                                Weight: ${cargo.weight} kg
-                                Dimensions: ${cargo.dimensions}
-                                Contact: ${cargo.phone}
-                                Instructions: ${cargo.instructions || 'None'}
-                            `);
+                            showCargoDetails(cargo);
                         }
                     });
                 });
@@ -819,26 +762,21 @@ if (!isset($_SESSION['user_name'])) {
                     method: 'POST',
                     body: formData
                 })
-                .then(response => response.json())
+                .then(response => response.text())
                 .then(data => {
                     // Re-enable submit button
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalText;
                     
-                    if (data.success) {
-                        // Show success message
-                        alert('Cargo posted successfully!');
-                        
-                        // Reset form and go to dashboard
-                        postCargoForm.reset();
-                        showSection(homeSection);
-                        
-                        // Refresh cargo data
-                        fetchCargos();
-                    } else {
-                        // Show error message
-                        alert('Error: ' + data.message);
-                    }
+                    // Show success message
+                    alert(data);
+                    
+                    // Reset form and go to dashboard
+                    postCargoForm.reset();
+                    showSection(homeSection);
+                    
+                    // Refresh cargo data
+                    fetchCargos();
                 })
                 .catch(error => {
                     console.error('Error:', error);
