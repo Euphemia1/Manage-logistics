@@ -2,6 +2,13 @@
 session_start();
 require_once 'db.php'; // Include your database connection
 
+// Check if user is logged in
+if (!isset($_SESSION['user_name'])) {
+    echo "Error: User not logged in";
+    exit;
+}
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the posted data
     $pickupDate = $_POST['pickupDate'];
