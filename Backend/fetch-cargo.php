@@ -10,11 +10,11 @@ if (!isset($_SESSION['user_name'])) {
 }
 
 // Get the cargo owner's name from the session
-$cargoOwnerName = $_SESSION['user_name'];
+$cargo_owner_name = $_SESSION['user_name'];
 
 // Prepare and execute the select statement to get cargos for this owner
 $stmt = $conn->prepare("SELECT * FROM orders WHERE cargo_owner_name = ? ORDER BY pickup_date DESC");
-$stmt->bind_param("s", $cargoOwnerName);
+$stmt->bind_param("s", $cargo_owner_name);
 $stmt->execute();
 
 $result = $stmt->get_result();
