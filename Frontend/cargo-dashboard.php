@@ -489,7 +489,7 @@ if (!isset($_SESSION['user_name'])) {
                             instructions: ""
                         },
                         {
-                            id: 2,
+                            id: "",
                             cargo_type: "",
                             status: "",
                             origin: "",
