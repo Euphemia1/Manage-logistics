@@ -478,15 +478,15 @@ if (!isset($_SESSION['user_name'])) {
                     const sampleData = [
                         {
                             id: 1,
-                            cargo_type: "Electronics",
-                            status: "Available",
-                            origin: "Nairobi",
-                            destination: "Mombasa",
-                            pickup_date: "2023-06-15",
-                            weight: "500",
-                            dimensions: "2m x 1m x 1m",
-                            phone: "+254712345678",
-                            instructions: "Handle with care. Fragile items."
+                            cargo_type: "",
+                            status: "",
+                            origin: "",
+                            destination: "",
+                            pickup_date: "",
+                            weight: "",
+                            dimensions: "",
+                            phone: "",
+                            instructions: ""
                         },
                         {
                             id: 2,
