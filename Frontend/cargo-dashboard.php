@@ -489,16 +489,16 @@ if (!isset($_SESSION['user_name'])) {
                             instructions: "Handle with care. Fragile items."
                         },
                         {
-                            id: 2,
-                            cargo_type: "Furniture",
-                            status: "In Transit",
-                            origin: "Kisumu",
-                            destination: "Nakuru",
-                            pickup_date: "2023-06-18",
-                            weight: "1200",
-                            dimensions: "3m x 2m x 2m",
-                            phone: "+254723456789",
-                            instructions: "Heavy items. Need strong handlers."
+                            id: "",
+                            cargo_type: "",
+                            status: "",
+                            origin: "",
+                            destination: "",
+                            pickup_date: "",
+                            weight: "",
+                            dimensions: "",
+                            phone: "",
+                            instructions: ""
                         },
                         {
                             id: "",
