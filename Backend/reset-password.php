@@ -16,6 +16,9 @@ try {
     exit();
 }
 
+// At the top of reset-password.php, add:
+$email = $_GET['email'] ?? '';
+$userType = $_GET['type'] ?? '';
 // Get token, email, and type from URL
 $token = $_GET['token'] ?? '';
 $email = $_GET['email'] ?? '';
