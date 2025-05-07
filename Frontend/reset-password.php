@@ -125,7 +125,7 @@ function validatePasswords() {
 }
 </script>
 
-<form action="" method="POST" id="resetForm">
+<form action="./Backend/reset-password.php" method="POST" id="resetForm">
     <!-- Change from process-reset.php to current file -->
     <!-- Ensure these hidden fields exactly match these names -->
     <input type="hidden" name="reset_token" value="<?= htmlspecialchars($token) ?>">
