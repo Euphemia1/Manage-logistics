@@ -1,8 +1,14 @@
 <?php
 session_start();
 $type = $_GET['type'] ?? '';
-if ($type !== 'cargo_owner' && $type !== 'transporters') {
-    // die('Invalid user type');
+
+// Debug line to see what type is being received
+// echo "Debug - Type received: " . htmlspecialchars($type);
+
+// Fix the validation to accept both 'transporter' and 'transporters'
+if ($type !== 'cargo_owner' && $type !== 'transporter' && $type !== 'transporters') {
+    $_SESSION['reset_message'] = "Invalid user type. Please use a valid link.";
+    // Don't die, just show the error message on the page
 }
 ?>
 <!DOCTYPE html>
@@ -38,6 +44,13 @@ if ($type !== 'cargo_owner' && $type !== 'transporters') {
         .message {
             background-color: #e8f5e9;
             color:rgb(91, 77, 214);
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        .error-message {
+            background-color: #ffebee;
+            color: #c62828;
             padding: 10px;
             border-radius: 4px;
             margin-bottom: 1rem;
@@ -93,12 +106,3 @@ if ($type !== 'cargo_owner' && $type !== 'transporters') {
     </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
