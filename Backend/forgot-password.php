@@ -26,22 +26,29 @@ try {
 $email = filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL);
 $type = $_POST['type'] ?? '';
 
-// Debug line (uncomment if needed)
-// error_log("Debug - Email: $email, Type: $type");
-
-if (!filter_var($email, FILTER_VALIDATE_EMAIL) || empty($type)) {
-    $_SESSION['reset_message'] = "Valid email and user type are required.";
-    // Always include the type in the redirect
+// Validate email and type
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $_SESSION['reset_message'] = "Please enter a valid email address.";
     header("Location: ../Frontend/forgot-password.php?type=" . urlencode($type));
     exit();
 }
 
-// Normalize the user type to ensure consistency
-// If type is 'transporters' (plural), change it to 'transporter' (singular) for consistency
-$normalizedType = ($type === 'transporters') ? 'transporter' : $type;
+if (empty($type)) {
+    $_SESSION['reset_message'] = "Please select a user type.";
+    header("Location: ../Frontend/forgot-password.php");
+    exit();
+}
 
-// Determine which table to query based on normalized user type
-$table = ($normalizedType === 'cargo_owner') ? 'cargo_owners' : 'transporters';
+// Validate user type
+$validTypes = ['cargo_owners', 'transporters'];
+if (!in_array($type, $validTypes)) {
+    $_SESSION['reset_message'] = "Invalid user type selected.";
+    header("Location: ../Frontend/forgot-password.php");
+    exit();
+}
+
+// Determine which table to query based on user type
+$table = $type; // Since we're now using the exact table names
 
 // Check if email exists in the correct table
 $stmt = $pdo->prepare("SELECT email FROM $table WHERE email = ?");
@@ -52,7 +59,7 @@ if ($user) {
     $token = bin2hex(random_bytes(32));
     $expires = date('Y-m-d H:i:s', time() + 3600); // 1 hour expiration
     
-    // Store token - use the original type value for consistency with existing data
+    // Store token
     $stmt = $pdo->prepare("INSERT INTO password_resets (email, token, expires, user_type, created_at) VALUES (?, ?, ?, ?, NOW())");
     try {
         $stmt->execute([$email, $token, $expires, $type]);
