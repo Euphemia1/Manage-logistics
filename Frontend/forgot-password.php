@@ -2,14 +2,9 @@
 session_start();
 $type = $_GET['type'] ?? '';
 
-// Debug line to see what type is being received
-// echo "Debug - Type received: " . htmlspecialchars($type);
-
-// Fix the validation to accept both 'transporter' and 'transporters'
-if ($type !== 'cargo_owner' && $type !== 'transporter') {
-    $_SESSION['reset_message'] = "Invalid user type. Please use a valid link.";
-    // Don't die, just show the error message on the page
-}
+// Check if type is empty or invalid
+$validTypes = ['cargo_owners', 'transporters'];
+$isValidType = in_array($type, $validTypes);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,6 +79,35 @@ if ($type !== 'cargo_owner' && $type !== 'transporter') {
         button:hover {
             background-color: #45a049;
         }
+        .user-type-selection {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .user-type-btn {
+            padding: 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .cargo-owner-btn {
+            background-color: #2196F3;
+            color: white;
+        }
+        .cargo-owner-btn:hover {
+            background-color: #0b7dda;
+        }
+        .transporter-btn {
+            background-color: #FF9800;
+            color: white;
+        }
+        .transporter-btn:hover {
+            background-color: #e68a00;
+        }
     </style>
 </head>
 <body>
@@ -95,14 +119,32 @@ if ($type !== 'cargo_owner' && $type !== 'transporter') {
             unset($_SESSION['reset_message']);
         }
         ?>
-        <form action="../Backend/forgot-password.php" method="POST">
-            <input type="hidden" name="type" value="<?php echo htmlspecialchars($type); ?>">
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+
+        <?php if (!$isValidType): ?>
+            <!-- Show user type selection if type is empty or invalid -->
+            <p>Please select your account type:</p>
+            <div class="user-type-selection">
+                <a href="?type=cargo_owners" class="user-type-btn cargo-owner-btn">Cargo Owner</a>
+                <a href="?type=transporters" class="user-type-btn transporter-btn">Transporter</a>
             </div>
-            <button type="submit">Reset Password</button>
-        </form>
+        <?php else: ?>
+            <!-- Show email form if type is valid -->
+            <form action="../Backend/forgot-password.php" method="POST">
+                <input type="hidden" name="type" value="<?php echo htmlspecialchars($type); ?>">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <button type="submit">Reset Password</button>
+            </form>
+            <p style="margin-top: 1rem; text-align: center;">
+                <small>Not a <?php echo $type === 'cargo_owners' ? 'Cargo Owner' : 'Transporter'; ?>? 
+                <a href="?type=<?php echo $type === 'cargo_owners' ? 'transporters' : 'cargo_owners'; ?>">
+                    Click here
+                </a>
+                </small>
+            </p>
+        <?php endif; ?>
     </div>
 </body>
 </html>
