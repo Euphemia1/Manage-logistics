@@ -1,11 +1,74 @@
 <?php
 session_start();
 $token = $_GET['token'] ?? '';
+$email = $_GET['email'] ?? ''; // Missing email parameter
 $type = $_GET['type'] ?? '';
 
-// if (empty($token) || empty($type)) {
-//     die("Invalid password reset link.");
-// }
+// Process form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get form data
+    $token = $_POST['reset_token'];
+    $email = $_POST['reset_email'];
+    $userType = $_POST['user_type'];
+    $newPassword = $_POST['new_password'];
+    $confirmPassword = $_POST['confirm_password'];
+
+    // Validate passwords
+    if ($newPassword !== $confirmPassword) {
+        $_SESSION['reset_message'] = "Passwords do not match!";
+    } else {
+        // Database connection
+        $host = 'localhost';
+        $dbname = 'logistics';
+        $username = 'root';
+        $password = '';
+
+        try {
+            $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+            // Verify token is valid and not expired
+            $stmt = $pdo->prepare("SELECT * FROM password_resets WHERE email = ? AND token = ? AND expires > NOW()");
+            $stmt->execute([$email, $token]);
+            $resetRequest = $stmt->fetch();
+
+            if (!$resetRequest) {
+                $_SESSION['reset_message'] = "Invalid or expired reset link.";
+            } else {
+                // Update password in the correct table
+                $table = ($userType === 'cargo_owner') ? 'cargo_owners' : 'transporters';
+                $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+                try {
+                    $pdo->beginTransaction();
+                    
+                    // Update password
+                    $stmt = $pdo->prepare("UPDATE $table SET password = ? WHERE email = ?");
+                    $stmt->execute([$hashedPassword, $email]);
+                    
+                    // Delete the used token
+                    $stmt = $pdo->prepare("DELETE FROM password_resets WHERE email = ?");
+                    $stmt->execute([$email]);
+                    
+                    $pdo->commit();
+                    
+                    // Redirect to the CORRECT login page
+                    $_SESSION['login_message'] = "Password updated successfully! Please log in.";
+                    $redirectPage = ($userType === 'cargo_owner') 
+                                  ? "cargo-owner-login.php" 
+                                  : "transporter-login.php";
+                    header("Location: $redirectPage");
+                    exit();
+                } catch (PDOException $e) {
+                    $pdo->rollBack();
+                    $_SESSION['reset_message'] = "Error updating password: " . $e->getMessage();
+                }
+            }
+        } catch (PDOException $e) {
+            $_SESSION['reset_message'] = "Database connection failed: " . $e->getMessage();
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -90,6 +153,12 @@ $type = $_GET['type'] ?? '';
             text-align: center;
         }
 
+        #passwordMatchMessage {
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            color: #c62828;
+        }
+
         @media (max-width: 480px) {
             .container {
                 padding: 1.5rem;
@@ -107,71 +176,56 @@ $type = $_GET['type'] ?? '';
             <p class="message"><?php echo $_SESSION['reset_message']; unset($_SESSION['reset_message']); ?></p>
         <?php endif; ?>
 
-        <?php
-// Include the validation code shown above
-// If validation passes, show this form:
-?>
-<!-- Add this JavaScript for client-side validation -->
-<script>
-function validatePasswords() {
-    const newPass = document.getElementById('new_password').value;
-    const confirmPass = document.getElementById('confirm_password').value;
-    
-    if (newPass !== confirmPass) {
-        alert('Passwords do not match!');
-        return false;
-    }
-    return true;
-}
-</script>
+        <form action="" method="POST" id="resetForm" onsubmit="return validatePasswords()">
+            <!-- Fixed hidden fields with correct values -->
+            <input type="hidden" name="reset_token" value="<?= htmlspecialchars($token) ?>">
+            <input type="hidden" name="reset_email" value="<?= htmlspecialchars($email) ?>">
+            <input type="hidden" name="user_type" value="<?= htmlspecialchars($type) ?>">
+            
+            <div class="form-group">
+                <label for="new_password">New Password:</label>
+                <input type="password" id="new_password" name="new_password" required minlength="8" onkeyup="checkPasswordMatch()">
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" required minlength="8" onkeyup="checkPasswordMatch()">
+                <div id="passwordMatchMessage"></div>
+            </div>
+            
+            <button type="submit">Reset Password</button>
+        </form>
 
-<form action="" method="POST" id="resetForm">
-    <!-- Change from process-reset.php to current file -->
-    <!-- Ensure these hidden fields exactly match these names -->
-    <input type="hidden" name="reset_token" value="<?= htmlspecialchars($token) ?>">
-    <input type="hidden" name="reset_email" value="<?= htmlspecialchars($email) ?>">
-    <input type="hidden" name="user_type" value="<?= htmlspecialchars($userType) ?>">
-    
-    <div class="form-group">
-        <label for="new_password">New Password:</label>
-        <input type="password" id="new_password" name="new_password" required minlength="8">
-    </div>
-    
-    <div class="form-group">
-        <label for="confirm_password">Confirm Password:</label>
-        <input type="password" id="confirm_password" name="confirm_password" required minlength="8">
-    </div>
-    
-    <button type="submit">Reset Password</button>
-</form>
-
-<script>
-
-function checkPasswordMatch() {
-    const newPass = document.getElementById('new_password').value;
-    const confirmPass = document.getElementById('confirm_password').value;
-    const message = document.getElementById('passwordMatchMessage');
-    
-    if (newPass && confirmPass) {
-        if (newPass !== confirmPass) {
-            message.textContent = "Passwords do not match!";
-        } else {
-            message.textContent = "Passwords match!";
-            message.style.color = "green";
+        <script>
+        function validatePasswords() {
+            const newPass = document.getElementById('new_password').value;
+            const confirmPass = document.getElementById('confirm_password').value;
+            
+            if (newPass !== confirmPass) {
+                alert('Passwords do not match!');
+                return false;
+            }
+            return true;
         }
-    } else {
-        message.textContent = "";
-    }
-}
-</script>
+
+        function checkPasswordMatch() {
+            const newPass = document.getElementById('new_password').value;
+            const confirmPass = document.getElementById('confirm_password').value;
+            const message = document.getElementById('passwordMatchMessage');
+            
+            if (newPass && confirmPass) {
+                if (newPass !== confirmPass) {
+                    message.textContent = "Passwords do not match!";
+                    message.style.color = "#c62828";
+                } else {
+                    message.textContent = "Passwords match!";
+                    message.style.color = "green";
+                }
+            } else {
+                message.textContent = "";
+            }
+        }
+        </script>
     </div>
 </body>
 </html>
-
-
-
-
-
-
-
-
