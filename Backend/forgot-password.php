@@ -64,7 +64,7 @@ if ($user) {
 // Construct the reset link properly
 // $resetLink = "https://".$_SERVER['HTTP_HOST']."../Frontend/reset-password.php?token=$token&email=".urlencode($email)."&type=".urlencode($type);
 // Correct way to generate the reset link:
-$resetLink = "https://localhost/Frontend/reset-password.php?token=$token&email=" . urlencode($email) . "&type=$userType";
+$resetLink = "../Frontend/reset-password.php?token=$token&email=" . urlencode($email) . "&type=$userType";
     // PHPMailer Setup
     try {
         $phpMailer = new PHPMailer(true);
@@ -96,3 +96,4 @@ $resetLink = "https://localhost/Frontend/reset-password.php?token=$token&email="
 // Redirect
 header("Location: ../Frontend/reset-password.php?type=$type");
 exit();
+

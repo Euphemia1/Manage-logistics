@@ -144,10 +144,6 @@ function validatePasswords() {
     <button type="submit">Reset Password</button>
 </form>
 
-
-
-
-
 <script>
 function checkPasswordMatch() {
     const newPass = document.getElementById('new_password').value;
