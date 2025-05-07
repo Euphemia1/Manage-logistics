@@ -37,7 +37,7 @@ if ($type !== 'cargo_owner' && $type !== 'transporters') {
         }
         .message {
             background-color: #e8f5e9;
-            color: #2e7d32;
+            color:rgb(91, 77, 214);
             padding: 10px;
             border-radius: 4px;
             margin-bottom: 1rem;
@@ -93,6 +93,8 @@ if ($type !== 'cargo_owner' && $type !== 'transporters') {
     </div>
 </body>
 </html>
+
+
 
 
 

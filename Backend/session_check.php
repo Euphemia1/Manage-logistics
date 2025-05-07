@@ -13,3 +13,4 @@ if (!isset($_SESSION['last_activity']) ||
 
 echo json_encode($response);
 ?>
+
