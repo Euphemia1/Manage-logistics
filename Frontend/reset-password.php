@@ -125,11 +125,12 @@ function validatePasswords() {
 }
 </script>
 
-<form method="POST" id="resetForm">
-    <!-- Hidden fields MUST match backend expected names -->
-    <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
-    <input type="hidden" name="email" value="<?= htmlspecialchars($email) ?>">
-    <input type="hidden" name="type" value="<?= htmlspecialchars($type) ?>">
+<form action="" method="POST" id="resetForm">
+    <!-- Change from process-reset.php to current file -->
+    <!-- Ensure these hidden fields exactly match these names -->
+    <input type="hidden" name="reset_token" value="<?= htmlspecialchars($token) ?>">
+    <input type="hidden" name="reset_email" value="<?= htmlspecialchars($email) ?>">
+    <input type="hidden" name="user_type" value="<?= htmlspecialchars($userType) ?>">
     
     <div class="form-group">
         <label for="new_password">New Password:</label>
@@ -141,7 +142,7 @@ function validatePasswords() {
         <input type="password" id="confirm_password" name="confirm_password" required minlength="8">
     </div>
     
-    <button type="submit" name="reset_submit">Reset Password</button>
+    <button type="submit">Reset Password</button>
 </form>
 
 <script>
