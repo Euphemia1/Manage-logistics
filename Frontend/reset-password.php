@@ -1,8 +1,11 @@
 <?php
 session_start();
 $token = $_GET['token'] ?? '';
-$email = $_GET['email'] ?? ''; // Missing email parameter
+$email = $_GET['email'] ?? '';
 $type = $_GET['type'] ?? '';
+
+// Debug line (uncomment if needed)
+// error_log("Debug - Reset Password: Token: $token, Email: $email, Type: $type");
 
 // Process form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -35,8 +38,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!$resetRequest) {
                 $_SESSION['reset_message'] = "Invalid or expired reset link.";
             } else {
-                // Update password in the correct table
-                $table = ($userType === 'cargo_owner') ? 'cargo_owners' : 'transporters';
+                // Normalize the user type to ensure consistency
+                $normalizedType = ($userType === 'transporters') ? 'transporter' : $userType;
+                
+                // Determine which table to update based on normalized user type
+                $table = ($normalizedType === 'cargo_owner') ? 'cargo_owners' : 'transporters';
                 $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
                 try {
@@ -54,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     
                     // Redirect to the CORRECT login page
                     $_SESSION['login_message'] = "Password updated successfully! Please log in.";
-                    $redirectPage = ($userType === 'cargo_owner') 
+                    $redirectPage = ($normalizedType === 'cargo_owner') 
                                   ? "cargo-owner-login.php" 
                                   : "transporter-login.php";
                     header("Location: $redirectPage");
@@ -176,25 +182,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p class="message"><?php echo $_SESSION['reset_message']; unset($_SESSION['reset_message']); ?></p>
         <?php endif; ?>
 
-        <form action="" method="POST" id="resetForm" onsubmit="return validatePasswords()">
-            <!-- Fixed hidden fields with correct values -->
-            <input type="hidden" name="reset_token" value="<?= htmlspecialchars($token) ?>">
-            <input type="hidden" name="reset_email" value="<?= htmlspecialchars($email) ?>">
-            <input type="hidden" name="user_type" value="<?= htmlspecialchars($type) ?>">
-            
-            <div class="form-group">
-                <label for="new_password">New Password:</label>
-                <input type="password" id="new_password" name="new_password" required minlength="8" onkeyup="checkPasswordMatch()">
-            </div>
-            
-            <div class="form-group">
-                <label for="confirm_password">Confirm Password:</label>
-                <input type="password" id="confirm_password" name="confirm_password" required minlength="8" onkeyup="checkPasswordMatch()">
-                <div id="passwordMatchMessage"></div>
-            </div>
-            
-            <button type="submit">Reset Password</button>
-        </form>
+        <?php if (empty($token) || empty($email) || empty($type)): ?>
+            <p class="message" style="background-color: #ffebee; color: #c62828;">
+                Invalid password reset link. Missing required parameters.
+            </p>
+        <?php else: ?>
+            <form action="" method="POST" id="resetForm" onsubmit="return validatePasswords()">
+                <!-- Hidden fields with correct values -->
+                <input type="hidden" name="reset_token" value="<?= htmlspecialchars($token) ?>">
+                <input type="hidden" name="reset_email" value="<?= htmlspecialchars($email) ?>">
+                <input type="hidden" name="user_type" value="<?= htmlspecialchars($type) ?>">
+                
+                <div class="form-group">
+                    <label for="new_password">New Password:</label>
+                    <input type="password" id="new_password" name="new_password" required minlength="8" onkeyup="checkPasswordMatch()">
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password:</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required minlength="8" onkeyup="checkPasswordMatch()">
+                    <div id="passwordMatchMessage"></div>
+                </div>
+                
+                <button type="submit">Reset Password</button>
+            </form>
+        <?php endif; ?>
 
         <script>
         function validatePasswords() {
