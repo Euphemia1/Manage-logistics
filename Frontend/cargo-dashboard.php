@@ -5,6 +5,8 @@ if (!isset($_SESSION['user_name'])) {
     header("Location: cargo-owner-login.php"); // Redirect to login if not logged in
     exit();
 }
+// Update last activity time on every page load
+$_SESSION['last_activity'] = time();
 ?>
 
 <!DOCTYPE html>
