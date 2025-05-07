@@ -29,11 +29,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $error = "Invalid email or password";
     }
+// Set session to expire quickly (e.g., 5 minutes) or when browser closes
 
     if (isset($error)) {
         $_SESSION['login_error'] = $error;
         header("Location: ../Frontend/cargo-owner-login.php");
         exit();
     }
+
+    $_SESSION['last_activity'] = time(); // Track activity time
+$_SESSION['expire_after'] = 300; // 5 minutes (adjust as needed)
 }
 ?>

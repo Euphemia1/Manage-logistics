@@ -28,8 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     // Check what value is being passed
     // Prepare and execute the insert statement
-    $stmt = $conn->prepare("INSERT INTO orders (pickup_date, weight, dimensions, cargo_type, origin, destination, phone_number, instructions, cargo_owner_name, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssssssss", $pickupDate, $weight, $dimensions, $cargoType, $origin, $destination, $phone, $instructions, $cargoOwnerName, $status);
+    $stmt = $conn->prepare("INSERT INTO orders (pickup_date, weight, dimensions, cargo_type, origin, destination, phone_number, instructions,  status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssssss", $pickupDate, $weight, $dimensions, $cargoType, $origin, $destination, $phone, $instructions,  $status);
 
     if ($stmt->execute()) {
         echo "Cargo posted successfully!";
