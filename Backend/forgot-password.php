@@ -23,11 +23,11 @@ try {
 }
 
 // Get email and user type from form
-$email = $_POST['email'] ?? '';
+$email = filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL);
 $type = $_POST['type'] ?? '';
 
-if (empty($email) || empty($type)) {
-    $_SESSION['reset_message'] = "Email and user type are required.";
+if (!filter_var($email, FILTER_VALIDATE_EMAIL) || empty($type)) {
+    $_SESSION['reset_message'] = "Valid email and user type are required.";
     header("Location: ../Frontend/forgot-password.php");
     exit();
 }
@@ -42,7 +42,7 @@ $user = $stmt->fetch();
 
 if ($user) {
     $token = bin2hex(random_bytes(32));
-    $expires = date('Y-m-d H:i:s', time() + 3600);
+    $expires = date('Y-m-d H:i:s', time() + 3600); // 1 hour expiration
     
     // Store token
     $stmt = $pdo->prepare("INSERT INTO password_resets (email, token, expires, user_type, created_at) VALUES (?, ?, ?, ?, NOW())");
@@ -51,20 +51,30 @@ if ($user) {
     } catch (PDOException $e) {
         error_log("Database error: " . $e->getMessage());
         $_SESSION['reset_message'] = "Failed to store reset token.";
-        header("Location: ../reset-password.php?type=$type");
+        header("Location: ../Frontend/forgot-password.php?type=$type");
         exit();
     }
 
-    // Construct reset link
-    $scheme = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
-    $host = $_SERVER['HTTP_HOST'];
-    $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
-   
+    // Construct reset link - PROPERLY FORMATED
+    $isLocalhost = (strpos($_SERVER['HTTP_HOST'], 'localhost') !== false);
     
-// Construct the reset link properly
-// $resetLink = "https://".$_SERVER['HTTP_HOST']."../Frontend/reset-password.php?token=$token&email=".urlencode($email)."&type=".urlencode($type);
-// Correct way to generate the reset link:
-$resetLink = "../Frontend/reset-password.php?token=$token&email=" . urlencode($email) . "&type=$userType";
+    if ($isLocalhost) {
+        // For local development
+        $resetLink = "http://localhost/nyamula-logistics/Frontend/reset-password.php?" . http_build_query([
+            'token' => $token,
+            'email' => $email,
+            'type' => $type
+        ]);
+    } else {
+        // For production
+        $scheme = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
+        $resetLink = "$scheme://{$_SERVER['HTTP_HOST']}/Frontend/reset-password.php?" . http_build_query([
+            'token' => $token,
+            'email' => $email,
+            'type' => $type
+        ]);
+    }
+
     // PHPMailer Setup
     try {
         $phpMailer = new PHPMailer(true);
@@ -81,19 +91,32 @@ $resetLink = "../Frontend/reset-password.php?token=$token&email=" . urlencode($e
         $phpMailer->addAddress($email);
 
         $phpMailer->Subject = 'Password Reset Request';
-        $phpMailer->Body = "Hello,<br><br>Click the following link to reset your password:<br><br><a href='$resetLink'>Reset Password</a><br><br>This link will expire in 1 hour.";
+        $phpMailer->Body = "
+            <html>
+            <body>
+                <p>Hello,</p>
+                <p>Click the following link to reset your password:</p>
+                <p><a href='$resetLink' style='color: #0066cc;'>Reset Password</a></p>
+                <p><strong>This link expires in 1 hour.</strong></p>
+                <p>If you didn't request this, please ignore this email.</p>
+                <hr>
+                <p style='color: #666; font-size: 0.8em;'>
+                    For security reasons, please don't share this link with anyone.
+                </p>
+            </body>
+            </html>
+        ";
         
         $phpMailer->send();
-        $_SESSION['reset_message'] = "Password reset link has been sent.";
+        $_SESSION['reset_message'] = "Password reset link has been sent to your email.";
     } catch (Exception $e) {
         error_log("Mail error: " . $phpMailer->ErrorInfo);
-        $_SESSION['reset_message'] = "Failed to send password reset email.";
+        $_SESSION['reset_message'] = "Failed to send password reset email. Please try again later.";
     }
 } else {
     $_SESSION['reset_message'] = "Email not found in our $type records.";
 }
 
 // Redirect
-header("Location: ../Frontend/reset-password.php?type=$type");
+header("Location: ../Frontend/forgot-password.php?type=$type");
 exit();
-
