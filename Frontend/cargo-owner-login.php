@@ -111,7 +111,7 @@ ini_set('display_errors', 1);
     </div>
 
     <script>
-        
+
         // In// Force logout when user leaves the page
     window.addEventListener('beforeunload', (event) => {
         // Option 1: Clear session storage (client-side)
@@ -135,3 +135,4 @@ setInterval(() => {
     </script>
 </body>
 </html>
+
