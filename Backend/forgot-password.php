@@ -26,14 +26,22 @@ try {
 $email = filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL);
 $type = $_POST['type'] ?? '';
 
+// Debug line (uncomment if needed)
+// error_log("Debug - Email: $email, Type: $type");
+
 if (!filter_var($email, FILTER_VALIDATE_EMAIL) || empty($type)) {
     $_SESSION['reset_message'] = "Valid email and user type are required.";
-    header("Location: ../Frontend/forgot-password.php");
+    // Always include the type in the redirect
+    header("Location: ../Frontend/forgot-password.php?type=" . urlencode($type));
     exit();
 }
 
-// Determine which table to query based on user type
-$table = ($type === 'cargo_owner') ? 'cargo_owners' : 'transporters';
+// Normalize the user type to ensure consistency
+// If type is 'transporters' (plural), change it to 'transporter' (singular) for consistency
+$normalizedType = ($type === 'transporters') ? 'transporter' : $type;
+
+// Determine which table to query based on normalized user type
+$table = ($normalizedType === 'cargo_owner') ? 'cargo_owners' : 'transporters';
 
 // Check if email exists in the correct table
 $stmt = $pdo->prepare("SELECT email FROM $table WHERE email = ?");
@@ -44,14 +52,14 @@ if ($user) {
     $token = bin2hex(random_bytes(32));
     $expires = date('Y-m-d H:i:s', time() + 3600); // 1 hour expiration
     
-    // Store token
+    // Store token - use the original type value for consistency with existing data
     $stmt = $pdo->prepare("INSERT INTO password_resets (email, token, expires, user_type, created_at) VALUES (?, ?, ?, ?, NOW())");
     try {
         $stmt->execute([$email, $token, $expires, $type]);
     } catch (PDOException $e) {
         error_log("Database error: " . $e->getMessage());
         $_SESSION['reset_message'] = "Failed to store reset token.";
-        header("Location: ../Frontend/forgot-password.php?type=$type");
+        header("Location: ../Frontend/forgot-password.php?type=" . urlencode($type));
         exit();
     }
 
@@ -114,9 +122,9 @@ if ($user) {
         $_SESSION['reset_message'] = "Failed to send password reset email. Please try again later.";
     }
 } else {
-    $_SESSION['reset_message'] = "Email not found in our $type records.";
+    $_SESSION['reset_message'] = "Email not found in our records.";
 }
 
-// Redirect
-header("Location: ../Frontend/forgot-password.php?type=$type");
+// Always include the type in the redirect
+header("Location: ../Frontend/forgot-password.php?type=" . urlencode($type));
 exit();
