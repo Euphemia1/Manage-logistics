@@ -12,61 +12,56 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     $_SESSION['reset_message'] = "Database connection failed";
-    header("Location: ../Frontend/forgot-password.php");
+    header("Location: forgot-password.php");
     exit();
 }
 
-// Get token, email, and type from URL
-$token = $_GET['token'] ?? '';
-$email = $_GET['email'] ?? '';
-$userType = $_GET['type'] ?? '';
+// Process form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset_submit'])) {
+    $token = $_POST['token'];
+    $email = $_POST['email'];
+    $userType = $_POST['type'];
+    $newPassword = $_POST['new_password'];
+    $confirmPassword = $_POST['confirm_password'];
 
-// If form is submitted (POST request)
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $token = $_POST['token'] ?? $token;
-    $email = $_POST['email'] ?? $email;
-    $userType = $_POST['type'] ?? $userType;
-    $newPassword = $_POST['new_password'] ?? '';
-    $confirmPassword = $_POST['confirm_password'] ?? '';
-    
     // Validate passwords
-    if (empty($newPassword) || $newPassword !== $confirmPassword) {
-        $_SESSION['reset_message'] = "Passwords don't match or are empty";
+    if ($newPassword !== $confirmPassword) {
+        $_SESSION['reset_message'] = "Passwords do not match!";
     } else {
-        // Verify token first
+        // Verify token is valid and not expired
         $stmt = $pdo->prepare("SELECT * FROM password_resets WHERE email = ? AND token = ? AND expires > NOW()");
         $stmt->execute([$email, $token]);
         $resetRequest = $stmt->fetch();
 
         if (!$resetRequest) {
-            $_SESSION['reset_message'] = "Invalid or expired reset link";
-            header("Location: ../Frontend/forgot-password.php");
+            $_SESSION['reset_message'] = "Invalid or expired reset link.";
+            header("Location: forgot-password.php");
             exit();
         }
 
-        // Determine which table to update
+        // Update password in the correct table
         $table = ($userType === 'cargo_owner') ? 'cargo_owners' : 'transporters';
-        
+        $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
         try {
             $pdo->beginTransaction();
             
             // Update password
-            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
             $stmt = $pdo->prepare("UPDATE $table SET password = ? WHERE email = ?");
             $stmt->execute([$hashedPassword, $email]);
             
-            // Delete token
+            // Delete the used token
             $stmt = $pdo->prepare("DELETE FROM password_resets WHERE email = ?");
             $stmt->execute([$email]);
             
             $pdo->commit();
             
-            // Success - redirect to login
-            $_SESSION['login_message'] = "Password updated successfully! Please login.";
-            $redirect = ($userType === 'cargo_owner') 
-                      ? "../Frontend/cargo-owner-login.php" 
-                      : "../Frontend/transporter-login.php";
-            header("Location: $redirect");
+            // Redirect to the CORRECT login page
+            $_SESSION['login_message'] = "Password updated successfully! Please log in.";
+            $redirectPage = ($userType === 'cargo_owner') 
+                          ? "cargo-owner-login.php" 
+                          : "transporter-login.php";
+            header("Location: $redirectPage");
             exit();
         } catch (PDOException $e) {
             $pdo->rollBack();
@@ -75,8 +70,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// If GET request or POST validation failed, show the form
+// If NOT a POST request, continue to display the form below
 ?>
-
-<!DOCTYPE html>
-<!-- Rest of your HTML form remains the same -->
