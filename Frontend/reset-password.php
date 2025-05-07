@@ -145,6 +145,7 @@ function validatePasswords() {
 </form>
 
 <script>
+
 function checkPasswordMatch() {
     const newPass = document.getElementById('new_password').value;
     const confirmPass = document.getElementById('confirm_password').value;
@@ -165,6 +166,8 @@ function checkPasswordMatch() {
     </div>
 </body>
 </html>
+
+
 
 
 
