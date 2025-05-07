@@ -4,9 +4,6 @@ $token = $_GET['token'] ?? '';
 $email = $_GET['email'] ?? '';
 $type = $_GET['type'] ?? '';
 
-// Debug line (uncomment if needed)
-// error_log("Debug - Reset Password: Token: $token, Email: $email, Type: $type");
-
 // Process form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get form data
@@ -38,11 +35,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!$resetRequest) {
                 $_SESSION['reset_message'] = "Invalid or expired reset link.";
             } else {
-                // Normalize the user type to ensure consistency
-                $normalizedType = ($userType === 'transporters') ? 'transporter' : $userType;
+                // Validate user type
+                $validTypes = ['cargo_owners', 'transporters'];
+                if (!in_array($userType, $validTypes)) {
+                    $_SESSION['reset_message'] = "Invalid user type.";
+                    header("Location: forgot-password.php");
+                    exit();
+                }
                 
-                // Determine which table to update based on normalized user type
-                $table = ($normalizedType === 'cargo_owner') ? 'cargo_owners' : 'transporters';
+                // Use the exact table name
+                $table = $userType;
                 $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
                 try {
@@ -60,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     
                     // Redirect to the CORRECT login page
                     $_SESSION['login_message'] = "Password updated successfully! Please log in.";
-                    $redirectPage = ($normalizedType === 'cargo_owner') 
+                    $redirectPage = ($userType === 'cargo_owners') 
                                   ? "cargo-owner-login.php" 
                                   : "transporter-login.php";
                     header("Location: $redirectPage");
@@ -159,6 +161,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             text-align: center;
         }
 
+        .error-message {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
         #passwordMatchMessage {
             font-size: 0.85rem;
             margin-top: 0.25rem;
@@ -183,8 +194,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
         <?php if (empty($token) || empty($email) || empty($type)): ?>
-            <p class="message" style="background-color: #ffebee; color: #c62828;">
+            <p class="error-message">
                 Invalid password reset link. Missing required parameters.
+            </p>
+            <p style="text-align: center; margin-top: 1rem;">
+                <a href="forgot-password.php">Return to forgot password page</a>
             </p>
         <?php else: ?>
             <form action="" method="POST" id="resetForm" onsubmit="return validatePasswords()">
