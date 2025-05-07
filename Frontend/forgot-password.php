@@ -6,7 +6,7 @@ $type = $_GET['type'] ?? '';
 // echo "Debug - Type received: " . htmlspecialchars($type);
 
 // Fix the validation to accept both 'transporter' and 'transporters'
-if ($type !== 'cargo_owner' && $type !== 'transporter' && $type !== 'transporters') {
+if ($type !== 'cargo_owner' && $type !== 'transporter') {
     $_SESSION['reset_message'] = "Invalid user type. Please use a valid link.";
     // Don't die, just show the error message on the page
 }
