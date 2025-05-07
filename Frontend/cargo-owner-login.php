@@ -111,7 +111,26 @@ ini_set('display_errors', 1);
     </div>
 
     <script>
-        // Initialize Lucide icons
+        
+        // In// Force logout when user leaves the page
+    window.addEventListener('beforeunload', (event) => {
+        // Option 1: Clear session storage (client-side)
+        sessionStorage.clear();
+
+
+// Check session expiry periodically
+setInterval(() => {
+        fetch('../Backend/session-check.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.expired) {
+                    window.location.href = 'cargo-owner-login.php?session_expired=1';
+                }
+            });
+    }, 60000); // Check every 1 minute
+
+    });
+        //itialize Lucide icons
         lucide.createIcons();
     </script>
 </body>
