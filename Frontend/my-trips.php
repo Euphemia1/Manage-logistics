@@ -258,7 +258,7 @@ if (!isset($_SESSION['user_name'])) {
                   
                 </span>
               </td>
-              <td class="py-3 px-4 text-sm text-gray-900">$320</td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
             </tr>
           </tbody>
         </table>
