@@ -150,7 +150,7 @@ if (!isset($_SESSION['user_name'])) {
       </div>
     </div>
 
-    <!-- Available Loads Section -->
+    <!-- Available Loads Section
     <div class="card bg-white shadow-sm rounded-lg p-4 mb-6">
       <div class="flex justify-between items-center mb-4">
         <h3 class="text-xl font-bold text-gray-800">Available Loads Near You</h3>
@@ -230,7 +230,7 @@ if (!isset($_SESSION['user_name'])) {
           </tbody>
         </table>
       </div>
-    </div>
+    </div> -->
 
     <!-- Current Location Section -->
     <div class="card bg-white shadow-sm rounded-lg p-4 mb-6">
