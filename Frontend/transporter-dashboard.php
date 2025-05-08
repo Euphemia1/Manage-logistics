@@ -144,7 +144,7 @@ if (!isset($_SESSION['user_name'])) {
           </div>
           <div class="ml-4">
             <p class="text-sm font-medium text-gray-500">Earnings (This Month)</p>
-            <p class="text-2xl font-semibold text-gray-800">$2,450</p>
+            <p class="text-2xl font-semibold text-gray-800"></p>
           </div>
         </div>
       </div>
