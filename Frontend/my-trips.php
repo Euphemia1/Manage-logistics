@@ -163,12 +163,12 @@ if (!isset($_SESSION['user_name'])) {
           </thead>
           <tbody class="divide-y divide-gray-200">
             <tr class="hover:bg-gray-50">
-              <td class="py-3 px-4 text-sm text-gray-900">#TR-8901</td>
-              <td class="py-3 px-4 text-sm text-gray-900">Perishable</td>
-              <td class="py-3 px-4 text-sm text-gray-900">Nairobi CBD</td>
-              <td class="py-3 px-4 text-sm text-gray-900">Mombasa</td>
-              <td class="py-3 px-4 text-sm text-gray-900">485 km</td>
-              <td class="py-3 px-4 text-sm text-gray-900">May 6, 2025</td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
               <td class="py-3 px-4 text-sm">
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
                   In Transit
