@@ -238,7 +238,7 @@ if (!isset($_SESSION['user_name'])) {
       <div class="bg-gray-100 rounded-lg h-64 flex items-center justify-center">
         <div class="text-center">
           <i class="fas fa-map-marker-alt text-primary-500 text-4xl mb-2"></i>
-          <p class="text-gray-700">Nairobi CBD, Kenya</p>
+          <p class="text-gray-700">Lusaka, Zambia</p>
           <button class="mt-4 bg-primary-500 text-white py-2 px-4 rounded-lg hover:bg-primary-600 transition-colors">
             <i class="fas fa-location-arrow mr-1"></i> Update Location
           </button>
