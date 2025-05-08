@@ -213,13 +213,13 @@ if (!isset($_SESSION['user_name'])) {
               </td>
             </tr>
             <tr class="hover:bg-gray-50">
-              <td class="py-3 px-4 text-sm text-gray-900">#LD-5680</td>
-              <td class="py-3 px-4 text-sm text-gray-900">Non-Perishable</td>
-              <td class="py-3 px-4 text-sm text-gray-900">0.8 tons</td>
-              <td class="py-3 px-4 text-sm text-gray-900">Westlands</td>
-              <td class="py-3 px-4 text-sm text-gray-900">Kisumu</td>
-              <td class="py-3 px-4 text-sm text-gray-900">340 km</td>
-              <td class="py-3 px-4 text-sm text-gray-900">$580</td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
               <td class="py-3 px-4 text-sm">
                 <button class="bg-primary-500 text-white py-1 px-3 rounded-lg hover:bg-primary-600 transition-colors">Accept</button>
                 <button class="ml-2 text-gray-500 hover:text-gray-700">
