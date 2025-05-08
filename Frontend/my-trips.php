@@ -265,7 +265,7 @@ if (!isset($_SESSION['user_name'])) {
       </div>
       <div class="mt-4 flex justify-between items-center">
         <div class="text-sm text-gray-700">
-          Showing <span class="font-medium">1</span> to <span class="font-medium">7</span> of <span class="font-medium">48</span> trips
+          Showing <span class="font-medium"></span>  <span class="font-medium"></span>  <span class="font-medium"></span> trips
         </div>
         <div class="flex space-x-2">
           <button class="px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50" disabled>
