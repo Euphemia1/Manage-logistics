@@ -185,7 +185,7 @@ if (!isset($_SESSION['user_name'])) {
               <td class="py-3 px-4 text-sm text-gray-900"></td>
               <td class="py-3 px-4 text-sm">
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                  Completed
+                  
                 </span>
               </td>
               <td class="py-3 px-4 text-sm text-gray-900"></td>
