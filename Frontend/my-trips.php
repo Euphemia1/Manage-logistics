@@ -219,12 +219,12 @@ if (!isset($_SESSION['user_name'])) {
               <td class="py-3 px-4 text-sm text-gray-900">$320</td>
             </tr>
             <tr class="hover:bg-gray-50">
-              <td class="py-3 px-4 text-sm text-gray-900">#TR-8887</td>
-              <td class="py-3 px-4 text-sm text-gray-900">Heavy Machinery</td>
-              <td class="py-3 px-4 text-sm text-gray-900">Eldoret</td>
-              <td class="py-3 px-4 text-sm text-gray-900">Nairobi</td>
-              <td class="py-3 px-4 text-sm text-gray-900">312 km</td>
-              <td class="py-3 px-4 text-sm text-gray-900">Apr 20, 2025</td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
               <td class="py-3 px-4 text-sm">
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
                   Cancelled
