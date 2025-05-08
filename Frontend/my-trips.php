@@ -244,7 +244,7 @@ if (!isset($_SESSION['user_name'])) {
                   
                 </span>
               </td>
-              <td class="py-3 px-4 text-sm text-gray-900">$120</td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
             </tr>
             <tr class="hover:bg-gray-50">
               <td class="py-3 px-4 text-sm text-gray-900"></td>
