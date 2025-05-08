@@ -1,23 +1,56 @@
 <?php
-session_start();
-require_once 'db.php'; // Include your database connection
+session_start(); // Call session_start() only once at the beginning
 
-// Check if user is logged in
-if (!isset($_SESSION['user_name'])) {
-    header('Content-Type: application/json');
-    echo json_encode(['error' => 'User not logged in']);
+// db.php should establish $conn
+require_once 'db.php';
+
+header('Content-Type: application/json'); // Set content type for JSON response
+
+// Check if user is logged in and has user_id (which should be cargo_owner_id)
+if (!isset($_SESSION['user_name']) || !isset($_SESSION['user_id'])) {
+    echo json_encode(['success' => false, 'message' => 'User not logged in or user ID missing.']);
     exit();
 }
-// After successful login (e.g., in login.php)
-session_start();
-$_SESSION['user_name'] = $user['name']; // Assuming $user['name'] contains the cargo owner's name
-// Get the cargo owner's name from the session
-$cargo_owner_name = $_SESSION['user_name'];
+
+$cargo_owner_id = $_SESSION['user_id']; // Use the ID for querying
 
 // Prepare and execute the select statement to get cargos for this owner
-$stmt = $conn->prepare("SELECT * FROM orders WHERE cargo_owner_name = ? ORDER BY pickup_date DESC");
-$stmt->bind_param("s", $cargo_owner_name);
-$stmt->execute();
+// Explicitly list columns and alias order_id to 'id' and phone_number to 'phone' for frontend compatibility
+// Order by order_id DESC to get newest first (assuming order_id is auto-incrementing)
+$sql = "SELECT
+            order_id AS id,
+            cargo_owner_id,
+            cargo_owner_name,
+            phone_number AS phone,
+            cargo_type,
+            weight,
+            dimensions,
+            origin,
+            destination,
+            instructions,
+            pickup_date,
+            status
+        FROM orders
+        WHERE cargo_owner_id = ?
+        ORDER BY order_id DESC";
+
+$stmt = $conn->prepare($sql);
+
+if (!$stmt) {
+    echo json_encode(['success' => false, 'message' => 'Prepare statement failed: ' . $conn->error]);
+    $conn->close();
+    exit();
+}
+
+// Bind the cargo_owner_id (integer)
+$stmt->bind_param("i", $cargo_owner_id);
+
+if (!$stmt->execute()) {
+    echo json_encode(['success' => false, 'message' => 'Execute statement failed: ' . $stmt->error]);
+    $stmt->close();
+    $conn->close();
+    exit();
+}
 
 $result = $stmt->get_result();
 $cargos = [];
@@ -27,12 +60,9 @@ while ($row = $result->fetch_assoc()) {
     $cargos[] = $row;
 }
 
-// Return the cargos as JSON
-header('Content-Type: application/json');
-echo json_encode($cargos);
+// Return the cargos as JSON within a structured response
+echo json_encode(['success' => true, 'cargos' => $cargos]);
 
 $stmt->close();
 $conn->close();
 ?>
-
-
