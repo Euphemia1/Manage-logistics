@@ -156,11 +156,11 @@ if (!isset($_SESSION['user_name'])) {
         <h3 class="text-xl font-bold text-gray-800">Available Loads Near You</h3>
         <div class="flex items-center">
           <select class="mr-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 p-2">
-            <option>All Cargo Types</option>
-            <option>Perishable</option>
-            <option>Non-Perishable</option>
-            <option>Fragile</option>
-            <option>Heavy Machinery</option>
+            <option></option>
+            <option></option>
+            <option></option>
+            <option></option>
+            <option></option>
           </select>
           <button class="bg-primary-500 text-white py-2 px-4 rounded-lg hover:bg-primary-600 transition-colors">
             <i class="fas fa-sync-alt mr-1"></i> Refresh
