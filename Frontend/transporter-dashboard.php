@@ -183,13 +183,13 @@ if (!isset($_SESSION['user_name'])) {
           </thead>
           <tbody class="divide-y divide-gray-200">
             <tr class="hover:bg-gray-50">
-              <td class="py-3 px-4 text-sm text-gray-900">#LD-5678</td>
-              <td class="py-3 px-4 text-sm text-gray-900">Perishable</td>
-              <td class="py-3 px-4 text-sm text-gray-900">1.2 tons</td>
-              <td class="py-3 px-4 text-sm text-gray-900">Nairobi CBD</td>
-              <td class="py-3 px-4 text-sm text-gray-900">Mombasa</td>
-              <td class="py-3 px-4 text-sm text-gray-900">485 km</td>
-              <td class="py-3 px-4 text-sm text-gray-900">$850</td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
+              <td class="py-3 px-4 text-sm text-gray-900"></td>
               <td class="py-3 px-4 text-sm">
                 <button class="bg-primary-500 text-white py-1 px-3 rounded-lg hover:bg-primary-600 transition-colors">Accept</button>
                 <button class="ml-2 text-gray-500 hover:text-gray-700">
