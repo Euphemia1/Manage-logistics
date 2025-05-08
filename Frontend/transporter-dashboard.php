@@ -133,7 +133,7 @@ if (!isset($_SESSION['user_name'])) {
           </div>
           <div class="ml-4">
             <p class="text-sm font-medium text-gray-500">Active Trips</p>
-            <p class="text-2xl font-semibold text-gray-800">3</p>
+            <p class="text-2xl font-semibold text-gray-800"></p>
           </div>
         </div>
       </div>
