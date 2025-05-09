@@ -776,7 +776,7 @@ $_SESSION['last_activity'] = time();
                 if(cargoList) cargoList.innerHTML = '<p class="text-muted text-center py-4">Loading your cargos...</p>';
                 if(recentActivity) recentActivity.innerHTML = '<p class="text-center text-muted py-3">Loading recent activity...</p>';
                 
-                fetch('../Backend/fetch-cargos.php')
+                fetch('../Backend/fetch-cargo.php')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
