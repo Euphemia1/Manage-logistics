@@ -8,7 +8,7 @@ session_start();
 // 🔧 Update with your actual database credentials
 $host = 'localhost';
 $dbname = 'your_database_name';
-$username = 'your_db_user';
+$username = 'logistics';
 $password = '';
 
 try {
