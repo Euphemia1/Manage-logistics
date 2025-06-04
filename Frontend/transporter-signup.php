@@ -1,3 +1,13 @@
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +18,8 @@
   <link href="https://unpkg.com/lucide-icons/dist/umd/lucide-icons.js" rel="stylesheet">
   <script src="https://unpkg.com/lucide-icons" defer></script>
 </head>
+
+
 <body class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center p-4">
   <div class="max-w-6xl w-full grid md:grid-cols-2 gap-8 items-center">
     <!-- Left side - Hero Section -->

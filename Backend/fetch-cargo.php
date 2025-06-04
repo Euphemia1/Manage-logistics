@@ -14,9 +14,11 @@ if (!isset($_SESSION['user_name']) || !isset($_SESSION['user_id'])) {
 
 $cargo_owner_id = $_SESSION['user_id']; // Use the ID for querying
 
+
 // Prepare and execute the select statement to get cargos for this owner
 // Explicitly list columns and alias order_id to 'id' and phone_number to 'phone' for frontend compatibility
 // Order by order_id DESC to get newest first (assuming order_id is auto-incrementing)
+
 $sql = "SELECT
             order_id AS id,
             cargo_owner_id,

@@ -1,23 +1,61 @@
 <?php
-// post-cargo.php - TEMPORARY DEBUGGING VERSION
-
-// Make sure no characters, spaces, or BOM are before this line.
+// post-cargo.php
 error_reporting(E_ALL);
-ini_set('display_errors', 1); // Show errors directly for now (REMOVE FOR PRODUCTION)
-
+ini_set('display_errors', 1);
 header('Content-Type: application/json');
+session_start();
 
-$response = ['success' => false, 'message' => 'post-cargo.php was reached. Method: ' . $_SERVER['REQUEST_METHOD']];
+// 🔧 Update with your actual database credentials
+$host = 'localhost';
+$dbname = 'your_database_name';
+$username = 'your_db_user';
+$password = 'your_db_password';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $response['message'] = 'post-cargo.php reached via POST. Data received: ' . print_r($_POST, true) . '. Session: ' . print_r($_SESSION, true);
-    // You can add a very simple success true here for testing if POST is working
-    // $response['success'] = true;
-} else {
-    $response['message'] = 'post-cargo.php reached, but NOT via POST. Method: ' . $_SERVER['REQUEST_METHOD'];
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo json_encode(['success' => false, 'message' => 'Database connection failed: ' . $e->getMessage()]);
+    exit;
 }
 
-echo json_encode($response);
-exit(); // Important to stop further execution if anything else was in the file
+// 📨 Only accept POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get and sanitize form data
+    $item       = trim($_POST['cargoType'] ?? 'Unknown');
+    $pickup     = trim($_POST['pickup'] ?? '');
+    $dropoff    = trim($_POST['dropoff'] ?? '');
+    $weight     = trim($_POST['weight'] ?? '');
+    $state      = trim($_POST['state'] ?? '');
+    $price      = trim($_POST['price'] ?? '');
+    $start_date = trim($_POST['pickupDate'] ?? '');
 
-?>
+    // Basic validation
+    if (!$item || !$pickup || !$dropoff || !$start_date) {
+        echo json_encode(['success' => false, 'message' => 'Required fields are missing.']);
+        exit;
+    }
+
+    try {
+        $stmt = $pdo->prepare("INSERT INTO jobs (item, pickup, dropoff, weight, state, price, start_date)
+                               VALUES (:item, :pickup, :dropoff, :weight, :state, :price, :start_date)");
+
+        $stmt->execute([
+            ':item'       => $item,
+            ':pickup'     => $pickup,
+            ':dropoff'    => $dropoff,
+            ':weight'     => $weight,
+            ':state'      => $state,
+            ':price'      => $price,
+            ':start_date' => $start_date,
+        ]);
+
+        echo json_encode(['success' => true, 'message' => 'Cargo saved to database.']);
+    } catch (PDOException $e) {
+        echo json_encode(['success' => false, 'message' => 'Database error: ' . $e->getMessage()]);
+    }
+    exit;
+}
+
+echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
+exit;

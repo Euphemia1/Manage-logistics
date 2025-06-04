@@ -535,6 +535,7 @@ $_SESSION['last_activity'] = time();
             </div>
         </div>
 
+
         <!-- View Posted Cargos Section -->
         <div id="postedCargosSection" class="d-none">
             <div class="card dashboard-card">
@@ -566,6 +567,7 @@ $_SESSION['last_activity'] = time();
                         </div>
                     </div>
                     
+
                     <!-- Loading indicator -->
                     <div id="cargoLoader" class="loader d-none"></div>
                     
@@ -576,6 +578,7 @@ $_SESSION['last_activity'] = time();
                 </div>
             </div>
         </div>
+
 
          <!-- Settings Section -->
          <div id="settingsSection" class="d-none">
@@ -602,6 +605,7 @@ $_SESSION['last_activity'] = time();
         </div>
 
     </div> <!-- End Main Content -->
+
 
     <!-- Cargo Details Modal -->
     <div class="modal fade" id="cargoDetailsModal" tabindex="-1" aria-labelledby="cargoDetailsModalLabel" aria-hidden="true">
@@ -656,6 +660,8 @@ $_SESSION['last_activity'] = time();
             </div>
         </div>
     </div>
+
+
 
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -1186,6 +1192,7 @@ $_SESSION['last_activity'] = time();
                             const step1 = document.getElementById('step1');
                             if(step1) step1.classList.add('active');
 
+
                             fetchCargos(); 
                             setTimeout(() => {
                                 showSection(postedCargosSection);
@@ -1258,6 +1265,7 @@ $_SESSION['last_activity'] = time();
                     }
                 });
             });
+
             
             showSection(homeSection); 
             fetchCargos();
@@ -1265,3 +1273,4 @@ $_SESSION['last_activity'] = time();
     </script>
 </body>
 </html>
+
