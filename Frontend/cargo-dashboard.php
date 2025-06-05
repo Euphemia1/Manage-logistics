@@ -1409,6 +1409,193 @@ $_SESSION['last_activity'] = time();
   }
 })
 
+document.addEventListener("DOMContentLoaded", () => {
+  const postCargoForm = document.getElementById("postCargoForm")
+  const formAlertPlaceholder = document.getElementById("formAlertPlaceholder")
+
+  // Handle form submission
+  postCargoForm.addEventListener("submit", (e) => {
+    e.preventDefault()
+
+    // Validate all required fields regardless of which step they're in
+    const requiredFields = postCargoForm.querySelectorAll("[required]")
+    let isValid = true
+    let firstInvalidField = null
+
+    requiredFields.forEach((field) => {
+      if (!field.value.trim()) {
+        isValid = false
+        field.classList.add("is-invalid")
+        if (!firstInvalidField) firstInvalidField = field
+      } else {
+        field.classList.remove("is-invalid")
+      }
+    })
+
+    // Check terms checkbox
+    const termsCheck = document.getElementById("termsCheck")
+    if (!termsCheck.checked) {
+      isValid = false
+      termsCheck.classList.add("is-invalid")
+      if (!firstInvalidField) firstInvalidField = termsCheck
+    } else {
+      termsCheck.classList.remove("is-invalid")
+    }
+
+    if (!isValid) {
+      // Show which step contains errors
+      const invalidStep = firstInvalidField.closest(".form-step")
+      const stepId = invalidStep.id
+
+      // Switch to the step with errors
+      document.querySelectorAll(".form-step").forEach((step) => {
+        step.classList.remove("active")
+      })
+      invalidStep.classList.add("active")
+
+      // Show error message
+      showAlert("Required fields are missing. Please check highlighted fields.", "danger")
+      return
+    }
+
+    // If validation passes, submit the form
+    const formData = new FormData(postCargoForm)
+
+    // Add custom cargo type if "Other" is selected
+    if (formData.get("cargoType") === "Other" && document.getElementById("customCargoType").value) {
+      formData.set("cargoType", document.getElementById("customCargoType").value)
+    }
+
+    // Add specific date if selected
+    if (formData.get("pickupDate") === "specific" && document.getElementById("specificDate").value) {
+      formData.set("pickupDate", document.getElementById("specificDate").value)
+    }
+
+    // Submit form data via fetch
+    fetch("post-cargo.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          showAlert("Cargo posted successfully!", "success")
+          postCargoForm.reset()
+          // Reset to first step
+          document.querySelectorAll(".form-step").forEach((step) => {
+            step.classList.remove("active")
+          })
+          document.getElementById("step1").classList.add("active")
+        } else {
+          showAlert(data.message || "Error posting cargo. Please try again.", "danger")
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error)
+        showAlert("An unexpected error occurred. Please try again.", "danger")
+      })
+  })
+
+  // Handle next step buttons
+  document.querySelectorAll(".next-step").forEach((button) => {
+    button.addEventListener("click", function () {
+      const currentStep = this.closest(".form-step")
+      const nextStepId = this.dataset.next
+      const nextStep = document.getElementById(nextStepId)
+
+      // Validate current step fields before proceeding
+      const requiredFields = currentStep.querySelectorAll("[required]")
+      let isValid = true
+
+      requiredFields.forEach((field) => {
+        if (!field.value.trim()) {
+          isValid = false
+          field.classList.add("is-invalid")
+        } else {
+          field.classList.remove("is-invalid")
+        }
+      })
+
+      if (!isValid) {
+        showAlert("Please fill in all required fields before proceeding.", "danger")
+        return
+      }
+
+      // Proceed to next step
+      currentStep.classList.remove("active")
+      nextStep.classList.add("active")
+    })
+  })
+
+  // Handle previous step buttons
+  document.querySelectorAll(".prev-step").forEach((button) => {
+    button.addEventListener("click", function () {
+      const currentStep = this.closest(".form-step")
+      const prevStepId = this.dataset.prev
+      const prevStep = document.getElementById(prevStepId)
+
+      currentStep.classList.remove("active")
+      prevStep.classList.add("active")
+    })
+  })
+
+  // Handle "Other" cargo type selection
+  document.getElementById("otherType").addEventListener("change", function () {
+    const customTypeContainer = document.getElementById("customTypeContainer")
+    if (this.checked) {
+      customTypeContainer.classList.remove("d-none")
+    } else {
+      customTypeContainer.classList.add("d-none")
+    }
+  })
+
+  // Handle specific date selection
+  document.getElementById("pickupDate").addEventListener("change", function () {
+    const specificDateInput = document.getElementById("specificDate")
+    if (this.value === "specific") {
+      specificDateInput.classList.remove("d-none")
+      specificDateInput.setAttribute("required", "")
+    } else {
+      specificDateInput.classList.add("d-none")
+      specificDateInput.removeAttribute("required")
+    }
+  })
+
+  // Handle current location buttons
+  document.querySelectorAll(".use-current-location").forEach((button) => {
+    button.addEventListener("click", function () {
+      const inputField = this.closest(".input-group").querySelector("input")
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            // For a real implementation, you would use a geocoding service
+            // to convert coordinates to an address
+            inputField.value = `${position.coords.latitude}, ${position.coords.longitude}`
+            inputField.classList.remove("is-invalid")
+          },
+          (error) => {
+            console.error("Geolocation error:", error)
+            showAlert("Could not get your location. Please enter it manually.", "warning")
+          },
+        )
+      } else {
+        showAlert("Geolocation is not supported by your browser. Please enter location manually.", "warning")
+      }
+    })
+  })
+
+  // Helper function to show alerts
+  function showAlert(message, type) {
+    formAlertPlaceholder.innerHTML = `
+      <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    `
+  }
+})
+
     </script>
 </body>
 </html>
