@@ -27,7 +27,7 @@ ini_set('display_errors', 1);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
         }
         .input-field:focus {
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+            box-shadow: 0 0 0 3px rgba(43, 153, 48, 0.2);
         }
     </style>
 </head>
