@@ -512,14 +512,27 @@ $_SESSION['last_activity'] = time();
                                 </div>
                                 
                                 <div class="col-12">
-                                    <div class="form-check mb-3">
-                                        <input class="form-check-input" type="checkbox" id="termsCheck" required>
-                                        <label class="form-check-label small" for="termsCheck">
-                                            I agree to the terms and conditions of cargo transportation
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
+                                   <!-- Add these updates to your existing form -->
+
+<!-- Make sure the terms checkbox has a name attribute -->
+<div class="form-check mb-3">
+    <input class="form-check-input" type="checkbox" id="termsCheck" name="termsCheck" required>
+    <label class="form-check-label small" for="termsCheck">
+        I agree to the terms and conditions of cargo transportation
+    </label>
+    <div class="invalid-feedback">
+        You must agree to the terms and conditions
+    </div>
+</div>
+
+<!-- Add name attribute to specific date input -->
+<input type="date" id="specificDate" name="specificDate" class="form-control mt-2 d-none">
+
+<!-- Make sure custom cargo type has name attribute -->
+<div id="customTypeContainer" class="mt-3 d-none">
+    <input id="customCargoType" name="customCargoType" placeholder="Specify cargo type" type="text" class="form-control">
+</div>
+
                             
                             <div class="d-flex justify-content-between mt-4">
                                 <button type="button" class="btn btn-outline-secondary prev-step" data-prev="step2">
