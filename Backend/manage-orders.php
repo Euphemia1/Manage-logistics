@@ -426,7 +426,7 @@ if ($result) {
                         </tr>
                     </thead>
 
-                    
+
                     <tbody>
                         <?php if (!empty($orders)): ?>
                             <?php foreach ($orders as $order): ?>
@@ -435,7 +435,7 @@ if ($result) {
                                     $statusClass = strtolower(str_replace(' ', '-', $order['status']));
                                 ?>
                                 <tr data-status="<?php echo $statusClass; ?>">
-                                    <td><?php echo htmlspecialchars($order['order_id']); ?></td>
+                                    <td><?php echo htmlspecialchars($order['id']); ?></td>
                                     <td><?php echo htmlspecialchars($order['cargo_owner_name']); ?></td>
                                     <td><?php echo htmlspecialchars($order['cargo_type']); ?></td>
                                     <td><?php echo htmlspecialchars($order['origin']); ?></td>
