@@ -107,7 +107,7 @@ ini_set('display_errors', 1);
             </form>
 
             <div class="mt-6 text-center text-sm text-gray-600">
-                Need an account? <a href="cargo-owner-signup.php" class="font-medium text-blue-600 hover:text-blue-500">Sign up here</a>
+                Need an account? <a href="cargo-owner-signup.php" class="font-medium text-black-600 hover:text-blue-500">Sign up here</a>
             </div>
         </div>
     </div>
