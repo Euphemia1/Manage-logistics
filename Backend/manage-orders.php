@@ -439,7 +439,7 @@ if ($result) {
                                     <td><?php echo htmlspecialchars($order['cargo_owner_name']); ?></td>
                                     <td><?php echo htmlspecialchars($order['cargo_type']); ?></td>
                                     <td><?php echo htmlspecialchars($order['origin']); ?></td>
-                                    <td><?php echo htmlspecialchars($order['destination']); ?></td>
+                                    <td><?php echo htmlspecialchars($order['dropoff']); ?></td>
                                     <td>
                                         <span class="status <?php echo $statusClass; ?>">
                                             <?php echo htmlspecialchars($order['status']); ?>
