@@ -419,7 +419,7 @@ if ($result) {
                             <th>Cargo Owner</th>
                             <th>Cargo Type</th>
                             <th>Origin</th>
-                            <th>Destination</th>
+                            <th>Dropoff</th>
                             <th>Status</th>
                             <th>Created At</th>
                             <th>Actions</th>
