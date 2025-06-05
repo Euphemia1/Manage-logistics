@@ -652,9 +652,9 @@ $_SESSION['last_activity'] = time();
     <button class="btn btn-outline-primary me-2 active" data-target-section="postedCargosSection">
         <i class="fas fa-list me-2"></i>View Posted Cargos
     </button>
-    <button class="btn btn-outline-info me-2" data-target-section="dashboardOverview">
+    <!-- <button class="btn btn-outline-info me-2" data-target-section="dashboardOverview">
         <i class="fas fa-chart-bar me-2"></i>Dashboard
-    </button>
+    </button> -->
 </div>
 
          <!-- Settings Section -->
