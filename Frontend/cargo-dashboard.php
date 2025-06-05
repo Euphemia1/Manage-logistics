@@ -1609,6 +1609,499 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 })
 
+class CargoManager {
+  constructor() {
+    this.currentPage = 1
+    this.itemsPerPage = 6
+    this.searchTerm = ""
+    this.isLoading = false
+    this.init()
+  }
+
+  init() {
+    this.bindEvents()
+    this.setupNavigation()
+  }
+
+  bindEvents() {
+    // Search functionality
+    const searchInput = document.getElementById("cargoSearchInput")
+    if (searchInput) {
+      searchInput.addEventListener(
+        "input",
+        this.debounce((e) => this.handleSearch(e.target.value), 300),
+      )
+    }
+
+    // Refresh button
+    const refreshBtn = document.getElementById("refreshCargosBtn")
+    if (refreshBtn) {
+      refreshBtn.addEventListener("click", () => this.refreshCargoList())
+    }
+
+    // Filter buttons
+    document.querySelectorAll(".cargo-filter-btn").forEach((btn) => {
+      btn.addEventListener("click", (e) => this.handleFilter(e.target.dataset.filter))
+    })
+  }
+
+  setupNavigation() {
+    const navButtons = document.querySelectorAll("[data-target-section]")
+    navButtons.forEach((button) => {
+      button.addEventListener("click", (e) => {
+        e.preventDefault()
+        const targetSection = button.getAttribute("data-target-section")
+        this.showSection(targetSection)
+
+        if (targetSection === "postedCargosSection") {
+          this.loadCargoList()
+        }
+      })
+    })
+  }
+
+  showSection(sectionId) {
+    // Hide all sections
+    document.querySelectorAll(".dashboard-section").forEach((section) => {
+      section.classList.add("d-none")
+    })
+
+    // Show target section
+    const targetSection = document.getElementById(sectionId)
+    if (targetSection) {
+      targetSection.classList.remove("d-none")
+    }
+
+    // Update navigation state
+    document.querySelectorAll("[data-target-section]").forEach((btn) => {
+      btn.classList.remove("active")
+    })
+    document.querySelector(`[data-target-section="${sectionId}"]`)?.classList.add("active")
+  }
+
+  async loadCargoList(page = 1) {
+    if (this.isLoading) return
+
+    this.isLoading = true
+    this.currentPage = page
+    this.showLoadingState()
+
+    try {
+      const params = new URLSearchParams({
+        page: this.currentPage,
+        limit: this.itemsPerPage,
+        search: this.searchTerm,
+      })
+
+      const response = await fetch(`api/cargo-list.php?${params}`)
+      const result = await response.json()
+
+      if (result.success) {
+        this.renderCargoList(result.data.cargos)
+        this.renderPagination(result.data.pagination)
+        this.updateCargoStats(result.data.pagination.total_records)
+      } else {
+        this.showErrorState(result.message || "Failed to load cargos")
+      }
+    } catch (error) {
+      console.error("Error loading cargos:", error)
+      this.showErrorState("Network error occurred")
+    } finally {
+      this.isLoading = false
+      this.hideLoadingState()
+    }
+  }
+
+  renderCargoList(cargos) {
+    const container = document.getElementById("cargoListContainer")
+    if (!container) return
+
+    if (cargos.length === 0) {
+      this.showEmptyState()
+      return
+    }
+
+    container.innerHTML = cargos.map((cargo) => this.createCargoCard(cargo)).join("")
+  }
+
+  createCargoCard(cargo) {
+    const statusClass = this.getStatusClass(cargo.status)
+    const formattedDate = this.formatDate(cargo.pickup_date)
+    const postedDate = this.formatDate(cargo.posted_date)
+
+    return `
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card cargo-item-card h-100 shadow-sm">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0 fw-bold text-primary">${this.escapeHtml(cargo.cargo_type)}</h6>
+                        <span class="badge ${statusClass}">${this.escapeHtml(cargo.status || "pending")}</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="route-info mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-map-marker-alt text-success me-2"></i>
+                                <small class="text-muted">From:</small>
+                            </div>
+                            <div class="fw-semibold mb-2">${this.escapeHtml(cargo.pickup_location)}</div>
+                            
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-flag-checkered text-danger me-2"></i>
+                                <small class="text-muted">To:</small>
+                            </div>
+                            <div class="fw-semibold">${this.escapeHtml(cargo.delivery_location)}</div>
+                        </div>
+                        
+                        <div class="cargo-details">
+                            <div class="row text-sm">
+                                <div class="col-6 mb-2">
+                                    <small class="text-muted">Weight:</small>
+                                    <div>${this.escapeHtml(cargo.weight || "N/A")}</div>
+                                </div>
+                                <div class="col-6 mb-2">
+                                    <small class="text-muted">Size:</small>
+                                    <div>${this.escapeHtml(cargo.dimensions || "N/A")}</div>
+                                </div>
+                                <div class="col-6 mb-2">
+                                    <small class="text-muted">Transport:</small>
+                                    <div>${this.escapeHtml(cargo.transport_type || "Road")}</div>
+                                </div>
+                                <div class="col-6 mb-2">
+                                    <small class="text-muted">Pickup:</small>
+                                    <div>${formattedDate}</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        ${
+                          cargo.instructions
+                            ? `
+                            <div class="mt-2">
+                                <small class="text-muted">Instructions:</small>
+                                <p class="small text-truncate">${this.escapeHtml(cargo.instructions)}</p>
+                            </div>
+                        `
+                            : ""
+                        }
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">Posted: ${postedDate}</small>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-info" onclick="cargoManager.viewDetails(${cargo.id})" title="View Details">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-warning" onclick="cargoManager.editCargo(${cargo.id})" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-danger" onclick="cargoManager.deleteCargo(${cargo.id})" title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
+  }
+
+  renderPagination(pagination) {
+    const container = document.getElementById("paginationContainer")
+    if (!container || pagination.total_pages <= 1) {
+      container.innerHTML = ""
+      return
+    }
+
+    let paginationHTML = `<nav aria-label="Cargo pagination"><ul class="pagination justify-content-center">`
+
+    // Previous button
+    paginationHTML += `
+            <li class="page-item ${!pagination.has_prev ? "disabled" : ""}">
+                <button class="page-link" onclick="cargoManager.loadCargoList(${pagination.current_page - 1})" 
+                        ${!pagination.has_prev ? "disabled" : ""}>
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </li>
+        `
+
+    // Page numbers
+    const startPage = Math.max(1, pagination.current_page - 2)
+    const endPage = Math.min(pagination.total_pages, pagination.current_page + 2)
+
+    for (let i = startPage; i <= endPage; i++) {
+      paginationHTML += `
+                <li class="page-item ${i === pagination.current_page ? "active" : ""}">
+                    <button class="page-link" onclick="cargoManager.loadCargoList(${i})">${i}</button>
+                </li>
+            `
+    }
+
+    // Next button
+    paginationHTML += `
+            <li class="page-item ${!pagination.has_next ? "disabled" : ""}">
+                <button class="page-link" onclick="cargoManager.loadCargoList(${pagination.current_page + 1})" 
+                        ${!pagination.has_next ? "disabled" : ""}>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </li>
+        `
+
+    paginationHTML += `</ul></nav>`
+    container.innerHTML = paginationHTML
+  }
+
+  showLoadingState() {
+    const container = document.getElementById("cargoListContainer")
+    const spinner = document.getElementById("cargoLoadingSpinner")
+
+    if (container) container.innerHTML = ""
+    if (spinner) spinner.classList.remove("d-none")
+  }
+
+  hideLoadingState() {
+    const spinner = document.getElementById("cargoLoadingSpinner")
+    if (spinner) spinner.classList.add("d-none")
+  }
+
+  showEmptyState() {
+    const container = document.getElementById("cargoListContainer")
+    if (!container) return
+
+    container.innerHTML = `
+            <div class="col-12">
+                <div class="text-center py-5">
+                    <i class="fas fa-box-open fa-4x text-muted mb-4"></i>
+                    <h4 class="text-muted mb-3">No Cargos Found</h4>
+                    <p class="text-muted mb-4">
+                        ${this.searchTerm ? "No cargos match your search criteria." : "You haven't posted any cargo yet."}
+                    </p>
+                    <button class="btn btn-success btn-lg" data-target-section="postCargoSection">
+                        <i class="fas fa-plus me-2"></i>Post New Cargo
+                    </button>
+                </div>
+            </div>
+        `
+  }
+
+  showErrorState(message) {
+    const container = document.getElementById("cargoListContainer")
+    if (!container) return
+
+    container.innerHTML = `
+            <div class="col-12">
+                <div class="text-center py-5">
+                    <i class="fas fa-exclamation-triangle fa-4x text-warning mb-4"></i>
+                    <h4 class="text-muted mb-3">Error Loading Cargos</h4>
+                    <p class="text-muted mb-4">${this.escapeHtml(message)}</p>
+                    <button class="btn btn-primary" onclick="cargoManager.refreshCargoList()">
+                        <i class="fas fa-refresh me-2"></i>Try Again
+                    </button>
+                </div>
+            </div>
+        `
+  }
+
+  updateCargoStats(totalCount) {
+    const statsElement = document.getElementById("totalCargoCount")
+    if (statsElement) {
+      statsElement.textContent = totalCount
+    }
+  }
+
+  handleSearch(searchTerm) {
+    this.searchTerm = searchTerm
+    this.currentPage = 1
+    this.loadCargoList()
+  }
+
+  refreshCargoList() {
+    this.currentPage = 1
+    this.loadCargoList()
+  }
+
+  async viewDetails(cargoId) {
+    try {
+      const response = await fetch(`api/cargo-actions.php?action=details&id=${cargoId}`)
+      const result = await response.json()
+
+      if (result.success) {
+        this.showCargoDetailsModal(result.data)
+      } else {
+        this.showAlert("Error loading cargo details: " + result.message, "danger")
+      }
+    } catch (error) {
+      console.error("Error:", error)
+      this.showAlert("Network error occurred", "danger")
+    }
+  }
+
+  showCargoDetailsModal(cargo) {
+    // Create and show modal with cargo details
+    const modalHTML = `
+            <div class="modal fade" id="cargoDetailsModal" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Cargo Details</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="fw-bold">Cargo Type:</label>
+                                    <p>${this.escapeHtml(cargo.cargo_type)}</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="fw-bold">Status:</label>
+                                    <p><span class="badge ${this.getStatusClass(cargo.status)}">${this.escapeHtml(cargo.status || "pending")}</span></p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="fw-bold">Pickup Location:</label>
+                                    <p>${this.escapeHtml(cargo.pickup_location)}</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="fw-bold">Delivery Location:</label>
+                                    <p>${this.escapeHtml(cargo.delivery_location)}</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="fw-bold">Weight:</label>
+                                    <p>${this.escapeHtml(cargo.weight || "Not specified")}</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="fw-bold">Dimensions:</label>
+                                    <p>${this.escapeHtml(cargo.dimensions || "Not specified")}</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="fw-bold">Transport Type:</label>
+                                    <p>${this.escapeHtml(cargo.transport_type || "Road")}</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="fw-bold">Contact Phone:</label>
+                                    <p>${this.escapeHtml(cargo.phone || "Not provided")}</p>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label class="fw-bold">Special Instructions:</label>
+                                    <p>${this.escapeHtml(cargo.instructions || "None")}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-warning" onclick="cargoManager.editCargo(${cargo.id})">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
+
+    // Remove existing modal if any
+    const existingModal = document.getElementById("cargoDetailsModal")
+    if (existingModal) {
+      existingModal.remove()
+    }
+
+    // Add modal to DOM and show
+    document.body.insertAdjacentHTML("beforeend", modalHTML)
+    const modal = new bootstrap.Modal(document.getElementById("cargoDetailsModal"))
+    modal.show()
+  }
+
+  async deleteCargo(cargoId) {
+    if (!confirm("Are you sure you want to delete this cargo? This action cannot be undone.")) {
+      return
+    }
+
+    try {
+      const response = await fetch(`api/cargo-actions.php?action=delete&id=${cargoId}`, {
+        method: "DELETE",
+      })
+      const result = await response.json()
+
+      if (result.success) {
+        this.showAlert("Cargo deleted successfully", "success")
+        this.loadCargoList(this.currentPage)
+      } else {
+        this.showAlert("Error deleting cargo: " + result.message, "danger")
+      }
+    } catch (error) {
+      console.error("Error:", error)
+      this.showAlert("Network error occurred", "danger")
+    }
+  }
+
+  editCargo(cargoId) {
+    // Implement edit functionality
+    this.showAlert("Edit functionality coming soon!", "info")
+  }
+
+  // Utility methods
+  getStatusClass(status) {
+    const statusClasses = {
+      pending: "bg-warning text-dark",
+      "in-transit": "bg-info text-white",
+      delivered: "bg-success text-white",
+      cancelled: "bg-danger text-white",
+    }
+    return statusClasses[status?.toLowerCase()] || "bg-secondary text-white"
+  }
+
+  formatDate(dateString) {
+    if (!dateString) return "Not specified"
+    const date = new Date(dateString)
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    })
+  }
+
+  escapeHtml(text) {
+    const div = document.createElement("div")
+    div.textContent = text
+    return div.innerHTML
+  }
+
+  debounce(func, wait) {
+    let timeout
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout)
+        func(...args)
+      }
+      clearTimeout(timeout)
+      timeout = setTimeout(later, wait)
+    }
+  }
+
+  showAlert(message, type) {
+    const alertContainer = document.getElementById("alertContainer")
+    if (!alertContainer) return
+
+    const alertHTML = `
+            <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                ${this.escapeHtml(message)}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        `
+
+    alertContainer.innerHTML = alertHTML
+
+    // Auto-dismiss after 5 seconds
+    setTimeout(() => {
+      const alert = alertContainer.querySelector(".alert")
+      if (alert) {
+        const bsAlert = new bootstrap.Alert(alert)
+        bsAlert.close()
+      }
+    }, 5000)
+  }
+}
+
+// Initialize the cargo manager when DOM is loaded
+document.addEventListener("DOMContentLoaded", () => {
+  window.cargoManager = new CargoManager()
+})
+
+
     </script>
 </body>
 </html>
