@@ -383,7 +383,7 @@ if ($result) {
             gap: 10px;
         }
     </style>
-    
+
 </head>
 <body>
     <div class="container">
@@ -503,6 +503,8 @@ if ($result) {
         </div>
     </div>
 
+
+    
     <script>
         // Function to handle order editing
         function editOrder(orderId) {
