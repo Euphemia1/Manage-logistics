@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 header('Content-Type: application/json');
 session_start();
 
-// 🔧 Update with your actual database credentials
+// Database credentials
 $host = 'localhost';
 $dbname = 'logistics';
 $username = 'root';
@@ -19,38 +19,88 @@ try {
     exit;
 }
 
-// 📨 Only accept POST
+// Only accept POST requests
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get and sanitize form data
-    $item       = trim($_POST['cargoType'] ?? 'Unknown');
-    $pickup     = trim($_POST['pickup'] ?? '');
-    $dropoff    = trim($_POST['dropoff'] ?? '');
-    $weight     = trim($_POST['weight'] ?? '');
-    $state      = trim($_POST['state'] ?? '');
-    $price      = trim($_POST['price'] ?? '');
-    $start_date = trim($_POST['pickupDate'] ?? '');
+    // Get form data using the correct field names from your HTML form
+    $cargoType = trim($_POST['cargoType'] ?? '');
+    $weight = trim($_POST['weight'] ?? '');
+    $dimensions = trim($_POST['dimensions'] ?? '');
+    $origin = trim($_POST['origin'] ?? '');           // This matches your HTML form
+    $destination = trim($_POST['destination'] ?? ''); // This matches your HTML form
+    $pickupDate = trim($_POST['pickupDate'] ?? '');
+    $transportType = trim($_POST['transportType'] ?? '');
+    $phone = trim($_POST['phone'] ?? '');
+    $instructions = trim($_POST['instructions'] ?? '');
+    
+    // Handle custom cargo type
+    if ($cargoType === 'Other' && !empty($_POST['customCargoType'])) {
+        $cargoType = trim($_POST['customCargoType']);
+    }
+    
+    // Handle specific pickup date
+    if ($pickupDate === 'specific' && !empty($_POST['specificDate'])) {
+        $pickupDate = trim($_POST['specificDate']);
+    }
 
-    // Basic validation
-    if (!$item || !$pickup || !$dropoff || !$start_date) {
-        echo json_encode(['success' => false, 'message' => 'Required fields are missing.']);
+    // Validation - check required fields
+    $requiredFields = [
+        'cargoType' => $cargoType,
+        'origin' => $origin,
+        'destination' => $destination,
+        'pickupDate' => $pickupDate,
+        'phone' => $phone
+    ];
+    
+    $missingFields = [];
+    foreach ($requiredFields as $fieldName => $fieldValue) {
+        if (empty($fieldValue)) {
+            $missingFields[] = $fieldName;
+        }
+    }
+    
+    // Check terms checkbox
+    if (!isset($_POST['termsCheck'])) {
+        $missingFields[] = 'terms agreement';
+    }
+    
+    if (!empty($missingFields)) {
+        echo json_encode([
+            'success' => false, 
+            'message' => 'Required fields are missing: ' . implode(', ', $missingFields)
+        ]);
         exit;
     }
 
     try {
-        $stmt = $pdo->prepare("INSERT INTO jobs (item, pickup, dropoff, weight, state, price, start_date)
-                               VALUES (:item, :pickup, :dropoff, :weight, :state, :price, :start_date)");
+        // Update the SQL to match your form fields
+        $stmt = $pdo->prepare("
+            INSERT INTO jobs (
+                item, pickup, dropoff, weight, dimensions, 
+                transport_type, phone, instructions, start_date, created_at
+            ) VALUES (
+                :item, :pickup, :dropoff, :weight, :dimensions,
+                :transport_type, :phone, :instructions, :start_date, NOW()
+            )
+        ");
 
         $stmt->execute([
-            ':item'       => $item,
-            ':pickup'     => $pickup,
-            ':dropoff'    => $dropoff,
-            ':weight'     => $weight,
-            ':state'      => $state,
-            ':price'      => $price,
-            ':start_date' => $start_date,
+            ':item' => $cargoType,
+            ':pickup' => $origin,
+            ':dropoff' => $destination,
+            ':weight' => $weight,
+            ':dimensions' => $dimensions,
+            ':transport_type' => $transportType,
+            ':phone' => $phone,
+            ':instructions' => $instructions,
+            ':start_date' => $pickupDate
         ]);
 
-        echo json_encode(['success' => true, 'message' => 'Cargo saved to database.']);
+        echo json_encode([
+            'success' => true, 
+            'message' => 'Cargo posted successfully!',
+            'job_id' => $pdo->lastInsertId()
+        ]);
+        
     } catch (PDOException $e) {
         echo json_encode(['success' => false, 'message' => 'Database error: ' . $e->getMessage()]);
     }
@@ -59,3 +109,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
 exit;
+?>
