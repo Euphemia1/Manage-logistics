@@ -644,6 +644,7 @@ $_SESSION['last_activity'] = time();
     </div>
 </div>
 
+
 <!-- Navigation Buttons (Update your existing navigation) -->
 <div class="dashboard-nav mb-4">
     <button class="btn btn-outline-success me-2" data-target-section="postCargoSection">
