@@ -503,8 +503,6 @@ if ($result) {
         </div>
     </div>
 
-
-    
     <script>
         // Function to handle order editing
         function editOrder(orderId) {
