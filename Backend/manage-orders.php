@@ -450,7 +450,7 @@ if ($result) {
                                         <button class="icon-button view" title="View Details" onclick="viewOrder(<?php echo (int) $order['id']; ?>)">
                                             <i class="fas fa-eye"></i>
                                         </button>
-                                        <button class="icon-button edit" title="Edit Order" onclick="editOrder(<?php echo (int) $order['order_id']; ?>)">
+                                        <button class="icon-button edit" title="Edit Order" onclick="editOrder(<?php echo (int) $order['id']; ?>)">
                                             <i class="fas fa-edit"></i>
                                         </button>
                                         <button class="icon-button delete" title="Delete Order" onclick="confirmDelete(<?php echo (int) $order['order_id']; ?>)">
