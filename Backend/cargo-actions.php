@@ -98,6 +98,7 @@ function updateCargo($db) {
         return;
     }
     
+    
     try {
         $stmt = $db->prepare("
             UPDATE jobs SET 
