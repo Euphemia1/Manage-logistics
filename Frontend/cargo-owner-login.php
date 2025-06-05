@@ -94,7 +94,7 @@ ini_set('display_errors', 1);
                     </div>
 
                     <div class="text-sm">
-                        <a href="forgot-password.php?type=cargo_owner" class="font-medium text-blue-600 hover:text-blue-500">
+                        <a href="forgot-password.php?type=cargo_owner" class="font-medium text-black-600 hover:text-blue-500">
                             Forgot password?
                         </a>
                     </div>
