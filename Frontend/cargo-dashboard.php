@@ -549,49 +549,113 @@ $_SESSION['last_activity'] = time();
         </div>
 
 
-        <!-- View Posted Cargos Section -->
-        <div id="postedCargosSection" class="d-none">
-            <div class="card dashboard-card">
-                <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                    <h3 class="mb-0">
-                        <span class="text-success">Your Posted</span> Cargos
-                    </h3>
-                    <button id="backToHomeBtn" class="btn btn-outline-success">
-                        <i class="fas fa-arrow-left me-2"></i> Back to Dashboard
-                    </button>
-                </div>
-                <div class="card-body">
-                    <!-- Filter and Search -->
-                    <div class="row mb-4">
-                        <div class="col-md-8 mb-3 mb-md-0">
-                            <input type="text" id="searchCargo" placeholder="Search by origin, destination or type..." 
-                                   class="form-control">
+        <<!-- Enhanced Posted Cargos Section -->
+<div id="postedCargosSection" class="dashboard-section d-none">
+    <div class="container-fluid">
+        <!-- Header Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                            <div>
+                                <h2 class="mb-1">
+                                    <i class="fas fa-boxes text-primary me-2"></i>
+                                    Your Posted Cargos
+                                </h2>
+                                <p class="text-muted mb-0">
+                                    Manage and track your cargo shipments
+                                    <span class="badge bg-primary ms-2">
+                                        <span id="totalCargoCount">0</span> Total
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <button class="btn btn-outline-secondary" id="refreshCargosBtn">
+                                    <i class="fas fa-sync-alt me-1"></i>Refresh
+                                </button>
+                                <button class="btn btn-success" data-target-section="postCargoSection">
+                                    <i class="fas fa-plus me-1"></i>Post New Cargo
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-md-4 d-flex gap-2">
-                            <select id="statusFilter" class="form-select">
-                                <option value="all">All Status</option>
-                                <option value="Available">Available</option>
-                                <option value="In Transit">In Transit</option>
-                                <option value="Delivered">Delivered</option>
-                            </select>
-                            <button id="refreshCargos" class="btn btn-primary">
-                                <i class="fas fa-sync-alt"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-
-                    <!-- Loading indicator -->
-                    <div id="cargoLoader" class="loader d-none"></div>
-                    
-                    <!-- Cargo list container -->
-                    <div id="cargoList" class="mt-4">
-                        <p class="text-muted text-center py-4">Loading your cargos...</p>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Search and Filter Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body py-3">
+                        <div class="row align-items-center">
+                            <div class="col-md-6 mb-2 mb-md-0">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="cargoSearchInput" 
+                                           placeholder="Search by cargo type, pickup, or destination...">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex gap-2 justify-content-md-end flex-wrap">
+                                    <button class="btn btn-outline-primary btn-sm cargo-filter-btn active" data-filter="all">
+                                        All
+                                    </button>
+                                    <button class="btn btn-outline-warning btn-sm cargo-filter-btn" data-filter="pending">
+                                        Pending
+                                    </button>
+                                    <button class="btn btn-outline-info btn-sm cargo-filter-btn" data-filter="in-transit">
+                                        In Transit
+                                    </button>
+                                    <button class="btn btn-outline-success btn-sm cargo-filter-btn" data-filter="delivered">
+                                        Delivered
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert Container -->
+        <div id="alertContainer" class="mb-3"></div>
+
+        <!-- Loading Spinner -->
+        <div id="cargoLoadingSpinner" class="text-center py-5 d-none">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-3 text-muted">Loading your cargos...</p>
+        </div>
+
+        <!-- Cargo List Container -->
+        <div id="cargoListContainer" class="row">
+            <!-- Cargo cards will be dynamically loaded here -->
+        </div>
+
+        <!-- Pagination Container -->
+        <div id="paginationContainer" class="mt-4">
+            <!-- Pagination will be dynamically loaded here -->
+        </div>
+    </div>
+</div>
+
+<!-- Navigation Buttons (Update your existing navigation) -->
+<div class="dashboard-nav mb-4">
+    <button class="btn btn-outline-success me-2" data-target-section="postCargoSection">
+        <i class="fas fa-plus me-2"></i>Post New Cargo
+    </button>
+    <button class="btn btn-outline-primary me-2 active" data-target-section="postedCargosSection">
+        <i class="fas fa-list me-2"></i>View Posted Cargos
+    </button>
+    <button class="btn btn-outline-info me-2" data-target-section="dashboardOverview">
+        <i class="fas fa-chart-bar me-2"></i>Dashboard
+    </button>
+</div>
 
          <!-- Settings Section -->
          <div id="settingsSection" class="d-none">
