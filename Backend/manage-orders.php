@@ -437,7 +437,6 @@ if ($result) {
                                 <tr data-status="<?php echo $statusClass; ?>">
                                     <td><?php echo htmlspecialchars($order['id']); ?></td>
                                     <td><?php echo htmlspecialchars($order['cargo_owner_name']); ?></td>
-                                  
                                     <td><?php echo htmlspecialchars($order['pickup']); ?></td>
                                     <td><?php echo htmlspecialchars($order['dropoff']); ?></td>
                                     <td>
