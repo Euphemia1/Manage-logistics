@@ -525,13 +525,13 @@ $_SESSION['last_activity'] = time();
     </div>
 </div>
 
-<!-- Add name attribute to specific date input -->
-<input type="date" id="specificDate" name="specificDate" class="form-control mt-2 d-none">
+        <!-- Add name attribute to specific date input -->
+        <input type="date" id="specificDate" name="specificDate" class="form-control mt-2 d-none">
 
-<!-- Make sure custom cargo type has name attribute -->
-<div id="customTypeContainer" class="mt-3 d-none">
-    <input id="customCargoType" name="customCargoType" placeholder="Specify cargo type" type="text" class="form-control">
-</div>
+        <!-- Make sure custom cargo type has name attribute -->
+        <div id="customTypeContainer" class="mt-3 d-none">
+             <input id="customCargoType" name="customCargoType" placeholder="Specify cargo type" type="text" class="form-control">
+                </div>
 
                             
                             <div class="d-flex justify-content-between mt-4">
