@@ -320,7 +320,7 @@ $conn->close();
     }
   </style>
 
-  
+
 </head>
 <body>
   <div class="sidebar">
@@ -444,6 +444,7 @@ $conn->close();
         });
     }
 
+    
     // Function to update count display with animation if changed
     function updateCountDisplay(elementId, newCount) {
       const countElement = document.getElementById(elementId);

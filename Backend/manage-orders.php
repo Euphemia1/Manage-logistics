@@ -2,7 +2,7 @@
 require_once 'db.php'; // Include your database connection
 
 // Fetch orders from the database
-$result = $conn->query("SELECT * FROM orders");
+$result = $conn->query("SELECT * FROM jobs");
 
 if ($result) {
     $orders = $result->fetch_all(MYSQLI_ASSOC); // Fetch all orders as an associative array
@@ -466,6 +466,8 @@ if ($result) {
                 </table>
             </div>
         </div>
+        
+
         
         <div class="footer">
             <div>
