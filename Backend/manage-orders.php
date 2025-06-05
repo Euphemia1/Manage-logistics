@@ -438,7 +438,7 @@ if ($result) {
                                     <td><?php echo htmlspecialchars($order['id']); ?></td>
                                     <td><?php echo htmlspecialchars($order['cargo_owner_name']); ?></td>
                                     <td><?php echo htmlspecialchars($order['cargo_type']); ?></td>
-                                    <td><?php echo htmlspecialchars($order['origin']); ?></td>
+                                    <td><?php echo htmlspecialchars($order['pickup']); ?></td>
                                     <td><?php echo htmlspecialchars($order['dropoff']); ?></td>
                                     <td>
                                         <span class="status <?php echo $statusClass; ?>">
