@@ -447,7 +447,7 @@ if ($result) {
                                     </td>
                                     <td><?php echo htmlspecialchars($order['created_at']); ?></td>
                                     <td class="actions">
-                                        <button class="icon-button view" title="View Details" onclick="viewOrder(<?php echo (int) $order['order_id']; ?>)">
+                                        <button class="icon-button view" title="View Details" onclick="viewOrder(<?php echo (int) $order['id']; ?>)">
                                             <i class="fas fa-eye"></i>
                                         </button>
                                         <button class="icon-button edit" title="Edit Order" onclick="editOrder(<?php echo (int) $order['order_id']; ?>)">
