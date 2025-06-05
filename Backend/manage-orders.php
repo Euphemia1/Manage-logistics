@@ -425,6 +425,8 @@ if ($result) {
                             <th>Actions</th>
                         </tr>
                     </thead>
+
+                    
                     <tbody>
                         <?php if (!empty($orders)): ?>
                             <?php foreach ($orders as $order): ?>
@@ -468,7 +470,7 @@ if ($result) {
         </div>
         
 
-        
+
         <div class="footer">
             <div>
                 <button class="btn" onclick="addOrder()">
