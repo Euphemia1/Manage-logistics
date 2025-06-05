@@ -30,6 +30,8 @@ ini_set('display_errors', 1);
             box-shadow: 0 0 0 3px rgba(43, 153, 48, 0.2);
         }
     </style>
+
+    
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
     <div class="login-container bg-white rounded-xl shadow-md overflow-hidden w-full max-w-md">
