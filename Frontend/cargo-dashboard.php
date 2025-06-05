@@ -1270,6 +1270,145 @@ $_SESSION['last_activity'] = time();
             showSection(homeSection); 
             fetchCargos();
         });
+
+        document.addEventListener("DOMContentLoaded", () => {
+  const postCargoForm = document.getElementById("postCargoForm")
+  const formAlertPlaceholder = document.getElementById("formAlertPlaceholder")
+
+  // Handle form submission
+  if (postCargoForm) {
+    postCargoForm.addEventListener("submit", (e) => {
+      e.preventDefault()
+
+      // Show loading state
+      const submitBtn = postCargoForm.querySelector('button[type="submit"]')
+      const originalText = submitBtn.innerHTML
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Posting...'
+      submitBtn.disabled = true
+
+      // Create FormData object
+      const formData = new FormData(postCargoForm)
+
+      // Debug: Log form data
+      console.log("Form data being sent:")
+      for (const [key, value] of formData.entries()) {
+        console.log(key, value)
+      }
+
+      // Submit form
+      fetch("post-cargo.php", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            showAlert("Cargo posted successfully!", "success")
+            postCargoForm.reset()
+            // Reset to first step
+            document.querySelectorAll(".form-step").forEach((step) => {
+              step.classList.remove("active")
+            })
+            document.getElementById("step1").classList.add("active")
+          } else {
+            showAlert(data.message || "Error posting cargo. Please try again.", "danger")
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error)
+          showAlert("Network error. Please check your connection and try again.", "danger")
+        })
+        .finally(() => {
+          // Reset button
+          submitBtn.innerHTML = originalText
+          submitBtn.disabled = false
+        })
+    })
+  }
+
+  // Handle step navigation
+  document.querySelectorAll(".next-step").forEach((button) => {
+    button.addEventListener("click", function () {
+      const currentStep = this.closest(".form-step")
+      const nextStepId = this.dataset.next
+      const nextStep = document.getElementById(nextStepId)
+
+      // Basic validation for current step
+      const requiredInputs = currentStep.querySelectorAll("[required]")
+      let isValid = true
+
+      requiredInputs.forEach((input) => {
+        if (!input.value.trim()) {
+          input.classList.add("is-invalid")
+          isValid = false
+        } else {
+          input.classList.remove("is-invalid")
+        }
+      })
+
+      if (isValid) {
+        currentStep.classList.remove("active")
+        nextStep.classList.add("active")
+      } else {
+        showAlert("Please fill in all required fields.", "warning")
+      }
+    })
+  })
+
+  // Handle previous step
+  document.querySelectorAll(".prev-step").forEach((button) => {
+    button.addEventListener("click", function () {
+      const currentStep = this.closest(".form-step")
+      const prevStepId = this.dataset.prev
+      const prevStep = document.getElementById(prevStepId)
+
+      currentStep.classList.remove("active")
+      prevStep.classList.add("active")
+    })
+  })
+
+  // Handle "Other" cargo type
+  document.querySelectorAll('input[name="cargoType"]').forEach((radio) => {
+    radio.addEventListener("change", function () {
+      const customContainer = document.getElementById("customTypeContainer")
+      if (this.value === "Other") {
+        customContainer.classList.remove("d-none")
+        document.getElementById("customCargoType").setAttribute("required", "")
+      } else {
+        customContainer.classList.add("d-none")
+        document.getElementById("customCargoType").removeAttribute("required")
+      }
+    })
+  })
+
+  // Handle specific date selection
+  const pickupDateSelect = document.getElementById("pickupDate")
+  if (pickupDateSelect) {
+    pickupDateSelect.addEventListener("change", function () {
+      const specificDateInput = document.getElementById("specificDate")
+      if (this.value === "specific") {
+        specificDateInput.classList.remove("d-none")
+        specificDateInput.setAttribute("required", "")
+      } else {
+        specificDateInput.classList.add("d-none")
+        specificDateInput.removeAttribute("required")
+      }
+    })
+  }
+
+  // Helper function to show alerts
+  function showAlert(message, type) {
+    if (formAlertPlaceholder) {
+      formAlertPlaceholder.innerHTML = `
+                <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `
+    }
+  }
+})
+
     </script>
 </body>
 </html>
