@@ -31,11 +31,11 @@ ini_set('display_errors', 1);
         }
     </style>
 
-    
+
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
     <div class="login-container bg-white rounded-xl shadow-md overflow-hidden w-full max-w-md">
-        <div class="bg-blue-600 py-4 px-6">
+        <div class="bg-green-600 py-4 px-6">
             <div class="flex items-center justify-center space-x-2">
                 <i data-lucide="package" class="w-6 h-6 text-white"></i>
                 <h2 class="text-xl font-bold text-white">Cargo Owner Login</h2>
