@@ -443,6 +443,7 @@ if ($result) {
                                         <span class="status <?php echo $statusClass; ?>">
                                             <?php echo htmlspecialchars($order['status']); ?>
                                         </span>
+                                        
                                     </td>
                                     <td><?php echo htmlspecialchars($order['created_at']); ?></td>
                                     <td class="actions">
