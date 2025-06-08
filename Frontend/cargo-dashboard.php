@@ -462,7 +462,7 @@ $_SESSION['last_activity'] = time();
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Transport Type</label>
                                     <div class="btn-group w-100" role="group">
-                                        <input type="radio" name="transportType" id="roadTransport" value="Road" class="btn-check" autocomplete="off" checked>
+                                        <!-- <input type="radio" name="transportType" id="roadTransport" value="Road" class="btn-check" autocomplete="off" checked>
                                         <label for="roadTransport" class="btn btn-outline-success">
                                             <i class="fas fa-truck me-2"></i> Road
                                         </label>
@@ -478,7 +478,7 @@ $_SESSION['last_activity'] = time();
                                         </label>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             
                             <!-- <div class="d-flex justify-content-between mt-4">
                                 <button type="button" class="btn btn-outline-secondary prev-step" data-prev="step1">
