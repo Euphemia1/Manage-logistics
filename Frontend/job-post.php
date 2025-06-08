@@ -627,7 +627,7 @@
                 <div class="action-buttons">
                     ${job.cargo_owner_phone ? 
                         `<a href="tel:${job.cargo_owner_phone}" class="btn btn-secondary"><i class="fas fa-phone"></i> Call</a>` : 
-                        `<button class="btn btn-outline" disabled><i class="fas fa-phone"></i> No Phone</button>`
+                        // `<button class="btn btn-outline" disabled><i class="fas fa-phone"></i> No Phone</button>`
                     }
                     <button class="btn btn-primary" onclick="viewJobDetails(${job.id || 0})"><i class="fas fa-info-circle"></i> Details</button>
                 </div>
