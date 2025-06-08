@@ -352,7 +352,7 @@ $_SESSION['last_activity'] = time();
                     <!-- Alert Placeholder -->
                     <!-- <div id="formAlertPlaceholder" class="mb-3"></div>
                     <!-- Multi-step form -->
-                    <form id="postCargoForm">
+                    <!-- <form id="postCargoForm"> -->
                         <!-- Step 1: Basic Info -->
                         <!-- <div id="step1" class="form-step active">
                             <h5 class="mb-4"><i class="fas fa-box me-2 text-success"></i> What are you shipping?</h5>
