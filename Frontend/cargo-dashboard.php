@@ -491,8 +491,8 @@ $_SESSION['last_activity'] = time();
                         </div>
                         
                         <!-- Step 3: Contact & Final Details -->
-                        <div id="step3" class="form-step">
-                            <h5 class="mb-4"><i class="fas fa-user me-2 text-success"></i> Final Details</h5> -->
+                        <!-- <div id="step3" class="form-step">
+                            <h5 class="mb-4"><i class="fas fa-user me-2 text-success"></i> Final Details</h5>  -->
                             
                             <!-- <div class="row">
                                 <div class="col-md-6 mb-3">
