@@ -480,7 +480,7 @@ $_SESSION['last_activity'] = time();
                                 </div>
                             </div>
                             
-                            <div class="d-flex justify-content-between mt-4">
+                            <!-- <div class="d-flex justify-content-between mt-4">
                                 <button type="button" class="btn btn-outline-secondary prev-step" data-prev="step1">
                                     <i class="fas fa-arrow-left me-2"></i> Back
                                 </button>
@@ -492,7 +492,7 @@ $_SESSION['last_activity'] = time();
                         
                         <!-- Step 3: Contact & Final Details -->
                         <div id="step3" class="form-step">
-                            <h5 class="mb-4"><i class="fas fa-user me-2 text-success"></i> Final Details</h5>
+                            <h5 class="mb-4"><i class="fas fa-user me-2 text-success"></i> Final Details</h5> -->
                             
                             <!-- <div class="row">
                                 <div class="col-md-6 mb-3">
