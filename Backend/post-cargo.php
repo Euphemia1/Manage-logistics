@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':dropoff' => $destination,
             ':weight' => $weight,
             // ':dimensions' => $dimensions,
-            ':transport_type' => $transportType,
+            // ':transport_type' => $transportType,
             ':phone' => $phone,
             ':instructions' => $instructions,
             ':start_date' => $pickupDate
