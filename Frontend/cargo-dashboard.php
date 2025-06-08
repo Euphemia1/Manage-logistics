@@ -340,6 +340,65 @@ $_SESSION['last_activity'] = time();
             </div>
         </div>
 
+
+
+        <div id="postCargoSection" class="d-none">
+    <div class="card dashboard-card">
+        <div class="card-header bg-white">
+            <h3 class="mb-0">
+                <span class="text-success">Post New</span> Cargo
+            </h3>
+        </div>
+        <div class="card-body">
+            <!-- Alert Placeholder -->
+            <div id="formAlertPlaceholder" class="mb-3"></div>
+            <!-- Cargo Form -->
+            <form id="postCargoForm">
+                <div class="row mb-4">
+                    <div class="col-12 mb-3">
+                        <label class="form-label">Pickup Point</label>
+                        <input id="origin" name="origin" type="text" class="form-control" placeholder="Enter pickup point" required>
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <label class="form-label">Drop Off</label>
+                        <input id="destination" name="destination" type="text" class="form-control" placeholder="Enter drop off location" required>
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <label class="form-label">Cargo Type</label>
+                        <input id="cargoType" name="cargoType" type="text" class="form-control" placeholder="Enter cargo type" required>
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <label class="form-label">Weight</label>
+                        <input id="weight" name="weight" type="text" class="form-control" placeholder="Enter weight (e.g., 600 Tonnes)" required>
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <label class="form-label">Start Date</label>
+                        <input type="date" id="startDate" name="startDate" class="form-control" required>
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <label class="form-label">Status</label>
+                        <input id="status" name="status" type="text" class="form-control" placeholder="Enter status" required>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-paper-plane me-2"></i> Post Cargo
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
         <!-- Post Cargo Form Section -->
         <!-- <div id="postCargoSection" class="d-none">
             <div class="card dashboard-card">
