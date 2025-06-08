@@ -73,24 +73,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // Update the SQL to match your form fields
-        $stmt = $pdo->prepare("
-        INSERT INTO jobs (
-            item, pickup, dropoff, weight, phone, start_date, status, created_at
-        ) VALUES (
-            :item, :pickup, :dropoff, :weight, :phone, :start_date, :status, NOW()
-        )
-    ");
-    
-    $stmt->execute([
-        ':item' => $cargoType,
-        ':pickup' => $origin,
-        ':dropoff' => $destination,
-        ':weight' => $weight,
-        ':phone' => $phone,
-        ':start_date' => $pickupDate,  // you may want to rename this to $startDate to match form field
-        ':status' => $_POST['status'] ?? '',  // status from the form
-    ]);
-    
+   // Read form inputs
+$cargoType = trim($_POST['cargoType'] ?? '');
+$origin = trim($_POST['origin'] ?? '');
+$destination = trim($_POST['destination'] ?? '');
+$weight = trim($_POST['weight'] ?? '');
+$startDate = trim($_POST['startDate'] ?? '');
+$status = trim($_POST['status'] ?? '');
+$phone = trim($_POST['phone'] ?? '');
+
+// Prepare insert with these fields (add status)
+$stmt = $pdo->prepare("
+    INSERT INTO jobs (
+        item, pickup, dropoff, weight, phone, start_date, status, created_at
+    ) VALUES (
+        :item, :pickup, :dropoff, :weight, :phone, :start_date, :status, NOW()
+    )
+");
+
+$stmt->execute([
+    ':item' => $cargoType,
+    ':pickup' => $origin,
+    ':dropoff' => $destination,
+    ':weight' => $weight,
+    ':phone' => $phone,
+    ':start_date' => $startDate,
+    ':status' => $status
+]);
+
 
         echo json_encode([
             'success' => true, 
