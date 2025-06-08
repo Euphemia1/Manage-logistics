@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare("
             INSERT INTO jobs (
                 item, pickup, dropoff, weight, 
-                 phone, instructions, start_date, created_at
+                 phone,  start_date, created_at
             ) VALUES (
                 :item, :pickup, :dropoff, :weight, 
                 :transport_type, :phone, :instructions, :start_date, NOW()
