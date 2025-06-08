@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 item, pickup, dropoff, weight, dimensions, 
                 transport_type, phone, instructions, start_date, created_at
             ) VALUES (
-                :item, :pickup, :dropoff, :weight, :dimensions,
+                :item, :pickup, :dropoff, :weight, 
                 :transport_type, :phone, :instructions, :start_date, NOW()
             )
         ");
