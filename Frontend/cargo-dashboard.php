@@ -401,7 +401,7 @@ $_SESSION['last_activity'] = time();
                                     </select>
                                 </div>
                                 
-                                <div class="col-md-6 mb-3">
+                                <!-- <div class="col-md-6 mb-3">
                                     <label for="dimensions" class="form-label">Approximate Size</label>
                                     <select id="dimensions" name="dimensions" class="form-select">
                                         <option value="Small">Small (e.g., boxes)</option>
@@ -417,7 +417,7 @@ $_SESSION['last_activity'] = time();
                                     Next <i class="fas fa-arrow-right ms-2"></i>
                                 </button>
                             </div>
-                        </div>
+                        </div> -->
                         
                         <!-- Step 2: Location Info -->
                         <!-- <div id="step2" class="form-step">
