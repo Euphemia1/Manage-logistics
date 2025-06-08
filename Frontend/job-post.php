@@ -516,8 +516,9 @@
                             <th>Drop off</th>
                             <th>Weight</th>
                             <th>Status</th>
-                            <th>Phone number</th>
                             <th>Start Date</th>
+                            <th>Phone number</th>
+                           
                             <!-- <th>Cargo Owner</th>
                             <th>Actions</th> -->
                         </tr>
