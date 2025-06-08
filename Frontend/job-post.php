@@ -592,48 +592,48 @@
     }
 
     function showJobPost(job) {
-        const jobPostList = document.getElementById('jobPostList');
-        const row = document.createElement('tr');
-        
-        // Determine status class
-        let statusClass = 'available';
-        if (job.state && job.state.toLowerCase() === 'pending') {
-            statusClass = 'pending';
-        } else if (job.state && job.state.toLowerCase() === 'completed') {
-            statusClass = 'completed';
-        }
-        
-        row.innerHTML = `
-            <td>${job.item || 'N/A'}</td>
-            <td>
-                <div class="location-cell">
-                    <span class="location-label">Pick up</span>
-                    <span class="location-value">${job.pickup || 'N/A'}</span>
-                </div>
-            </td>
-            <td>
-                <div class="location-cell">
-                    <span class="location-label">Drop off</span>
-                    <span class="location-value">${job.dropoff || 'N/A'}</span>
-                </div>
-            </td>
-            <td>${job.weight ? job.weight + ' mt' : 'N/A'}</td>
-            <td>${job.cargo_owner_phone || 'N/A'}</td>   <!-- Phone Number -->
-            <td>${job.start_date || 'N/A'}</td>          <!-- Start Date -->
-            <td><span class="status-badge ${statusClass}">${job.state || 'Available'}</span></td>
-            <td>
-                <div class="action-buttons">
-                    ${job.cargo_owner_phone ? 
-                        `<a href="tel:${job.cargo_owner_phone}" class="btn btn-secondary"><i class="fas fa-phone"></i> Call</a>` : 
-                        `<button class="btn btn-outline" disabled><i class="fas fa-phone"></i> No Phone</button>`
-                    }
-                  
-                </div>
-            </td>
-        `;
-        
-        jobPostList.appendChild(row);
+    const jobPostList = document.getElementById('jobPostList');
+    const row = document.createElement('tr');
+
+    // Use correct field for status
+    let statusClass = 'available';
+    if (job.status && job.status.toLowerCase() === 'pending') {
+        statusClass = 'pending';
+    } else if (job.status && job.status.toLowerCase() === 'completed') {
+        statusClass = 'completed';
     }
+
+    row.innerHTML = `
+        <td>${job.item || 'N/A'}</td>
+        <td>
+            <div class="location-cell">
+                <span class="location-label">Pick up</span>
+                <span class="location-value">${job.pickup || 'N/A'}</span>
+            </div>
+        </td>
+        <td>
+            <div class="location-cell">
+                <span class="location-label">Drop off</span>
+                <span class="location-value">${job.dropoff || 'N/A'}</span>
+            </div>
+        </td>
+        <td>${job.weight ? job.weight + ' mt' : 'N/A'}</td>
+        <td>${job.phone || 'N/A'}</td>   <!-- ✅ Phone Number -->
+        <td>${job.start_date || 'N/A'}</td> <!-- ✅ Start Date -->
+        <td><span class="status-badge ${statusClass}">${job.status || 'Available'}</span></td> <!-- ✅ Status -->
+        <td>
+            <div class="action-buttons">
+                ${job.phone ? 
+                    `<a href="tel:${job.phone}" class="btn btn-secondary"><i class="fas fa-phone"></i> Call</a>` : 
+                    `<button class="btn btn-outline" disabled><i class="fas fa-phone"></i> No Phone</button>`
+                }
+            </div>
+        </td>
+    `;
+
+    jobPostList.appendChild(row);
+}
+
 
     function searchJobs() {
         const pickup = document.getElementById('pickup').value.toLowerCase();
