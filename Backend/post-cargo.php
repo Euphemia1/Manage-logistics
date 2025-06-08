@@ -102,6 +102,7 @@ $stmt->execute([
 ]);
 
 
+
         echo json_encode([
             'success' => true, 
             'message' => 'Cargo posted successfully!',
