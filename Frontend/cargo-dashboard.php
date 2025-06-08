@@ -515,7 +515,7 @@ $_SESSION['last_activity'] = time();
                                    <!-- Add these updates to your existing form -->
 
 <!-- Make sure the terms checkbox has a name attribute -->
-<div class="form-check mb-3">
+<!-- <div class="form-check mb-3">
     <input class="form-check-input" type="checkbox" id="termsCheck" name="termsCheck" required>
     <label class="form-check-label small" for="termsCheck">
         I agree to the terms and conditions of cargo transportation
@@ -523,7 +523,7 @@ $_SESSION['last_activity'] = time();
     <div class="invalid-feedback">
         You must agree to the terms and conditions
     </div>
-</div>
+</div> -->
 <!-- 
         <!-- Add name attribute to specific date input -->
         <!-- <input type="date" id="specificDate" name="specificDate" class="form-control mt-2 d-none">
