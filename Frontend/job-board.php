@@ -869,7 +869,7 @@ $result = mysqli_query($conn, $query);
                                 </div>
                             </td>
                             <td>  -->
-                                <div class="location-cell">
+                                <!-- <div class="location-cell">
                                     <span class="location-label">To</span>
                                     <span class="location-value"></span>
                                 </div>
@@ -887,7 +887,7 @@ $result = mysqli_query($conn, $query);
                                     </div>
                                 </div>
                             </td>
-                            <td>
+                            <td> -->
                                 <div class="action-buttons">
                                     <a href="#" class="btn btn-primary">View Details</a>
                                     <a href="#" class="btn btn-secondary">Contact</a>
