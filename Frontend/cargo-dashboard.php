@@ -494,7 +494,7 @@ $_SESSION['last_activity'] = time();
                         <div id="step3" class="form-step">
                             <h5 class="mb-4"><i class="fas fa-user me-2 text-success"></i> Final Details</h5>
                             
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="phone" class="form-label">Contact Number</label>
                                     <div class="input-group">
@@ -511,7 +511,7 @@ $_SESSION['last_activity'] = time();
                                               class="form-control" placeholder="Fragile items, special handling, etc."></textarea>
                                 </div>
                                 
-                                <div class="col-12">
+                                <div class="col-12"> -->
                                    <!-- Add these updates to your existing form -->
 
 <!-- Make sure the terms checkbox has a name attribute -->
