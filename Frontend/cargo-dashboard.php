@@ -386,10 +386,13 @@ $_SESSION['last_activity'] = time();
                     </div>
                 </div>
 
-                <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-success">
-                        <i class="fas fa-paper-plane me-2"></i> Post Cargo
-                    </button>
+                <div class="d-flex justify-content-between mt-4">
+                                <button type="button" class="btn btn-outline-secondary prev-step" data-prev="step2">
+                                    <i class="fas fa-arrow-left me-2"></i> Back
+                                </button>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-paper-plane me-2"></i> Post Cargo
+                                </button>
                 </div>
             </form>
         </div>
