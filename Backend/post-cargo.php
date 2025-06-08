@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get form data using the correct field names from your HTML form
     $cargoType = trim($_POST['cargoType'] ?? '');
     $weight = trim($_POST['weight'] ?? '');
-    $dimensions = trim($_POST['dimensions'] ?? '');
+    // $dimensions = trim($_POST['dimensions'] ?? '');
     $origin = trim($_POST['origin'] ?? '');           // This matches your HTML form
     $destination = trim($_POST['destination'] ?? ''); // This matches your HTML form
     $pickupDate = trim($_POST['pickupDate'] ?? '');
