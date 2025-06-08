@@ -358,7 +358,7 @@ $_SESSION['last_activity'] = time();
                             <h5 class="mb-4"><i class="fas fa-box me-2 text-success"></i> What are you shipping?</h5>
                             
                             <div class="row mb-4">
-                                <div class="col-12 mb-3">
+                                <!-- <div class="col-12 mb-3">
                                     <label class="form-label">Cargo Type</label>
                                     <div class="d-flex flex-wrap gap-2 cargo-type-selector">
                                         <input type="radio" name="cargoType" id="generalGoods" value="General Goods" class="d-none" checked>
@@ -371,7 +371,7 @@ $_SESSION['last_activity'] = time();
                                         <label for="furniture" class="cargo-type-option">
                                             <i class="fas fa-couch fa-2x mb-2"></i>
                                             <span>Furniture</span>
-                                        </label>
+                                        </label> -->
 <!--                                         
                                         <input type="radio" name="cargoType" id="electronics" value="Electronics" class="d-none">
                                         <label for="electronics" class="cargo-type-option">
