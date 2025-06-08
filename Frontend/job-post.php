@@ -509,20 +509,18 @@
                     <div class="loading-spinner"></div>
                 </div>
                 <table id="jobTable" style="display: none;">
-                    <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>Pick up</th>
-                            <th>Drop off</th>
-                            <th>Weight</th>
-                            <th>Status</th>
-                            <th>Start Date</th>
-                            <th>Phone number</th>
-                           
-                            <!-- <th>Cargo Owner</th>
-                            <th>Actions</th> -->
-                        </tr>
-                    </thead>
+                <thead>
+    <tr>
+        <th>Item</th>
+        <th>Pick up</th>
+        <th>Drop off</th>
+        <th>Weight</th>
+        <th>Phone number</th>
+        <th>Start Date</th>
+        <th>Status</th>
+    </tr>
+</thead>
+
                     <tbody id="jobPostList">
                         <!-- Job posts will be dynamically inserted here -->
                     </tbody>
@@ -627,7 +625,7 @@
                 <div class="action-buttons">
                     ${job.cargo_owner_phone ? 
                         `<a href="tel:${job.cargo_owner_phone}" class="btn btn-secondary"><i class="fas fa-phone"></i> Call</a>` : 
-                        // `<button class="btn btn-outline" disabled><i class="fas fa-phone"></i> No Phone</button>`
+                        `<button class="btn btn-outline" disabled><i class="fas fa-phone"></i> No Phone</button>`
                     }
                   
                 </div>
