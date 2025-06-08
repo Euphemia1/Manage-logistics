@@ -888,7 +888,7 @@ $result = mysqli_query($conn, $query);
                                 </div>
                             </td>
                             <td> -->
-                                <div class="action-buttons">
+                                <!-- <div class="action-buttons">
                                     <a href="#" class="btn btn-primary">View Details</a>
                                     <a href="#" class="btn btn-secondary">Contact</a>
                                 </div>
@@ -906,7 +906,7 @@ $result = mysqli_query($conn, $query);
             <button class="pagination-btn"><i class="fas fa-ellipsis-h"></i></button>
             <button class="pagination-btn">10</button>
         </div>
-    </div> 
+    </div>  -->
 
     <script>
         // Toggle job form visibility
