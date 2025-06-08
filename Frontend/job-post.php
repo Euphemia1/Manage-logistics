@@ -545,159 +545,147 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            loadJobs(); // Load jobs on page load
-            setInterval(loadJobs, 30000); // Reload jobs every 30 seconds
-        });
+    document.addEventListener('DOMContentLoaded', function () {
+        loadJobs(); // Load jobs on page load
+        setInterval(loadJobs, 30000); // Reload jobs every 30 seconds
+    });
 
-        function loadJobs() {
-            const loading = document.getElementById('loading');
-            const jobTable = document.getElementById('jobTable');
-            const emptyState = document.getElementById('emptyState');
-            
-            loading.style.display = 'flex';
-            jobTable.style.display = 'none';
-            emptyState.style.display = 'none';
-            
-            fetch('../Backend/get-jobs.php')
-                .then(response => response.json())
-                .then(jobs => {
-                    const jobPostList = document.getElementById('jobPostList');
-                    const jobCount = document.getElementById('jobCount');
-                    
-                    // Update job count
-                    jobCount.textContent = `${jobs.length} job${jobs.length !== 1 ? 's' : ''}`;
-                    
-                    // Clear existing jobs
-                    jobPostList.innerHTML = '';
-                    
-                    if (jobs.length === 0) {
-                        jobTable.style.display = 'none';
-                        emptyState.style.display = 'flex';
-                    } else {
-                        jobTable.style.display = 'table';
-                        emptyState.style.display = 'none';
-                        
-                        jobs.forEach(job => {
-                            showJobPost(job);
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching jobs:', error);
+    function loadJobs() {
+        const loading = document.getElementById('loading');
+        const jobTable = document.getElementById('jobTable');
+        const emptyState = document.getElementById('emptyState');
+        
+        loading.style.display = 'flex';
+        jobTable.style.display = 'none';
+        emptyState.style.display = 'none';
+        
+        fetch('../Backend/get-jobs.php')
+            .then(response => response.json())
+            .then(jobs => {
+                const jobPostList = document.getElementById('jobPostList');
+                const jobCount = document.getElementById('jobCount');
+                
+                // Update job count
+                jobCount.textContent = `${jobs.length} job${jobs.length !== 1 ? 's' : ''}`;
+                
+                // Clear existing jobs
+                jobPostList.innerHTML = '';
+                
+                if (jobs.length === 0) {
                     jobTable.style.display = 'none';
                     emptyState.style.display = 'flex';
-                })
-                .finally(() => {
-                    loading.style.display = 'none';
-                });
-        }
-
-        function showJobPost(job) {
-            const jobPostList = document.getElementById('jobPostList');
-            const row = document.createElement('tr');
-            
-            // Get owner initials for avatar
-            // let ownerInitials = 'CO';
-            // if (job.cargo_owner_name) {
-            //     const nameParts = job.cargo_owner_name.split(' ');
-            //     if (nameParts.length >= 2) {
-            //         ownerInitials = (nameParts[0][0] + nameParts[1][0]).toUpperCase();
-            //     } else if (nameParts.length === 1) {
-            //         ownerInitials = nameParts[0].substring(0, 2).toUpperCase();
-            //     }
-            // }
-            
-            // Determine status class
-            let statusClass = 'available';
-            if (job.state && job.state.toLowerCase() === 'pending') {
-                statusClass = 'pending';
-            } else if (job.state && job.state.toLowerCase() === 'completed') {
-                statusClass = 'completed';
-            }
-            
-            row.innerHTML = `
-                <td>${job.item || 'N/A'}</td>
-                <td>
-                    <div class="location-cell">
-                        <span class="location-label">Pick up</span>
-                        <span class="location-value">${job.pickup || 'N/A'}</span>
-                    </div>
-                </td>
-                <td>
-                    <div class="location-cell">
-                        <span class="location-label">Drop off</span>
-                        <span class="location-value">${job.dropoff || 'N/A'}</span>
-                    </div>
-                </td>
-                <td>${job.weight ? job.weight + ' mt' : 'N/A'}</td>
-                <td><span class="status-badge ${statusClass}">${job.state || 'Available'}</span></td>
-              
-                
-               
-                </td>
-                <td>
-                    <div class="action-buttons">
-                        ${job.cargo_owner_phone ? 
-                            `<a href="tel:${job.cargo_owner_phone}" class="btn btn-secondary"><i class="fas fa-phone"></i> Call</a>` : 
-                            `<button class="btn btn-outline" disabled><i class="fas fa-phone"></i> No Phone</button>`
-                        }
-                        <button class="btn btn-primary" onclick="viewJobDetails(${job.id || 0})"><i class="fas fa-info-circle"></i> Details</button>
-                    </div>
-                </td>
-            `;
-            
-            jobPostList.appendChild(row);
-        }
-
-        function searchJobs() {
-            const pickup = document.getElementById('pickup').value.toLowerCase();
-            const dropoff = document.getElementById('dropoff').value.toLowerCase();
-            const rows = document.querySelectorAll('#jobPostList tr');
-            let visibleCount = 0;
-            
-            rows.forEach(row => {
-                const pickupCell = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-                const dropoffCell = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
-                
-                const matchesPickup = pickup === '' || pickupCell.includes(pickup);
-                const matchesDropoff = dropoff === '' || dropoffCell.includes(dropoff);
-                
-                if (matchesPickup && matchesDropoff) {
-                    row.style.display = '';
-                    visibleCount++;
                 } else {
-                    row.style.display = 'none';
+                    jobTable.style.display = 'table';
+                    emptyState.style.display = 'none';
+                    
+                    jobs.forEach(job => {
+                        showJobPost(job);
+                    });
                 }
-            });
-            
-            // Update job count
-            document.getElementById('jobCount').textContent = `${visibleCount} job${visibleCount !== 1 ? 's' : ''}`;
-            
-            // Show empty state if no results
-            const jobTable = document.getElementById('jobTable');
-            const emptyState = document.getElementById('emptyState');
-            
-            if (visibleCount === 0) {
+            })
+            .catch(error => {
+                console.error('Error fetching jobs:', error);
                 jobTable.style.display = 'none';
                 emptyState.style.display = 'flex';
+            })
+            .finally(() => {
+                loading.style.display = 'none';
+            });
+    }
+
+    function showJobPost(job) {
+        const jobPostList = document.getElementById('jobPostList');
+        const row = document.createElement('tr');
+        
+        // Determine status class
+        let statusClass = 'available';
+        if (job.state && job.state.toLowerCase() === 'pending') {
+            statusClass = 'pending';
+        } else if (job.state && job.state.toLowerCase() === 'completed') {
+            statusClass = 'completed';
+        }
+        
+        row.innerHTML = `
+            <td>${job.item || 'N/A'}</td>
+            <td>
+                <div class="location-cell">
+                    <span class="location-label">Pick up</span>
+                    <span class="location-value">${job.pickup || 'N/A'}</span>
+                </div>
+            </td>
+            <td>
+                <div class="location-cell">
+                    <span class="location-label">Drop off</span>
+                    <span class="location-value">${job.dropoff || 'N/A'}</span>
+                </div>
+            </td>
+            <td>${job.weight ? job.weight + ' mt' : 'N/A'}</td>
+            <td>${job.cargo_owner_phone || 'N/A'}</td>   <!-- Phone Number -->
+            <td>${job.start_date || 'N/A'}</td>          <!-- Start Date -->
+            <td><span class="status-badge ${statusClass}">${job.state || 'Available'}</span></td>
+            <td>
+                <div class="action-buttons">
+                    ${job.cargo_owner_phone ? 
+                        `<a href="tel:${job.cargo_owner_phone}" class="btn btn-secondary"><i class="fas fa-phone"></i> Call</a>` : 
+                        `<button class="btn btn-outline" disabled><i class="fas fa-phone"></i> No Phone</button>`
+                    }
+                    <button class="btn btn-primary" onclick="viewJobDetails(${job.id || 0})"><i class="fas fa-info-circle"></i> Details</button>
+                </div>
+            </td>
+        `;
+        
+        jobPostList.appendChild(row);
+    }
+
+    function searchJobs() {
+        const pickup = document.getElementById('pickup').value.toLowerCase();
+        const dropoff = document.getElementById('dropoff').value.toLowerCase();
+        const rows = document.querySelectorAll('#jobPostList tr');
+        let visibleCount = 0;
+        
+        rows.forEach(row => {
+            const pickupCell = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+            const dropoffCell = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+            
+            const matchesPickup = pickup === '' || pickupCell.includes(pickup);
+            const matchesDropoff = dropoff === '' || dropoffCell.includes(dropoff);
+            
+            if (matchesPickup && matchesDropoff) {
+                row.style.display = '';
+                visibleCount++;
             } else {
-                jobTable.style.display = 'table';
-                emptyState.style.display = 'none';
+                row.style.display = 'none';
             }
+        });
+        
+        // Update job count
+        document.getElementById('jobCount').textContent = `${visibleCount} job${visibleCount !== 1 ? 's' : ''}`;
+        
+        // Show empty state if no results
+        const jobTable = document.getElementById('jobTable');
+        const emptyState = document.getElementById('emptyState');
+        
+        if (visibleCount === 0) {
+            jobTable.style.display = 'none';
+            emptyState.style.display = 'flex';
+        } else {
+            jobTable.style.display = 'table';
+            emptyState.style.display = 'none';
         }
+    }
 
-        function clearSearch() {
-            document.getElementById('pickup').value = '';
-            document.getElementById('dropoff').value = '';
-            loadJobs();
-        }
+    function clearSearch() {
+        document.getElementById('pickup').value = '';
+        document.getElementById('dropoff').value = '';
+        loadJobs();
+    }
 
-        function viewJobDetails(jobId) {
-            // Implement job details view
-            alert(`Viewing details for job ID: ${jobId}`);
-            // You could redirect to a details page or show a modal
-        }
-    </script>
+    function viewJobDetails(jobId) {
+        // Implement job details view
+        alert(`Viewing details for job ID: ${jobId}`);
+        // You could redirect to a details page or show a modal
+    }
+</script>
+
 </body>
 </html>
