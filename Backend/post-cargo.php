@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $origin = trim($_POST['origin'] ?? '');           // This matches your HTML form
     $destination = trim($_POST['destination'] ?? ''); // This matches your HTML form
     $pickupDate = trim($_POST['pickupDate'] ?? '');
-    $transportType = trim($_POST['transportType'] ?? '');
+    // $transportType = trim($_POST['transportType'] ?? '');
     $phone = trim($_POST['phone'] ?? '');
     $instructions = trim($_POST['instructions'] ?? '');
     
