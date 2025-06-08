@@ -518,8 +518,8 @@
                             <th>Status</th>
                             <th>Price</th>
                             <th>Start Date</th>
-                            <th>Cargo Owner</th>
-                            <th>Actions</th>
+                            <!-- <th>Cargo Owner</th>
+                            <th>Actions</th> -->
                         </tr>
                     </thead>
                     <tbody id="jobPostList">
