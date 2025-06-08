@@ -776,7 +776,7 @@ $result = mysqli_query($conn, $query);
                 </div>
                 
                 <!-- Added Cargo Owner Name and Phone fields -->
-                <div class="space-y-2">
+                <!-- <div class="space-y-2">
                     <label for="formOwnerName" class="block text-sm font-medium text-gray-700">Cargo Owner Name</label>
                     <input id="formOwnerName" name="ownerName" type="text" placeholder="Enter cargo owner name" required
                         class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
@@ -786,7 +786,7 @@ $result = mysqli_query($conn, $query);
                     <label for="formOwnerPhone" class="block text-sm font-medium text-gray-700">Cargo Owner Phone</label>
                     <input id="formOwnerPhone" name="ownerPhone" type="text" placeholder="Enter cargo owner phone" required
                         class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
-                </div>
+                </div> -->
                 
                 <div class="space-y-2 md:col-span-2 lg:col-span-4 flex justify-end">
                     <div class="flex space-x-2">
