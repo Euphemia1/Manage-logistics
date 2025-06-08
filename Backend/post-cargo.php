@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // ':dimensions' => $dimensions,
             // ':transport_type' => $transportType,
             ':phone' => $phone,
-            ':instructions' => $instructions,
+            // ':instructions' => $instructions,
             ':start_date' => $pickupDate
         ]);
 
