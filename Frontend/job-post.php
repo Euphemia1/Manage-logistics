@@ -597,15 +597,15 @@
             const row = document.createElement('tr');
             
             // Get owner initials for avatar
-            let ownerInitials = 'CO';
-            if (job.cargo_owner_name) {
-                const nameParts = job.cargo_owner_name.split(' ');
-                if (nameParts.length >= 2) {
-                    ownerInitials = (nameParts[0][0] + nameParts[1][0]).toUpperCase();
-                } else if (nameParts.length === 1) {
-                    ownerInitials = nameParts[0].substring(0, 2).toUpperCase();
-                }
-            }
+            // let ownerInitials = 'CO';
+            // if (job.cargo_owner_name) {
+            //     const nameParts = job.cargo_owner_name.split(' ');
+            //     if (nameParts.length >= 2) {
+            //         ownerInitials = (nameParts[0][0] + nameParts[1][0]).toUpperCase();
+            //     } else if (nameParts.length === 1) {
+            //         ownerInitials = nameParts[0].substring(0, 2).toUpperCase();
+            //     }
+            // }
             
             // Determine status class
             let statusClass = 'available';
