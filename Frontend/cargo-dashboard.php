@@ -391,7 +391,7 @@ $_SESSION['last_activity'] = time();
                                     </div>
                                 </div>
                                 
-                                <div class="col-md-6 mb-3">
+                                <!-- <div class="col-md-6 mb-3">
                                     <label for="weight" class="form-label">Approximate Weight (kg)</label>
                                     <select id="weight" name="weight" class="form-select">
                                         <option value="0-50">0-50 kg</option>
@@ -399,7 +399,7 @@ $_SESSION['last_activity'] = time();
                                         <option value="101-500">101-500 kg</option>
                                         <option value="500+">500+ kg</option>
                                     </select>
-                                </div>
+                                </div> -->
                                 
                                 <!-- <div class="col-md-6 mb-3">
                                     <label for="dimensions" class="form-label">Approximate Size</label>
