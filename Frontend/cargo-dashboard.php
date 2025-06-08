@@ -372,7 +372,7 @@ $_SESSION['last_activity'] = time();
                                             <i class="fas fa-couch fa-2x mb-2"></i>
                                             <span>Furniture</span>
                                         </label>
-                                        
+<!--                                         
                                         <input type="radio" name="cargoType" id="electronics" value="Electronics" class="d-none">
                                         <label for="electronics" class="cargo-type-option">
                                             <i class="fas fa-laptop fa-2x mb-2"></i>
@@ -389,7 +389,7 @@ $_SESSION['last_activity'] = time();
                                     <div id="customTypeContainer" class="mt-3 d-none">
                                         <input id="customCargoType" placeholder="Specify cargo type" type="text" class="form-control">
                                     </div>
-                                </div>
+                                </div> -->
                                 
                                 <!-- <div class="col-md-6 mb-3">
                                     <label for="weight" class="form-label">Approximate Weight (kg)</label>
