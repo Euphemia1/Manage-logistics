@@ -631,9 +631,7 @@
                 </td>
                 <td>${job.weight ? job.weight + ' mt' : 'N/A'}</td>
                 <td><span class="status-badge ${statusClass}">${job.state || 'Available'}</span></td>
-                <td class="price-cell">${job.price || 'N/A'}</td>
-                <td>${job.start_date || 'N/A'}</td>
-                <td>
+              
                     <div class="cargo-owner-cell">
                         <div class="owner-avatar">${ownerInitials}</div>
                         <div class="owner-info">
