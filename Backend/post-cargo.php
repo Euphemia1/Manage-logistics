@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Update the SQL to match your form fields
         $stmt = $pdo->prepare("
             INSERT INTO jobs (
-                item, pickup, dropoff, weight, dimensions, 
+                item, pickup, dropoff, weight, 
                 transport_type, phone, instructions, start_date, created_at
             ) VALUES (
                 :item, :pickup, :dropoff, :weight, 
