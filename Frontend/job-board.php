@@ -755,6 +755,7 @@ $result = mysqli_query($conn, $query);
                         <option value="Available">Available</option>
                         <option value="Pending">Pending</option>
                         <option value="Completed">Completed</option>
+                        <option value="Loading in Progress">Loading in Progress</option>
                     </select>
                 </div>
                 
