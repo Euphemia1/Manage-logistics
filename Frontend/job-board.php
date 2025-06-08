@@ -763,11 +763,11 @@ $result = mysqli_query($conn, $query);
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <span class="text-gray-500">$</span>
-                        </div> -->
+                        </div>
                         <input id="formPrice" name="price" type="number" min="0" step="0.01" placeholder="Enter price" required
                             class="pl-8 w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
                     </div>
-                </div>
+                </div> -->
                 
                 <div class="space-y-2">
                     <label for="formStartDate" class="block text-sm font-medium text-gray-700">Job start date</label>
