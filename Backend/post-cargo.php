@@ -27,7 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // $dimensions = trim($_POST['dimensions'] ?? '');
     $origin = trim($_POST['origin'] ?? '');           // This matches your HTML form
     $destination = trim($_POST['destination'] ?? ''); // This matches your HTML form
-    $pickupDate = trim($_POST['pickupDate'] ?? '');
+    $startDate = !empty($pickupDate) ? $pickupDate : date('Y-m-d');
+
     // $transportType = trim($_POST['transportType'] ?? '');
     $phone = trim($_POST['phone'] ?? '');
     // $instructions = trim($_POST['instructions'] ?? '');
