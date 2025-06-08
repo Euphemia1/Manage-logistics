@@ -385,7 +385,22 @@ $_SESSION['last_activity'] = time();
                         <input id="status" name="status" type="text" class="form-control" placeholder="Enter status" required>
                     </div>
                 </div>
-
+                
+                <div class="col-12 mb-3">
+    <label class="form-label">Phone</label>
+    <input id="phone" name="phone" type="tel" class="form-control" placeholder="Enter your phone number" required>
+</div>
+<div class="col-12 mb-3">
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="termsCheck" name="termsCheck" required>
+        <label class="form-check-label" for="termsCheck">
+            I agree to the terms and conditions of cargo transportation
+        </label>
+        <div class="invalid-feedback">
+            You must agree to the terms and conditions.
+        </div>
+    </div>
+</div>
                 <div class="d-flex justify-content-between mt-4">
                                 <button type="button" class="btn btn-outline-secondary prev-step" data-prev="step2">
                                     <i class="fas fa-arrow-left me-2"></i> Back
