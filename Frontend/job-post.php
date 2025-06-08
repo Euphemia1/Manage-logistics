@@ -618,7 +618,17 @@
                 </div>
             </td>
             <td>${job.weight ? job.weight + ' mt' : 'N/A'}</td>
-          
+            <td>${job.cargo_owner_phone || 'N/A'}</td>   <!-- Phone Number -->
+            <td>${job.start_date || 'N/A'}</td>          <!-- Start Date -->
+            <td><span class="status-badge ${statusClass}">${job.state || 'Available'}</span></td>
+            <td>
+                <div class="action-buttons">
+                    ${job.cargo_owner_phone ? 
+                        `<a href="tel:${job.cargo_owner_phone}" class="btn btn-secondary"><i class="fas fa-phone"></i> Call</a>` : 
+                        `<button class="btn btn-outline" disabled><i class="fas fa-phone"></i> No Phone</button>`
+                    }
+                  
+                </div>
             </td>
         `;
         

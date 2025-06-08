@@ -78,7 +78,8 @@ $cargoType = trim($_POST['cargoType'] ?? '');
 $origin = trim($_POST['origin'] ?? '');
 $destination = trim($_POST['destination'] ?? '');
 $weight = trim($_POST['weight'] ?? '');
-$startDate = trim($_POST['startDate'] ?? '');
+$startDate = $pickupDate;  // since pickupDate is already read and validated
+
 $status = trim($_POST['status'] ?? '');
 $phone = trim($_POST['phone'] ?? '');
 
