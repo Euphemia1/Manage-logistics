@@ -74,26 +74,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         // Update the SQL to match your form fields
         $stmt = $pdo->prepare("
-            INSERT INTO jobs (
-                item, pickup, dropoff, weight, 
-                 phone,  start_date, created_at
-            ) VALUES (
-                :item, :pickup, :dropoff, :weight, 
-                :transport_type, :phone, :instructions, :start_date, NOW()
-            )
-        ");
-
-        $stmt->execute([
-            ':item' => $cargoType,
-            ':pickup' => $origin,
-            ':dropoff' => $destination,
-            ':weight' => $weight,
-            // ':dimensions' => $dimensions,
-            // ':transport_type' => $transportType,
-            ':phone' => $phone,
-            // ':instructions' => $instructions,
-            ':start_date' => $pickupDate
-        ]);
+        INSERT INTO jobs (
+            item, pickup, dropoff, weight, phone, start_date, status, created_at
+        ) VALUES (
+            :item, :pickup, :dropoff, :weight, :phone, :start_date, :status, NOW()
+        )
+    ");
+    
+    $stmt->execute([
+        ':item' => $cargoType,
+        ':pickup' => $origin,
+        ':dropoff' => $destination,
+        ':weight' => $weight,
+        ':phone' => $phone,
+        ':start_date' => $pickupDate,  // you may want to rename this to $startDate to match form field
+        ':status' => $_POST['status'] ?? '',  // status from the form
+    ]);
+    
 
         echo json_encode([
             'success' => true, 
