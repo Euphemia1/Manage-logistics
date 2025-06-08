@@ -447,7 +447,7 @@ $_SESSION['last_activity'] = time();
                                 
                                 <div class="col-md-6 mb-3">
                                     <label for="pickupDate" class="form-label">When should it be picked up?</label>
-                                    <div class="input-group">
+                                    <!-- <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                                         <select id="pickupDate" name="pickupDate" class="form-select">
                                             <option value="ASAP">As soon as possible</option>
@@ -461,7 +461,7 @@ $_SESSION['last_activity'] = time();
                                 
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Transport Type</label>
-                                    <div class="btn-group w-100" role="group">
+                                    <div class="btn-group w-100" role="group"> -->
                                         <!-- <input type="radio" name="transportType" id="roadTransport" value="Road" class="btn-check" autocomplete="off" checked>
                                         <label for="roadTransport" class="btn btn-outline-success">
                                             <i class="fas fa-truck me-2"></i> Road
