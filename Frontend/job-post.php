@@ -632,13 +632,8 @@
                 <td>${job.weight ? job.weight + ' mt' : 'N/A'}</td>
                 <td><span class="status-badge ${statusClass}">${job.state || 'Available'}</span></td>
               
-                    <div class="cargo-owner-cell">
-                        <div class="owner-avatar">${ownerInitials}</div>
-                        <div class="owner-info">
-                            <span class="owner-name">${job.cargo_owner_name || 'Not specified'}</span>
-                            ${job.cargo_owner_phone ? `<span class="owner-phone">${job.cargo_owner_phone}</span>` : ''}
-                        </div>
-                    </div>
+                
+               
                 </td>
                 <td>
                     <div class="action-buttons">
