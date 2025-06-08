@@ -801,7 +801,7 @@ $result = mysqli_query($conn, $query);
             </form>
         </div>
 
-        <div class="table-container">
+        <!-- <div class="table-container">
             <div class="table-header">
                 <h3><i class="fas fa-list"></i> Job Listings</h3>
                 <div class="job-count"></div>
@@ -824,7 +824,7 @@ $result = mysqli_query($conn, $query);
                     </thead>
                     <tbody id="jobsTableBody">
                         <!-- Sample job 1 -->
-                        <tr>
+                        <!-- <tr>
                             <td></td>
                             <td>
                                 <div class="location-cell">
@@ -860,7 +860,7 @@ $result = mysqli_query($conn, $query);
                         </tr>
                         
                         <!-- Sample job 2 -->
-                        <tr>
+                        <!-- <tr>
                             <td></td>
                             <td>
                                 <div class="location-cell">
@@ -868,7 +868,7 @@ $result = mysqli_query($conn, $query);
                                     <span class="location-value"></span>
                                 </div>
                             </td>
-                            <td>
+                            <td>  -->
                                 <div class="location-cell">
                                     <span class="location-label">To</span>
                                     <span class="location-value"></span>
@@ -906,7 +906,7 @@ $result = mysqli_query($conn, $query);
             <button class="pagination-btn"><i class="fas fa-ellipsis-h"></i></button>
             <button class="pagination-btn">10</button>
         </div>
-    </div>
+    </div> 
 
     <script>
         // Toggle job form visibility
