@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pickupDate = trim($_POST['pickupDate'] ?? '');
     // $transportType = trim($_POST['transportType'] ?? '');
     $phone = trim($_POST['phone'] ?? '');
-    $instructions = trim($_POST['instructions'] ?? '');
+    // $instructions = trim($_POST['instructions'] ?? '');
     
     // Handle custom cargo type
     if ($cargoType === 'Other' && !empty($_POST['customCargoType'])) {
