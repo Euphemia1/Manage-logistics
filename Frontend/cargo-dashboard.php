@@ -420,7 +420,7 @@ $_SESSION['last_activity'] = time();
                         </div>
                         
                         <!-- Step 2: Location Info -->
-                        <div id="step2" class="form-step">
+                        <!-- <div id="step2" class="form-step">
                             <h5 class="mb-4"><i class="fas fa-map-marker-alt me-2 text-success"></i> Where is it going?</h5>
                             
                             <div class="row">
@@ -434,7 +434,7 @@ $_SESSION['last_activity'] = time();
                                             <i class="fas fa-location-arrow"></i>
                                         </button>
                                     </div>
-                                </div>
+                                </div> -->
 <!--                                 
                                 <div class="col-md-6 mb-3">
                                     <label for="destination" class="form-label">Delivery Location</label>
