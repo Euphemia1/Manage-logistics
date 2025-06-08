@@ -354,10 +354,10 @@ $_SESSION['last_activity'] = time();
                     <!-- Multi-step form -->
                     <form id="postCargoForm">
                         <!-- Step 1: Basic Info -->
-                        <div id="step1" class="form-step active">
+                        <!-- <div id="step1" class="form-step active">
                             <h5 class="mb-4"><i class="fas fa-box me-2 text-success"></i> What are you shipping?</h5>
                             
-                            <div class="row mb-4">  -->
+                            <div class="row mb-4">   -->
                                 <!-- <div class="col-12 mb-3">
                                     <label class="form-label">Cargo Type</label>
                                     <div class="d-flex flex-wrap gap-2 cargo-type-selector">
