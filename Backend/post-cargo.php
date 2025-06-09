@@ -61,7 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'origin' => $origin,
         'destination' => $destination,
         'pickupDate' => $pickupDate,
-        'phone' => $phone
+        'phone' => $phone,
+        'start_date' => $start_date
     ];
 
     $missingFields = [];
