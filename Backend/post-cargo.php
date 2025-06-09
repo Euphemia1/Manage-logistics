@@ -18,7 +18,7 @@ try {
     echo json_encode(['success' => false, 'message' => 'Database connection failed: ' . $e->getMessage()]);
     exit;
 }
-
+  
 // Only accept POST requests
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get form data using the correct field names from your HTML form
