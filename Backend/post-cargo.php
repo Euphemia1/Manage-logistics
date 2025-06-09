@@ -36,10 +36,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Determine pickup date
     $pickupDate = trim($_POST['pickupDate'] ?? '');
+
+    // Check if the user selected 'specific' and provided a specific date
     if ($pickupDate === 'specific' && !empty($_POST['specificDate'])) {
-        $pickupDate = trim($_POST['specificDate']);
+        $specificDate = trim($_POST['specificDate']);
+        
+        // Validate the specific date format (YYYY-MM-DD)
+        if (DateTime::createFromFormat('Y-m-d', $specificDate) !== false) {
+            $pickupDate = $specificDate;
+        } else {
+            // Handle invalid date format
+            // You can set an error message or take other actions
+            $pickupDate = ''; // Reset to empty or handle as needed
+        }
     }
+    
+    // Set startDate to pickupDate or current date if pickupDate is empty
     $startDate = !empty($pickupDate) ? $pickupDate : date('Y-m-d');
+    
 
     // Validation - check required fields
     $requiredFields = [
