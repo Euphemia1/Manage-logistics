@@ -377,7 +377,7 @@ $_SESSION['last_activity'] = time();
 
                     <div class="col-12 mb-3">
                         <label class="form-label">Start Date</label>
-                        <input type="date" id="startDate" name="startDate" class="form-control" required>
+                        <input type="date" id="start_date" name="startDate" class="form-control" required>
                     </div>
 
                     <div class="col-12 mb-3">
