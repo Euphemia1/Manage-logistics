@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Determine pickup date
-    $pickupDate = trim($_POST['pickupDate'] ?? '');
+    $pickupDate = trim($_POST['start_date'] ?? '');
 
     // Check if the user selected 'specific' and provided a specific date
     if ($pickupDate === 'specific' && !empty($_POST['specificDate'])) {
