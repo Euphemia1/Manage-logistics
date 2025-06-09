@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':dropoff' => $destination,
             ':weight' => $weight,
             ':phone' => $phone,
-            ':start_date' => $startDate,
+            ':start_date' => $start_date,
             ':status' => $status
         ]);
 
