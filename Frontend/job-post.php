@@ -595,6 +595,7 @@
 }
 
 
+
     function showJobPost(job) {
     const jobPostList = document.getElementById('jobPostList');
     const row = document.createElement('tr');
