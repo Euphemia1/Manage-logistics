@@ -18,7 +18,8 @@ if ($conn->connect_error) {
 }
 
 // Query
-$sql = "SELECT * FROM jobs";
+$result = $conn->query("SELECT * FROM jobs ORDER BY created_at DESC");
+
 $result = $conn->query($sql);
 
 if (!$result) {
