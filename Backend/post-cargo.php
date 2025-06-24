@@ -5,12 +5,6 @@ ini_set('display_errors', 1);
 header('Content-Type: application/json');
 session_start();
 
-// Optional: Check if user is logged in
-// if (!isset($_SESSION['user_id'])) {
-//     echo json_encode(['success' => false, 'message' => 'You must be logged in to post cargo.']);
-//     exit;
-// }
-
 // Database credentials
 $host = 'localhost';
 $dbname = 'logistics';
@@ -38,28 +32,26 @@ $origin      = trim($_POST['origin'] ?? '');
 $destination = trim($_POST['destination'] ?? '');
 $phone       = trim($_POST['phone'] ?? '');
 $status      = trim($_POST['status'] ?? '');
-$pickupDate  = trim($_POST['start_date'] ?? '');
+$startDate   = trim($_POST['start_date'] ?? '');
 
 // Handle custom cargo type
 if ($cargoType === 'Other' && !empty($_POST['customCargoType'])) {
     $cargoType = trim($_POST['customCargoType']);
 }
 
-// If pickup date is 'specific', validate specificDate
-if ($pickupDate === 'specific' && !empty($_POST['specificDate'])) {
-    $specificDate = trim($_POST['specificDate']);
-    if (DateTime::createFromFormat('Y-m-d', $specificDate) !== false) {
-        $pickupDate = $specificDate;
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Invalid date format for specific date.']);
+// Validate date format (expecting YYYY-MM-DD)
+if (!empty($startDate)) {
+    $dateObj = DateTime::createFromFormat('Y-m-d', $startDate);
+    if (!$dateObj || $dateObj->format('Y-m-d') !== $startDate) {
+        echo json_encode(['success' => false, 'message' => 'Invalid date format for pickup date.']);
         exit;
     }
+} else {
+    // If no date provided, default to today
+    $startDate = date('Y-m-d');
 }
 
-// Final fallback
-$startDate = !empty($pickupDate) ? $pickupDate : date('Y-m-d');
-
-// Validation
+// Validation of required fields
 $requiredFields = [
     'cargoType'   => $cargoType,
     'origin'      => $origin,
