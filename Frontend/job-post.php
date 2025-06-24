@@ -549,47 +549,51 @@
     });
 
     function loadJobs() {
-        const loading = document.getElementById('loading');
-        const jobTable = document.getElementById('jobTable');
-        const emptyState = document.getElementById('emptyState');
-        
-        loading.style.display = 'flex';
-        jobTable.style.display = 'none';
-        emptyState.style.display = 'none';
-        
-        fetch('../Backend/get-jobs.php')
-            .then(response => response.json())
-            .then(jobs => {
-                const jobPostList = document.getElementById('jobPostList');
-                const jobCount = document.getElementById('jobCount');
-                
-                // Update job count
-                jobCount.textContent = `${jobs.length} job${jobs.length !== 1 ? 's' : ''}`;
-                
-                // Clear existing jobs
-                jobPostList.innerHTML = '';
-                
-                if (jobs.length === 0) {
-                    jobTable.style.display = 'none';
-                    emptyState.style.display = 'flex';
-                } else {
-                    jobTable.style.display = 'table';
-                    emptyState.style.display = 'none';
-                    
-                    jobs.forEach(job => {
-                        showJobPost(job);
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching jobs:', error);
+    const loading = document.getElementById('loading');
+    const jobTable = document.getElementById('jobTable');
+    const emptyState = document.getElementById('emptyState');
+
+    loading.style.display = 'flex';
+    jobTable.style.display = 'none';
+    emptyState.style.display = 'none';
+
+    fetch('../Backend/get-jobs.php')
+        .then(response => response.json())
+        .then(jobs => {
+            const jobPostList = document.getElementById('jobPostList');
+            const jobCount = document.getElementById('jobCount');
+
+            // ✅ Sort jobs by start_date (newest first)
+            jobs.sort((a, b) => new Date(b.start_date) - new Date(a.start_date));
+
+            // Update job count
+            jobCount.textContent = `${jobs.length} job${jobs.length !== 1 ? 's' : ''}`;
+
+            // Clear existing jobs
+            jobPostList.innerHTML = '';
+
+            if (jobs.length === 0) {
                 jobTable.style.display = 'none';
                 emptyState.style.display = 'flex';
-            })
-            .finally(() => {
-                loading.style.display = 'none';
-            });
-    }
+            } else {
+                jobTable.style.display = 'table';
+                emptyState.style.display = 'none';
+
+                jobs.forEach(job => {
+                    showJobPost(job);
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching jobs:', error);
+            jobTable.style.display = 'none';
+            emptyState.style.display = 'flex';
+        })
+        .finally(() => {
+            loading.style.display = 'none';
+        });
+}
+
 
     function showJobPost(job) {
     const jobPostList = document.getElementById('jobPostList');
