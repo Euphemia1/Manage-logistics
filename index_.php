@@ -671,7 +671,7 @@
         <h2>Meet Our Team</h2>
         <div class="team-grid">
             <div class="team-member">
-                <img src="../images/Faith.jpg" alt="" class="team-member-image">
+                <img src="./images/Faith.jpg" alt="" class="team-member-image">
                 <div class="team-member-info">
                     <h3 class="team-member-name">Faith Mikumbiri</h3>
                     <p class="team-member-title">Chief Executive Officer</p>
