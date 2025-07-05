@@ -362,7 +362,7 @@ $conn->close();
         <h3>Transporters</h3>
         <div id="transporters-count" class="count"><?php echo $transportersCount; ?></div>
         <div class="last-updated">Total Registered</div>
-        <a href="../Backend/manage-transporters.php" class="btn-view">View All <i class="fas fa-arrow-right"></i></a>
+        <a href="manage-transporters.php" class="btn-view">View All <i class="fas fa-arrow-right"></i></a>
       </div>
 
       <div class="dashboard-card orders">
