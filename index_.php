@@ -699,7 +699,7 @@
                 </div>
             </div>
             <div class="team-member">
-                <img src="../images/Euphemia.jpg" alt="" class="team-member-image">
+                <img src="./images/Euphemia.jpg" alt="" class="team-member-image">
                 <div class="team-member-info">
                     <h3 class="team-member-name">Euphemia Chikungulu</h3>
                     <p class="team-member-title">Chief Technology Officer</p>
