@@ -1290,7 +1290,7 @@ $_SESSION['last_activity'] = time();
                     formData.set('pickupDate', pickupDateValue);
 
 
-                    fetch('../Backend/post-cargo.php', {
+                    fetch('post-cargo.php', {
                         method: 'POST',
                         body: formData
                     })
