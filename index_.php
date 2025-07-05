@@ -591,7 +591,7 @@
                     <button class="dropbtn">TRANSPORTER</button>
                     <div class="dropdown-content">
                         <a href="transporter_signup.php">REGISTER</a>
-                        <a href="transporter-login.php">LOGIN</a>
+                        <a href="transporter_login.php">LOGIN</a>
                     </div>
                     </div>
                 <a href="job-post.php" class="nav-link">AVAILABLE LOADS</a>
