@@ -71,7 +71,7 @@ HTML;
         <p class="text-gray-600">Create your account to get started</p>
       </div>
 
-      <form action="../Backend/cargo-owner-signup.php" method="POST" class="space-y-6">
+      <form action="./cargo-owner-signup.php" method="POST" class="space-y-6">
         <div class="space-y-4">
           <div>
             <label for="cargo_owner_name" class="block text-sm font-medium text-gray-700 mb-1">
