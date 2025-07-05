@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ];
 
             // Redirect to the login page after successful signup
-            header("Location: ../Frontend/transporter-login.php");
+            header("Location: transporter-login.php");
             exit();
         } else {
             echo "Error: " . $stmt->error;
