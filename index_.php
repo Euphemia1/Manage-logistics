@@ -729,7 +729,7 @@
             </div>
 
             <div class="team-member">
-                <img src="../images/beatrice.jpg" alt="" class="team-member-image">
+                <img src="./images/beatrice.jpg" alt="" class="team-member-image">
                 <div class="team-member-info">
                     <h3 class="team-member-name">Beatrice Phiri Ngoma</h3>
                     <p class="team-member-title">Logistics Officer</p>
