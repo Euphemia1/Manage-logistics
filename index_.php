@@ -714,7 +714,7 @@
             </div>
 
             <div class="team-member">
-                <img src="../images/Mtaja.jpg" alt="" class="team-member-image">
+                <img src="./images/Mtaja.jpg" alt="" class="team-member-image">
                 <div class="team-member-info">
                     <h3 class="team-member-name">Faith Mtaja</h3>
                     <p class="team-member-title">Startegic Assistant</p>
