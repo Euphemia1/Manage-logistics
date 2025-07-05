@@ -49,7 +49,7 @@ ini_set('display_errors', 1);
                 <?php unset($_SESSION['login_error']); ?>
             <?php endif; ?>
 
-            <form id="loginForm" action="../Backend/transporter-login.php" method="POST" class="space-y-5">
+            <form id="loginForm" action="transporter-login.php" method="POST" class="space-y-5">
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
                         <i data-lucide="mail" class="inline mr-2 w-4 h-4"></i>Email Address
