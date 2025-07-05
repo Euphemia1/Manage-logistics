@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (isset($error)) {
         $_SESSION['login_error'] = $error;
-        header("Location: ../Frontend/cargo-owner-login.php");
+        header("Location: ./nyamula-logistics/cargo-owner-login.php");
         exit();
     }
 
