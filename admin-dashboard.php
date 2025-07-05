@@ -352,7 +352,7 @@ $conn->close();
         <h3>Cargo Owners</h3>
         <div id="cargo-owners-count" class="count"><?php echo $cargoOwnersCount; ?></div>
         <div class="last-updated">Total Registered</div>
-        <a href="../Backend/manage-cargo-owners.php" class="btn-view">View All <i class="fas fa-arrow-right"></i></a>
+        <a href="manage-cargo-owners.php" class="btn-view">View All <i class="fas fa-arrow-right"></i></a>
       </div>
 
       <div class="dashboard-card transporters">
