@@ -372,7 +372,7 @@ $conn->close();
         <h3>Orders</h3>
         <div id="orders-count" class="count"><?php echo $ordersCount; ?></div>
         <div class="last-updated">Total Registered</div>
-        <a href="../Backend/manage-orders.php" class="btn-view">View All <i class="fas fa-arrow-right"></i></a>
+        <a href="manage-orders.php" class="btn-view">View All <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
 
