@@ -94,7 +94,7 @@
 <body>
     <div class="registration-container">
         <h2>Admin Registration</h2>
-        <form id="adminRegisterForm">
+     <form id="adminRegisterForm" action="add-admin.php" method="POST">
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
