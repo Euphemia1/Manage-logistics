@@ -2,7 +2,8 @@
 session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-session_start();
+// session_start();
+
 require 'db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
