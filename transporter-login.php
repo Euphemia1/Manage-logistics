@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (isset($error)) {
         $_SESSION['login_error'] = $error;
-        header("Location: transporter-login.php");
+        header("Location: transporter_login.php");
         exit();
     }
 }
