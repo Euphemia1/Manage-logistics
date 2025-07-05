@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_id'] = $user['cargo_owner_id'];
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_name'] = $user['cargo_owner_name'];
-            header("Location: ../Frontend/cargo-dashboard.php");
+            header("Location: .cargo-dashboard.php");
             exit();
         } else {
             $error = "Invalid email or password";
