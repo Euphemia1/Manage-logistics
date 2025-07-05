@@ -331,7 +331,7 @@ $conn->close();
     <a href="../Backend/manage-transporters.php"><i class="fas fa-truck"></i> <span>Manage Transporters</span></a>
     <a href="../Backend/manage-orders.php"><i class="fas fa-box"></i> <span>Manage Orders</span></a>
     <a href="#"><i class="fas fa-cogs"></i> <span>Settings</span></a>
-    <a href="../Backend/admin-logout.php"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+    <a href="admin-logout.php"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
   </div>
 
   <div class="main-content">
