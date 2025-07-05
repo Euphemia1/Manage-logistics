@@ -122,89 +122,46 @@
 
     <script>
         document.getElementById('adminRegisterForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const adminKey = document.getElementById('adminKey').value;
-            const messageEl = document.getElementById('message');
-            
-            // Clear previous messages
-            messageEl.textContent = '';
-            messageEl.className = 'message';
-            
-            // Validation
-            if (password !== confirmPassword) {
-                showMessage('Passwords do not match', 'error');
-                return;
-            }
-            
-            if (password.length < 8) {
-                showMessage('Password must be at least 8 characters', 'error');
-                return;
-            }
-            
-            // In a real app, you would validate the admin key against your backend
-            if (!adminKey) {
-                showMessage('Admin key is required', 'error');
-                return;
-            }
-            
-            try {
-                // Hash the password before sending (in a real app, you might do this on the backend)
-                // This is a simple example - use a proper hashing library in production
-                const hashedPassword = await hashPassword(password);
-                
-                const response = await fetch('/api/admin/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        username,
-                        email,
-                        password: hashedPassword,
-                        adminKey
-                    })
-                });
-                
-                const data = await response.json();
-                
-                if (response.ok) {
-                    showMessage('Admin registration successful!', 'success');
-                    // Redirect to admin dashboard after 2 seconds
-                    setTimeout(() => {
-                        window.location.href = 'admin-dashboard';
-                    }, 2000);
-                } else {
-                    showMessage(data.message || 'Registration failed', 'error');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                showMessage('An error occurred during registration', 'error');
-            }
+    e.preventDefault();
+    
+    // Get form data
+    const formData = new FormData(this);
+    const data = {
+        username: formData.get('username'),
+        email: formData.get('email'),
+        password: formData.get('password'),
+        adminKey: formData.get('adminKey')
+    };
+    
+    // Validation (same as before)
+    if (formData.get('password') !== formData.get('confirmPassword')) {
+        showMessage('Passwords do not match', 'error');
+        return;
+    }
+    
+    try {
+        const response = await fetch('add-admin.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
         });
-
-        // Simple password hashing function (use a proper library like bcrypt in production)
-        async function hashPassword(password) {
-            // In a real application, you would:
-            // 1. Use a proper hashing algorithm (like bcrypt)
-            // 2. Probably do this on the backend, not the frontend
-            const encoder = new TextEncoder();
-            const data = encoder.encode(password);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-            return hashHex;
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            showMessage(result.message, 'success');
+            setTimeout(() => {
+                window.location.href = 'admin-dashboard.php';
+            }, 2000);
+        } else {
+            showMessage(result.message, 'error');
         }
-
-        function showMessage(message, type) {
-            const messageEl = document.getElementById('message');
-            messageEl.textContent = message;
-            messageEl.classList.add(type);
-        }
+    } catch (error) {
+        showMessage('Network error: ' + error.message, 'error');
+    }
+});
     </script>
 </body>
 </html>
