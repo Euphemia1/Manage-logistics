@@ -1,6 +1,6 @@
 <?php
 // Include database connection
-require_once '../Backend/db.php';
+require_once 'db.php';
 
 // Function to get count from a table
 function getCount($conn, $table) {
