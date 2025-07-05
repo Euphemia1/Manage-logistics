@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Insert new admin
         $stmt = $pdo->prepare("
-            INSERT INTO admin (username, password, email) 
+            INSERT INTO admins (username, password, email) 
             VALUES (?, ?, ?)
         ");
         $stmt->execute([$data['username'], $hashedPassword, $data['email']]);
