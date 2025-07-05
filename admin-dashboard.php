@@ -427,7 +427,7 @@ $conn->close();
   <script>
     // Function to fetch updated counts from the server
     function fetchCounts() {
-      fetch('../Backend/get-dashboard-counts.php')
+      fetch('get-dashboard-counts.php')
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
