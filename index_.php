@@ -685,7 +685,7 @@
                 </div>
             </div>
             <div class="team-member">
-                <img src="../images/Muraga.jpg" alt="" class="team-member-image">
+                <img src="./images/Muraga.jpg" alt="" class="team-member-image">
                 <div class="team-member-info">
                     <h3 class="team-member-name">Stephen Muraga</h3>
                     <p class="team-member-title">Chief Business Development Officer</p>
