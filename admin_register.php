@@ -176,7 +176,7 @@
                     showMessage('Admin registration successful!', 'success');
                     // Redirect to admin dashboard after 2 seconds
                     setTimeout(() => {
-                        window.location.href = '/admin/dashboard';
+                        window.location.href = 'admin-dashboard';
                     }, 2000);
                 } else {
                     showMessage(data.message || 'Registration failed', 'error');
