@@ -568,7 +568,7 @@
         <div class="container">
             <a href="/" class="logo">
                 <div style="display: flex; align-items: center; gap: 1rem;">
-                    <img src="../images/logo.png" alt="Nyamula Logistics" class="logo-image">
+                    <img src="./images/logo.png" alt="Nyamula Logistics" class="logo-image">
               
                 </div>
             </a>
