@@ -327,7 +327,7 @@ $conn->close();
     <h2>Admin Dashboard</h2>
     <a href="#"><i class="fas fa-home"></i> <span>Home</span></a>
     <a href="job-board.php"><i class="fas fa-briefcase"></i> <span>Job Post</span></a>
-    <a href="../Backend/manage-cargo-owners.php"><i class="fas fa-users"></i> <span>Manage Cargo Owners</span></a>
+    <a href="manage-cargo-owners.php"><i class="fas fa-users"></i> <span>Manage Cargo Owners</span></a>
     <a href="manage-transporters.php"><i class="fas fa-truck"></i> <span>Manage Transporters</span></a>
     <a href="manage-orders.php"><i class="fas fa-box"></i> <span>Manage Orders</span></a>
     <a href="#"><i class="fas fa-cogs"></i> <span>Settings</span></a>
