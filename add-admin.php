@@ -1,15 +1,13 @@
 <?php
-// admin_register.php
 header('Content-Type: application/json');
 
 // Database configuration
 define('DB_HOST', 'localhost');
-define('DB_USER', 'roots');
+define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_NAME', 'logistics');
-define('ADMIN_SECRET_KEY', 'your-secret-key-here'); // Change this to a strong secret key
+define('ADMIN_SECRET_KEY', 'your-secret-key-here');
 
-// Handle POST request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $data = json_decode(file_get_contents('php://input'), true);
@@ -29,28 +27,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Connect to database
         $pdo = new PDO(
-            "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4",
+            "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME,
             DB_USER,
             DB_PASS,
             [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES => false,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
             ]
         );
         
-        // Check if admin table exists, create if not
-        // $pdo->exec("
-        //     CREATE TABLE IF NOT EXISTS admin (git
-        //         id INT AUTO_INCREMENT PRIMARY KEY,
-        //         username VARCHAR(50) NOT NULL UNIQUE,
-        //         password VARCHAR(255) NOT NULL,
-        //         email VARCHAR(100) NOT NULL UNIQUE,
-        //         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        //     )
-        // ");
-        
-        // Check if username or email already exists
+        // Check if username/email exists
         $stmt = $pdo->prepare("SELECT id FROM admins WHERE username = ? OR email = ?");
         $stmt->execute([$data['username'], $data['email']]);
         
@@ -59,20 +45,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         
         // Hash password
-        $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT, ['cost' => 12]);
+        $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
         
         // Insert new admin
-        $stmt = $pdo->prepare("
-            INSERT INTO admins (username, password, email) 
-            VALUES (?, ?, ?)
-        ");
+        $stmt = $pdo->prepare("INSERT INTO admins (username, password, email) VALUES (?, ?, ?)");
         $stmt->execute([$data['username'], $hashedPassword, $data['email']]);
         
-        // Success response
+        // Return success with redirect to login
         echo json_encode([
             'success' => true,
-            'message' => 'Admin registered successfully',
-            'adminId' => $pdo->lastInsertId()
+            'message' => 'Registration successful! Redirecting to login...',
+            'redirect' => 'admin-login.php'  // Redirect to login page
         ]);
         
     } catch (PDOException $e) {
