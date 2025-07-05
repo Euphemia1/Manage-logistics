@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_id'] = $user['transporter_id'];
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['user_name'] = $user['transporter_name'];
-            header("Location: ../Frontend/transporter-dashboard.php");
+            header("Location: transporter-dashboard.php");
             exit();
         } else {
             $error = "Invalid email or password";
