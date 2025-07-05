@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($admin && password_verify($password, $admin['password'])) {
         $_SESSION['admin_id'] = $admin['id'];
-        header('Location: ../Frontend/admin-dashboard.php'); // Redirect to admin dashboard
+        header('Location: admin-dashboard.php'); // Redirect to admin dashboard
         exit();
     } else {
         echo "Invalid credentials!";
