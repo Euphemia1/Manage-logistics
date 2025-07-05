@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ");
         
         // Check if username or email already exists
-        $stmt = $pdo->prepare("SELECT id FROM admin WHERE username = ? OR email = ?");
+        $stmt = $pdo->prepare("SELECT id FROM admins WHERE username = ? OR email = ?");
         $stmt->execute([$data['username'], $data['email']]);
         
         if ($stmt->rowCount() > 0) {
