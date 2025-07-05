@@ -536,49 +536,7 @@ $_SESSION['last_activity'] = time();
                                         </select>
                                     </div>
                                     <input type="date" id="specificDate" class="form-control mt-2 d-none">
-                                </div>
-                                
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Transport Type</label>
-                                    <div class="btn-group w-100" role="group"> -->
-                                        <!-- <input type="radio" name="transportType" id="roadTransport" value="Road" class="btn-check" autocomplete="off" checked>
-                                        <label for="roadTransport" class="btn btn-outline-success">
-                                            <i class="fas fa-truck me-2"></i> Road
-                                        </label>
-                                        
-                                        <input type="radio" name="transportType" id="airTransport" value="Air" class="btn-check" autocomplete="off">
-                                        <label for="airTransport" class="btn btn-outline-success">
-                                            <i class="fas fa-plane me-2"></i> Air
-                                        </label>
-                                        
-                                        <input type="radio" name="transportType" id="seaTransport" value="Sea" class="btn-check" autocomplete="off">
-                                        <label for="seaTransport" class="btn btn-outline-success">
-                                            <i class="fas fa-ship me-2"></i> Sea
-                                        </label>
-                                    </div>
-                                </div>
-                            </div> -->
-                            
-                            <!-- <div class="d-flex justify-content-between mt-4">
-                                <button type="button" class="btn btn-outline-secondary prev-step" data-prev="step1">
-                                    <i class="fas fa-arrow-left me-2"></i> Back
-                                </button>
-                                <button type="button" class="btn btn-success next-step" data-next="step3">
-                                    Next <i class="fas fa-arrow-right ms-2"></i>
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <!-- Step 3: Contact & Final Details -->
-                        <!-- <div id="step3" class="form-step">
-                            <h5 class="mb-4"><i class="fas fa-user me-2 text-success"></i> Final Details</h5>  -->
-                            
-                            <!-- <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="phone" class="form-label">Contact Number</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                                        <input id="phone" name="phone" type="tel" class="form-control" 
+                                <
                                                value="<?php echo isset($_SESSION['user_phone']) ? htmlspecialchars($_SESSION['user_phone']) : ''; ?>"
                                                required>
                                     </div>
