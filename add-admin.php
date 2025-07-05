@@ -4,9 +4,9 @@ header('Content-Type: application/json');
 
 // Database configuration
 define('DB_HOST', 'localhost');
-define('DB_USER', 'logistics');
+define('DB_USER', 'roots');
 define('DB_PASS', '');
-define('DB_NAME', 'your_db_name');
+define('DB_NAME', 'logistics');
 define('ADMIN_SECRET_KEY', 'your-secret-key-here'); // Change this to a strong secret key
 
 // Handle POST request
