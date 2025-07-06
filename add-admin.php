@@ -1,5 +1,4 @@
 <?php
-header('Content-Type: application/json');
 
 // Database configuration
 define('DB_HOST', 'localhost');
@@ -23,6 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             throw new Exception('Invalid email format');
+        }
+        
+        if (strlen($data['password']) < 8) {
+            throw new Exception('Password must be at least 8 characters long');
         }
         
         // Connect to database
@@ -54,8 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Return success with redirect to login
         echo json_encode([
             'success' => true,
-            'message' => 'Registration successful! Redirecting to login...',
-            'redirect' => 'admin-login.php'  // Redirect to login page
+            'message' => 'Registration successful! Redirecting to dashboard...',
+            'redirect' => 'admin-dashboard.php'
         ]);
         
     } catch (PDOException $e) {
@@ -69,4 +72,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     http_response_code(405);
     echo json_encode(['success' => false, 'message' => 'Method not allowed']);
 }
-?>
