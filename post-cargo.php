@@ -49,23 +49,25 @@ try {
     $stmt = $pdo->prepare("
         INSERT INTO jobs (
             item, pickup, dropoff, weight, phone, start_date, status, 
-            created_at, cargo_owner_id
+            created_at, cargo_owner_id, cargo_owner
         ) VALUES (
             :item, :pickup, :dropoff, :weight, :phone, :start_date, 
-            :status, NOW(), :cargo_owner_id
+            :status, NOW(), :cargo_owner_id, :cargo_owner
         )
     ");
 
     $stmt->execute([
-        ':item'           => $cargoType,
-        ':pickup'         => $origin,
-        ':dropoff'        => $destination,
-        ':weight'        => $weight,
-        ':phone'         => $phone,
-        ':start_date'    => $startDate,
-        ':status'        => $status,
-        ':cargo_owner_id' => $cargo_owner_id
+        ':item'            => $cargoType,
+        ':pickup'          => $origin,
+        ':dropoff'         => $destination,
+        ':weight'          => $weight,
+        ':phone'           => $phone,
+        ':start_date'      => $startDate,
+        ':status'          => $status,
+        ':cargo_owner_id'  => $_SESSION['user_id'],
+        ':cargo_owner'     => $_SESSION['user_name'] // <-- This is new
     ]);
+
 
     echo json_encode([
         'success' => true,
