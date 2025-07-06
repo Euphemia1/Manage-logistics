@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode([
             'success' => true,
             'message' => 'Registration successful! Redirecting to dashboard...',
-            'redirect' => 'admin-dashboard.php'
+            'redirect' => 'admin-login.php'
         ]);
         
     } catch (PDOException $e) {
