@@ -111,10 +111,10 @@
                 <label for="confirmPassword">Confirm Password:</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" required minlength="8">
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="adminKey">Admin Secret Key:</label>
                 <input type="password" id="adminKey" name="adminKey" required>
-            </div>
+            </div> -->
             <button type="submit" class="register-btn">Register Admin</button>
         </form>
         <div id="message" class="message"></div>
