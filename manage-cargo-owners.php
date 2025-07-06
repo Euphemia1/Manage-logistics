@@ -296,7 +296,7 @@ $conn->close();
     <div class="container">
         <div class="header">
             <h1><i class="fas fa-users"></i> Cargo Owners Management</h1>
-            <a href="../Frontend/admin-dashboard.php" class="btn btn-secondary">
+            <a href="admin-dashboard.php" class="btn btn-secondary">
                 <i class="fas fa-arrow-left"></i> Back to Dashboard
             </a>
         </div>
