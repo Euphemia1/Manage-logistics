@@ -2,20 +2,36 @@
 require_once 'db.php'; // Include your database connection
 
 // Fetch orders with cargo owner details from the database
+// Fetch orders with cargo owner details from the database
+
+require_once 'db.php'; // Include your database connection
+
+// Fetch orders with cargo owner details from the database
 $result = $conn->query("
-    SELECT j.*, co.cargo_owner_name, co.company, co.email, co.phone_number 
+    SELECT 
+        j.id,
+        j.pickup,
+        j.dropoff,
+        j.item as cargo_type,
+        j.status,
+        j.created_at,
+        j.cargo_owner_id,
+        co.cargo_owner_name, 
+        co.company,
+        co.phone_number
     FROM jobs j
     LEFT JOIN cargo_owners co ON j.cargo_owner_id = co.cargo_owner_id
     ORDER BY j.created_at DESC
 ");
 
-if ($result) {
-    $orders = $result->fetch_all(MYSQLI_ASSOC);
-} else {
-    $orders = [];
-    echo "Error fetching orders: " . $conn->error;
+$orders = [];
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $orders[] = $row;
+    }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
