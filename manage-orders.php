@@ -1,14 +1,19 @@
 <?php
 require_once 'db.php'; // Include your database connection
 
-// Fetch orders from the database
-$result = $conn->query("SELECT * FROM jobs");
+// Fetch orders with cargo owner details from the database
+$result = $conn->query("
+    SELECT j.*, co.cargo_owner_name, co.company, co.email, co.phone_number 
+    FROM jobs j
+    LEFT JOIN cargo_owners co ON j.cargo_owner_id = co.cargo_owner_id
+    ORDER BY j.created_at DESC
+");
 
 if ($result) {
-    $orders = $result->fetch_all(MYSQLI_ASSOC); // Fetch all orders as an associative array
+    $orders = $result->fetch_all(MYSQLI_ASSOC);
 } else {
-    $orders = []; // Initialize as an empty array if the query fails
-    echo "Error fetching orders: " . $conn->error; // Optional: Display error message
+    $orders = [];
+    echo "Error fetching orders: " . $conn->error;
 }
 ?>
 
@@ -382,8 +387,13 @@ if ($result) {
             justify-content: flex-end;
             gap: 10px;
         }
+        
+        .owner-details {
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: var(--text-light);
+        }
     </style>
-
 </head>
 <body>
     <div class="container">
@@ -420,14 +430,12 @@ if ($result) {
                             <th>Cargo Owner</th>
                             <th>Cargo Type</th>
                             <th>Origin</th>
-                            <th>Dropoff</th>
+                            <th>Destination</th>
                             <th>Status</th>
                             <th>Created At</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
-
-
                     <tbody>
                         <?php if (!empty($orders)): ?>
                             <?php foreach ($orders as $order): ?>
@@ -437,14 +445,26 @@ if ($result) {
                                 ?>
                                 <tr data-status="<?php echo $statusClass; ?>">
                                     <td><?php echo htmlspecialchars($order['id']); ?></td>
-                                    <td><?php echo htmlspecialchars($order['cargo_owner_name']); ?></td>
+                                    <td>
+                                        <strong><?php echo htmlspecialchars($order['cargo_owner_name'] ?? 'Unknown'); ?></strong>
+                                        <?php if (!empty($order['company'])): ?>
+                                            <div class="owner-details">
+                                                <?php echo htmlspecialchars($order['company']); ?>
+                                            </div>
+                                        <?php endif; ?>
+                                        <?php if (!empty($order['phone_number'])): ?>
+                                            <div class="owner-details">
+                                                <i class="fas fa-phone"></i> <?php echo htmlspecialchars($order['phone_number']); ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?php echo htmlspecialchars($order['cargo_type'] ?? 'N/A'); ?></td>
                                     <td><?php echo htmlspecialchars($order['pickup']); ?></td>
                                     <td><?php echo htmlspecialchars($order['dropoff']); ?></td>
                                     <td>
                                         <span class="status <?php echo $statusClass; ?>">
                                             <?php echo htmlspecialchars($order['status']); ?>
                                         </span>
-
                                     </td>
                                     <td><?php echo htmlspecialchars($order['created_at']); ?></td>
                                     <td class="actions">
@@ -470,8 +490,6 @@ if ($result) {
             </div>
         </div>
         
-
-
         <div class="footer">
             <div>
                 <button class="btn" onclick="addOrder()">
