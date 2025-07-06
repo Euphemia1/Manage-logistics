@@ -1,7 +1,3 @@
-<?php
-// admin_register.php
-// You can add PHP code here for server-side processing if needed
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,6 +74,7 @@
             padding: 0.75rem;
             border-radius: 4px;
             text-align: center;
+            display: none;
         }
 
         .success {
@@ -94,7 +91,7 @@
 <body>
     <div class="registration-container">
         <h2>Admin Registration</h2>
-     <form id="adminRegisterForm" action="add-admin.php" method="POST">
+        <form id="adminRegisterForm" action="add-admin.php" method="POST">
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
@@ -111,10 +108,6 @@
                 <label for="confirmPassword">Confirm Password:</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" required minlength="8">
             </div>
-            <!-- <div class="form-group">
-                <label for="adminKey">Admin Secret Key:</label>
-                <input type="password" id="adminKey" name="adminKey" required>
-            </div> -->
             <button type="submit" class="register-btn">Register Admin</button>
         </form>
         <div id="message" class="message"></div>
@@ -122,57 +115,47 @@
 
     <script>
         document.getElementById('adminRegisterForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    // Client-side validation
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
-    
-    if (password !== confirmPassword) {
-        showMessage('Passwords do not match', 'error');
-        return;
-    }
-    
-    // Get form data
-    const formData = {
-        username: document.getElementById('username').value,
-        email: document.getElementById('email').value,
-        password: password,
-        adminKey: document.getElementById('adminKey').value
-    };
-    
-    try {
-        const response = await fetch('add-admin.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData)
+            e.preventDefault();
+            
+            // Client-side validation
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                showMessage('Passwords do not match', 'error');
+                return;
+            }
+            
+            // Submit the form
+            const formData = new FormData(this);
+            
+            try {
+                const response = await fetch('add-admin.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage(result.message, 'success');
+                    setTimeout(() => {
+                        window.location.href = result.redirect || 'admin-dashboard.php';
+                    }, 2000);
+                } else {
+                    showMessage(result.message, 'error');
+                }
+            } catch (error) {
+                showMessage('Network error: ' + error.message, 'error');
+            }
         });
-        
-        const result = await response.json();
-        
-        if (result.success) {
-            showMessage(result.message, 'success');
-            setTimeout(() => {
-                window.location.href = result.redirect || 'admin-dashboard.php';
-            }, 2000);
-        } else {
-            showMessage(result.message, 'error');
+
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = message;
+            messageDiv.className = 'message ' + type;
+            messageDiv.style.display = 'block';
         }
-    } catch (error) {
-        showMessage('Network error: ' + error.message, 'error');
-    }
-});
-
-function showMessage(message, type) {
-    const messageDiv = document.getElementById('message');
-    messageDiv.textContent = message;
-    messageDiv.className = 'message ' + type;
-    messageDiv.style.display = 'block';
-}
-
     </script>
 </body>
 </html>
-
