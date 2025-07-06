@@ -20,7 +20,7 @@ function getCount($conn, $table) {
 // Get counts from database
 $cargoOwnersCount = getCount($conn, 'cargo_owners');
 $transportersCount = getCount($conn, 'transporters');
-$ordersCount = getCount($conn, 'orders');
+$ordersCount = getCount($conn, 'jobs');
 
 // Close connection
 $conn->close();
