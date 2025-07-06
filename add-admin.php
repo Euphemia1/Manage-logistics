@@ -1,31 +1,35 @@
 <?php
+header('Content-Type: application/json');
 
 // Database configuration
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_NAME', 'logistics');
-define('ADMIN_SECRET_KEY', 'your-secret-key-here');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        $data = json_decode(file_get_contents('php://input'), true);
+        // Get form data
+        $username = $_POST['username'] ?? '';
+        $email = $_POST['email'] ?? '';
+        $password = $_POST['password'] ?? '';
+        $confirmPassword = $_POST['confirmPassword'] ?? '';
         
         // Validate input
-        if (empty($data['username']) || empty($data['email']) || empty($data['password']) || empty($data['adminKey'])) {
+        if (empty($username) || empty($email) || empty($password) || empty($confirmPassword)) {
             throw new Exception('All fields are required');
         }
         
-        if ($data['adminKey'] !== ADMIN_SECRET_KEY) {
-            throw new Exception('Invalid admin key');
-        }
-        
-        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new Exception('Invalid email format');
         }
         
-        if (strlen($data['password']) < 8) {
+        if (strlen($password) < 8) {
             throw new Exception('Password must be at least 8 characters long');
+        }
+        
+        if ($password !== $confirmPassword) {
+            throw new Exception('Passwords do not match');
         }
         
         // Connect to database
@@ -41,20 +45,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Check if username/email exists
         $stmt = $pdo->prepare("SELECT id FROM admins WHERE username = ? OR email = ?");
-        $stmt->execute([$data['username'], $data['email']]);
+        $stmt->execute([$username, $email]);
         
         if ($stmt->rowCount() > 0) {
             throw new Exception('Username or email already exists');
         }
         
         // Hash password
-        $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         
         // Insert new admin
         $stmt = $pdo->prepare("INSERT INTO admins (username, password, email) VALUES (?, ?, ?)");
-        $stmt->execute([$data['username'], $hashedPassword, $data['email']]);
+        $stmt->execute([$username, $hashedPassword, $email]);
         
-        // Return success with redirect to login
+        // Return success with redirect to dashboard
         echo json_encode([
             'success' => true,
             'message' => 'Registration successful! Redirecting to dashboard...',
