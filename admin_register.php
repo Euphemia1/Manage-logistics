@@ -124,20 +124,22 @@
         document.getElementById('adminRegisterForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     
-    // Get form data
-    const formData = new FormData(this);
-    const data = {
-        username: formData.get('username'),
-        email: formData.get('email'),
-        password: formData.get('password'),
-        adminKey: formData.get('adminKey')
-    };
+    // Client-side validation
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
     
-    // Validation (same as before)
-    if (formData.get('password') !== formData.get('confirmPassword')) {
+    if (password !== confirmPassword) {
         showMessage('Passwords do not match', 'error');
         return;
     }
+    
+    // Get form data
+    const formData = {
+        username: document.getElementById('username').value,
+        email: document.getElementById('email').value,
+        password: password,
+        adminKey: document.getElementById('adminKey').value
+    };
     
     try {
         const response = await fetch('add-admin.php', {
@@ -145,7 +147,7 @@
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(formData)
         });
         
         const result = await response.json();
@@ -153,7 +155,7 @@
         if (result.success) {
             showMessage(result.message, 'success');
             setTimeout(() => {
-                window.location.href = 'admin-dashboard.php';
+                window.location.href = result.redirect || 'admin-dashboard.php';
             }, 2000);
         } else {
             showMessage(result.message, 'error');
@@ -162,6 +164,14 @@
         showMessage('Network error: ' + error.message, 'error');
     }
 });
+
+function showMessage(message, type) {
+    const messageDiv = document.getElementById('message');
+    messageDiv.textContent = message;
+    messageDiv.className = 'message ' + type;
+    messageDiv.style.display = 'block';
+}
+
     </script>
 </body>
 </html>
