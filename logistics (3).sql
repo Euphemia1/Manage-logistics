@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2025 at 12:08 PM
+-- Generation Time: Jul 07, 2025 at 01:02 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -35,6 +35,14 @@ CREATE TABLE `admins` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`id`, `username`, `password`, `email`, `created_at`) VALUES
+(2, 'Stephen Muraga', '$2y$10$b7A41NGE2JWh7huOxekapO9mgqpgdla5gaZAT.rGxdafddsPcfsYy', 'admin@nymaula.com', '2025-07-06 13:23:50'),
+(3, 'Faith Mikumbiri', '$2y$10$DEt5/Q1flQMRsF6h2QKES.5Amlx2r1ik6wo9yp6oulIALXWT3oSEa', 'admin@nyamula.com', '2025-07-06 13:25:37');
+
 -- --------------------------------------------------------
 
 --
@@ -55,7 +63,8 @@ CREATE TABLE `cargo_owners` (
 --
 
 INSERT INTO `cargo_owners` (`cargo_owner_id`, `cargo_owner_name`, `email`, `phone_number`, `password`, `company`) VALUES
-(1, 'Euphemia Chikungulu', 'euphemiachikungulu347@gmail.com', '+260762273483', '$2y$10$m9FUS89u3Y.VTk3br8/0FeW23ZNVVydJJrj84C11PnpDwJR.rzmDK', 'Spectrum Technologies limited');
+(1, 'Euphemia Chikungulu', 'euphemiachikungulu347@gmail.com', '+260762273483', '$2y$10$m9FUS89u3Y.VTk3br8/0FeW23ZNVVydJJrj84C11PnpDwJR.rzmDK', 'Spectrum Technologies limited'),
+(2, 'Ronald Nkhoma', 'euphemiachikungulu3@gmail.com', '+260762273483', '$2y$10$itzkn.2CDtch84dJjtiuQ.VQg6yRDnRESDd4UrYwgI/FOR6N3qf9.', 'Spectrum Technologies limited');
 
 -- --------------------------------------------------------
 
@@ -72,16 +81,18 @@ CREATE TABLE `jobs` (
   `status` varchar(100) DEFAULT NULL,
   `start_date` date NOT NULL,
   `phone` varchar(20) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `cargo_owner` varchar(255) DEFAULT NULL,
+  `cargo_owner_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `jobs`
 --
 
-INSERT INTO `jobs` (`id`, `item`, `pickup`, `dropoff`, `weight`, `status`, `start_date`, `phone`, `created_at`) VALUES
-(15, 'Bagged Sulphur', 'Beira,Mozambique', 'Lubumbashi, DRC', 300.00, 'loading', '2025-06-24', '0972049151', '2025-06-24 08:58:49'),
-(16, 'Steel', 'lusaka', 'Harare, Zimbabwe', 600.00, 'Loading Ongoing', '2025-06-24', '0972049151', '2025-06-24 09:04:58');
+INSERT INTO `jobs` (`id`, `item`, `pickup`, `dropoff`, `weight`, `status`, `start_date`, `phone`, `created_at`, `cargo_owner`, `cargo_owner_id`) VALUES
+(15, 'Bagged Sulphur', 'Beira,Mozambique', 'Lubumbashi, DRC', 300.00, 'loading', '2025-06-24', '0972049151', '2025-06-24 08:58:49', NULL, NULL),
+(16, 'Steel', 'lusaka', 'Harare, Zimbabwe', 600.00, 'Loading Ongoing', '2025-06-24', '0972049151', '2025-06-24 09:04:58', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -154,7 +165,9 @@ CREATE TABLE `transporters` (
 --
 
 INSERT INTO `transporters` (`transporter_id`, `transporter_name`, `email`, `password`, `phone_number`, `company`, `truck_number`) VALUES
-(1, 'Euphemia Chikungulu', 'euphemiachikungulu347@gmail.com', '$2y$10$1mSaJa17hp7ft4CGoYY2AurWTU6ZbBzLqJv3SQOdX0Ju/tG6rRR3W', '+260762273483', 'Nyamuka Africa', NULL);
+(1, 'Euphemia Chikungulu', 'euphemiachikungulu347@gmail.com', '$2y$10$1mSaJa17hp7ft4CGoYY2AurWTU6ZbBzLqJv3SQOdX0Ju/tG6rRR3W', '+260762273483', 'Nyamuka Africa', NULL),
+(2, 'Nancy Dilema', 'techempress01@gmail.com', '$2y$10$5p2PCgOIcMHqqlgMD2GX/uqb1oUbuYe2WfYAsRKjkkpE1FniM2UB6', '+260762273483', 'UNICEIF', NULL),
+(4, 'Nancy Dilema', 'nancydilema29@gmail.com', '$2y$10$9CEBvFZlOmpQlH3TiqJnbuKDz6wuxCrL4y3tjYlIa7owsLet.65Ce', '+260762273483', 'UNICEIF', NULL);
 
 --
 -- Indexes for dumped tables
@@ -216,19 +229,19 @@ ALTER TABLE `transporters`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `cargo_owners`
 --
 ALTER TABLE `cargo_owners`
-  MODIFY `cargo_owner_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `cargo_owner_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -252,7 +265,7 @@ ALTER TABLE `password_resets`
 -- AUTO_INCREMENT for table `transporters`
 --
 ALTER TABLE `transporters`
-  MODIFY `transporter_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `transporter_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
