@@ -6,7 +6,6 @@ require_once 'db.php'; // Include your database connection
 
 require_once 'db.php'; // Include your database connection
 
-// Fetch orders with cargo owner details from the database
 $result = $conn->query("
     SELECT 
         j.id,
@@ -16,7 +15,8 @@ $result = $conn->query("
         j.status,
         j.created_at,
         j.cargo_owner_id,
-        co.cargo_owner_name, 
+        j.cargo_owner as direct_owner_name,
+        COALESCE(co.cargo_owner_name, j.cargo_owner, 'Unassigned') as display_owner_name, 
         co.company,
         co.phone_number
     FROM jobs j
@@ -462,18 +462,18 @@ if ($result && $result->num_rows > 0) {
                                 <tr data-status="<?php echo $statusClass; ?>">
                                     <td><?php echo htmlspecialchars($order['id']); ?></td>
                                     <td>
-                                        <strong><?php echo htmlspecialchars($order['cargo_owner_name'] ?? 'Unknown'); ?></strong>
-                                        <?php if (!empty($order['company'])): ?>
-                                            <div class="owner-details">
-                                                <?php echo htmlspecialchars($order['company']); ?>
-                                            </div>
-                                        <?php endif; ?>
-                                        <?php if (!empty($order['phone_number'])): ?>
-                                            <div class="owner-details">
-                                                <i class="fas fa-phone"></i> <?php echo htmlspecialchars($order['phone_number']); ?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </td>
+    <strong><?php echo htmlspecialchars($order['display_owner_name']); ?></strong>
+    <?php if (!empty($order['company'])): ?>
+        <div class="owner-details">
+            <?php echo htmlspecialchars($order['company']); ?>
+        </div>
+    <?php endif; ?>
+    <?php if (!empty($order['phone_number'])): ?>
+        <div class="owner-details">
+            <i class="fas fa-phone"></i> <?php echo htmlspecialchars($order['phone_number']); ?>
+        </div>
+    <?php endif; ?>
+</td>
                                     <td><?php echo htmlspecialchars($order['cargo_type'] ?? 'N/A'); ?></td>
                                     <td><?php echo htmlspecialchars($order['pickup']); ?></td>
                                     <td><?php echo htmlspecialchars($order['dropoff']); ?></td>
