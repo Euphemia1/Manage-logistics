@@ -560,7 +560,7 @@
     jobTable.style.display = 'none';
     emptyState.style.display = 'none';
 
-    fetch('../Backend/get-jobs.php')
+    fetch('get-jobs.php')
         .then(response => response.json())
         .then(jobs => {
             const jobPostList = document.getElementById('jobPostList');
