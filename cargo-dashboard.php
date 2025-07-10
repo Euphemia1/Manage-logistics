@@ -246,7 +246,7 @@ $_SESSION['last_activity'] = time();
                     </a>
                 </li>
                 <li class="nav-item mt-5">
-                    <a href="../Backend/logout.php" class="nav-link text-danger">
+                    <a href="logout.php" class="nav-link text-danger">
                         <i class="fas fa-sign-out-alt"></i> Logout
                     </a>
                 </li>
