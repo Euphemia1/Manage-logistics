@@ -8,6 +8,6 @@ echo json_encode(value: [
 ]);
 
 // Redirect to login page
-header("Location: ../Frontend/index.php");
+header("Location: index.php");
 exit();
 ?>
