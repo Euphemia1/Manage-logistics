@@ -66,7 +66,7 @@ if ($user) {
     } catch (PDOException $e) {
         error_log("Database error: " . $e->getMessage());
         $_SESSION['reset_message'] = "Failed to store reset token.";
-        header("Location: ../Frontend/forgot-password.php?type=" . urlencode($type));
+        header("Location: forgot-password.php?type=" . urlencode($type));
         exit();
     }
 
