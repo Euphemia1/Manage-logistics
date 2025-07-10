@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($email) || empty($type)) {
         $_SESSION['reset_message'] = "Invalid input.";
-        header("Location: ../Frontend/forgot-password.php?type=$type");
+        header("Location: forgot-password.php?type=$type");
         exit();
     }
 
