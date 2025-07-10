@@ -7,7 +7,7 @@ $token = $_POST['reset_token'] ?? '';
 // 2. Validate inputs (fail fast if invalid)
 if (!filter_var($email, FILTER_VALIDATE_EMAIL) || empty($token)) {
     $_SESSION['reset_message'] = "Invalid request parameters.";
-    header("Location: ../Frontend/forgot-password.php");
+    header("Location: forgot-password.php");
     exit();
 }
 
