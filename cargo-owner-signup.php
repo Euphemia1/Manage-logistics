@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ];
 
             // Redirect to the login page after successful signup
-            header("Location: ../Frontend/cargo-owner-login.php");
+            header("Location: cargo-owner-login.php");
             exit();
         } else {
             echo "Error: " . $stmt->error;
