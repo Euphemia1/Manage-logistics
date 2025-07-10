@@ -124,7 +124,7 @@ ini_set('display_errors', 1);
 
 // Check session expiry periodically
 setInterval(() => {
-        fetch('../Backend/session-check.php')
+        fetch('session-check.php')
             .then(response => response.json())
             .then(data => {
                 if (data.expired) {
