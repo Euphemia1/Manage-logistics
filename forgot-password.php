@@ -35,7 +35,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
 if (empty($type)) {
     $_SESSION['reset_message'] = "Please select a user type.";
-    header("Location: ../Frontend/forgot-password.php");
+    header("Location: forgot-password.php");
     exit();
 }
 
