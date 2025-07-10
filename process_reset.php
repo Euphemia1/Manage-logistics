@@ -48,7 +48,7 @@ if ($newPassword !== $confirmPassword) {
 
 if (strlen($newPassword) < 8) {
     $_SESSION['reset_message'] = "Password must be at least 8 characters long.";
-    header("Location: ../Frontend/reset-password.php?token=" . urlencode($token) . 
+    header("Location: reset-password.php?token=" . urlencode($token) . 
           "&email=" . urlencode($email) . "&type=" . urlencode($userType));
     exit();
 }
