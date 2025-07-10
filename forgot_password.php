@@ -129,7 +129,7 @@ $isValidType = in_array($type, $validTypes);
             </div>
         <?php else: ?>
             <!-- Show email form if type is valid -->
-            <form action="../Backend/forgot-password.php" method="POST">
+            <form action="forgot-password.php" method="POST">
                 <input type="hidden" name="type" value="<?php echo htmlspecialchars($type); ?>">
                 <div class="form-group">
                     <label for="email">Email:</label>
