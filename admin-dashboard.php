@@ -14,7 +14,6 @@ function getCount($conn, $table) {
     
     return 0;
 }
-
 // Get counts from database
 $cargoOwnersCount = getCount($conn, 'cargo_owners');
 $transportersCount = getCount($conn, 'transporters');
