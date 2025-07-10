@@ -43,7 +43,7 @@ if (empty($type)) {
 $validTypes = ['cargo_owners', 'transporters'];
 if (!in_array($type, $validTypes)) {
     $_SESSION['reset_message'] = "Invalid user type selected.";
-    header("Location: ../Frontend/forgot-password.php");
+    header("Location: forgot-password.php");
     exit();
 }
 
