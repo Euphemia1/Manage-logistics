@@ -41,7 +41,7 @@ if (empty($newPassword) || empty($confirmPassword)) {
 
 if ($newPassword !== $confirmPassword) {
     $_SESSION['reset_message'] = "The passwords you entered do not match. Please try again.";
-    header("Location: ../Frontend/reset-password.php?token=" . urlencode($token) . 
+    header("Location: reset-password.php?token=" . urlencode($token) . 
           "&email=" . urlencode($email) . "&type=" . urlencode($userType));
     exit();
 }
