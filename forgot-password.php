@@ -29,7 +29,7 @@ $type = $_POST['type'] ?? '';
 // Validate email and type
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $_SESSION['reset_message'] = "Please enter a valid email address.";
-    header("Location: ../Frontend/forgot-password.php?type=" . urlencode($type));
+    header("Location: forgot-password.php?type=" . urlencode($type));
     exit();
 }
 
