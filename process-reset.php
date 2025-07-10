@@ -31,7 +31,7 @@ try {
 } catch (PDOException $e) {
     error_log("Password reset error: " . $e->getMessage());
     $_SESSION['reset_message'] = "System error. Please try again.";
-    header("Location: ../Frontend/forgot-password.php");
+    header("Location: forgot-password.php");
     exit();
 }
 
