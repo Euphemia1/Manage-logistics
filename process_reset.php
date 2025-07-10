@@ -28,7 +28,7 @@ $confirmPassword = trim($_POST['confirm_password'] ?? '');
 // Enhanced validation
 if (empty($token) || empty($email) || empty($userType)) {
     $_SESSION['reset_message'] = "Invalid reset request. Please try the reset link again.";
-    header("Location: ../Frontend/forgot-password.php");
+    header("Location: forgot-password.php");
     exit();
 }
 
