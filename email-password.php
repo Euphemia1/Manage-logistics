@@ -36,6 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    header("Location: ../Frontend/forgot-password.php?type=$type");
+    header("Location: forgot-password.php?type=$type");
     exit();
 }
