@@ -25,7 +25,7 @@ try {
 
     if (!$resetRequest) {
         $_SESSION['reset_message'] = "Invalid, expired, or already-used reset link.";
-        header("Location: ../Frontend/forgot-password.php");
+        header("Location: forgot-password.php");
         exit();
     }
 } catch (PDOException $e) {
