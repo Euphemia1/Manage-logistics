@@ -34,7 +34,7 @@ if (empty($token) || empty($email) || empty($userType)) {
 
 if (empty($newPassword) || empty($confirmPassword)) {
     $_SESSION['reset_message'] = "Both password fields are required.";
-    header("Location: ../Frontend/reset-password.php?token=" . urlencode($token) . 
+    header("Location: reset-password.php?token=" . urlencode($token) . 
           "&email=" . urlencode($email) . "&type=" . urlencode($userType));
     exit();
 }
