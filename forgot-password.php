@@ -133,5 +133,5 @@ if ($user) {
 }
 
 // Always include the type in the redirect
-header("Location: ../Frontend/forgot-password.php?type=" . urlencode($type));
+header("Location: forgot-password.php?type=" . urlencode($type));
 exit();
