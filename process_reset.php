@@ -13,7 +13,7 @@ try {
 } catch (PDOException $e) {
     error_log("Database connection failed: " . $e->getMessage());
     $_SESSION['reset_message'] = "Database connection error. Please try again later.";
-    header("Location: ../Frontend/forgot-password.php");
+    header("Location: forgot-password.php");
     exit();
 }
 
