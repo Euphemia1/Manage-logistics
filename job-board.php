@@ -775,6 +775,12 @@ $result = mysqli_query($conn, $query);
                     <input id="formStartDate" name="startDate" type="date" required
                         class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
                 </div>
+
+                <div class="space-y-2">
+                    <label for="formphone" class="block text-sm font-medium text-gray-700">Phone</label>
+                    <input id="formphone" name="phone" type="text" placeholder="Enter phone" required
+                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
+                </div>
                 
                 <!-- Added Cargo Owner Name and Phone fields -->
                 <!-- <div class="space-y-2">
