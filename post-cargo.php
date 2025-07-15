@@ -28,7 +28,7 @@ error_log("User ID: " . $_SESSION['user_id'] . ", User Type: " . $_SESSION['user
 // --- END DEBUGGING ---
 
 
-// Database credentials (fine as is)
+// Database credentials
 $host = 'localhost';
 $dbname = 'logistics';
 $username = 'root';
@@ -42,13 +42,13 @@ try {
     exit;
 }
 
-// Only accept POST requests (fine as is)
+// Only accept POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
     exit;
 }
 
-// Get form data (fine as is)
+// Get form data
 $cargoType   = trim($_POST['cargoType'] ?? '');
 $weight      = trim($_POST['weight'] ?? '');
 $origin      = trim($_POST['origin'] ?? '');
@@ -57,41 +57,55 @@ $phone       = trim($_POST['phone'] ?? '');
 $status      = trim($_POST['status'] ?? '');
 $startDate   = trim($_POST['start_date'] ?? '');
 
-// Get cargo owner ID and name from session
-// Ensure these variables exist for admins as well, or handle accordingly
+// Get poster ID and name from session
+// $_SESSION['user_id'] will contain the ID from either admin or cargo_owner table
 $poster_id = $_SESSION['user_id'];
-// For 'cargo_owner' column, if an admin posts, you might want to use their username
-// This assumes 'user_name' is set for both admin and cargo owner logins.
+// $_SESSION['user_name'] should be set in both login scripts (admin username or cargo owner name)
 $poster_name = $_SESSION['user_name'] ?? 'Unknown Poster';
+// $_SESSION['user_type'] will contain 'admin' or 'cargo_owner'
+$poster_type = $_SESSION['user_type'];
 
 
-// [Rest of your validation code remains the same...]
-// Example: if (empty($cargoType) || empty($weight)) { ... }
+// --- Basic Validation Example (you should expand this) ---
+if (empty($cargoType) || empty($weight) || empty($origin) || empty($destination) || empty($phone) || empty($status) || empty($startDate)) {
+    echo json_encode(['success' => false, 'message' => 'All fields are required.']);
+    exit;
+}
+// Example: Validate weight is numeric
+if (!is_numeric($weight) || $weight <= 0) {
+    echo json_encode(['success' => false, 'message' => 'Weight must be a positive number.']);
+    exit;
+}
+// Example: Validate start_date format
+if (!preg_match("/^\d{4}-\d{2}-\d{2}$/", $startDate)) {
+    echo json_encode(['success' => false, 'message' => 'Start date must be in YYYY-MM-DD format.']);
+    exit;
+}
 
 
-// Insert into DB with poster_id and poster_name (if applicable)
+// Insert into DB with poster_id, poster_name, and poster_type
 try {
     $stmt = $pdo->prepare("
         INSERT INTO jobs (
             item, pickup, dropoff, weight, phone, start_date, status,
-            created_at, posted_by_id, posted_by_type, cargo_owner_name_for_display // <<< Column for the name
+            created_at, cargo_owner_id, cargo_owner, poster_type
         ) VALUES (
             :item, :pickup, :dropoff, :weight, :phone, :start_date,
-            :status, NOW(), :posted_by_id, :posted_by_type, :cargo_owner_name_for_display
+            :status, NOW(), :cargo_owner_id, :cargo_owner_name, :poster_type
         )
     ");
 
     $stmt->execute([
-        ':item'                       => $cargoType,
-        ':pickup'                     => $origin,
-        ':dropoff'                    => $destination,
-        ':weight'                     => $weight,
-        ':phone'                      => $phone,
-        ':start_date'                 => $startDate,
-        ':status'                     => $status,
-        ':posted_by_id'               => $poster_id,     // Using the generic poster ID
-        ':posted_by_type'             => $_SESSION['user_type'], // Storing the user's role/type
-        ':cargo_owner_name_for_display' => $poster_name   // Name to display (was $_SESSION['user_name'])
+        ':item'           => $cargoType,
+        ':pickup'         => $origin,
+        ':dropoff'        => $destination,
+        ':weight'         => $weight,
+        ':phone'          => $phone,
+        ':start_date'     => $startDate,
+        ':status'         => $status,
+        ':cargo_owner_id' => $poster_id,    // This column will now store either admin_id or cargo_owner_id
+        ':cargo_owner_name' => $poster_name, // This column will now store either admin_username or cargo_owner_name
+        ':poster_type'    => $poster_type   // <<< NEW: Stores 'admin' or 'cargo_owner'
     ]);
 
 
@@ -101,7 +115,10 @@ try {
         'job_id'  => $pdo->lastInsertId()
     ]);
 } catch (PDOException $e) {
+    // Log the actual error for debugging
+    error_log("PDO Error in post-cargo.php: " . $e->getMessage() . " - SQL: " . ($stmt->queryString ?? 'N/A')); // Added query string for better debugging
     echo json_encode(['success' => false, 'message' => 'Database error: ' . $e->getMessage()]);
     exit;
 }
+
 ?>
