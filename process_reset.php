@@ -86,7 +86,7 @@ try {
     $pdo->rollBack();
     error_log("Password update failed: " . $e->getMessage());
     $_SESSION['reset_message'] = "Error updating password. Please try again.";
-    header("Location: ../Frontend/reset-password.php?token=" . urlencode($token) . 
+    header("reset-password.php?token=" . urlencode($token) . 
           "&email=" . urlencode($email) . "&type=" . urlencode($userType));
     exit();
 }
