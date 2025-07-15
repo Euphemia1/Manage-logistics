@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($stmt->execute()) {
         // Redirect back to the job board after successful update
-        header("Location: ../Frontend/job-board.php");
+        header("Location: job-board.php");
         exit();
     } else {
         echo json_encode(["error" => "Error: " . $stmt->error]);
