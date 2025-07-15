@@ -1,16 +1,15 @@
 <?php
-session_start(); // <<< Ensure this is the first line
+session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require 'db.php';
-
+require 'db.php'; // Assuming $conn is mysqli
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $sql = "SELECT cargo_owner_id, password, email, cargo_owner_name FROM cargo_owners WHERE email = ?"; // Select necessary columns
+    $sql = "SELECT cargo_owner_id, password, email, cargo_owner_name FROM cargo_owners WHERE email = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -19,16 +18,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows === 1) {
         $user = $result->fetch_assoc();
         if (password_verify($password, $user['password'])) {
-            // Set consistent session variables for all logged-in users
-            $_SESSION['logged_in'] = true;        // Universal flag for any logged-in user
+            $_SESSION['logged_in'] = true;        // Universal flag
             $_SESSION['user_id'] = $user['cargo_owner_id']; // Store their ID
-            $_SESSION['user_type'] = 'cargo_owner'; // <<< IMPORTANT: Define the user type
-            $_SESSION['user_email'] = $user['email']; // Still useful for cargo owner specific pages
-            $_SESSION['user_name'] = $user['cargo_owner_name']; // Still useful for cargo owner specific pages
+            $_SESSION['user_type'] = 'cargo_owner'; // <<< ADD THIS LINE
+            $_SESSION['user_email'] = $user['email'];
+            $_SESSION['user_name'] = $user['cargo_owner_name']; // Already there, good!
 
-            // Your session timeout logic (good addition!)
-            $_SESSION['last_activity'] = time(); // Track activity time
-            $_SESSION['expire_after'] = 300; // 5 minutes (adjust as needed)
+            $_SESSION['last_activity'] = time();
+            $_SESSION['expire_after'] = 300;
 
             header("Location: cargo-dashboard.php");
             exit();
@@ -45,11 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 }
-// Close outside the if block, but only if they are not needed later in the script
-if (isset($stmt)) {
-    $stmt->close();
-}
-if (isset($conn)) {
-    $conn->close();
-}
+if (isset($stmt)) $stmt->close();
+if (isset($conn)) $conn->close();
 ?>
