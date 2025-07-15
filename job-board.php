@@ -719,6 +719,7 @@ $result = mysqli_query($conn, $query);
         </div>
 
         <!-- Add Job Form (Hidden by default) -->
+        <form action="post-cargo.php" method="POST">
         <div id="jobFormPanel" class="bg-white rounded-lg shadow-md p-4 mb-6 hidden">
             <h2 class="text-lg font-semibold mb-4 text-gray-800 flex items-center">
                 <i class="fas fa-plus-circle mr-2 text-primary-600"></i> Add New Job
