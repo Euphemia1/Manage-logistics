@@ -78,7 +78,7 @@ try {
     
     $_SESSION['reset_message'] = "Password updated successfully!";
     $redirectPage = ($userType === 'cargo_owner') 
-                  ? '../Frontend/cargo-owner-login.php' 
+                  ? 'cargo-owner-login.php' 
                   : 'transporter-login.php';
     header("Location: $redirectPage");
     exit();
