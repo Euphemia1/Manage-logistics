@@ -719,94 +719,72 @@ $result = mysqli_query($conn, $query);
         </div>
 
         <!-- Add Job Form (Hidden by default) -->
-        <form action="post-cargo.php" method="POST">
-        <div id="jobFormPanel" class="bg-white rounded-lg shadow-md p-4 mb-6 hidden">
-            <h2 class="text-lg font-semibold mb-4 text-gray-800 flex items-center">
-                <i class="fas fa-plus-circle mr-2 text-primary-600"></i> Add New Job
-            </h2>
-            <form id="jobForm" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="space-y-2">
-                    <label for="formItem" class="block text-sm font-medium text-gray-700">Item</label>
-                    <input id="formItem" name="item" type="text" placeholder="Enter item" required
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
-                </div>
-                
-                <div class="space-y-2">
-                    <label for="formPickup" class="block text-sm font-medium text-gray-700">Pick up</label>
-                    <input id="formPickup" name="pickup" type="text" placeholder="Enter pick up location" required
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
-                </div>
-                
-                <div class="space-y-2">
-                    <label for="formDropoff" class="block text-sm font-medium text-gray-700">Drop off</label>
-                    <input id="formDropoff" name="dropoff" type="text" placeholder="Enter drop off location" required
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
-                </div>
-                
-                <div class="space-y-2">
-                    <label for="formWeight" class="block text-sm font-medium text-gray-700">Weight (mt)</label>
-                    <input id="formWeight" name="weight" type="number" min="0" step="0.1" placeholder="Enter weight" required
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
-                </div>
-                
-                <div class="space-y-2">
-                    <label for="formState" class="block text-sm font-medium text-gray-700">State</label>
-                    <select id="formState" name="state" required
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500">
-                        <option value="Available">Available</option>
-                        <option value="Pending">Pending</option>
-                        <option value="Completed">Completed</option>
-                        <option value="Loading in Progress">Loading in Progress</option>
-                    </select>
-                </div>
-                
-                <!-- <div class="space-y-2">
-                    <label for="formPrice" class="block text-sm font-medium text-gray-700">Price per tn</label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <span class="text-gray-500">$</span>
-                        </div>
-                        <input id="formPrice" name="price" type="number" min="0" step="0.01" placeholder="Enter price" required
-                            class="pl-8 w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
-                    </div>
-                </div> -->
-                
-                <div class="space-y-2">
-                    <label for="formStartDate" class="block text-sm font-medium text-gray-700">Job start date</label>
-                    <input id="formStartDate" name="startDate" type="date" required
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
-                </div>
+        <form action="post-cargo.php" method="POST" id="mainCargoPostForm">
+    <div id="jobFormPanel" class="bg-white rounded-lg shadow-md p-4 mb-6 hidden">
+        <h2 class="text-lg font-semibold mb-4 text-gray-800 flex items-center">
+            <i class="fas fa-plus-circle mr-2 text-primary-600"></i> Add New Job
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="space-y-2">
+                <label for="formItem" class="block text-sm font-medium text-gray-700">Item</label>
+                <input id="formItem" name="cargoType" type="text" placeholder="Enter item" required
+                    class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
+            </div>
 
-                <div class="space-y-2">
-                    <label for="formphone" class="block text-sm font-medium text-gray-700">Phone</label>
-                    <input id="formphone" name="phone" type="text" placeholder="Enter phone" required
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
+            <div class="space-y-2">
+                <label for="formPickup" class="block text-sm font-medium text-gray-700">Pick up</label>
+                <input id="formPickup" name="origin" type="text" placeholder="Enter pick up location" required
+                    class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
+            </div>
+
+            <div class="space-y-2">
+                <label for="formDropoff" class="block text-sm font-medium text-gray-700">Drop off</label>
+                <input id="formDropoff" name="destination" type="text" placeholder="Enter drop off location" required
+                    class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
+            </div>
+
+            <div class="space-y-2">
+                <label for="formWeight" class="block text-sm font-medium text-gray-700">Weight (mt)</label>
+                <input id="formWeight" name="weight" type="number" min="0" step="0.1" placeholder="Enter weight" required
+                    class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
+            </div>
+
+            <div class="space-y-2">
+                <label for="formState" class="block text-sm font-medium text-gray-700">Status</label>
+                <select id="formState" name="status" required
+                    class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500">
+                    <option value="Available">Available</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Loading in Progress">Loading in Progress</option>
+                </select>
+            </div>
+
+            <div class="space-y-2">
+                <label for="formStartDate" class="block text-sm font-medium text-gray-700">Job start date</label>
+                <input id="formStartDate" name="start_date" type="date" required
+                    class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
+            </div>
+
+            <div class="space-y-2">
+                <label for="formphone" class="block text-sm font-medium text-gray-700">Phone</label>
+                <input id="formphone" name="phone" type="text" placeholder="Enter phone" required
+                    class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
+            </div>
+
+            <div class="space-y-2 md:col-span-2 lg:col-span-4 flex justify-end">
+                <div class="flex space-x-2">
+                    <button type="button" onclick="toggleJobForm()" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors">
+                        Cancel
+                    </button>
+                    <button type="submit" class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors">
+                        <i class="fas fa-save mr-2"></i> Save Job
+                    </button>
                 </div>
-                
-                <!-- Added Cargo Owner Name and Phone fields -->
-                <!-- <div class="space-y-2">
-                    <label for="formOwnerName" class="block text-sm font-medium text-gray-700">Cargo Owner Name</label>
-                    <input id="formOwnerName" name="ownerName" type="text" placeholder="Enter cargo owner name" required
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
-                </div>
-                
-                <div class="space-y-2">
-                    <label for="formOwnerPhone" class="block text-sm font-medium text-gray-700">Cargo Owner Phone</label>
-                    <input id="formOwnerPhone" name="ownerPhone" type="text" placeholder="Enter cargo owner phone" required
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
-                </div> -->
-                
-                <div class="space-y-2 md:col-span-2 lg:col-span-4 flex justify-end">
-                    <div class="flex space-x-2">
-                        <button type="button" onclick="toggleJobForm()" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors">
-                            Cancel
-                        </button>
-                        <button type="submit" class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors">
-                            <i class="fas fa-save mr-2"></i> Save Job
-                        </button>
-                    </div>
-                </div>
-            </form>
+            </div>
+        </div>
+    </div>
+</form>
         </div>
 
         <!-- <div class="table-container">
