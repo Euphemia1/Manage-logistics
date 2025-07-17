@@ -18,7 +18,7 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     $_SESSION['reset_message'] = "Database connection failed: " . $e->getMessage();
-    header("Location: forgot-password.php");
+    header("Location: forgot_password.php");
     exit();
 }
 
@@ -135,3 +135,4 @@ if ($user) {
 // Always include the type in the redirect
 header("Location: forgot_password.php?type=" . urlencode($type));
 exit();
+
