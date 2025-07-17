@@ -75,7 +75,7 @@ if ($user) {
     
     if ($isLocalhost) {
         // For local development
-        $resetLink = "http://localhost/nyamula-logistics/Frontend/reset-password.php?" . http_build_query([
+        $resetLink = "http://localhost/nyamula-logistics/reset-password.php?" . http_build_query([
             'token' => $token,
             'email' => $email,
             'type' => $type
