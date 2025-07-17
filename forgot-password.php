@@ -29,13 +29,13 @@ $type = $_POST['type'] ?? '';
 // Validate email and type
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $_SESSION['reset_message'] = "Please enter a valid email address.";
-    header("Location: forgot-password.php?type=" . urlencode($type));
+    header("Location: forgot_password.php?type=" . urlencode($type));
     exit();
 }
 
 if (empty($type)) {
     $_SESSION['reset_message'] = "Please select a user type.";
-    header("Location: forgot-password.php");
+    header("Location: forgot_password.php");
     exit();
 }
 
@@ -43,7 +43,7 @@ if (empty($type)) {
 $validTypes = ['cargo_owners', 'transporters'];
 if (!in_array($type, $validTypes)) {
     $_SESSION['reset_message'] = "Invalid user type selected.";
-    header("Location: forgot-password.php");
+    header("Location: forgot_password.php");
     exit();
 }
 
@@ -83,7 +83,7 @@ if ($user) {
     } else {
         // For production
         $scheme = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
-        $resetLink = "$scheme://{$_SERVER['HTTP_HOST']}/Frontend/reset-password.php?" . http_build_query([
+        $resetLink = "$scheme://{$_SERVER['HTTP_HOST']} reset-password.php?" . http_build_query([
             'token' => $token,
             'email' => $email,
             'type' => $type
