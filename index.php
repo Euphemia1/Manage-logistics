@@ -1,4 +1,4 @@
-<?php?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -751,7 +751,7 @@
     <!-- Countries We Deliver To Section -->
     <section class="countries-section">
         <div class="container">
-            <h2>Countries We Deliver To</h2>
+            <h2>Countries We delivered To</h2>
             <p>Trusted logistics solutions across Africa - connecting businesses and communities</p>
             <div class="carousel-container">
                 <div class="carousel-track">
