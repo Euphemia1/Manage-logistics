@@ -1,9 +1,5 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
-
-
 
 <head>
     <meta charset="UTF-8">
@@ -508,25 +504,72 @@
                 <span class="job-count" id="jobCount"></span>
             </div>
             <div class="table-responsive">
-                <div class="loading" id="loading">
+                <div class="loading" id="loading" style="display: none;">
                     <div class="loading-spinner"></div>
                 </div>
-                <table id="jobTable" style="display: none;">
-                <thead>
-    <tr>
-        <th>Item</th>
-        <th>Pick up</th>
-        <th>Drop off</th>
-        <th>Weight</th>
-        <th>Phone number</th>
-        <th>Start Date</th>
-        <th>Status</th>
-    </tr>
-</thead>
-
+                <table id="jobTable">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Pick up</th>
+                            <th>Drop off</th>
+                            <th>Weight</th>
+                            <th>Phone number</th>
+                            <th>Start Date</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
                     <tbody id="jobPostList">
-                        <!-- Job posts will be dynamically inserted here -->
-                    </tbody>
+                        <tr>
+                            <td>Steel</td>
+                            <td>
+                                <div class="location-cell">
+                                    <span class="location-label">Pick up</span>
+                                    <span class="location-value">Lusaka</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="location-cell">
+                                    <span class="location-label">Drop off</span>
+                                    <span class="location-value">Harare, Zimbabwe</span>
+                                </div>
+                            </td>
+                            <td>600.00 mt</td>
+                            <td>0972049151</td>
+                            <td>2025-06-24</td>
+                            <td><span class="status-badge available">available</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="tel:0972049151" class="btn btn-secondary"><i class="fas fa-phone"></i> Call</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Bagged Sulphur</td>
+                            <td>
+                                <div class="location-cell">
+                                    <span class="location-label">Pick up</span>
+                                    <span class="location-value">Beira, Mozambique</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="location-cell">
+                                    <span class="location-label">Drop off</span>
+                                    <span class="location-value">Lubumbashi, DRC</span>
+                                </div>
+                            </td>
+                            <td>300.00 mt</td>
+                            <td>0972049151</td>
+                            <td>2025-06-24</td>
+                            <td><span class="status-badge available">available</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="tel:0972049151" class="btn btn-secondary"><i class="fas fa-phone"></i> Call</a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
                 </table>
                 <div class="empty-state" id="emptyState" style="display: none;">
                     <i class="fas fa-truck-loading"></i>
@@ -546,155 +589,131 @@
     </div>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        loadJobs(); // Load jobs on page load
-        setInterval(loadJobs, 30000); // Reload jobs every 30 seconds
-    });
+        document.addEventListener('DOMContentLoaded', function () {
+            // No need to fetch or set interval as data is hardcoded
+            updateJobDisplay();
+        });
 
-    function loadJobs() {
-    const loading = document.getElementById('loading');
-    const jobTable = document.getElementById('jobTable');
-    const emptyState = document.getElementById('emptyState');
-
-    loading.style.display = 'flex';
-    jobTable.style.display = 'none';
-    emptyState.style.display = 'none';
-
-    fetch('get-jobs.php')
-        .then(response => response.json())
-        .then(jobs => {
+        // Function to update job count and table visibility
+        function updateJobDisplay() {
+            const jobTable = document.getElementById('jobTable');
+            const emptyState = document.getElementById('emptyState');
             const jobPostList = document.getElementById('jobPostList');
             const jobCount = document.getElementById('jobCount');
 
-            // ✅ Sort jobs by start_date (newest first)
-            jobs.sort((a, b) => new Date(b.start_date) - new Date(a.start_date));
+            const numJobs = jobPostList.children.length; // Count actual rows in tbody
 
-            // Update job count
-            jobCount.textContent = `${jobs.length} job${jobs.length !== 1 ? 's' : ''}`;
-
-            // Clear existing jobs
-            jobPostList.innerHTML = '';
-
-            if (jobs.length === 0) {
+            if (numJobs === 0) {
                 jobTable.style.display = 'none';
                 emptyState.style.display = 'flex';
             } else {
                 jobTable.style.display = 'table';
                 emptyState.style.display = 'none';
-
-                jobs.forEach(job => {
-                    showJobPost(job);
-                });
             }
-        })
-        .catch(error => {
-            console.error('Error fetching jobs:', error);
-            jobTable.style.display = 'none';
-            emptyState.style.display = 'flex';
-        })
-        .finally(() => {
-            loading.style.display = 'none';
-        });
-}
-
-
-
-    function showJobPost(job) {
-    const jobPostList = document.getElementById('jobPostList');
-    const row = document.createElement('tr');
-
-    // Use correct field for status
-    let statusClass = 'available';
-    if (job.status && job.status.toLowerCase() === 'pending') {
-        statusClass = 'pending';
-    } else if (job.status && job.status.toLowerCase() === 'completed') {
-        statusClass = 'completed';
-    }
-
-    row.innerHTML = `
-        <td>${job.item || 'N/A'}</td>
-        <td>
-            <div class="location-cell">
-                <span class="location-label">Pick up</span>
-                <span class="location-value">${job.pickup || 'N/A'}</span>
-            </div>
-        </td>
-        <td>
-            <div class="location-cell">
-                <span class="location-label">Drop off</span>
-                <span class="location-value">${job.dropoff || 'N/A'}</span>
-            </div>
-        </td>
-        <td>${job.weight ? job.weight + ' mt' : 'N/A'}</td>
-        <td>${job.phone || 'N/A'}</td>   <!-- ✅ Phone Number -->
-        <td>${job.start_date || 'N/A'}</td> <!-- ✅ Start Date -->
-        <td><span class="status-badge ${statusClass}">${job.status || 'Available'}</span></td> <!-- ✅ Status -->
-        <td>
-            <div class="action-buttons">
-                ${job.phone ? 
-                    `<a href="tel:${job.phone}" class="btn btn-secondary"><i class="fas fa-phone"></i> Call</a>` : 
-                    `<button class="btn btn-outline" disabled><i class="fas fa-phone"></i> No Phone</button>`
-                }
-            </div>
-        </td>
-    `;
-
-    jobPostList.appendChild(row);
-}
-
-
-    function searchJobs() {
-        const pickup = document.getElementById('pickup').value.toLowerCase();
-        const dropoff = document.getElementById('dropoff').value.toLowerCase();
-        const rows = document.querySelectorAll('#jobPostList tr');
-        let visibleCount = 0;
-        
-        rows.forEach(row => {
-            const pickupCell = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-            const dropoffCell = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
-            
-            const matchesPickup = pickup === '' || pickupCell.includes(pickup);
-            const matchesDropoff = dropoff === '' || dropoffCell.includes(dropoff);
-            
-            if (matchesPickup && matchesDropoff) {
-                row.style.display = '';
-                visibleCount++;
-            } else {
-                row.style.display = 'none';
-            }
-        });
-        
-        // Update job count
-        document.getElementById('jobCount').textContent = `${visibleCount} job${visibleCount !== 1 ? 's' : ''}`;
-        
-        // Show empty state if no results
-        const jobTable = document.getElementById('jobTable');
-        const emptyState = document.getElementById('emptyState');
-        
-        if (visibleCount === 0) {
-            jobTable.style.display = 'none';
-            emptyState.style.display = 'flex';
-        } else {
-            jobTable.style.display = 'table';
-            emptyState.style.display = 'none';
+            jobCount.textContent = `${numJobs} job${numJobs !== 1 ? 's' : ''}`;
         }
-    }
 
-    function clearSearch() {
-        document.getElementById('pickup').value = '';
-        document.getElementById('dropoff').value = '';
-        loadJobs();
-    }
+        // Modified loadJobs to not fetch, but just re-evaluate display
+        function loadJobs() {
+            // In a hardcoded scenario, loadJobs just needs to ensure correct display based on current content
+            updateJobDisplay();
+        }
 
-    function viewJobDetails(jobId) {
-        // Implement job details view
-        alert(`Viewing details for job ID: ${jobId}`);
-        // You could redirect to a details page or show a modal
-    }
-</script>
+        function showJobPost(job) {
+            // This function is no longer actively used for adding new rows dynamically
+            // but kept for reference if you plan to re-introduce dynamic loading.
+            const jobPostList = document.getElementById('jobPostList');
+            const row = document.createElement('tr');
+
+            let statusClass = 'available';
+            if (job.status && job.status.toLowerCase() === 'pending') {
+                statusClass = 'pending';
+            } else if (job.status && job.status.toLowerCase() === 'completed') {
+                statusClass = 'completed';
+            }
+
+            row.innerHTML = `
+                <td>${job.item || 'N/A'}</td>
+                <td>
+                    <div class="location-cell">
+                        <span class="location-label">Pick up</span>
+                        <span class="location-value">${job.pickup || 'N/A'}</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="location-cell">
+                        <span class="location-label">Drop off</span>
+                        <span class="location-value">${job.dropoff || 'N/A'}</span>
+                    </div>
+                </td>
+                <td>${job.weight ? job.weight + ' mt' : 'N/A'}</td>
+                <td>${job.phone || 'N/A'}</td>
+                <td>${job.start_date || 'N/A'}</td>
+                <td><span class="status-badge ${statusClass}">${job.status || 'Available'}</span></td>
+                <td>
+                    <div class="action-buttons">
+                        ${job.phone ?
+                            `<a href="tel:${job.phone}" class="btn btn-secondary"><i class="fas fa-phone"></i> Call</a>` :
+                            `<button class="btn btn-outline" disabled><i class="fas fa-phone"></i> No Phone</button>`
+                        }
+                    </div>
+                </td>
+            `;
+
+            jobPostList.appendChild(row);
+        }
+
+        function searchJobs() {
+            const pickup = document.getElementById('pickup').value.toLowerCase();
+            const dropoff = document.getElementById('dropoff').value.toLowerCase();
+            const rows = document.querySelectorAll('#jobPostList tr');
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+                const pickupCell = row.querySelector('td:nth-child(2) .location-value').textContent.toLowerCase();
+                const dropoffCell = row.querySelector('td:nth-child(3) .location-value').textContent.toLowerCase();
+
+                const matchesPickup = pickup === '' || pickupCell.includes(pickup);
+                const matchesDropoff = dropoff === '' || dropoffCell.includes(dropoff);
+
+                if (matchesPickup && matchesDropoff) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            const jobTable = document.getElementById('jobTable');
+            const emptyState = document.getElementById('emptyState');
+
+            if (visibleCount === 0) {
+                jobTable.style.display = 'none';
+                emptyState.style.display = 'flex';
+            } else {
+                jobTable.style.display = 'table';
+                emptyState.style.display = 'none';
+            }
+            document.getElementById('jobCount').textContent = `${visibleCount} job${visibleCount !== 1 ? 's' : ''}`;
+        }
+
+        function clearSearch() {
+            document.getElementById('pickup').value = '';
+            document.getElementById('dropoff').value = '';
+            // When clearing search, simply make all hardcoded rows visible again
+            const rows = document.querySelectorAll('#jobPostList tr');
+            rows.forEach(row => {
+                row.style.display = '';
+            });
+            updateJobDisplay(); // Update counts based on all rows being visible
+        }
+
+        function viewJobDetails(jobId) {
+            // Implement job details view
+            alert(`Viewing details for job ID: ${jobId}`);
+            // You could redirect to a details page or show a modal
+        }
+    </script>
 
 </body>
 </html>
-
-
-

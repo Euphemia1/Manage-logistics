@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 header('Content-Type: application/json');
 
 // Database connection
@@ -23,4 +23,4 @@ while ($row = $result->fetch_assoc()) {
 
 echo json_encode($jobs);
 $conn->close();
-?>
+?> -->
