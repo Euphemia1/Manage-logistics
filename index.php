@@ -1,6 +1,4 @@
-<?php
-?>
-<!DOCTYPE html>
+<?php?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +6,6 @@
     <title>Nyamula Logistics - Your Trusted Partner for Seamless Shipping and Delivery</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-
         /* Reset and base styles */
         :root {
             --primary-color:rgb(43, 198, 82);
@@ -18,25 +15,21 @@
             --background: #f3f4f6;
             --white: #ffffff;
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: var(--text-color);
         }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1.5rem;
         }
-
         /* Navigation */
         .navbar {
             background-color: var(--white);
@@ -46,39 +39,33 @@
             top: 0;
             z-index: 1000;
         }
-
         .navbar .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             height: 80px;
         }
-
         .logo {
             display: flex;
             align-items: center;
             text-decoration: none;
         }
-
         .logo-image {
             height: 40px; /* Reduced from 50px */
             width: auto;
             display: block;
             object-fit: contain; /* Ensures the image maintains its aspect ratio */
         }
-
         @media (max-width: 768px) {
             .logo-image {
                 height: 30px; /* Reduced from 40px for mobile devices */
             }
         }
-
         .logo-text {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary-color);
         }
-
         @media (max-width: 768px) {
             .logo-image {
                 height: 30px;
@@ -87,28 +74,23 @@
                 font-size: 1.2rem;
             }
         }
-
         .nav-links {
             display: flex;
             align-items: center;
             gap: 2rem;
         }
-
         .nav-link {
             color: var(--text-color);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
         }
-
         .nav-link:hover {
             color: var(--primary-color);
         }
-
         .dropdown {
             position: relative;
         }
-
         .dropbtn {
             background: none;
             border: none;
@@ -119,7 +101,6 @@
             cursor: pointer;
             padding: 0.5rem 1rem;
         }
-
         .dropdown-content {
             display: none;
             position: absolute;
@@ -129,7 +110,6 @@
             border-radius: 0.5rem;
             overflow: hidden;
         }
-
         .dropdown-content a {
             color: var(--text-color);
             padding: 0.75rem 1rem;
@@ -137,15 +117,12 @@
             display: block;
             transition: background-color 0.3s ease;
         }
-
         .dropdown-content a:hover {
             background-color: var(--background);
         }
-
         .dropdown:hover .dropdown-content {
             display: block;
         }
-
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
@@ -154,21 +131,18 @@
             text-align: center;
             margin-top: 80px;
         }
-
         .hero h1 {
             font-size: 3rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
             line-height: 1.2;
         }
-
         .hero p {
             font-size: 1.25rem;
             max-width: 800px;
             margin: 0 auto 2rem;
             opacity: 0.9;
         }
-
         .cta-button {
             display: inline-block;
             background-color: var(--white);
@@ -179,24 +153,20 @@
             font-weight: 600;
             transition: transform 0.3s ease;
         }
-
         .cta-button:hover {
             transform: translateY(-2px);
         }
-
         /* Features Section */
         .features {
             padding: 5rem 0;
             background-color: var(--white);
         }
-
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
-
         .feature-card {
             text-align: center;
             padding: 2rem;
@@ -205,11 +175,9 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
         }
-
         .feature-card:hover {
             transform: translateY(-5px);
         }
-
         .feature-icon {
             width: 80px;
             height: 80px;
@@ -217,166 +185,234 @@
             border-radius: 50%;
             overflow: hidden;
         }
-
         .feature-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
         .feature-card h3 {
             color: var(--text-color);
             margin-bottom: 1rem;
             font-size: 1.25rem;
         }
-
         .feature-card p {
             color: var(--light-text);
         }
-
         /* About Section */
         .about {
             padding: 5rem 0;
             background-color: var(--background);
             text-align: center;
         }
-
         .about h2 {
             font-size: 2.5rem;
             margin-bottom: 2rem;
             color: var(--text-color);
         }
-
         .about p {
             max-width: 800px;
             margin: 0 auto;
             color: var(--light-text);
         }
         /* Team Section */
-.team {
-    padding: 5rem 0;
-    background-color: var(--white);
-}
+        .team {
+            padding: 5rem 0;
+            background-color: var(--white);
+        }
+        .team h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-color);
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+        .team-member {
+            text-align: center;
+            background-color: var(--white);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+        .team-member-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        .team-member-info {
+            padding: 1.5rem;
+        }
+        .team-member-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+        .team-member-title {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        .team-social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .team-social-link {
+            color: var(--light-text);
+            transition: color 0.3s ease;
+        }
+        .team-social-link:hover {
+            color: var(--primary-color);
+        }
+        @media (max-width: 768px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+        }
 
-.team h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-    color: var(--text-color);
-}
-
-.team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2.5rem;
-    margin-top: 2rem;
-}
-
-.team-member {
-    text-align: center;
-    background-color: var(--white);
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.team-member:hover {
-    transform: translateY(-5px);
-}
-
-.team-member-image {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-}
-
-.team-member-info {
-    padding: 1.5rem;
-}
-
-.team-member-name {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--text-color);
-    margin-bottom: 0.5rem;
-}
-
-.team-member-title {
-    color: var(--primary-color);
-    font-weight: 500;
-    margin-bottom: 1rem;
-}
-
-.team-social-links {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.team-social-link {
-    color: var(--light-text);
-    transition: color 0.3s ease;
-}
-
-.team-social-link:hover {
-    color: var(--primary-color);
-}
-
-@media (max-width: 768px) {
-    .team-grid {
-        grid-template-columns: 1fr;
-        padding: 0 1rem;
-    }
-}
-
+        /* Countries Carousel Section */
+        .countries-section {
+            padding: 5rem 0;
+            background-color: var(--background);
+            overflow: hidden;
+        }
+        .countries-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        .countries-section p {
+            text-align: center;
+            color: var(--light-text);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            background: var(--white);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem 0;
+        }
+        .carousel-track {
+            display: flex;
+            animation: scroll 30s linear infinite;
+            width: calc(200px * 22); /* 11 countries * 2 for seamless loop */
+        }
+        .carousel-track:hover {
+            animation-play-state: paused;
+        }
+        .country-item {
+            flex: 0 0 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            margin: 0 1rem;
+            background: var(--white);
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .country-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        .country-flag {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .country-name {
+            font-weight: 600;
+            color: var(--text-color);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-200px * 11));
+            }
+        }
+        @media (max-width: 768px) {
+            .countries-section h2 {
+                font-size: 2rem;
+            }
+            .country-item {
+                flex: 0 0 150px;
+                margin: 0 0.5rem;
+            }
+            .carousel-track {
+                width: calc(150px * 22);
+            }
+            @keyframes scroll {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(calc(-150px * 11));
+                }
+            }
+        }
 
         /* Contact Section */
         .contact {
             padding: 5rem 0;
             background-color: var(--white);
         }
-
         .contact h2 {
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 3rem;
         }
-
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
         }
-
         .contact-info {
             display: grid;
             gap: 2rem;
         }
-
         .contact-card {
             padding: 2rem;
             background-color: var(--background);
             border-radius: 1rem;
         }
-
         .contact-card h3 {
             color: var(--primary-color);
             margin-bottom: 1rem;
         }
-
         .contact-form {
             background-color: var(--white);
             padding: 2rem;
             border-radius: 1rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
         .form-group {
             margin-bottom: 1.5rem;
         }
-
         .form-group input,
         .form-group textarea {
             width: 100%;
@@ -385,12 +421,10 @@
             border-radius: 0.5rem;
             font-family: 'Inter', sans-serif;
         }
-
         .form-group textarea {
             height: 150px;
             resize: vertical;
         }
-
         .submit-button {
             background-color: var(--primary-color);
             color: var(--white);
@@ -402,30 +436,25 @@
             width: 100%;
             transition: background-color 0.3s ease;
         }
-
         .submit-button:hover {
             background-color: var(--secondary-color);
         }
-
         /* Footer */
         .footer {
             background-color: var(--text-color);
             color: var(--white);
             padding: 4rem 0 2rem;
         }
-
         .footer-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 3rem;
             margin-bottom: 3rem;
         }
-
         .footer-section h3 {
             color: var(--white);
             margin-bottom: 1.5rem;
         }
-
         .footer-section a {
             color: #9ca3af;
             text-decoration: none;
@@ -433,32 +462,26 @@
             margin-bottom: 0.75rem;
             transition: color 0.3s ease;
         }
-
         .footer-section a:hover {
             color: var(--white);
         }
-
         .social-links {
             display: flex;
             gap: 1rem;
         }
-
         .social-link {
             color: #9ca3af;
             text-decoration: none;
             transition: color 0.3s ease;
         }
-
         .social-link:hover {
             color: var(--white);
         }
-
         .footer-bottom {
             text-align: center;
             padding-top: 2rem;
             border-top: 1px solid #374151;
         }
-
         /* Mobile Navigation */
         .nav-toggle {
             display: none;
@@ -466,7 +489,6 @@
             gap: 6px;
             cursor: pointer;
         }
-
         .nav-toggle span {
             display: block;
             width: 25px;
@@ -474,13 +496,11 @@
             background-color: var(--text-color);
             transition: 0.3s;
         }
-
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-toggle {
                 display: flex;
             }
-
             .nav-links {
                 display: none;
                 position: absolute;
@@ -492,66 +512,53 @@
                 padding: 1rem;
                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
-
             .nav-links.active {
                 display: flex;
             }
-
             .dropdown-content {
                 position: static;
                 box-shadow: none;
                 display: none;
             }
-
             .dropdown:hover .dropdown-content {
                 display: none;
             }
-
             .hero {
                 padding: 6rem 0 4rem;
             }
-
             .hero h1 {
                 font-size: 2rem;
             }
-
             .contact-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
-
             .footer-grid {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
-
             .social-links {
                 justify-content: center;
             }
         }
-
         .site-title {
             font-size: 3.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
             line-height: 1.2;
         }
-
         .site-title .green {
             color: var(--primary-color);
         }
-
         .site-title .black {
             color: #000;
         }
-
         .hero h2 {
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
             line-height: 1.2;
         }
-
         @media (max-width: 768px) {
             .site-title {
                 font-size: 2.5rem;
@@ -569,7 +576,7 @@
             <a href="/" class="logo">
                 <div style="display: flex; align-items: center; gap: 1rem;">
                     <img src="./images/logo.png" alt="Nyamula Logistics" class="logo-image">
-              
+                              
                 </div>
             </a>
             <div class="nav-toggle">
@@ -610,8 +617,7 @@
             </h1>
             <h2>Your Trusted Partner for Seamless Shipping and Delivery</h2>
             <p>At Nyamula Logistics, we provide fast, reliable, and cost-effective shipping solutions tailored to your needs. With a network of trusted partners and real-time tracking, we ensure your goods are delivered securely and efficiently, every time.
-                
-            </p>
+                            </p>
             <a href="#services" class="cta-button">Learn More</a>
         </div>
     </section>
@@ -659,9 +665,9 @@
             <p>Nyamula Logistics is dedicated to providing seamless, efficient, and reliable logistics services. 
                 We provide a technology-driven platform that connects cargo owners with trusted and reliable small-scale truck operators, offering cost-effective and timely logistics solutions for businesses of all sizes.
                 Nyamula Logistics is a Zambian logistics company tackling the challenge of high carbon emissions in mining and agriculture. 
-                We aggregate small-scale truck operators and optimize their routes, while also developing a groundbreaking solution that combines fuel-efficient hardware retrofits for existing trucks with advanced carbon capture technology at mining sites.
-                 This integrated approach empowers small-scale operators to optimize their capacity and helps mining companies reduce their carbon footprint, enhancing operational efficiency and promoting sustainability. 
-                 By collaborating with a network of technology providers across the globe, we deliver cutting-edge solutions tailored to the African context, driving a greener future for the mining and agricultural sectors.</p>
+                We aggregate small-scale truck operators and optimize their routes, while also developing a groundbreaking solution that combines fuel-efficient hardware retrofits for existing trucks with advanced carbon capture technology at mining sites. 
+                This integrated approach empowers small-scale operators to optimize their capacity and helps mining companies reduce their carbon footprint, enhancing operational efficiency and promoting sustainability.  
+                By collaborating with a network of technology providers across the globe, we deliver cutting-edge solutions tailored to the African context, driving a greener future for the mining and agricultural sectors.</p>
         </div>
     </section>
 
@@ -679,8 +685,8 @@
                         <a href="https://www.linkedin.com/in/faith-mukumbiri-909b01105?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="team-social-link" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="10"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
                         <!-- <a href="#" class="team-social-link" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a> -->
                         <a href="https://www.facebook.com/share/15F2CcCCTW/" class="team-social-link" title="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-                         <a href="https://www.instagram.com/faffykue?igsh=dnNldXlzbG05MmI=" class="team-social-link" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a> 
-                        <!-- <a href="#" class="team-social-link" title="TikTok"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2H7a5 5 0 0 0-5 5v10a5 5 0 0 0 5 5h10a5 5 0 0 0 5-5V7a5 5 0 0 0-5-5Z"></path><path d="M12 12a5 5 0 0 1 5 5"></path><path d="M12 12v9"></path><path d="M12 12a5 5 0 0 0 5-5"></path></svg></a>  -->
+                         <a href="https://www.instagram.com/faffykue?igsh=dnNldXlzbG05MmI=" class="team-social-link" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                         <!-- <a href="#" class="team-social-link" title="TikTok"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2H7a5 5 0 0 0-5 5v10a5 5 0 0 0 5 5h10a5 5 0 0 0 5-5V7a5 5 0 0 0-5-5Z"></path><path d="M12 12a5 5 0 0 1 5 5"></path><path d="M12 12v9"></path><path d="M12 12a5 5 0 0 0 5-5"></path></svg></a>  -->
                     </div>
                 </div>
             </div>
@@ -712,7 +718,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="team-member">
                 <img src="./images/Mtaja.jpg" alt="" class="team-member-image">
                 <div class="team-member-info">
@@ -727,7 +732,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="team-member">
                 <img src="./images/beatrice.jpg" alt="" class="team-member-image">
                 <div class="team-member-info">
@@ -737,7 +741,6 @@
                         <a href="#" class="team-social-link" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
                         <!-- <a href="#" class="team-social-link" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a> -->
                         <a href="#" class="team-social-link" title="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
-
                     </div>
                 </div>
             </div>
@@ -745,7 +748,107 @@
     </div>
 </section>
 
-
+    <!-- Countries We Deliver To Section -->
+    <section class="countries-section">
+        <div class="container">
+            <h2>Countries We Deliver To</h2>
+            <p>Trusted logistics solutions across Africa - connecting businesses and communities</p>
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <!-- First set of countries -->
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/bw.png" alt="Botswana Flag" class="country-flag">
+                        <div class="country-name">Botswana</div>
+                    </div>
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/cd.png" alt="Congo Flag" class="country-flag">
+                        <div class="country-name">Congo</div>
+                    </div>
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/ke.png" alt="Kenya Flag" class="country-flag">
+                        <div class="country-name">Kenya</div>
+                    </div>
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/mw.png" alt="Malawi Flag" class="country-flag">
+                        <div class="country-name">Malawi</div>
+                    </div>
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/mz.png" alt="Mozambique Flag" class="country-flag">
+                        <div class="country-name">Mozambique</div>
+                    </div>
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/na.png" alt="Namibia Flag" class="country-flag">
+                        <div class="country-name">Namibia</div>
+                    </div>
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/rw.png" alt="Rwanda Flag" class="country-flag">
+                        <div class="country-name">Rwanda</div>
+                    </div>
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/za.png" alt="South Africa Flag" class="country-flag">
+                        <div class="country-name">South Africa</div>
+                    </div>
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/tz.png" alt="Tanzania Flag" class="country-flag">
+                        <div class="country-name">Tanzania</div>
+                    </div>
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/zm.png" alt="Zambia Flag" class="country-flag">
+                        <div class="country-name">Zambia</div>
+                    </div>
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/zw.png" alt="Zimbabwe Flag" class="country-flag">
+                        <div class="country-name">Zimbabwe</div>
+                    </div>
+                    <!-- Duplicate set for seamless loop -->
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/bw.png" alt="Botswana Flag" class="country-flag">
+                        <div class="country-name">Botswana</div>
+                    </div>
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/cd.png" alt="Congo Flag" class="country-flag">
+                        <div class="country-name">Congo</div>
+                    </div>
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/ke.png" alt="Kenya Flag" class="country-flag">
+                        <div class="country-name">Kenya</div>
+                    </div>
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/mw.png" alt="Malawi Flag" class="country-flag">
+                        <div class="country-name">Malawi</div>
+                    </div>
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/mz.png" alt="Mozambique Flag" class="country-flag">
+                        <div class="country-name">Mozambique</div>
+                    </div>
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/na.png" alt="Namibia Flag" class="country-flag">
+                        <div class="country-name">Namibia</div>
+                    </div>
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/rw.png" alt="Rwanda Flag" class="country-flag">
+                        <div class="country-name">Rwanda</div>
+                    </div>
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/za.png" alt="South Africa Flag" class="country-flag">
+                        <div class="country-name">South Africa</div>
+                    </div>
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/tz.png" alt="Tanzania Flag" class="country-flag">
+                        <div class="country-name">Tanzania</div>
+                    </div>
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/zm.png" alt="Zambia Flag" class="country-flag">
+                        <div class="country-name">Zambia</div>
+                    </div>
+                    <div class="country-item">
+                        <img src="https://flagcdn.com/w320/zw.png" alt="Zimbabwe Flag" class="country-flag">
+                        <div class="country-name">Zimbabwe</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
@@ -808,7 +911,7 @@
                     <div class="social-links">
                         <a href="https://www.facebook.com/nyamulalogistics" class="social-link">Facebook</a>
                         <a href="https://www.linkedin.com/company/nyamula/" class="social-link">LinkedIn</a>
-                       
+                                           
                     </div>
                 </div>
             </div>
@@ -852,25 +955,6 @@
                 });
             }
         });
-
-
-//         document.querySelector('.contact-form').addEventListener('submit', function(e) {
-//     e.preventDefault();
-//     fetch('your-server-endpoint', {
-//         method: 'POST',
-//         body: JSON.stringify({
-//             name: this.name.value,
-//             email: this.email.value,
-//             message: this.message.value
-//         }),
-//         headers: {
-//             'Content-Type': 'application/json'
-//         }
-//     })
-//     .then(response => alert('Message sent!'))
-//     .catch(error => alert('Error sending message'));
-// });
     </script>
 </body>
 </html>
-
