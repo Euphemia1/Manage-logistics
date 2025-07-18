@@ -755,7 +755,7 @@
     <!-- Countries We Deliver To Section -->
     <section class="countries-section">
         <div class="container">
-            <h2>Countries We Deliverd To</h2>
+            <h2>Countries We Delivered To</h2>
             <p>Trusted logistics solutions across Africa - connecting businesses and communities</p>
             <div class="carousel-container">
                 <div class="carousel-track">

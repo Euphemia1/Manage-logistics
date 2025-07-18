@@ -136,3 +136,4 @@ if ($user) {
 header("Location: forgot_password.php?type=" . urlencode($type));
 exit();
 
+
