@@ -917,7 +917,7 @@
             });
         });
 
-        // Close dropdowns when clicking outside
+        
         document.addEventListener('click', function(e) {
             if (window.innerWidth <= 768) { // Only apply this logic on mobile
                 const isClickInsideDropdown = e.target.closest('.dropdown');
