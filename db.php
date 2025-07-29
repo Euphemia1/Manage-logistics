@@ -1,9 +1,9 @@
 <?php
 // Database connection configuration
 $db_host = 'localhost';
-$db_user = 'u962968097_nyamuladb';
-$db_pass = 'p@55w07d@1#';
-$db_name = 'u962968097_nyamula'; 
+$db_user = 'root';
+$db_pass = '';
+$db_name = 'logistics'; 
 
 // Create the database connection
 $conn = new mysqli($db_host, 
