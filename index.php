@@ -932,12 +932,12 @@
             }
         });
 
-        // Resize handler to reset mobile menu state and dropdowns
+        
         window.addEventListener('resize', function() {
             if (window.innerWidth > 768) {
                 document.querySelector('.nav-links').classList.remove('active');
                 document.querySelectorAll('.dropdown-content').forEach(function(content) {
-                    content.classList.remove('active'); // Ensure dropdowns are closed on desktop
+                    content.classList.remove('active'); 
                 });
             }
         });
