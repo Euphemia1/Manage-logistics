@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,57 +7,107 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://unpkg.com/lucide-icons/dist/umd/lucide-icons.js" rel="stylesheet">
   <script src="https://unpkg.com/lucide-icons" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background: linear-gradient(135deg, #e0ffe0 0%, #f0fff0 100%); /* Light green gradient */
+        color: #333;
+    }
+    .signup-card {
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 128, 0, 0.1); /* Subtle green border */
+    }
+    .signup-card:hover {
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+    .input-field {
+        border-color: #d1d5db; /* Default border color */
+        transition: all 0.2s ease-in-out;
+    }
+    .input-field:focus {
+        outline: none;
+        border-color: #4CAF50; /* Green border on focus */
+        box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2); /* Green glow on focus */
+    }
+    .btn-primary {
+        background-color: #4CAF50; /* Green button */
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .btn-primary:hover {
+        background-color: #45a049; /* Darker green on hover */
+        transform: translateY(-2px);
+    }
+    .btn-primary:active {
+        transform: translateY(0);
+    }
+    .text-link {
+        color: #2e7d32; /* Darker green for links */
+        transition: color 0.3s ease;
+    }
+    .text-link:hover {
+        color: #1b5e20; /* Even darker green on hover */
+        text-decoration: underline;
+    }
+    .feature-card {
+        background-color: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(5px);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+  </style>
 </head>
 
-
-<body class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center p-4">
-  <div class="max-w-6xl w-full grid md:grid-cols-2 gap-8 items-center">
-    <!-- Left side - Hero Section -->
-    <div class="hidden md:flex flex-col space-y-6 p-8">
-      <div class="flex items-center space-x-3">
-        <i data-lucide="truck" class="w-10 h-10 text-blue-600"></i>
-        <h1 class="text-2xl font-bold text-gray-900">Nyamula Logistics</h1>
+<body class="min-h-screen flex items-center justify-center p-4">
+  <div class="max-w-6xl w-full grid md:grid-cols-2 gap-10 items-center">
+    <div class="hidden md:flex flex-col space-y-7 p-8 animate-fade-in-left">
+      <div class="flex items-center space-x-4">
+        <i data-lucide="truck" class="w-12 h-12 text-green-600"></i>
+        <h1 class="text-3xl font-bold text-gray-900">Nyamula Logistics</h1>
       </div>
       
-      <h2 class="text-4xl font-bold text-gray-900 leading-tight">
-        Transform Your Cargo Management Experience
+      <h2 class="text-5xl font-bold text-gray-900 leading-tight">
+        Empowering Transporters for Growth
       </h2>
       
-      <p class="text-lg text-gray-600">
-        Join our network of successful Transporters and experience seamless logistics management with real-time tracking and professional support.
+      <p class="text-lg text-gray-700">
+        Join our network of professional transporters and gain access to a seamless system for managing your logistics, with real-time tracking and dedicated support.
       </p>
 
-      <div class="grid grid-cols-2 gap-4 mt-8">
-        <div class="bg-white/80 backdrop-blur-sm p-4 rounded-lg">
-          <h3 class="font-semibold text-gray-900">Global Reach</h3>
-          <p class="text-sm text-gray-600">Access to international shipping routes</p>
+      <div class="grid grid-cols-2 gap-5 mt-10">
+        <div class="feature-card p-5 rounded-lg shadow-sm">
+          <h3 class="font-semibold text-gray-900 mb-1">Expanded Network</h3>
+          <p class="text-sm text-gray-600">Connect with more cargo opportunities</p>
         </div>
-        <div class="bg-white/80 backdrop-blur-sm p-4 rounded-lg">
-          <h3 class="font-semibold text-gray-900">24/7 Support</h3>
-          <p class="text-sm text-gray-600">Round-the-clock customer service</p>
+        <div class="feature-card p-5 rounded-lg shadow-sm">
+          <h3 class="font-semibold text-gray-900 mb-1">Efficient Operations</h3>
+          <p class="text-sm text-gray-600">Streamline your daily logistics</p>
         </div>
-        <div class="bg-white/80 backdrop-blur-sm p-4 rounded-lg">
-          <h3 class="font-semibold text-gray-900">Real-time Tracking</h3>
-          <p class="text-sm text-gray-600">Monitor your cargo location live</p>
+        <div class="feature-card p-5 rounded-lg shadow-sm">
+          <h3 class="font-semibold text-gray-900 mb-1">Real-time Visibility</h3>
+          <p class="text-sm text-gray-600">Monitor your fleet and cargo live</p>
         </div>
-        <div class="bg-white/80 backdrop-blur-sm p-4 rounded-lg">
-          <h3 class="font-semibold text-gray-900">Secure Platform</h3>
-          <p class="text-sm text-gray-600">Enhanced security protocols</p>
+        <div class="feature-card p-5 rounded-lg shadow-sm">
+          <h3 class="font-semibold text-gray-900 mb-1">Secure & Reliable</h3>
+          <p class="text-sm text-gray-600">Robust platform for your business</p>
         </div>
       </div>
     </div>
 
-    <!-- Right side - Sign Up Form -->
-    <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10">
+    <div class="signup-card bg-white rounded-2xl p-8 md:p-10 animate-fade-in-right">
       <div class="mb-8 text-center">
-        <h2 class="text-2xl font-bold text-gray-900 mb-2">Transporter Signup</h2>
+        <h2 class="text-3xl font-bold text-gray-900 mb-2">Transporter Signup</h2>
         <p class="text-gray-600">Create your account to get started</p>
       </div>
 
       <form action="transporter-signup.php" method="POST" class="space-y-6">
-        <div class="space-y-4">
+        <div class="space-y-5">
           <div>
-            <label for="cargo_owner_name" class="block text-sm font-medium text-gray-700 mb-1">
+            <label for="transporter_name" class="block text-sm font-medium text-gray-700 mb-1.5">
               Full Name
             </label>
             <div class="relative">
@@ -67,9 +116,9 @@
               </div>
               <input
                 type="text"
-                id="cargo_owner_name"
+                id="transporter_name"
                 name="transporter_name"
-                class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                class="input-field block w-full pl-10 pr-3 py-2.5 border rounded-lg"
                 placeholder="John Doe"
                 required
               >
@@ -77,7 +126,7 @@
           </div>
 
           <div>
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-1.5">
               Email Address
             </label>
             <div class="relative">
@@ -88,7 +137,7 @@
                 type="email"
                 id="email"
                 name="email"
-                class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                class="input-field block w-full pl-10 pr-3 py-2.5 border rounded-lg"
                 placeholder="you@company.com"
                 required
               >
@@ -96,7 +145,7 @@
           </div>
 
           <div>
-            <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
+            <label for="password" class="block text-sm font-medium text-gray-700 mb-1.5">
               Password
             </label>
             <div class="relative">
@@ -107,7 +156,7 @@
                 type="password"
                 id="password"
                 name="password"
-                class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                class="input-field block w-full pl-10 pr-3 py-2.5 border rounded-lg"
                 placeholder="••••••••"
                 required
               >
@@ -115,7 +164,7 @@
           </div>
 
           <div>
-            <label for="company" class="block text-sm font-medium text-gray-700 mb-1">
+            <label for="company" class="block text-sm font-medium text-gray-700 mb-1.5">
               Company Name
             </label>
             <div class="relative">
@@ -126,15 +175,15 @@
                 type="text"
                 id="company"
                 name="company"
-                class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Your Company Ltd"
+                class="input-field block w-full pl-10 pr-3 py-2.5 border rounded-lg"
+                placeholder="Your Company Logistics"
                 required
               >
             </div>
           </div>
 
           <div>
-            <label for="phone_number" class="block text-sm font-medium text-gray-700 mb-1">
+            <label for="phone_number" class="block text-sm font-medium text-gray-700 mb-1.5">
               Phone Number
             </label>
             <div class="relative">
@@ -145,7 +194,7 @@
                 type="tel"
                 id="phone_number"
                 name="phone_number"
-                class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                class="input-field block w-full pl-10 pr-3 py-2.5 border rounded-lg"
                 placeholder="+1 (555) 000-0000"
                 required
               >
@@ -155,15 +204,15 @@
 
         <button
           type="submit"
-          class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+          class="w-full btn-primary text-white py-3.5 px-4 rounded-lg font-semibold shadow-md hover:shadow-lg"
         >
           Create Account
         </button>
       </form>
 
-      <p class="mt-6 text-center text-gray-600">
+      <p class="mt-8 text-center text-gray-600">
         Already have an account?
-        <a href="transporter-login.php" class="text-blue-600 hover:text-blue-700 font-medium">
+        <a href="transporter-login.php" class="text-link font-medium hover:underline">
           Sign in
         </a>
       </p>
@@ -176,5 +225,3 @@
   </script>
 </body>
 </html>
-
-
