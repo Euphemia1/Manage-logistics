@@ -129,15 +129,7 @@
         </thead>
         <tbody>
           
-            <tr>
-                <td><!-- Order ID --></td>
-                <td><!-- Cargo Owner Name --></td>
-                <td><!-- Cargo Type --></td>
-                <td><!-- Weight --></td>
- <td><!-- Origin --></td>
-                <td><!-- Dimensions --></td>
-                <td><!-- Start Date --></td>
-                <td>
+        
                     <a href="edit.php?order_id=<!-- Order ID -->" class="button edit">Edit</a>
                     <a href="delete.php?order_id=<!-- Order ID -->" class="button delete">Delete</a>
                 </td>
