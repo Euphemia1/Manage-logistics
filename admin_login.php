@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'db.php'; // Include your database connection
+require 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($admin && password_verify($password, $admin['password'])) {
         $_SESSION['admin_id'] = $admin['id'];
-        header('Location: admin-dashboard.php'); // Redirect to admin dashboard
+        header('Location: admin-dashboard.php'); 
         exit();
     } else {
         echo "Invalid credentials!";
