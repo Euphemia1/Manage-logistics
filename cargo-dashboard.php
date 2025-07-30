@@ -1420,7 +1420,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   })
 
-  // Handle "Other" cargo type selection
   document.getElementById("otherType").addEventListener("change", function () {
     const customTypeContainer = document.getElementById("customTypeContainer")
     if (this.checked) {
@@ -1429,8 +1428,6 @@ document.addEventListener("DOMContentLoaded", () => {
       customTypeContainer.classList.add("d-none")
     }
   })
-
-  // Handle specific date selection
   document.getElementById("pickupDate").addEventListener("change", function () {
     const specificDateInput = document.getElementById("specificDate")
     if (this.value === "specific") {
@@ -1442,7 +1439,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })
 
-  // Handle current location buttons
   document.querySelectorAll(".use-current-location").forEach((button) => {
     button.addEventListener("click", function () {
       const inputField = this.closest(".input-group").querySelector("input")
@@ -1450,8 +1446,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
-            // For a real implementation, you would use a geocoding service
-            // to convert coordinates to an address
             inputField.value = `${position.coords.latitude}, ${position.coords.longitude}`
             inputField.classList.remove("is-invalid")
           },
@@ -1466,7 +1460,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   })
 
-  // Helper function to show alerts
   function showAlert(message, type) {
     formAlertPlaceholder.innerHTML = `
       <div class="alert alert-${type} alert-dismissible fade show" role="alert">
@@ -1501,21 +1494,14 @@ class CargoManager {
       )
     }
 
-   
-
     const refreshBtn = document.getElementById("refreshCargosBtn")
     if (refreshBtn) {
       refreshBtn.addEventListener("click", () => this.refreshCargoList())
     }
-
-   
-
-
     document.querySelectorAll(".cargo-filter-btn").forEach((btn) => {
       btn.addEventListener("click", (e) => this.handleFilter(e.target.dataset.filter))
     })
   }
-
   setupNavigation() {
     const navButtons = document.querySelectorAll("[data-target-section]")
     navButtons.forEach((button) => {
@@ -1532,20 +1518,13 @@ class CargoManager {
   }
 
   showSection(sectionId) {
-
-
     document.querySelectorAll(".dashboard-section").forEach((section) => {
       section.classList.add("d-none")
     })
-
-   
-
     const targetSection = document.getElementById(sectionId)
     if (targetSection) {
       targetSection.classList.remove("d-none")
     }
-
-  
 
     document.querySelectorAll("[data-target-section]").forEach((btn) => {
       btn.classList.remove("active")
@@ -1566,7 +1545,6 @@ class CargoManager {
         limit: this.itemsPerPage,
         search: this.searchTerm,
       })
-
       const response = await fetch(`api/cargo-list.php?${params}`)
       const result = await response.json()
 
@@ -1709,9 +1687,6 @@ class CargoManager {
                 </li>
             `
     }
-
-   
-
     paginationHTML += `
             <li class="page-item ${!pagination.has_next ? "disabled" : ""}">
                 <button class="page-link" onclick="cargoManager.loadCargoList(${pagination.current_page + 1})" 
@@ -1720,7 +1695,6 @@ class CargoManager {
                 </button>
             </li>
         `
-
     paginationHTML += `</ul></nav>`
     container.innerHTML = paginationHTML
   }
@@ -1868,14 +1842,10 @@ class CargoManager {
                 </div>
             </div>
         `
-
-    // Remove existing modal if any
     const existingModal = document.getElementById("cargoDetailsModal")
     if (existingModal) {
       existingModal.remove()
     }
-
-    // Add modal to DOM and show
     document.body.insertAdjacentHTML("beforeend", modalHTML)
     const modal = new bootstrap.Modal(document.getElementById("cargoDetailsModal"))
     modal.show()
