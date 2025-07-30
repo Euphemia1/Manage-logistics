@@ -1875,11 +1875,9 @@ class CargoManager {
   }
 
   editCargo(cargoId) {
-    // Implement edit functionality
+
     this.showAlert("Edit functionality coming soon!", "info")
   }
-
-  // Utility methods
   getStatusClass(status) {
     const statusClasses = {
       pending: "bg-warning text-dark",
@@ -1930,8 +1928,6 @@ class CargoManager {
         `
 
     alertContainer.innerHTML = alertHTML
-
-    // Auto-dismiss after 5 seconds
     setTimeout(() => {
       const alert = alertContainer.querySelector(".alert")
       if (alert) {
@@ -1942,12 +1938,9 @@ class CargoManager {
   }
 }
 
-// Initialize the cargo manager when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
   window.cargoManager = new CargoManager()
 })
-
-
     </script>
 </body>
 </html>
