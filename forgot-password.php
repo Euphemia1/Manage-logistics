@@ -15,7 +15,7 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     $_SESSION['reset_message'] = "Database connection failed: " . $e->getMessage();
-    header("Location: forgot-password.php");
+    header("Location: forgot_password.php");
     exit();
 }
 
@@ -25,20 +25,20 @@ $type = $_POST['type'] ?? '';
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $_SESSION['reset_message'] = "Please enter a valid email address.";
-    header("Location: forgot-password.php?type=" . urlencode($type));
+    header("Location: forgot_password.php?type=" . urlencode($type));
     exit();
 }
 
 if (empty($type)) {
     $_SESSION['reset_message'] = "Please select a user type.";
-    header("Location: forgot-password.php");
+    header("Location: forgot_password.php");
     exit();
 }
 
 $validTypes = ['cargo_owners', 'transporters'];
 if (!in_array($type, $validTypes)) {
     $_SESSION['reset_message'] = "Invalid user type selected.";
-    header("Location: forgot-password.php");
+    header("Location: forgot_password.php");
     exit();
 }
 $table = $type; 
@@ -56,7 +56,7 @@ if ($user) {
     } catch (PDOException $e) {
         error_log("Database error: " . $e->getMessage());
         $_SESSION['reset_message'] = "Failed to store reset token.";
-        header("Location: forgot-password.php?type=" . urlencode($type));
+        header("Location: forgot_password.php?type=" . urlencode($type));
         exit();
     }
 
@@ -65,7 +65,7 @@ if ($user) {
     
     if ($isLocalhost) {
        
-        $resetLink = "http://localhost/nyamula-logistics/Frontend/reset-password.php?" . http_build_query([
+        $resetLink = "http://localhost/nyamula-logistics/reset-password.php?" . http_build_query([
             'token' => $token,
             'email' => $email,
             'type' => $type
@@ -73,7 +73,7 @@ if ($user) {
     } else {
       
         $scheme = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
-        $resetLink = "$scheme://{$_SERVER['HTTP_HOST']}/Frontend/reset-password.php?" . http_build_query([
+        $resetLink = "$scheme://{$_SERVER['HTTP_HOST']} reset-password.php?" . http_build_query([
             'token' => $token,
             'email' => $email,
             'type' => $type
