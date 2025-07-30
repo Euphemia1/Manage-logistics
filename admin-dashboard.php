@@ -402,10 +402,10 @@ $conn->close();
      
         countElement.classList.add('updated');
         
-        // Update the count
+      
         countElement.textContent = newCount;
         
-        // Remove the updated class after animation completes
+    
         setTimeout(() => {
           countElement.classList.remove('updated');
         }, 1000);
