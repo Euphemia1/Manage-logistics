@@ -1,11 +1,10 @@
 <?php
 session_start();
-// Check if the user is logged in
 if (!isset($_SESSION['user_name'])) {
-    header("Location: cargo-owner-login.php"); // Redirect to login if not logged in
+    header("Location: cargo-owner-login.php"); 
     exit();
 }
-// Update last activity time on every page load
+
 $_SESSION['last_activity'] = time();
 ?>
 
@@ -15,7 +14,7 @@ $_SESSION['last_activity'] = time();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cargo Owner Dashboard - Nyamula Logistics</title>
-    <!-- Bootstrap CSS -->
+   
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
