@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Reset and base styles */
+        
         :root {
             --primary-color: #2BC652;
             --primary-dark: #229944;
@@ -45,7 +45,7 @@
             padding: 0 1.5rem;
         }
 
-        /* Navigation */
+      
         .navbar {
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -210,7 +210,7 @@
             display: block;
         }
 
-        /* Hero Section */
+       
         .hero {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: var(--white);
