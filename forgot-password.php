@@ -39,27 +39,22 @@ if (empty($type)) {
     exit();
 }
 
-// Validate user type
+
 $validTypes = ['cargo_owners', 'transporters'];
 if (!in_array($type, $validTypes)) {
     $_SESSION['reset_message'] = "Invalid user type selected.";
     header("Location: forgot-password.php");
     exit();
 }
-
-// Determine which table to query based on user type
-$table = $type; // Since we're now using the exact table names
-
-// Check if email exists in the correct table
+$table = $type; 
 $stmt = $pdo->prepare("SELECT email FROM $table WHERE email = ?");
 $stmt->execute([$email]);
 $user = $stmt->fetch();
 
 if ($user) {
     $token = bin2hex(random_bytes(32));
-    $expires = date('Y-m-d H:i:s', time() + 3600); // 1 hour expiration
+    $expires = date('Y-m-d H:i:s', time() + 3600); 
     
-    // Store token
     $stmt = $pdo->prepare("INSERT INTO password_resets (email, token, expires, user_type, created_at) VALUES (?, ?, ?, ?, NOW())");
     try {
         $stmt->execute([$email, $token, $expires, $type]);
