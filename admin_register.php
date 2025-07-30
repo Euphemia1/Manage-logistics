@@ -117,7 +117,7 @@
         document.getElementById('adminRegisterForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Client-side validation
+          
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
             
@@ -126,7 +126,7 @@
                 return;
             }
             
-            // Submit the form
+       
             const formData = new FormData(this);
             
             try {
