@@ -1,18 +1,18 @@
 <?php
-require 'db.php'; // Include your database connection
+require 'db.php'; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get the posted data
+  
     $admin_username = trim($_POST['admin_username']);
     $admin_password = trim($_POST['admin_password']);
 
-    // Prepare and execute a query to check the admin credentials
+  
     $stmt = $conn->prepare("SELECT password FROM admins WHERE username = ?");
     $stmt->bind_param("s", $admin_username);
     $stmt->execute();
     $stmt->store_result();
 
-    // Check if the admin exists
+  
     if ($stmt->num_rows > 0) {
         $stmt->bind_result($hashed_password);
         $stmt->fetch();
