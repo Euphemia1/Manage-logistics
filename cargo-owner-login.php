@@ -49,17 +49,17 @@ ini_set('display_errors', 1);
             transform: translateY(0);
         }
         .text-link {
-            color: #2e7d32; /* Darker green for links */
+            color: #2e7d32; 
             transition: color 0.3s ease;
         }
         .text-link:hover {
-            color: #1b5e20; /* Even darker green on hover */
+            color: #1b5e20; 
             text-decoration: underline;
         }
         .alert-error {
-            background-color: #ffebee; /* Light red */
-            border-color: #ef9a9a; /* Red border */
-            color: #c62828; /* Dark red text */
+            background-color: #ffebee; 
+            border-color: #ef9a9a;
+            color: #c62828; 
         }
     </style>
 </head>
