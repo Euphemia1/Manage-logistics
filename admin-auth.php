@@ -17,9 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_result($hashed_password);
         $stmt->fetch();
 
-        // Verify the password
+        
         if (password_verify($admin_password, $hashed_password)) {
-            // Start a session and set session variables
+           
             session_start();
             $_SESSION['admin_username'] = $admin_username;
 
