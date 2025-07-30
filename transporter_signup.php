@@ -212,7 +212,7 @@
 
       <p class="mt-8 text-center text-gray-600">
         Already have an account?
-        <a href="transporter-login.php" class="text-link font-medium hover:underline">
+        <a href="transporter_login.php" class="text-link font-medium hover:underline">
           Sign in
         </a>
       </p>
@@ -220,7 +220,6 @@
   </div>
 
   <script>
-    // Initialize Lucide icons
     lucide.createIcons();
   </script>
 </body>
