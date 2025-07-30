@@ -893,7 +893,7 @@
             }
         }
 
-        /* Scroll animations */
+    
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -905,7 +905,7 @@
             transform: translateY(0);
         }
 
-        /* Loading animation */
+      
         .loading {
             opacity: 0;
             animation: fadeIn 0.6s ease forwards;
