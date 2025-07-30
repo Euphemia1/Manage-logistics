@@ -66,7 +66,7 @@ $_SESSION['last_activity'] = time();
             transition: all 0.3s;
         }
         
-        /* Card styles */
+       
         .dashboard-card {
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
@@ -77,8 +77,7 @@ $_SESSION['last_activity'] = time();
         .dashboard-card:hover {
             transform: translateY(-5px);
         }
-        
-        /* Stats cards */
+      
         .stats-card {
             border-left: 4px solid;
             padding: 15px;
@@ -96,7 +95,7 @@ $_SESSION['last_activity'] = time();
             border-left-color: #6f42c1;
         }
         
-        /* Status badges */
+     
         .badge-available {
             background-color: #cce5ff;
             color: #004085;
@@ -112,7 +111,7 @@ $_SESSION['last_activity'] = time();
             color: #155724;
         }
         
-        /* Mobile sidebar toggle */
+       
         #sidebarCollapse {
             display: none;
         }
