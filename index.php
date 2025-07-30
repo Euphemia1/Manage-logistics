@@ -1418,7 +1418,7 @@
             }, 3000);
         });
 
-        // Add loading states to buttons
+        
         document.querySelectorAll('.cta-button, .submit-button').forEach(button => {
             button.addEventListener('click', function() {
                 this.style.transform = 'scale(0.98)';
@@ -1430,3 +1430,4 @@
     </script>
 </body>
 </html>
+
