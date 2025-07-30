@@ -36,18 +36,18 @@
         transition: background-color 0.3s ease, transform 0.2s ease;
     }
     .btn-primary:hover {
-        background-color: #45a049; /* Darker green on hover */
+        background-color: #45a049; 
         transform: translateY(-2px);
     }
     .btn-primary:active {
         transform: translateY(0);
     }
     .text-link {
-        color: #2e7d32; /* Darker green for links */
+        color: #2e7d32; 
         transition: color 0.3s ease;
     }
     .text-link:hover {
-        color: #1b5e20; /* Even darker green on hover */
+        color: #1b5e20; 
         text-decoration: underline;
     }
     .feature-card {
@@ -124,7 +124,6 @@
               >
             </div>
           </div>
-
           <div>
             <label for="email" class="block text-sm font-medium text-gray-700 mb-1.5">
               Email Address
@@ -143,7 +142,6 @@
               >
             </div>
           </div>
-
           <div>
             <label for="password" class="block text-sm font-medium text-gray-700 mb-1.5">
               Password
@@ -162,7 +160,6 @@
               >
             </div>
           </div>
-
           <div>
             <label for="company" class="block text-sm font-medium text-gray-700 mb-1.5">
               Company Name
