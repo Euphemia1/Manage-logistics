@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 
-// Database configuration
+
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
@@ -9,13 +9,13 @@ define('DB_NAME', 'logistics');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        // Get form data
+        
         $username = $_POST['username'] ?? '';
         $email = $_POST['email'] ?? '';
         $password = $_POST['password'] ?? '';
         $confirmPassword = $_POST['confirmPassword'] ?? '';
         
-        // Validate input
+       
         if (empty($username) || empty($email) || empty($password) || empty($confirmPassword)) {
             throw new Exception('All fields are required');
         }
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             throw new Exception('Passwords do not match');
         }
         
-        // Connect to database
+      
         $pdo = new PDO(
             "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME,
             DB_USER,
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ]
         );
         
-        // Check if username/email exists
+       
         $stmt = $pdo->prepare("SELECT id FROM admins WHERE username = ? OR email = ?");
         $stmt->execute([$username, $email]);
         
