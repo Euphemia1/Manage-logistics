@@ -587,20 +587,17 @@ $_SESSION['last_activity'] = time();
         </div>
     </div>
 
-
-
-    <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Get all sections
+         
             const homeSection = document.getElementById('homeSection');
             const postCargoSection = document.getElementById('postCargoSection');
             const postedCargosSection = document.getElementById('postedCargosSection');
             const settingsSection = document.getElementById('settingsSection');
             
-            // Get all navigation links
+          
             const homeLink = document.getElementById('homeLink');
             const postCargoLink = document.getElementById('postCargoLink');
             const viewPostedCargosLink = document.getElementById('viewPostedCargosLink');
@@ -610,7 +607,6 @@ $_SESSION['last_activity'] = time();
             const refreshCargosBtn = document.getElementById('refreshCargos');
             const sidebarCollapse = document.getElementById('sidebarCollapse');
             
-            // Get form and cargo list elements
             const postCargoForm = document.getElementById('postCargoForm');
             const cargoList = document.getElementById('cargoList');
             const cargoLoader = document.getElementById('cargoLoader');
@@ -619,19 +615,16 @@ $_SESSION['last_activity'] = time();
             const recentActivity = document.getElementById('recentActivity');
             const formAlertPlaceholder = document.getElementById('formAlertPlaceholder');
             
-            // Dashboard counters
             const cargoCount = document.getElementById('cargoCount');
             const availableCount = document.getElementById('availableCount');
             const inTransitCount = document.getElementById('inTransitCount');
 
-            // Store all fetched cargos for client-side filtering
             let allFetchedCargos = [];
             let cargoDetailsModalInstance = null;
             if (document.getElementById('cargoDetailsModal')) {
                  cargoDetailsModalInstance = new bootstrap.Modal(document.getElementById('cargoDetailsModal'));
             }
             
-            // Toggle sidebar on mobile
             sidebarCollapse.addEventListener('click', function() {
                 const sidebar = document.getElementById('sidebar');
                 const mainContent = document.querySelector('.main-content');
@@ -640,7 +633,6 @@ $_SESSION['last_activity'] = time();
                 mainContent.classList.toggle('active');
             });
             
-            // Function to show a specific section and hide others
             function showSection(section) {
                 homeSection.classList.add('d-none');
                 postCargoSection.classList.add('d-none');
@@ -687,9 +679,7 @@ $_SESSION['last_activity'] = time();
                     }
                 }
             }
-
-
-
+            
             function showAlert(message, type, placeholderId = 'formAlertPlaceholder') {
                 const alertContainer = document.getElementById(placeholderId);
                 if (alertContainer) {
