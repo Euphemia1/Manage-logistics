@@ -1,8 +1,6 @@
 <?php
-// Include database connection
 require_once 'db.php';
 
-// Function to get count from a table
 function getCount($conn, $table) {
     $query = "SELECT COUNT(*) as count FROM $table";
     $result = $conn->query($query);
@@ -14,12 +12,12 @@ function getCount($conn, $table) {
     
     return 0;
 }
-// Get counts from database
+
 $cargoOwnersCount = getCount($conn, 'cargo_owners');
 $transportersCount = getCount($conn, 'transporters');
 $ordersCount = getCount($conn, 'jobs');
 
-// Close connection
+
 $conn->close();
 ?>
 
@@ -340,7 +338,7 @@ $conn->close();
       </div>
     </div>
 
-    <!-- Dashboard Summary Cards -->
+   
     <div class="dashboard-cards">
       <div class="dashboard-card cargo-owners">
         <div class="icon">
@@ -373,56 +371,9 @@ $conn->close();
       </div>
     </div>
 
-    <!-- Recent Activity Card
-    <div class="card">
-      <h3><i class="fas fa-chart-line"></i> Recent Activity</h3>
-      <ul class="recent-activity" id="recent-activity-list">
-        <li>
-          <div class="activity-icon">
-            <i class="fas fa-plus"></i>
-          </div>
-          <div class="activity-content">
-            <h4>New Order Created</h4>
-            <p>Order #1234 was created by Cargo Owner ABC</p>
-          </div>
-          <div class="activity-time">2 hours ago</div>
-        </li>
-        <li>
-          <div class="activity-icon">
-            <i class="fas fa-user-plus"></i>
-          </div>
-          <div class="activity-content">
-            <h4>New Transporter Registered</h4>
-            <p>Transporter XYZ Logistics joined the platform</p>
-          </div>
-          <div class="activity-time">5 hours ago</div>
-        </li>
-        <li>
-          <div class="activity-icon">
-            <i class="fas fa-truck"></i>
-          </div>
-          <div class="activity-content">
-            <h4>Order Status Updated</h4>
-            <p>Order #1230 status changed to "In Transit"</p>
-          </div>
-          <div class="activity-time">Yesterday</div>
-        </li>
-        <li>
-          <div class="activity-icon">
-            <i class="fas fa-check-circle"></i>
-          </div>
-          <div class="activity-content">
-            <h4>Order Completed</h4>
-            <p>Order #1228 was successfully delivered</p>
-          </div>
-          <div class="activity-time">2 days ago</div>
-        </li>
-      </ul>
-    </div>
-  </div> -->
-
+    
   <script>
-    // Function to fetch updated counts from the server
+   
     function fetchCounts() {
       fetch('get-dashboard-counts.php')
         .then(response => {
@@ -442,13 +393,13 @@ $conn->close();
     }
 
     
-    // Function to update count display with animation if changed
+    
     function updateCountDisplay(elementId, newCount) {
       const countElement = document.getElementById(elementId);
       const currentCount = parseInt(countElement.textContent);
       
       if (currentCount !== newCount) {
-        // Add the updated class for animation
+     
         countElement.classList.add('updated');
         
         // Update the count
