@@ -11,13 +11,13 @@
   <style>
     body {
         font-family: 'Roboto', sans-serif;
-        background: linear-gradient(135deg, #e0ffe0 0%, #f0fff0 100%); /* Light green gradient */
+        background: linear-gradient(135deg, #e0ffe0 0%, #f0fff0 100%); 
         color: #333;
     }
     .signup-card {
         transition: all 0.3s ease;
         box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
-        border: 1px solid rgba(0, 128, 0, 0.1); /* Subtle green border */
+        border: 1px solid rgba(0, 128, 0, 0.1); 
     }
     .signup-card:hover {
         box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
