@@ -1282,7 +1282,6 @@ $_SESSION['last_activity'] = time();
     })
   })
 
-  // Handle specific date selection
   const pickupDateSelect = document.getElementById("pickupDate")
   if (pickupDateSelect) {
     pickupDateSelect.addEventListener("change", function () {
@@ -1297,7 +1296,6 @@ $_SESSION['last_activity'] = time();
     })
   }
 
-  // Helper function to show alerts
   function showAlert(message, type) {
     if (formAlertPlaceholder) {
       formAlertPlaceholder.innerHTML = `
@@ -1314,11 +1312,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const postCargoForm = document.getElementById("postCargoForm")
   const formAlertPlaceholder = document.getElementById("formAlertPlaceholder")
 
-  // Handle form submission
   postCargoForm.addEventListener("submit", (e) => {
     e.preventDefault()
-
-    // Validate all required fields regardless of which step they're in
     const requiredFields = postCargoForm.querySelectorAll("[required]")
     let isValid = true
     let firstInvalidField = null
@@ -1333,7 +1328,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
 
-    // Check terms checkbox
     const termsCheck = document.getElementById("termsCheck")
     if (!termsCheck.checked) {
       isValid = false
@@ -1344,22 +1338,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (!isValid) {
-      // Show which step contains errors
       const invalidStep = firstInvalidField.closest(".form-step")
       const stepId = invalidStep.id
-
-      // Switch to the step with errors
       document.querySelectorAll(".form-step").forEach((step) => {
         step.classList.remove("active")
       })
       invalidStep.classList.add("active")
 
-      // Show error message
       showAlert("Required fields are missing. Please check highlighted fields.", "danger")
       return
     }
-
-    // If validation passes, submit the form
     const formData = new FormData(postCargoForm)
 
     // Add custom cargo type if "Other" is selected
