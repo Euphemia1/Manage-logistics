@@ -679,7 +679,7 @@ $_SESSION['last_activity'] = time();
                     }
                 }
             }
-            
+
             function showAlert(message, type, placeholderId = 'formAlertPlaceholder') {
                 const alertContainer = document.getElementById(placeholderId);
                 if (alertContainer) {
@@ -694,14 +694,12 @@ $_SESSION['last_activity'] = time();
                     alertContainer.append(wrapper);
                 }
             }
-            
-
+        
             function fetchCargos() {
                 if(cargoLoader) cargoLoader.classList.remove('d-none');
                 if(cargoList) cargoList.innerHTML = '<p class="text-muted text-center py-4">Loading your cargos...</p>';
                 if(recentActivity) recentActivity.innerHTML = '<p class="text-center text-muted py-3">Loading recent activity...</p>';
                 
-
                 fetch('fetch-cargo.php')
                 .then(response => {
                     if (!response.ok) {
@@ -768,7 +766,6 @@ $_SESSION['last_activity'] = time();
                 });
             }
 
-            
             function filterAndDisplayCargos() {
                 if (!searchCargo || !statusFilter) return;
                 const searchTerm = searchCargo.value.toLowerCase();
@@ -1080,10 +1077,9 @@ $_SESSION['last_activity'] = time();
                         formData.set('cargoType', customCargoTypeInput.value.trim() || 'Other (Unspecified)');
                     }
                     
-                    // Handle pickup date format
                     let pickupDateValue = formData.get('pickupDate');
                     if (pickupDateValue === 'specific' && specificDateInput) {
-                        pickupDateValue = specificDateInput.value; // Use yyyy-mm-dd from date input
+                        pickupDateValue = specificDateInput.value; 
                     } else if (pickupDateValue === 'Today') {
                         pickupDateValue = new Date().toISOString().split('T')[0];
                     } else if (pickupDateValue === 'Tomorrow') {
@@ -1091,11 +1087,7 @@ $_SESSION['last_activity'] = time();
                         tomorrow.setDate(tomorrow.getDate() + 1);
                         pickupDateValue = tomorrow.toISOString().split('T')[0];
                     }
-                    // For 'ASAP', backend will handle it as such or assign a date.
-                    // Here, we ensure formData has the final intended value for pickupDate.
                     formData.set('pickupDate', pickupDateValue);
-
-
                     fetch('post-cargo.php', {
                         method: 'POST',
                         body: formData
