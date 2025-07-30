@@ -1,5 +1,4 @@
 <?php
-// api/cargo-actions.php
 session_start();
 header('Content-Type: application/json');
 
