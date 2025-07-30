@@ -147,7 +147,6 @@ ini_set('display_errors', 1);
 
     <script>
         lucide.createIcons();
-
         const packageIcon = document.querySelector('.animate-bounce-slow');
         if (packageIcon) {
             setInterval(() => {
@@ -157,7 +156,6 @@ ini_set('display_errors', 1);
         window.addEventListener('beforeunload', (event) => {
             sessionStorage.clear();
         });
-
         setInterval(() => {
             fetch('session-check.php')
                 .then(response => response.json())
