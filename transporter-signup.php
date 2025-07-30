@@ -65,14 +65,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             curl_close($ch);
 
 
- // Set congratulatory message in session
+ 
  $_SESSION['signup_success'] = [
     'name' => $transporter_name,
     'email' => $email,
     'type' => 'transporter'
 ];
 
-            // Redirect to the login page after successful signup
+            
             header("Location: transporter-login.php");
             exit();
         } else {
@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Close connections
+
 $stmt->close();
 $conn->close();
 ?>
