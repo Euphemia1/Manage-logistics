@@ -5,9 +5,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-// git
-
-// Database connection setup
 $host = 'localhost';
 $dbname = 'logistics';
 $username = 'root';
@@ -22,11 +19,10 @@ try {
     exit();
 }
 
-// Get email and user type from form
 $email = filter_var($_POST['email'] ?? '', FILTER_SANITIZE_EMAIL);
 $type = $_POST['type'] ?? '';
 
-// Validate email and type
+
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $_SESSION['reset_message'] = "Please enter a valid email address.";
     header("Location: forgot-password.php?type=" . urlencode($type));
@@ -38,7 +34,6 @@ if (empty($type)) {
     header("Location: forgot-password.php");
     exit();
 }
-
 
 $validTypes = ['cargo_owners', 'transporters'];
 if (!in_array($type, $validTypes)) {
