@@ -688,7 +688,7 @@
             box-shadow: var(--shadow-lg);
         }
 
-        /* Footer */
+       
         .footer {
             background: linear-gradient(135deg, var(--text-color) 0%, #111827 100%);
             color: var(--white);
@@ -761,7 +761,7 @@
             color: var(--text-lighter);
         }
 
-        /* Mobile Navigation */
+       
         .nav-toggle {
             display: none;
             flex-direction: column;
@@ -797,7 +797,7 @@
             transform: rotate(-45deg) translate(6px, -6px);
         }
 
-        /* Responsive Design */
+       
         @media (max-width: 768px) {
             .nav-toggle {
                 display: flex;
