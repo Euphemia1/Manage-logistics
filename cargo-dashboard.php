@@ -188,7 +188,6 @@ $_SESSION['last_activity'] = time();
             box-shadow: 0 0.5rem 1rem rgba(0,0,0,.10)!important;
         }
 
-        /* Responsive styles */
         @media (max-width: 768px) {
             .sidebar {
                 margin-left: -250px;
@@ -217,7 +216,7 @@ $_SESSION['last_activity'] = time();
     </style>
 </head>
 <body>
-    <!-- Sidebar -->
+  
     <nav id="sidebar" class="sidebar">
         <div class="p-4">
             <h3 class="text-center mb-4">Cargo Owner Dashboard</h3>
@@ -252,14 +251,14 @@ $_SESSION['last_activity'] = time();
         </div>
     </nav>
 
-    <!-- Mobile sidebar toggle button -->
+ 
     <button type="button" id="sidebarCollapse" class="btn btn-success">
         <i class="fas fa-bars"></i>
     </button>
 
-    <!-- Main Content -->
+   
     <div class="main-content">
-        <!-- Header -->
+      
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="mb-0">Dashboard</h2>
             <div class="d-flex align-items-center">
@@ -268,7 +267,7 @@ $_SESSION['last_activity'] = time();
             </div>
         </div>
 
-        <!-- Dashboard Home Section -->
+      
         <div id="homeSection">
             <div class="card dashboard-card mb-4">
                 <div class="card-body">
@@ -325,7 +324,7 @@ $_SESSION['last_activity'] = time();
                 </div>
             </div>
             
-            <!-- Recent Activity -->
+         
             <div class="card dashboard-card">
                 <div class="card-header bg-white">
                     <h5 class="mb-0">Recent Activity</h5>
@@ -348,9 +347,9 @@ $_SESSION['last_activity'] = time();
             </h3>
         </div>
         <div class="card-body">
-            <!-- Alert Placeholder -->
+        
             <div id="formAlertPlaceholder" class="mb-3"></div>
-            <!-- Cargo Form -->
+          
             <form id="postCargoForm">
                 <div class="row mb-4">
                     <div class="col-12 mb-3">
