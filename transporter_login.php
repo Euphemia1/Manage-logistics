@@ -188,25 +188,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <script>
-        // Initialize Lucide icons
+
         lucide.createIcons();
 
-        // Simple animation for the truck icon
         const truckIcon = document.querySelector('.animate-pulse-slow');
         if (truckIcon) {
             setInterval(() => {
                 truckIcon.classList.toggle('scale-105');
-            }, 1500); // Toggle scale every 1.5 seconds
+            }, 1500);
         }
 
-        // Force logout when user leaves the page (client-side)
         window.addEventListener('beforeunload', (event) => {
             sessionStorage.clear();
         });
 
-        // Check session expiry periodically
         setInterval(() => {
-            fetch('session-check.php') // Assuming you have a session-check.php for transporters too
+            fetch('session-check.php')
                 .then(response => response.json())
                 .then(data => {
                     if (data.expired) {
@@ -214,7 +211,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     }
                 })
                 .catch(error => console.error('Error checking session:', error));
-        }, 60000); // Check every 1 minute
+        }, 60000); 
     </script>
 </body>
 </html>
