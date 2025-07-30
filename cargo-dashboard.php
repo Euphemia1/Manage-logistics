@@ -1179,7 +1179,6 @@ $_SESSION['last_activity'] = time();
                 });
             });
 
-            
             showSection(homeSection); 
             fetchCargos();
         });
@@ -1188,27 +1187,20 @@ $_SESSION['last_activity'] = time();
   const postCargoForm = document.getElementById("postCargoForm")
   const formAlertPlaceholder = document.getElementById("formAlertPlaceholder")
 
-  // Handle form submission
   if (postCargoForm) {
     postCargoForm.addEventListener("submit", (e) => {
       e.preventDefault()
-
-      // Show loading state
       const submitBtn = postCargoForm.querySelector('button[type="submit"]')
       const originalText = submitBtn.innerHTML
       submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Posting...'
       submitBtn.disabled = true
 
-      // Create FormData object
       const formData = new FormData(postCargoForm)
 
-      // Debug: Log form data
       console.log("Form data being sent:")
       for (const [key, value] of formData.entries()) {
         console.log(key, value)
       }
-
-      // Submit form
       fetch("post-cargo.php", {
         method: "POST",
         body: formData,
@@ -1218,7 +1210,7 @@ $_SESSION['last_activity'] = time();
           if (data.success) {
             showAlert("Cargo posted successfully!", "success")
             postCargoForm.reset()
-            // Reset to first step
+           
             document.querySelectorAll(".form-step").forEach((step) => {
               step.classList.remove("active")
             })
@@ -1232,21 +1224,19 @@ $_SESSION['last_activity'] = time();
           showAlert("Network error. Please check your connection and try again.", "danger")
         })
         .finally(() => {
-          // Reset button
+    
           submitBtn.innerHTML = originalText
           submitBtn.disabled = false
         })
     })
   }
 
-  // Handle step navigation
   document.querySelectorAll(".next-step").forEach((button) => {
     button.addEventListener("click", function () {
       const currentStep = this.closest(".form-step")
       const nextStepId = this.dataset.next
       const nextStep = document.getElementById(nextStepId)
 
-      // Basic validation for current step
       const requiredInputs = currentStep.querySelectorAll("[required]")
       let isValid = true
 
@@ -1268,7 +1258,6 @@ $_SESSION['last_activity'] = time();
     })
   })
 
-  // Handle previous step
   document.querySelectorAll(".prev-step").forEach((button) => {
     button.addEventListener("click", function () {
       const currentStep = this.closest(".form-step")
@@ -1280,7 +1269,6 @@ $_SESSION['last_activity'] = time();
     })
   })
 
-  // Handle "Other" cargo type
   document.querySelectorAll('input[name="cargoType"]').forEach((radio) => {
     radio.addEventListener("change", function () {
       const customContainer = document.getElementById("customTypeContainer")
