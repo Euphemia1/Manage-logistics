@@ -17,32 +17,32 @@ ini_set('display_errors', 1);
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #e0ffe0 0%, #f0fff0 100%); /* Light green gradient */
+            background: linear-gradient(135deg, #e0ffe0 0%, #f0fff0 100%);
             color: #333;
         }
         .login-container {
             transition: all 0.3s ease;
             box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(0, 128, 0, 0.1); /* Subtle green border */
+            border: 1px solid rgba(0, 128, 0, 0.1); 
         }
         .login-container:hover {
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
         }
         .input-field {
-            border-color: #d1d5db; /* Default border color */
+            border-color: #d1d5db;
             transition: all 0.2s ease-in-out;
         }
         .input-field:focus {
             outline: none;
-            border-color: #4CAF50; /* Green border on focus */
-            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2); /* Green glow on focus */
+            border-color: #4CAF50; 
+            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2); 
         }
         .btn-primary {
-            background-color: #4CAF50; /* Green button */
+            background-color: #4CAF50; 
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
         .btn-primary:hover {
-            background-color: #45a049; /* Darker green on hover */
+            background-color: #45a049; 
             transform: translateY(-2px);
         }
         .btn-primary:active {
