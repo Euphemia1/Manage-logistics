@@ -1338,7 +1338,7 @@
             });
         });
 
-        // Close mobile menu when clicking outside
+       
         document.addEventListener('click', function(e) {
             if (window.innerWidth <= 768) {
                 const isClickInsideDropdown = e.target.closest('.dropdown');
@@ -1355,7 +1355,7 @@
             }
         });
 
-        // Handle window resize
+    
         window.addEventListener('resize', function() {
             if (window.innerWidth > 768) {
                 navLinks.classList.remove('active');
