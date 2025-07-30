@@ -507,12 +507,8 @@ $_SESSION['last_activity'] = time();
     <button class="btn btn-outline-primary me-2 active" data-target-section="postedCargosSection">
         <i class="fas fa-list me-2"></i>View Posted Cargos
     </button>
-    <!-- <button class="btn btn-outline-info me-2" data-target-section="dashboardOverview">
-        <i class="fas fa-chart-bar me-2"></i>Dashboard
-    </button> -->
 </div>
 
-         <!-- Settings Section -->
          <div id="settingsSection" class="d-none">
             <div class="card dashboard-card">
                 <div class="card-header bg-white">
@@ -528,7 +524,7 @@ $_SESSION['last_activity'] = time();
                         <li>Changing password</li>
                         <li>Notification preferences</li>
                     </ul>
-                    <div id="globalAlertPlaceholder" class="mt-3"></div> <!-- For general alerts in settings or other global contexts -->
+                    <div id="globalAlertPlaceholder" class="mt-3"></div>
                     <div class="alert alert-info mt-3">
                         <i class="fas fa-info-circle me-2"></i> This section is a placeholder for future development.
                     </div>
@@ -536,10 +532,8 @@ $_SESSION['last_activity'] = time();
             </div>
         </div>
 
-    </div> <!-- End Main Content -->
+    </div>
 
-
-    <!-- Cargo Details Modal -->
     <div class="modal fade" id="cargoDetailsModal" tabindex="-1" aria-labelledby="cargoDetailsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
