@@ -128,7 +128,7 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Example row, replace with dynamic data from your database -->
+          
             <tr>
                 <td><!-- Order ID --></td>
                 <td><!-- Cargo Owner Name --></td>
@@ -142,7 +142,7 @@
                     <a href="delete.php?order_id=<!-- Order ID -->" class="button delete">Delete</a>
                 </td>
             </tr>
-            <!-- Add more rows as needed -->
+     
         </tbody>
     </table>
 </body>
