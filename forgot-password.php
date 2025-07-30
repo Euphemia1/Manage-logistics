@@ -70,18 +70,18 @@ if ($user) {
         exit();
     }
 
-    // Construct reset link - PROPERLY FORMATED
+  
     $isLocalhost = (strpos($_SERVER['HTTP_HOST'], 'localhost') !== false);
     
     if ($isLocalhost) {
-        // For local development
+       
         $resetLink = "http://localhost/nyamula-logistics/Frontend/reset-password.php?" . http_build_query([
             'token' => $token,
             'email' => $email,
             'type' => $type
         ]);
     } else {
-        // For production
+      
         $scheme = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
         $resetLink = "$scheme://{$_SERVER['HTTP_HOST']}/Frontend/reset-password.php?" . http_build_query([
             'token' => $token,
@@ -90,7 +90,7 @@ if ($user) {
         ]);
     }
 
-    // PHPMailer Setup
+
     try {
         $phpMailer = new PHPMailer(true);
         $phpMailer->isSMTP();
@@ -132,6 +132,5 @@ if ($user) {
     $_SESSION['reset_message'] = "Email not found in our records.";
 }
 
-// Always include the type in the redirect
-header("Location: forgot-password.php?type=" . urlencode($type));
+header("Location: forgot_password.php?type=" . urlencode($type));
 exit();
