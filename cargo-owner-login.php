@@ -4,8 +4,6 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,66 +17,98 @@ ini_set('display_errors', 1);
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            background: linear-gradient(135deg, #e0ffe0 0%, #f0fff0 100%); /* Light green gradient */
+            color: #333;
         }
         .login-container {
             transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 128, 0, 0.1); /* Subtle green border */
         }
         .login-container:hover {
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        .input-field {
+            border-color: #d1d5db; /* Default border color */
+            transition: all 0.2s ease-in-out;
         }
         .input-field:focus {
-            box-shadow: 0 0 0 3px rgba(43, 153, 48, 0.2);
+            outline: none;
+            border-color: #4CAF50; /* Green border on focus */
+            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2); /* Green glow on focus */
+        }
+        .btn-primary {
+            background-color: #4CAF50; /* Green button */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .btn-primary:hover {
+            background-color: #45a049; /* Darker green on hover */
+            transform: translateY(-2px);
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        .text-link {
+            color: #2e7d32; /* Darker green for links */
+            transition: color 0.3s ease;
+        }
+        .text-link:hover {
+            color: #1b5e20; /* Even darker green on hover */
+            text-decoration: underline;
+        }
+        .alert-error {
+            background-color: #ffebee; /* Light red */
+            border-color: #ef9a9a; /* Red border */
+            color: #c62828; /* Dark red text */
         }
     </style>
-
-
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
-    <div class="login-container bg-white rounded-xl shadow-md overflow-hidden w-full max-w-md">
-        <div class="bg-green-600 py-4 px-6">
-            <div class="flex items-center justify-center space-x-2">
-                <i data-lucide="package" class="w-6 h-6 text-white"></i>
-                <h2 class="text-xl font-bold text-white">Cargo Owner Login</h2>
+    <div class="login-container bg-white rounded-xl overflow-hidden w-full max-w-md">
+        <div class="bg-green-600 py-5 px-6 text-center">
+            <div class="flex items-center justify-center space-x-3">
+                <i data-lucide="package" class="w-7 h-7 text-white animate-bounce-slow"></i>
+                <h2 class="text-2xl font-bold text-white tracking-wide">Cargo Owner Login</h2>
             </div>
         </div>
         
-        <div class="p-6">
+        <div class="p-8">
             <?php if (isset($_SESSION['login_error'])): ?>
-                <div class="mb-4 p-3 bg-red-100 border border-red-200 text-red-700 rounded-lg flex items-start">
-                    <i data-lucide="alert-circle" class="flex-shrink-0 mr-2"></i>
-                    <span><?php echo htmlspecialchars($_SESSION['login_error']); ?></span>
+                <div class="mb-5 p-4 alert-error rounded-lg flex items-start animate-fade-in">
+                    <i data-lucide="alert-circle" class="flex-shrink-0 mr-3 mt-0.5 w-5 h-5"></i>
+                    <span class="text-sm font-medium"><?php echo htmlspecialchars($_SESSION['login_error']); ?></span>
                 </div>
                 <?php unset($_SESSION['login_error']); ?>
             <?php endif; ?>
 
-            <form id="loginForm" action="cargo-login.php" method="POST" class="space-y-5">
+            <form id="loginForm" action="cargo-login.php" method="POST" class="space-y-6">
                 <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
-                        <i data-lucide="mail" class="inline mr-2 w-4 h-4"></i>Email Address
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1.5">
+                        <i data-lucide="mail" class="inline mr-2 w-4 h-4 text-green-700"></i>Email Address
                     </label>
                     <input
                         type="email"
                         id="email"
                         name="email"
-                        class="input-field w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        class="input-field w-full px-4 py-2.5 border rounded-lg"
                         placeholder="you@company.com"
                         required
+                        autocomplete="email"
                     >
                 </div>
 
                 <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
-                        <i data-lucide="lock" class="inline mr-2 w-4 h-4"></i>Password
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1.5">
+                        <i data-lucide="lock" class="inline mr-2 w-4 h-4 text-green-700"></i>Password
                     </label>
                     <input
                         type="password"
                         id="password"
                         name="password"
-                        class="input-field w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        class="input-field w-full px-4 py-2.5 border rounded-lg"
                         placeholder="••••••••"
                         required
+                        autocomplete="current-password"
                     >
                 </div>
 
@@ -88,55 +118,59 @@ ini_set('display_errors', 1);
                             id="remember-me"
                             name="remember-me"
                             type="checkbox"
-                            class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                            class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
                         >
-                        <label for="remember-me" class="ml-2 block text-sm text-gray-700">
+                        <label for="remember-me" class="ml-2 block text-sm text-gray-700 select-none">
                             Remember me
                         </label>
                     </div>
 
                     <div class="text-sm">
-                        <a href="forgot-password.php?type=cargo_owner" class="font-medium text-black-600 hover:text-blue-500">
+                        <a href="forgot-password.php?type=cargo_owners" class="font-medium text-link hover:underline">
                             Forgot password?
                         </a>
                     </div>
                 </div>
 
-                <button type="submit" class="w-full bg-green-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors flex items-center justify-center">
-                    <i data-lucide="log-in" class="mr-2"></i>
+                <button type="submit" class="w-full btn-primary text-white py-3.5 px-4 rounded-lg font-semibold flex items-center justify-center shadow-md hover:shadow-lg">
+                    <i data-lucide="log-in" class="mr-2 w-5 h-5"></i>
                     Login
                 </button>
             </form>
 
-            <div class="mt-6 text-center text-sm text-gray-600">
-                Need an account? <a href="cargo-owner-signup.php" class="font-medium text-black-600 hover:text-blue-500">Sign up here</a>
+            <div class="mt-8 text-center text-sm text-gray-600">
+                Need an account? 
+                <a href="cargo-signup.php" class="font-medium text-link hover:underline">Sign up here</a>
             </div>
         </div>
     </div>
 
     <script>
-
-        // In// Force logout when user leaves the page
-    window.addEventListener('beforeunload', (event) => {
-        // Option 1: Clear session storage (client-side)
-        sessionStorage.clear();
-
-
-// Check session expiry periodically
-setInterval(() => {
-        fetch('session-check.php')
-            .then(response => response.json())
-            .then(data => {
-                if (data.expired) {
-                    window.location.href = 'cargo-owner-login.php?session_expired=1';
-                }
-            });
-    }, 60000); // Check every 1 minute
-
-    });
-        //itialize Lucide icons
         lucide.createIcons();
+
+        const packageIcon = document.querySelector('.animate-bounce-slow');
+        if (packageIcon) {
+            setInterval(() => {
+                packageIcon.classList.toggle('scale-105');
+            }, 1500); // Toggle scale every 1.5 seconds
+        }
+
+        // Force logout when user leaves the page
+        window.addEventListener('beforeunload', (event) => {
+            sessionStorage.clear();
+        });
+
+        // Check session expiry periodically
+        setInterval(() => {
+            fetch('session-check.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.expired) {
+                        window.location.href = 'cargo-owner-login.php?session_expired=1';
+                    }
+                })
+                .catch(error => console.error('Error checking session:', error));
+        }, 60000); // Check every 1 minute
     </script>
 </body>
 </html>
-
