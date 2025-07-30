@@ -1303,12 +1303,12 @@
     </footer>
 
     <script>
-        // Page loading animation
+   
         window.addEventListener('load', function() {
             document.body.classList.add('loaded');
         });
 
-        // Navbar scroll effect
+        
         window.addEventListener('scroll', function() {
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 50) {
