@@ -1318,7 +1318,7 @@
             }
         });
 
-        // Mobile menu toggle
+     
         const navToggle = document.querySelector('.nav-toggle');
         const navLinks = document.querySelector('.nav-links');
 
@@ -1327,7 +1327,7 @@
             navLinks.classList.toggle('active');
         });
 
-        // Dropdown functionality for mobile
+      
         document.querySelectorAll('.dropbtn').forEach(function(btn) {
             btn.addEventListener('click', function(e) {
                 if (window.innerWidth <= 768) {
