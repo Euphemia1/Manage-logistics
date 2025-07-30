@@ -293,7 +293,7 @@
             background: linear-gradient(135deg, var(--white) 0%, var(--background) 100%);
         }
 
-        /* Features Section */
+        
         .features {
             padding: 6rem 0;
             background-color: var(--background);
@@ -390,7 +390,7 @@
             line-height: 1.6;
         }
 
-        /* About Section */
+       
         .about {
             padding: 6rem 0;
             background: linear-gradient(135deg, var(--white) 0%, var(--background-alt) 100%);
@@ -409,7 +409,7 @@
             text-align: center;
         }
 
-        /* Team Section */
+      
         .team {
             padding: 6rem 0;
             background-color: var(--background);
@@ -490,7 +490,7 @@
             transform: translateY(-2px);
         }
 
-        /* Countries Section */
+       
         .countries-section {
             padding: 6rem 0;
             background: var(--white);
@@ -568,7 +568,7 @@
             }
         }
 
-        /* Contact Section */
+      
         .contact {
             padding: 6rem 0;
             background: linear-gradient(135deg, var(--background) 0%, var(--background-alt) 100%);
