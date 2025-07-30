@@ -51,14 +51,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             throw new Exception('Username or email already exists');
         }
         
-        // Hash password
+   
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         
-        // Insert new admin
+       
         $stmt = $pdo->prepare("INSERT INTO admins (username, password, email) VALUES (?, ?, ?)");
         $stmt->execute([$username, $hashedPassword, $email]);
         
-        // Return success with redirect to dashboard
+       
         echo json_encode([
             'success' => true,
             'message' => 'Registration successful! Redirecting to dashboard...',
