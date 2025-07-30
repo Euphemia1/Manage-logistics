@@ -116,7 +116,7 @@ $_SESSION['last_activity'] = time();
             display: none;
         }
         
-        /* Loading spinner */
+        
         .loader {
             border: 4px solid #f3f3f3;
             border-top: 4px solid #28a745;
@@ -132,7 +132,7 @@ $_SESSION['last_activity'] = time();
             100% { transform: rotate(360deg); }
         }
         
-        /* Cargo Posting Form Styles */
+     
         .form-step {
             display: none;
             animation: fadeIn 0.3s ease-out;
@@ -168,7 +168,7 @@ $_SESSION['last_activity'] = time();
         }
         
         .location-input {
-            background-image: none !important; /* Remove browser autocomplete background */
+            background-image: none !important;  
         }
         
         .use-current-location {
@@ -180,11 +180,11 @@ $_SESSION['last_activity'] = time();
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Custom purple color for stats card */
+      
         .text-purple {
             color: #6f42c1 !important;
         }
-        .cargo-item-card:hover { /* Optional: slight hover effect for cargo cards */
+        .cargo-item-card:hover { 
             box-shadow: 0 0.5rem 1rem rgba(0,0,0,.10)!important;
         }
 
