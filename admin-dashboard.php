@@ -412,10 +412,10 @@ $conn->close();
       }
     }
 
-    // Fetch counts every 30 seconds
+  
     setInterval(fetchCounts, 30000);
     
-    // Also fetch once when the page loads (after a short delay)
+    
     setTimeout(fetchCounts, 5000);
   </script>
 </body>
