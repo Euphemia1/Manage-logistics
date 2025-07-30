@@ -1397,12 +1397,11 @@
             });
         }, observerOptions);
 
-        // Observe all fade-in elements
         document.querySelectorAll('.fade-in').forEach(el => {
             observer.observe(el);
         });
 
-        // Form submission handling
+       
         const contactForm = document.querySelector('.contact-form');
         contactForm.addEventListener('submit', function(e) {
             const submitButton = this.querySelector('.submit-button');
@@ -1411,7 +1410,7 @@
             submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             submitButton.disabled = true;
             
-            // Reset button after 3 seconds (form will redirect)
+        
             setTimeout(() => {
                 submitButton.innerHTML = originalText;
                 submitButton.disabled = false;
