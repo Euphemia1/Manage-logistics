@@ -28,20 +28,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = $_POST['password'];
         $company = trim($_POST['company']);
 
-        // Check if transporter_name is empty
+        
         if (empty($transporter_name)) {
             die("Error: transporter_name cannot be empty.");
         }
 
-        // Hash the password for security
+        
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        // Execute query
+        
         if ($stmt->execute()) {
-            // Prepare the notification data for Formspree
+            
             $notificationData = [
                 'name' => 'Nyamula Logistics System',
-                '_replyto' => $email, // This will be the new transporter's email
+                '_replyto' => $email, 
                 '_subject' => 'New Transporter Registration - ' . $company,
                 'message' => "A new transporter has registered with the following details:\n\n" .
                              "Full Name: $transporter_name\n" .
@@ -49,10 +49,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                              "Company: $company\n" .
                              "Phone Number: $phone_number\n\n" .
                              "This is an automated notification from Nyamula Logistics System.",
-                '_recipient' => 'admin@nyamula.com' // Direct to admin email
+                '_recipient' => 'admin@nyamula.com'
             ];
             
-            // Send notification via Formspree
+           
             $ch = curl_init('https://formspree.io/f/mzzrrzww');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POST, true);
