@@ -23,16 +23,16 @@
         box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
     }
     .input-field {
-        border-color: #d1d5db; /* Default border color */
+        border-color: #d1d5db; 
         transition: all 0.2s ease-in-out;
     }
     .input-field:focus {
         outline: none;
-        border-color: #4CAF50; /* Green border on focus */
-        box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2); /* Green glow on focus */
+        border-color: #4CAF50; 
+        box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2); 
     }
     .btn-primary {
-        background-color: #4CAF50; /* Green button */
+        background-color: #4CAF50; 
         transition: background-color 0.3s ease, transform 0.2s ease;
     }
     .btn-primary:hover {
