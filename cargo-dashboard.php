@@ -447,7 +447,6 @@ $_SESSION['last_activity'] = time();
             </div>
         </div>
 
-        <!-- Search and Filter Section -->
         <div class="row mb-4">
             <div class="col-12">
                 <div class="card border-0 shadow-sm">
@@ -483,11 +482,8 @@ $_SESSION['last_activity'] = time();
                 </div>
             </div>
         </div>
-
-        <!-- Alert Container -->
         <div id="alertContainer" class="mb-3"></div>
 
-        <!-- Loading Spinner -->
         <div id="cargoLoadingSpinner" class="text-center py-5 d-none">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="visually-hidden">Loading...</span>
@@ -495,20 +491,15 @@ $_SESSION['last_activity'] = time();
             <p class="mt-3 text-muted">Loading your cargos...</p>
         </div>
 
-        <!-- Cargo List Container -->
         <div id="cargoListContainer" class="row">
-            <!-- Cargo cards will be dynamically loaded here -->
+         
         </div>
-
-        <!-- Pagination Container -->
         <div id="paginationContainer" class="mt-4">
-            <!-- Pagination will be dynamically loaded here -->
+           
         </div>
     </div>
 </div>
 
-
-<!-- Navigation Buttons (Update your existing navigation) -->
 <div class="dashboard-nav mb-4">
     <button class="btn btn-outline-success me-2" data-target-section="postCargoSection">
         <i class="fas fa-plus me-2"></i>Post New Cargo
