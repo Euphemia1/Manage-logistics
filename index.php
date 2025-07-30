@@ -1366,7 +1366,6 @@
             }
         });
 
-        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1376,14 +1375,14 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
-                    // Close mobile menu if open
+                   
                     navLinks.classList.remove('active');
                     navToggle.classList.remove('active');
                 }
             });
         });
 
-        // Intersection Observer for fade-in animations
+       
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
