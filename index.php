@@ -1125,7 +1125,7 @@
     <section class="countries-section">
         <div class="container">
             <div class="section-header fade-in">
-                <h2 class="section-title">Countries We Deliver To</h2>
+                <h2 class="section-title">Countries We delivered To</h2>
                 <p class="section-subtitle">Trusted logistics solutions across Africa - connecting businesses and communities</p>
             </div>
             <div class="carousel-container">
@@ -1174,7 +1174,7 @@
                         <img src="https://flagcdn.com/w320/zw.png" alt="Zimbabwe Flag" class="country-flag">
                         <div class="country-name">Zimbabwe</div>
                     </div>
-                    <!-- Duplicate for seamless loop -->
+                   
                     <div class="country-item">
                         <img src="https://flagcdn.com/w320/bw.png" alt="Botswana Flag" class="country-flag">
                         <div class="country-name">Botswana</div>
