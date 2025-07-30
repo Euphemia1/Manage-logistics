@@ -1349,18 +1349,14 @@ document.addEventListener("DOMContentLoaded", () => {
       return
     }
     const formData = new FormData(postCargoForm)
-
-    // Add custom cargo type if "Other" is selected
     if (formData.get("cargoType") === "Other" && document.getElementById("customCargoType").value) {
       formData.set("cargoType", document.getElementById("customCargoType").value)
     }
 
-    // Add specific date if selected
     if (formData.get("pickupDate") === "specific" && document.getElementById("specificDate").value) {
       formData.set("pickupDate", document.getElementById("specificDate").value)
     }
 
-    // Submit form data via fetch
     fetch("post-cargo.php", {
       method: "POST",
       body: formData,
@@ -1370,7 +1366,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (data.success) {
           showAlert("Cargo posted successfully!", "success")
           postCargoForm.reset()
-          // Reset to first step
+       
           document.querySelectorAll(".form-step").forEach((step) => {
             step.classList.remove("active")
           })
@@ -1385,14 +1381,12 @@ document.addEventListener("DOMContentLoaded", () => {
       })
   })
 
-  // Handle next step buttons
   document.querySelectorAll(".next-step").forEach((button) => {
     button.addEventListener("click", function () {
       const currentStep = this.closest(".form-step")
       const nextStepId = this.dataset.next
       const nextStep = document.getElementById(nextStepId)
 
-      // Validate current step fields before proceeding
       const requiredFields = currentStep.querySelectorAll("[required]")
       let isValid = true
 
@@ -1410,13 +1404,11 @@ document.addEventListener("DOMContentLoaded", () => {
         return
       }
 
-      // Proceed to next step
       currentStep.classList.remove("active")
       nextStep.classList.add("active")
     })
   })
 
-  // Handle previous step buttons
   document.querySelectorAll(".prev-step").forEach((button) => {
     button.addEventListener("click", function () {
       const currentStep = this.closest(".form-step")
