@@ -11,140 +11,204 @@ $isValidType = in_array($type, $validTypes);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forgot Password</title>
+    <title>Forgot Password - Nyamula Logistics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/lucide-icons/dist/umd/lucide-icons.js" rel="stylesheet">
+    <script src="https://unpkg.com/lucide-icons" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #e0ffe0 0%, #f0fff0 100%); /* Light green gradient */
+            color: #333;
         }
         .container {
             background-color: #ffffff;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 400px;
+            max-width: 450px;
+            border: 1px solid rgba(0, 128, 0, 0.1); /* Subtle green border */
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         h2 {
-            color: #333;
-            margin-bottom: 1.5rem;
+            color: #2e7d32; /* Darker green */
+            margin-bottom: 2rem;
             text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
         }
         .message {
-            background-color: #e8f5e9;
-            color:rgb(91, 77, 214);
-            padding: 10px;
-            border-radius: 4px;
-            margin-bottom: 1rem;
+            background-color: #e8f5e9; /* Light green */
+            color: #2e7d32; /* Dark green */
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
         }
         .error-message {
-            background-color: #ffebee;
-            color: #c62828;
-            padding: 10px;
-            border-radius: 4px;
-            margin-bottom: 1rem;
+            background-color: #ffebee; /* Light red */
+            color: #c62828; /* Dark red */
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
         }
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
         label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
             color: #555;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
         }
         input[type="email"] {
             width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
             padding: 0.75rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        input[type="email"]:focus {
+            outline: none;
+            border-color: #4CAF50; /* Green border on focus */
+            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2); /* Green glow on focus */
+        }
+        .btn-primary {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 0.9rem 1.5rem;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
             width: 100%;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 10px rgba(0, 128, 0, 0.2);
         }
-        button:hover {
-            background-color: #45a049;
+        .btn-primary:hover {
+            background-color: #45a049; /* Darker green */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 128, 0, 0.3);
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 128, 0, 0.2);
         }
         .user-type-selection {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            margin-top: 1rem;
+            gap: 1.25rem;
+            margin-top: 1.5rem;
         }
         .user-type-btn {
-            padding: 1rem;
+            padding: 1.25rem;
             border: none;
-            border-radius: 4px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
             text-align: center;
             transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        .user-type-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
         }
         .cargo-owner-btn {
-            background-color: #2196F3;
+            background-color: #28a745; /* A pleasant green */
             color: white;
         }
         .cargo-owner-btn:hover {
-            background-color: #0b7dda;
+            background-color: #218838;
         }
         .transporter-btn {
-            background-color: #FF9800;
+            background-color: #6c757d; /* A neutral gray, can be adjusted */
             color: white;
         }
         .transporter-btn:hover {
-            background-color: #e68a00;
+            background-color: #5a6268;
+        }
+        .switch-type-link {
+            color: #2e7d32; /* Darker green for links */
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .switch-type-link:hover {
+            color: #1b5e20; /* Even darker green on hover */
+            text-decoration: underline;
         }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex items-center justify-center p-4">
     <div class="container">
-        <h2>Forgot Password</h2>
+        <div class="flex items-center justify-center mb-6">
+            <i data-lucide="key-round" class="w-8 h-8 mr-3 text-green-600"></i>
+            <h2>Forgot Password</h2>
+        </div>
+        
         <?php
         if (isset($_SESSION['reset_message'])) {
-            echo '<p class="message">' . $_SESSION['reset_message'] . '</p>';
+            echo '<p class="message"><i data-lucide="check-circle" class="mr-2 w-5 h-5"></i>' . $_SESSION['reset_message'] . '</p>';
             unset($_SESSION['reset_message']);
         }
         ?>
 
         <?php if (!$isValidType): ?>
-            <!-- Show user type selection if type is empty or invalid -->
-            <p>Please select your account type:</p>
+            <p class="text-center text-gray-700 mb-4 text-lg">Please select your account type:</p>
             <div class="user-type-selection">
-                <a href="?type=cargo_owners" class="user-type-btn cargo-owner-btn">Cargo Owner</a>
-                <a href="?type=transporters" class="user-type-btn transporter-btn">Transporter</a>
+                <a href="?type=cargo_owners" class="user-type-btn cargo-owner-btn">
+                    <i data-lucide="package" class="inline mr-2 w-5 h-5"></i>Cargo Owner
+                </a>
+                <a href="?type=transporters" class="user-type-btn transporter-btn">
+                    <i data-lucide="truck" class="inline mr-2 w-5 h-5"></i>Transporter
+                </a>
             </div>
         <?php else: ?>
-            <!-- Show email form if type is valid -->
             <form action="forgot-password.php" method="POST">
                 <input type="hidden" name="type" value="<?php echo htmlspecialchars($type); ?>">
                 <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
+                    <label for="email">
+                        <i data-lucide="mail" class="inline mr-2 w-4 h-4 text-green-700"></i>Email Address:
+                    </label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
                 </div>
-                <button type="submit">Reset Password</button>
+                <button type="submit" class="btn-primary">
+                    <i data-lucide="send" class="w-5 h-5"></i>
+                    Send Reset Link
+                </button>
             </form>
-            <p style="margin-top: 1rem; text-align: center;">
+            <p style="margin-top: 1.5rem; text-align: center; font-size: 0.9rem; color: #666;">
                 <small>Not a <?php echo $type === 'cargo_owners' ? 'Cargo Owner' : 'Transporter'; ?>? 
-                <a href="?type=<?php echo $type === 'cargo_owners' ? 'transporters' : 'cargo_owners'; ?>">
-                    Click here
+                <a href="?type=<?php echo $type === 'cargo_owners' ? 'transporters' : 'cargo_owners'; ?>" class="switch-type-link">
+                    Click here to switch
                 </a>
                 </small>
             </p>
         <?php endif; ?>
     </div>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
 </body>
 </html>
