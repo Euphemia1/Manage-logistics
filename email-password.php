@@ -11,8 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: forgot-password.php?type=$type");
         exit();
     }
-
-    // Check if user exists
     $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ? AND type = ?");
     $stmt->execute([$email, $type]);
     $user = $stmt->fetch();
