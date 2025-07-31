@@ -52,8 +52,8 @@ $isValidType = in_array($type, $validTypes);
             font-weight: 500;
         }
         .error-message {
-            background-color: #ffebee; /* Light red */
-            color: #c62828; /* Dark red */
+            background-color: #ffebee; 
+            color: #c62828;
             padding: 1rem;
             border-radius: 8px;
             margin-bottom: 1.5rem;
@@ -82,11 +82,11 @@ $isValidType = in_array($type, $validTypes);
         }
         input[type="email"]:focus {
             outline: none;
-            border-color: #4CAF50; /* Green border on focus */
-            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2); /* Green glow on focus */
+            border-color: #4CAF50; 
+            box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2); 
         }
         .btn-primary {
-            background-color: #4CAF50; /* Green */
+            background-color: #4CAF50; 
             color: white;
             padding: 0.9rem 1.5rem;
             border: none;
