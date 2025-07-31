@@ -103,7 +103,7 @@ $isValidType = in_array($type, $validTypes);
             box-shadow: 0 4px 10px rgba(0, 128, 0, 0.2);
         }
         .btn-primary:hover {
-            background-color: #45a049; /* Darker green */
+            background-color: #45a049;
             transform: translateY(-2px);
             box-shadow: 0 6px 15px rgba(0, 128, 0, 0.3);
         }
@@ -133,26 +133,26 @@ $isValidType = in_array($type, $validTypes);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
         }
         .cargo-owner-btn {
-            background-color: #28a745; /* A pleasant green */
+            background-color: #28a745; 
             color: white;
         }
         .cargo-owner-btn:hover {
             background-color: #218838;
         }
         .transporter-btn {
-            background-color: #6c757d; /* A neutral gray, can be adjusted */
+            background-color: #6c757d; 
             color: white;
         }
         .transporter-btn:hover {
             background-color: #5a6268;
         }
         .switch-type-link {
-            color: #2e7d32; /* Darker green for links */
+            color: #2e7d32; 
             font-weight: 500;
             transition: color 0.3s ease;
         }
         .switch-type-link:hover {
-            color: #1b5e20; /* Even darker green on hover */
+            color: #1b5e20; 
             text-decoration: underline;
         }
     </style>
@@ -205,7 +205,6 @@ $isValidType = in_array($type, $validTypes);
         <?php endif; ?>
     </div>
     <script>
-        // Initialize Lucide icons
         lucide.createIcons();
     </script>
 </body>
