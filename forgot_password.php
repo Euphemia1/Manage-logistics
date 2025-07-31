@@ -1,8 +1,6 @@
 <?php
 session_start();
 $type = $_GET['type'] ?? '';
-
-// Check if type is empty or invalid
 $validTypes = ['cargo_owners', 'transporters'];
 $isValidType = in_array($type, $validTypes);
 ?>
@@ -19,7 +17,7 @@ $isValidType = in_array($type, $validTypes);
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #e0ffe0 0%, #f0fff0 100%); /* Light green gradient */
+            background: linear-gradient(135deg, #e0ffe0 0%, #f0fff0 100%); 
             color: #333;
         }
         .container {
@@ -29,7 +27,7 @@ $isValidType = in_array($type, $validTypes);
             box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 450px;
-            border: 1px solid rgba(0, 128, 0, 0.1); /* Subtle green border */
+            border: 1px solid rgba(0, 128, 0, 0.1);
             animation: fadeIn 0.5s ease-out;
         }
         @keyframes fadeIn {
@@ -37,15 +35,15 @@ $isValidType = in_array($type, $validTypes);
             to { opacity: 1; transform: translateY(0); }
         }
         h2 {
-            color: #2e7d32; /* Darker green */
+            color: #2e7d32; 
             margin-bottom: 2rem;
             text-align: center;
             font-size: 1.8rem;
             font-weight: 700;
         }
         .message {
-            background-color: #e8f5e9; /* Light green */
-            color: #2e7d32; /* Dark green */
+            background-color: #e8f5e9; 
+            color: #2e7d32; 
             padding: 1rem;
             border-radius: 8px;
             margin-bottom: 1.5rem;
