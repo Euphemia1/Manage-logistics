@@ -1,18 +1,14 @@
 <?php
-// Database connection
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "logistics";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch job details if ID is provided
 $job = null;
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -24,7 +20,6 @@ if (isset($_GET['id'])) {
     $stmt->close();
 }
 
-// Handle form submission for updating the job
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $item = $_POST['item'];
     $pickup = $_POST['pickup'];
@@ -35,12 +30,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $startDate = $_POST['startDate'];
     $id = $_POST['id'];
 
-    // Update job in the database
     $stmt = $conn->prepare("UPDATE jobs SET item=?, pickup=?, dropoff=?, weight=?, state=?, price=?, start_date=? WHERE id=?");
     $stmt->bind_param("sssssssi", $item, $pickup, $dropoff, $weight, $state, $price, $startDate, $id);
 
     if ($stmt->execute()) {
-        // Redirect back to the job board after successful update
         header("Location: job-board.php");
         exit();
     } else {
