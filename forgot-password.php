@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+// Include the Composer autoloader
+require_once 'vendor/autoload.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -60,7 +63,7 @@ if ($user) {
         exit();
     }
 
-  
+
     $isLocalhost = (strpos($_SERVER['HTTP_HOST'], 'localhost') !== false);
     
     if ($isLocalhost) {
@@ -81,42 +84,72 @@ if ($user) {
     }
 
 
+    // Try to send email
+    $emailSent = false;
+    $emailBody = "
+Dear User,
+
+You have requested to reset your password for your Nyamula Logistics account.
+
+Please click the following link to reset your password:
+$resetLink
+
+This link will expire in 1 hour for security reasons.
+
+If you did not request this password reset, please ignore this email.
+
+Best regards,
+Nyamula Logistics Team
+";
+
+    // Try PHPMailer first
     try {
         $phpMailer = new PHPMailer(true);
+        
         $phpMailer->isSMTP();
         $phpMailer->Host = "smtp.zoho.com";
         $phpMailer->SMTPAuth = true;
         $phpMailer->Username = 'bervinitsolutions@zohomail.com';
         $phpMailer->Password = "!3erv!n@6!S4@Z0H0";
-        $phpMailer->SMTPSecure = "tls";
+        $phpMailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $phpMailer->Port = 587;
-        $phpMailer->isHTML(true);
+        
+        $phpMailer->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
+        
+        $phpMailer->isHTML(false); // Use plain text for better compatibility
         $phpMailer->CharSet = "UTF-8";
         $phpMailer->setFrom('bervinitsolutions@zohomail.com', 'Nyamula Logistics');
         $phpMailer->addAddress($email);
-
-        $phpMailer->Subject = 'Password Reset Request';
-        $phpMailer->Body = "
-            <html>
-            <body>
-                <p>Hello,</p>
-                <p>Click the following link to reset your password:</p>
-                <p><a href='$resetLink' style='color: #0066cc;'>Reset Password</a></p>
-                <p><strong>This link expires in 1 hour.</strong></p>
-                <p>If you didn't request this, please ignore this email.</p>
-                <hr>
-                <p style='color: #666; font-size: 0.8em;'>
-                    For security reasons, please don't share this link with anyone.
-                </p>
-            </body>
-            </html>
-        ";
+        $phpMailer->Subject = 'Password Reset Request - Nyamula Logistics';
+        $phpMailer->Body = $emailBody;
         
         $phpMailer->send();
-        $_SESSION['reset_message'] = "Password reset link has been sent to your email.";
+        $emailSent = true;
+        
     } catch (Exception $e) {
-        error_log("Mail error: " . $phpMailer->ErrorInfo);
-        $_SESSION['reset_message'] = "Failed to send password reset email. Please try again later.";
+        // If PHPMailer fails, try PHP's built-in mail() function
+        error_log("PHPMailer failed: " . $e->getMessage());
+        
+        $headers = "From: Nyamula Logistics <noreply@nyamula-logistics.com>\r\n";
+        $headers .= "Reply-To: noreply@nyamula-logistics.com\r\n";
+        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+        
+        if (mail($email, 'Password Reset Request - Nyamula Logistics', $emailBody, $headers)) {
+            $emailSent = true;
+        }
+    }
+    
+    if ($emailSent) {
+        $_SESSION['reset_message'] = "A password reset link has been sent to your email address. Please check your inbox and spam folder.";
+    } else {
+        error_log("Failed to send password reset email to: " . $email);
+        $_SESSION['reset_message'] = "Failed to send password reset email. Please try again later or contact support.";
     }
 } else {
     $_SESSION['reset_message'] = "Email not found in our records.";

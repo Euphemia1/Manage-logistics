@@ -948,7 +948,7 @@
                         <a href="transporter_login.php"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
                     </div>
                 </div>
-                <a href="job-post.php" class="nav-link">AVAILABLE LOADS</a>
+                                <a href="job-board.php" class="nav-link">AVAILABLE LOADS</a>
             </div>
         </div>
     </nav>

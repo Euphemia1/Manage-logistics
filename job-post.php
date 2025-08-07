@@ -521,23 +521,23 @@
                     </thead>
                     <tbody id="jobPostList">
                         <tr>
-                            <td>Steel</td>
+                            <td></td>
                             <td>
                                 <div class="location-cell">
-                                    <span class="location-label">Pick up</span>
-                                    <span class="location-value">Lusaka</span>
+                                    <span class="location-label"></span>
+                                    <span class="location-value"></span>
                                 </div>
                             </td>
                             <td>
                                 <div class="location-cell">
-                                    <span class="location-label">Drop off</span>
-                                    <span class="location-value">Harare, Zimbabwe</span>
+                                    <span class="location-label"></span>
+                                    <span class="location-value"></span>
                                 </div>
                             </td>
-                            <td>600.00 mt</td>
-                            <td>0972049151</td>
-                            <td>2025-06-24</td>
-                            <td><span class="status-badge available">available</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><span class="status-badge available"></span></td>
                             <td>
                                 <div class="action-buttons">
                                     <a href="tel:0972049151" class="btn btn-secondary"><i class="fas fa-phone"></i> Call</a>
@@ -545,23 +545,23 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Bagged Sulphur</td>
+                            <td></td>
                             <td>
                                 <div class="location-cell">
-                                    <span class="location-label">Pick up</span>
-                                    <span class="location-value">Beira, Mozambique</span>
+                                    <span class="location-label"></span>
+                                    <span class="location-value"></span>
                                 </div>
                             </td>
                             <td>
                                 <div class="location-cell">
-                                    <span class="location-label">Drop off</span>
-                                    <span class="location-value">Lubumbashi, DRC</span>
+                                    <span class="location-label"></span>
+                                    <span class="location-value"></span>
                                 </div>
                             </td>
-                            <td>300.00 mt</td>
-                            <td>0972049151</td>
-                            <td>2025-06-24</td>
-                            <td><span class="status-badge available">available</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><span class="status-badge available"></span></td>
                             <td>
                                 <div class="action-buttons">
                                     <a href="tel:0972049151" class="btn btn-secondary"><i class="fas fa-phone"></i> Call</a>

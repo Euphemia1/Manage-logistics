@@ -13,10 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
+// Initialize response array
+$response = array();
 
-
-
-    
+try {
     // Get optional parameters for filtering and pagination
     $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 50;
     $offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
@@ -50,13 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     if (!empty($dropoff)) {
         $where_conditions[] = "dropoff LIKE ?";
         $params[] = '%' . $dropoff . '%';
-        $types .= 's';
-    }
-    
-    // Filter by poster type
-    if (!empty($poster_type)) {
-        $where_conditions[] = "poster_type = ?";
-        $params[] = $poster_type;
         $types .= 's';
     }
     
@@ -147,7 +140,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
                 'start_date' => $row['start_date'],
                 'phone' => htmlspecialchars($row['phone'], ENT_QUOTES, 'UTF-8'),
                 'created_at' => $row['created_at'],
-                'poster_type' => htmlspecialchars($row['poster_type'], ENT_QUOTES, 'UTF-8'),
                 'cargo_owner' => htmlspecialchars($row['cargo_owner'], ENT_QUOTES, 'UTF-8'),
                 'cargo_owner_id' => (int)$row['cargo_owner_id']
             );
@@ -178,23 +170,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     // Close statement
     $stmt->close();
     
-// } catch (Exception $e) {
-//     // Handle errors
-//     $response['success'] = false;
-//     $response['message'] = 'Error: ' . $e->getMessage();
-//     $response['count'] = 0;
-//     $response['total_records'] = 0;
-//     $response['data'] = array();
+} catch (Exception $e) {
+    // Handle errors
+    $response['success'] = false;
+    $response['message'] = 'Error: ' . $e->getMessage();
+    $response['count'] = 0;
+    $response['total_records'] = 0;
+    $response['data'] = array();
     
-//     // Log error for debugging
-//     error_log("get-jobs.php Error: " . $e->getMessage());
+    // Log error for debugging
+    error_log("get-jobs.php Error: " . $e->getMessage());
     
-// } finally {
-//     // Close connection using db.php function
-//     if (isset($conn)) {
-//         closeDbConnection($conn);
-//     }
-// }
+} finally {
+    // Close connection
+    if (isset($conn)) {
+        $conn->close();
+    }
+}
 
 // Return JSON response
 echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);

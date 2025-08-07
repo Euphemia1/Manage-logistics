@@ -11,21 +11,22 @@ if (!isset($_SESSION['user_name']) || !isset($_SESSION['user_id'])) {
 
 $cargo_owner_id = $_SESSION['user_id']; 
 $sql = "SELECT
-            order_id AS id,
+            id,
             cargo_owner_id,
-            cargo_owner_name,
-            phone_number AS phone,
-            cargo_type,
+            cargo_owner,
+            phone,
+            item AS cargo_type,
             weight,
-            dimensions,
-            origin,
-            destination,
-            instructions,
-            pickup_date,
-            status
-        FROM orders
+            '' AS dimensions,
+            pickup AS origin,
+            dropoff AS destination,
+            '' AS instructions,
+            start_date AS pickup_date,
+            status,
+            created_at
+        FROM jobs
         WHERE cargo_owner_id = ?
-        ORDER BY order_id DESC";
+        ORDER BY created_at DESC";
 
 $stmt = $conn->prepare($sql);
 

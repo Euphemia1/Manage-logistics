@@ -28,17 +28,18 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Transporters</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #4CAF50;
-            --primary-light: #e0f7e0;
-            --primary-dark: #388E3C;
+            --primary-color: #2BC652;
+            --primary-light: #e8f5e8;
+            --primary-dark: #1e8c3d;
             --secondary-color: #f5f5f5;
             --text-color: #333;
             --text-light: #666;
             --white: #ffffff;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --border-radius: 10px;
+            --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             --transition: all 0.3s ease;
         }
         
@@ -49,7 +50,7 @@ $conn->close();
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: #f8f9fa;
             color: var(--text-color);
             line-height: 1.6;
@@ -293,6 +294,37 @@ $conn->close();
     </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav style="background-color: var(--primary-color); padding: 1rem 0; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <h1 style="color: white; margin: 0; font-size: 24px; font-weight: 600;">
+                    <i class="fas fa-truck" style="margin-right: 10px;"></i>Nyamula Logistics
+                </h1>
+            </div>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <a href="admin-dashboard.php" style="color: white; text-decoration: none; padding: 8px 16px; border-radius: 5px; transition: background-color 0.3s; display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-tachometer-alt"></i>Dashboard
+                </a>
+                <a href="job-board.php" style="color: white; text-decoration: none; padding: 8px 16px; border-radius: 5px; transition: background-color 0.3s; display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-clipboard-list"></i>Job Board
+                </a>
+                <a href="manage-orders.php" style="color: white; text-decoration: none; padding: 8px 16px; border-radius: 5px; transition: background-color 0.3s; display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-box"></i>Orders
+                </a>
+                <a href="manage-transporters.php" style="color: white; text-decoration: none; padding: 8px 16px; border-radius: 5px; transition: background-color 0.3s; display: flex; align-items: center; gap: 8px; background-color: rgba(255,255,255,0.2);">
+                    <i class="fas fa-truck"></i>Transporters
+                </a>
+                <a href="manage-cargo-owners.php" style="color: white; text-decoration: none; padding: 8px 16px; border-radius: 5px; transition: background-color 0.3s; display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-users"></i>Cargo Owners
+                </a>
+                <a href="admin-logout.php" style="background-color: rgba(255,255,255,0.2); color: white; text-decoration: none; padding: 8px 16px; border-radius: 5px; transition: background-color 0.3s; display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-sign-out-alt"></i>Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
         <div class="header">
             <h1><i class="fas fa-truck"></i> Transporters Management</h1>

@@ -13,15 +13,28 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+// Debug: Show connection status
+echo "<!-- Database connection successful -->";
+
 // Count total jobs
 $countQuery = "SELECT COUNT(*) as total FROM jobs";
 $countResult = mysqli_query($conn, $countQuery);
 $countRow = mysqli_fetch_assoc($countResult);
 $totalJobs = $countRow['total'];
 
+// Debug: Show job count
+echo "<!-- Total jobs found: " . $totalJobs . " -->";
+
 // Fetch jobs
 $query = "SELECT * FROM jobs ORDER BY start_date DESC";
 $result = mysqli_query($conn, $query);
+
+// Debug: Show query result
+if ($result) {
+    echo "<!-- Query successful. Rows found: " . mysqli_num_rows($result) . " -->";
+} else {
+    echo "<!-- Query failed: " . mysqli_error($conn) . " -->";
+}
 ?>
 
 <!DOCTYPE html>
@@ -34,10 +47,10 @@ $result = mysqli_query($conn, $query);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --primary-color: #4CAF50;
-            --primary-dark: #388E3C;
-            --primary-light: #e0f7e0;
-            --secondary-color: #2196F3;
+            --primary-color: #2BC652;
+            --primary-dark: #1e8c3d;
+            --primary-light: #e8f5e8;
+            --secondary-color: #f8f9fa;
             --accent-color: #FF9800;
             --text-color: #333;
             --text-light: #666;
@@ -45,7 +58,7 @@ $result = mysqli_query($conn, $query);
             --border-color: #e0e0e0;
             --background-color: #f8f9fa;
             --card-background: #fff;
-            --success-color: #4CAF50;
+            --success-color: #2BC652;
             --warning-color: #FF9800;
             --danger-color: #F44336;
             --info-color: #2196F3;
@@ -706,6 +719,37 @@ $result = mysqli_query($conn, $query);
 </head>
 
 <body>
+    <!-- Navigation Bar -->
+    <nav style="background-color: var(--primary-color); padding: 1rem 0; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <h1 style="color: white; margin: 0; font-size: 24px; font-weight: 600;">
+                    <i class="fas fa-truck" style="margin-right: 10px;"></i>Nyamula Logistics
+                </h1>
+            </div>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <a href="admin-dashboard.php" style="color: white; text-decoration: none; padding: 8px 16px; border-radius: 5px; transition: background-color 0.3s; display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-tachometer-alt"></i>Dashboard
+                </a>
+                <a href="job-board.php" style="color: white; text-decoration: none; padding: 8px 16px; border-radius: 5px; transition: background-color 0.3s; display: flex; align-items: center; gap: 8px; background-color: rgba(255,255,255,0.2);">
+                    <i class="fas fa-clipboard-list"></i>Job Board
+                </a>
+                <a href="manage-orders.php" style="color: white; text-decoration: none; padding: 8px 16px; border-radius: 5px; transition: background-color 0.3s; display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-box"></i>Orders
+                </a>
+                <a href="manage-transporters.php" style="color: white; text-decoration: none; padding: 8px 16px; border-radius: 5px; transition: background-color 0.3s; display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-truck"></i>Transporters
+                </a>
+                <a href="manage-cargo-owners.php" style="color: white; text-decoration: none; padding: 8px 16px; border-radius: 5px; transition: background-color 0.3s; display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-users"></i>Cargo Owners
+                </a>
+                <a href="admin-logout.php" style="background-color: rgba(255,255,255,0.2); color: white; text-decoration: none; padding: 8px 16px; border-radius: 5px; transition: background-color 0.3s; display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-sign-out-alt"></i>Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
         <div class="header">
             <h2><i class="fas fa-shipping-fast"></i> Available Jobs</h2>
@@ -719,39 +763,38 @@ $result = mysqli_query($conn, $query);
         </div>
 
         <!-- Add Job Form (Hidden by default) -->
-        <form action="post-cargo.php" method="POST">
         <div id="jobFormPanel" class="bg-white rounded-lg shadow-md p-4 mb-6 hidden">
             <h2 class="text-lg font-semibold mb-4 text-gray-800 flex items-center">
                 <i class="fas fa-plus-circle mr-2 text-primary-600"></i> Add New Job
             </h2>
-            <form id="jobForm" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <form id="jobForm" action="post-cargo.php" method="POST" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="space-y-2">
                     <label for="formItem" class="block text-sm font-medium text-gray-700">Item</label>
-                    <input id="formItem" name="item" type="text" placeholder="Enter item" required
+                    <input id="formItem" name="cargoType" type="text" placeholder="Enter item" required
                         class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
                 </div>
                 
                 <div class="space-y-2">
                     <label for="formPickup" class="block text-sm font-medium text-gray-700">Pick up</label>
-                    <input id="formPickup" name="pickup" type="text" placeholder="Enter pick up location" required
+                    <input id="formPickup" name="origin" type="text" placeholder="Enter pick up location" required
                         class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
                 </div>
                 
                 <div class="space-y-2">
                     <label for="formDropoff" class="block text-sm font-medium text-gray-700">Drop off</label>
-                    <input id="formDropoff" name="dropoff" type="text" placeholder="Enter drop off location" required
+                    <input id="formDropoff" name="destination" type="text" placeholder="Enter drop off location" required
                         class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
                 </div>
                 
                 <div class="space-y-2">
                     <label for="formWeight" class="block text-sm font-medium text-gray-700">Weight (mt)</label>
-                    <input id="formWeight" name="weight" type="number" min="0" step="0.1" placeholder="Enter weight" required
+                    <input id="formWeight" name="weight" type="text" placeholder="Enter weight" required
                         class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
                 </div>
                 
                 <div class="space-y-2">
                     <label for="formState" class="block text-sm font-medium text-gray-700">State</label>
-                    <select id="formState" name="state" required
+                    <select id="formState" name="status" required
                         class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500">
                         <option value="Available">Available</option>
                         <option value="Pending">Pending</option>
@@ -760,20 +803,9 @@ $result = mysqli_query($conn, $query);
                     </select>
                 </div>
                 
-                <!-- <div class="space-y-2">
-                    <label for="formPrice" class="block text-sm font-medium text-gray-700">Price per tn</label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <span class="text-gray-500">$</span>
-                        </div>
-                        <input id="formPrice" name="price" type="number" min="0" step="0.01" placeholder="Enter price" required
-                            class="pl-8 w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
-                    </div>
-                </div> -->
-                
                 <div class="space-y-2">
                     <label for="formStartDate" class="block text-sm font-medium text-gray-700">Job start date</label>
-                    <input id="formStartDate" name="startDate" type="date" required
+                    <input id="formStartDate" name="start_date" type="date" required
                         class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
                 </div>
 
@@ -782,19 +814,6 @@ $result = mysqli_query($conn, $query);
                     <input id="formphone" name="phone" type="text" placeholder="Enter phone" required
                         class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
                 </div>
-                
-                <!-- Added Cargo Owner Name and Phone fields -->
-                <!-- <div class="space-y-2">
-                    <label for="formOwnerName" class="block text-sm font-medium text-gray-700">Cargo Owner Name</label>
-                    <input id="formOwnerName" name="ownerName" type="text" placeholder="Enter cargo owner name" required
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
-                </div>
-                
-                <div class="space-y-2">
-                    <label for="formOwnerPhone" class="block text-sm font-medium text-gray-700">Cargo Owner Phone</label>
-                    <input id="formOwnerPhone" name="ownerPhone" type="text" placeholder="Enter cargo owner phone" required
-                        class="w-full p-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"/>
-                </div> -->
                 
                 <div class="space-y-2 md:col-span-2 lg:col-span-4 flex justify-end">
                     <div class="flex space-x-2">
@@ -809,10 +828,10 @@ $result = mysqli_query($conn, $query);
             </form>
         </div>
 
-        <!-- <div class="table-container">
+        <div class="table-container">
             <div class="table-header">
                 <h3><i class="fas fa-list"></i> Job Listings</h3>
-                <div class="job-count"></div>
+                <div class="job-count"><?php echo $totalJobs; ?> Jobs</div>
             </div>
 
             <div class="table-responsive">
@@ -824,84 +843,79 @@ $result = mysqli_query($conn, $query);
                             <th>Drop off</th>
                             <th>Weight (mt)</th>
                             <th>Status</th>
-                            <th>Price per tn</th>
                             <th>Job start date</th>
+                            <th>Phone</th>
                             <th>Cargo Owner</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody id="jobsTableBody">
-                        <!-- Sample job 1 -->
-                        <!-- <tr>
-                            <td></td>
-                            <td>
-                                <div class="location-cell">
-                                    <span class="location-label">From</span>
-                                    <span class="location-value"></span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="location-cell">
-                                    <span class="location-label">To</span>
-                                    <span class="location-value"></span>
-                                </div>
-                            </td>
-                            <td></td>
-                            <td><span class="status-badge available"></span></td>
-                            <td class="price-cell"></td>
-                            <td></td>
-                            <td>
-                                <div class="cargo-owner-cell">
-                                    <div class="owner-avatar"></div>
-                                    <div class="owner-info">
-                                        <span class="owner-name"></span>
-                                        <span class="owner-phone"></span>
+                        <?php if ($result && mysqli_num_rows($result) > 0): ?>
+                            <?php while($row = mysqli_fetch_assoc($result)): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($row['item']); ?></td>
+                                    <td>
+                                        <div class="location-cell">
+                                            <span class="location-label">From</span>
+                                            <span class="location-value"><?php echo htmlspecialchars($row['pickup']); ?></span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="location-cell">
+                                            <span class="location-label">To</span>
+                                            <span class="location-value"><?php echo htmlspecialchars($row['dropoff']); ?></span>
+                                        </div>
+                                    </td>
+                                    <td><?php echo htmlspecialchars($row['weight']); ?></td>
+                                    <td><span class="status-badge <?php echo strtolower(str_replace(' ', '-', $row['status'])); ?>"><?php echo htmlspecialchars($row['status']); ?></span></td>
+                                    <td><?php echo date('m/d/Y', strtotime($row['start_date'])); ?></td>
+                                    <td><?php echo htmlspecialchars($row['phone']); ?></td>
+                                    <td>
+                                        <div class="cargo-owner-cell">
+                                            <div class="owner-avatar">
+                                                <?php 
+                                                $ownerName = $row['cargo_owner'] ?? 'Unknown';
+                                                $initials = '';
+                                                $nameParts = explode(' ', $ownerName);
+                                                foreach ($nameParts as $part) {
+                                                    if (!empty($part)) {
+                                                        $initials .= strtoupper(substr($part, 0, 1));
+                                                    }
+                                                }
+                                                echo $initials ?: 'UK';
+                                                ?>
+                                            </div>
+                                            <div class="owner-info">
+                                                <span class="owner-name"><?php echo htmlspecialchars($ownerName); ?></span>
+                                                <span class="owner-phone"><?php echo htmlspecialchars($row['phone']); ?></span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <a href="#" class="btn btn-primary">View Details</a>
+                                            <a href="tel:<?php echo htmlspecialchars($row['phone']); ?>" class="btn btn-secondary">Contact</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="9">
+                                    <div class="empty-state">
+                                        <i class="fas fa-box-open"></i>
+                                        <h3>No Jobs Available</h3>
+                                        <p>There are currently no jobs posted. Check back later or post a new job.</p>
+                                        <!-- Debug info -->
+                                        <small style="color: #999;">
+                                            Debug: Total jobs in DB = <?php echo $totalJobs; ?>, 
+                                            Query result = <?php echo $result ? 'Success' : 'Failed'; ?>
+                                            <?php if ($result) echo ', Rows = ' . mysqli_num_rows($result); ?>
+                                        </small>
                                     </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="action-buttons">
-                                    <a href="#" class="btn btn-primary">View Details</a>
-                                    <a href="#" class="btn btn-secondary">Contact</a>
-                                </div>
-                            </td>
-                        </tr>
-                        
-                        <!-- Sample job 2 -->
-                        <!-- <tr>
-                            <td></td>
-                            <td>
-                                <div class="location-cell">
-                                    <span class="location-label">From</span>
-                                    <span class="location-value"></span>
-                                </div>
-                            </td>
-                            <td>  -->
-                                <!-- <div class="location-cell">
-                                    <span class="location-label">To</span>
-                                    <span class="location-value"></span>
-                                </div>
-                            </td>
-                            <td>1.2</td>
-                            <td><span class="status-badge pending"></span></td>
-                            <td class="price-cell"></td>
-                            <td></td>
-                            <td>
-                                <div class="cargo-owner-cell">
-                                    <div class="owner-avatar"></div>
-                                    <div class="owner-info">
-                                        <span class="owner-name"></span>
-                                        <span class="owner-phone"></span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td> -->
-                                <!-- <div class="action-buttons">
-                                    <a href="#" class="btn btn-primary">View Details</a>
-                                    <a href="#" class="btn btn-secondary">Contact</a>
-                                </div>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
@@ -1015,78 +1029,48 @@ $result = mysqli_query($conn, $query);
                 jobForm.addEventListener('submit', function(e) {
                     e.preventDefault();
                     
-                    // Get form values
-                    const item = document.getElementById('formItem').value;
-                    const pickup = document.getElementById('formPickup').value;
-                    const dropoff = document.getElementById('formDropoff').value;
-                    const weight = document.getElementById('formWeight').value;
-                    const state = document.getElementById('formState').value;
-                    const price = document.getElementById('formPrice').value;
-                    const startDate = document.getElementById('formStartDate').value;
-                    const ownerName = document.getElementById('formOwnerName').value;
-                    const ownerPhone = document.getElementById('formOwnerPhone').value;
+                    // Show loading state
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Saving...';
+                    submitBtn.disabled = true;
                     
-                    // Create new row
-                    const newRow = document.createElement('tr');
+                    // Create FormData object
+                    const formData = new FormData(this);
                     
-                    // Get owner initials
-                    const initials = ownerName.split(' ').map(name => name.charAt(0).toUpperCase()).join('');
-                    
-                    // Format date
-                    const date = new Date(startDate);
-                    const formattedDate = `${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')}/${date.getFullYear()}`;
-                    
-                    // Set row HTML
-                    newRow.innerHTML = `
-                        <td>${item}</td>
-                        <td>
-                            <div class="location-cell">
-                                <span class="location-label">From</span>
-                                <span class="location-value">${pickup}</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="location-cell">
-                                <span class="location-label">To</span>
-                                <span class="location-value">${dropoff}</span>
-                            </div>
-                        </td>
-                        <td>${weight}</td>
-                        <td><span class="status-badge ${state.toLowerCase()}">${state}</span></td>
-                        <td class="price-cell">$${price}</td>
-                        <td>${formattedDate}</td>
-                        <td>
-                            <div class="cargo-owner-cell">
-                                <div class="owner-avatar">${initials}</div>
-                                <div class="owner-info">
-                                    <span class="owner-name">${ownerName}</span>
-                                    <span class="owner-phone">${ownerPhone}</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="action-buttons">
-                                <a href="#" class="btn btn-primary">View Details</a>
-                                <a href="#" class="btn btn-secondary">Contact</a>
-                            </div>
-                        </td>
-                    `;
-                    
-                    // Add the new row to the table
-                    document.getElementById('jobsTableBody').appendChild(newRow);
-                    
-                    // Update job count
-                    const jobCountElement = document.querySelector('.job-count');
-                    const currentCount = parseInt(jobCountElement.textContent);
-                    jobCountElement.textContent = `${currentCount + 1} Jobs`;
-                    
-                    // Reset form and hide it
-                    jobForm.reset();
-                    document.getElementById('formStartDate').value = formattedDate;
-                    toggleJobForm();
+                    // Submit to post-cargo.php
+                    fetch('post-cargo.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Job posted successfully!');
+                            // Reset form and hide it
+                            jobForm.reset();
+                            document.getElementById('formStartDate').value = formattedDate;
+                            toggleJobForm();
+                            // Reload page to show new job
+                            window.location.reload();
+                        } else {
+                            alert('Error: ' + (data.message || 'Failed to post job'));
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Network error occurred. Please try again.');
+                    })
+                    .finally(() => {
+                        // Restore button
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    });
                 });
             }
         });
     </script>
 </body>
 </html>
+
+

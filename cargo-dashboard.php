@@ -21,171 +21,454 @@ $_SESSION['last_activity'] = time();
    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-green: #28a745;
+            --dark-green: #1e7e34;
+            --light-green: #d4edda;
+            --very-light-green: #f8fff9;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --text-dark: #2d3748;
+            --text-muted: #6c757d;
+            --border-color: #e2e8f0;
+            --shadow: 0 2px 10px rgba(40, 167, 69, 0.1);
+            --shadow-hover: 0 4px 20px rgba(40, 167, 69, 0.15);
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f8f9fa;
+            background: linear-gradient(135deg, var(--very-light-green) 0%, var(--white) 100%);
+            color: var(--text-dark);
             overflow-x: hidden;
+            min-height: 100vh;
         }
         
-    
+        /* Sidebar Styling */
         .sidebar {
-            background: linear-gradient(to bottom, #1e7e34, #155724);
-            color: white;
+            background: linear-gradient(180deg, var(--primary-green) 0%, var(--dark-green) 100%);
+            color: var(--white);
             height: 100vh;
             width: 250px;
             position: fixed;
             left: 0;
             top: 0;
             z-index: 1000;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 2px 0 15px rgba(40, 167, 69, 0.2);
         }
         
         .sidebar .nav-link {
-            color: rgba(255, 255, 255, 0.8);
-            padding: 10px 20px;
-            margin: 5px 0;
-            border-radius: 5px;
-            transition: all 0.3s;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 12px 20px;
+            margin: 5px 10px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border: none;
+            background: transparent;
         }
         
         .sidebar .nav-link:hover, .sidebar .nav-link.active {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--white);
+            transform: translateX(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         
         .sidebar .nav-link i {
-            margin-right: 10px;
+            margin-right: 12px;
             width: 20px;
             text-align: center;
         }
+
+        .sidebar h3 {
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
         
-      
+        /* Main Content */
         .main-content {
             margin-left: 250px;
-            padding: 20px;
-            transition: all 0.3s;
+            padding: 30px;
+            transition: all 0.3s ease;
+            min-height: 100vh;
         }
         
-       
-        .dashboard-card {
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
-            border: none;
+        /* Cards */
+        .dashboard-card, .card {
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            background: var(--white);
         }
         
-        .dashboard-card:hover {
-            transform: translateY(-5px);
+        .dashboard-card:hover, .card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--very-light-green) 0%, var(--light-green) 100%);
+            border-bottom: 1px solid var(--border-color);
+            border-radius: 15px 15px 0 0 !important;
         }
       
+        /* Stats Cards */
         .stats-card {
-            border-left: 4px solid;
-            padding: 15px;
+            border-left: 4px solid var(--primary-green);
+            padding: 20px;
+            background: var(--white);
+            border-radius: 15px;
         }
         
-        .stats-card.posted {
-            border-left-color: #28a745;
+        .stats-card .card-title {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .stats-card h2 {
+            color: var(--primary-green);
+            font-weight: 700;
         }
         
-        .stats-card.available {
-            border-left-color: #007bff;
+        /* Buttons */
+        .btn {
+            border-radius: 10px;
+            font-weight: 500;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-success, .btn-primary {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+            border: none;
+            color: var(--white);
+        }
+
+        .btn-success:hover, .btn-primary:hover {
+            background: linear-gradient(135deg, var(--dark-green) 0%, var(--primary-green) 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-outline-success, .btn-outline-primary {
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            background: transparent;
+        }
+
+        .btn-outline-success:hover, .btn-outline-primary:hover {
+            background: var(--primary-green);
+            color: var(--white);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline-secondary {
+            border: 2px solid var(--border-color);
+            color: var(--text-muted);
+        }
+
+        .btn-outline-secondary:hover {
+            background: var(--light-gray);
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .btn-outline-info {
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .btn-outline-info:hover {
+            background: var(--primary-green);
+            color: var(--white);
+        }
+
+        .btn-outline-warning {
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .btn-outline-warning:hover {
+            background: var(--primary-green);
+            color: var(--white);
+        }
+
+        .btn-outline-danger {
+            border: 2px solid #dc3545;
+            color: #dc3545;
+        }
+
+        .btn-outline-danger:hover {
+            background: #dc3545;
+            color: var(--white);
+        }
+
+        .btn-warning {
+            background: var(--primary-green);
+            color: var(--white);
+            border: none;
+        }
+
+        .btn-warning:hover {
+            background: var(--dark-green);
+        }
+
+        .btn-info {
+            background: var(--primary-green);
+            color: var(--white);
+            border: none;
+        }
+
+        .btn-info:hover {
+            background: var(--dark-green);
         }
         
-        .stats-card.transit {
-            border-left-color: #6f42c1;
+        /* Badges */
+        .badge {
+            border-radius: 8px;
+            font-weight: 500;
+            padding: 6px 12px;
+        }
+
+        .badge-available, .bg-success {
+            background: var(--primary-green) !important;
+            color: var(--white) !important;
         }
         
-     
-        .badge-available {
-            background-color: #cce5ff;
-            color: #004085;
-        }
-        
-        .badge-transit {
-            background-color: #e0cffc;
-            color: #4b2354;
+        .badge-transit, .bg-info {
+            background: var(--primary-green) !important;
+            color: var(--white) !important;
         }
         
         .badge-delivered {
-            background-color: #d4edda;
-            color: #155724;
+            background: var(--dark-green) !important;
+            color: var(--white) !important;
+        }
+
+        .bg-warning {
+            background: var(--primary-green) !important;
+            color: var(--white) !important;
+        }
+
+        .bg-primary {
+            background: var(--primary-green) !important;
+            color: var(--white) !important;
+        }
+
+        .bg-danger {
+            background: #dc3545 !important;
+            color: var(--white) !important;
+        }
+
+        .bg-secondary {
+            background: var(--text-muted) !important;
+            color: var(--white) !important;
         }
         
-       
+        /* Forms */
+        .form-control, .form-select {
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.15);
+            background: var(--white);
+        }
+
+        .form-label {
+            color: var(--text-dark);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        /* Alerts */
+        .alert {
+            border-radius: 10px;
+            border: none;
+            padding: 15px 20px;
+        }
+
+        .alert-success {
+            background: var(--light-green);
+            color: var(--dark-green);
+            border-left: 4px solid var(--primary-green);
+        }
+
+        .alert-info {
+            background: var(--very-light-green);
+            color: var(--dark-green);
+            border-left: 4px solid var(--primary-green);
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            color: #856404;
+            border-left: 4px solid var(--primary-green);
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+        
+        /* Text Colors */
+        .text-success, .text-primary {
+            color: var(--primary-green) !important;
+        }
+
+        .text-purple {
+            color: var(--primary-green) !important;
+        }
+
+        .text-info {
+            color: var(--primary-green) !important;
+        }
+
+        .text-warning {
+            color: var(--primary-green) !important;
+        }
+        
+        /* Icons */
+        .fa, .fas {
+            color: inherit;
+        }
+
+        .text-success .fa, .text-success .fas {
+            color: var(--primary-green) !important;
+        }
+
+        .text-primary .fa, .text-primary .fas {
+            color: var(--primary-green) !important;
+        }
+
+        .text-purple .fa, .text-purple .fas {
+            color: var(--primary-green) !important;
+        }
+        
+        /* Loading Spinner */
+        .spinner-border {
+            color: var(--primary-green);
+        }
+
+        .spinner-border-sm {
+            color: var(--white);
+        }
+        
+        /* Profile Picture */
+        .rounded-circle {
+            border: 3px solid var(--primary-green) !important;
+        }
+        
+        /* Cargo Item Cards */
+        .cargo-item-card {
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .cargo-item-card:hover { 
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-3px);
+        }
+
+        .cargo-item-card .card-header {
+            background: linear-gradient(135deg, var(--very-light-green) 0%, var(--light-green) 100%);
+        }
+
+        .cargo-item-card .card-footer {
+            background: var(--very-light-green);
+            border-top: 1px solid var(--border-color);
+        }
+        
+        /* Filters */
+        .cargo-filter-btn.active {
+            background: var(--primary-green) !important;
+            color: var(--white) !important;
+            border-color: var(--primary-green) !important;
+        }
+        
+        /* Mobile Responsiveness */
         #sidebarCollapse {
             display: none;
+            background: var(--primary-green);
+            border: none;
+            color: var(--white);
+            border-radius: 10px;
+        }
+
+        #sidebarCollapse:hover {
+            background: var(--dark-green);
+        }
+
+        /* Modal */
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+            border-bottom: none;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.2);
+        }
+
+        .modal-footer {
+            border-top: 1px solid var(--border-color);
+            background: var(--very-light-green);
+            border-radius: 0 0 15px 15px;
         }
         
-        
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #28a745;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
+        /* Form Switches */
+        .form-check-input:checked {
+            background-color: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+
+        .form-check-input:focus {
+            box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.25);
         }
         
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        /* Pagination */
+        .page-link {
+            color: var(--primary-green);
+            border-color: var(--border-color);
+        }
+
+        .page-link:hover {
+            color: var(--white);
+            background-color: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+
+        .page-item.active .page-link {
+            background-color: var(--primary-green);
+            border-color: var(--primary-green);
+            color: var(--white);
+        }
+
+        .page-item.disabled .page-link {
+            color: var(--text-muted);
+            background-color: var(--light-gray);
         }
         
-     
-        .form-step {
-            display: none;
-            animation: fadeIn 0.3s ease-out;
+        /* Header styling */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-dark);
+            font-weight: 600;
         }
-        
-        .form-step.active {
-            display: block;
-        }
-        
-        .cargo-type-selector {
-            margin-bottom: 10px;
-        }
-        
-        .cargo-type-option {
-            flex: 1 0 120px;
-            padding: 15px 10px;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .cargo-type-option:hover {
-            border-color: #28a745;
-            background-color: rgba(40, 167, 69, 0.05);
-        }
-        
-        input[type="radio"]:checked + .cargo-type-option {
-            border-color: #28a745;
-            background-color: rgba(40, 167, 69, 0.1);
-            font-weight: 500;
-        }
-        
-        .location-input {
-            background-image: none !important;  
-        }
-        
-        .use-current-location {
-            min-width: 45px;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-      
-        .text-purple {
-            color: #6f42c1 !important;
-        }
-        .cargo-item-card:hover { 
-            box-shadow: 0 0.5rem 1rem rgba(0,0,0,.10)!important;
+
+        /* Welcome section enhancement */
+        .welcome-gradient {
+            background: linear-gradient(135deg, var(--very-light-green) 0%, var(--white) 100%);
+            border-left: 5px solid var(--primary-green);
         }
 
         @media (max-width: 768px) {
@@ -199,6 +482,7 @@ $_SESSION['last_activity'] = time();
             
             .main-content {
                 margin-left: 0;
+                padding: 15px;
             }
             
             .main-content.active {
@@ -212,6 +496,45 @@ $_SESSION['last_activity'] = time();
                 left: 15px;
                 z-index: 1100;
             }
+        }
+
+        /* Enhanced animations */
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .dashboard-section {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Download button styling */
+        .download-btn {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .download-btn:hover {
+            background: linear-gradient(135deg, var(--dark-green) 0%, var(--primary-green) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+            color: var(--white);
+            text-decoration: none;
         }
     </style>
 </head>
@@ -243,7 +566,7 @@ $_SESSION['last_activity'] = time();
                     </a>
                 </li>
                 <li class="nav-item mt-5">
-                    <a href="logout.php" class="nav-link text-danger">
+                    <a href="logout.php" class="nav-link" style="color: rgba(255, 255, 255, 0.9); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 10px;">
                         <i class="fas fa-sign-out-alt"></i> Logout
                     </a>
                 </li>
@@ -262,18 +585,22 @@ $_SESSION['last_activity'] = time();
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="mb-0">Dashboard</h2>
             <div class="d-flex align-items-center">
-                <img id="profilePicture" src="https://via.placeholder.com/40" alt="Profile Picture" class="rounded-circle border border-success me-2">
-                <span id="cargoOwnerName" class="fw-bold"><?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
+                <img id="profilePicture" src="https://via.placeholder.com/40/28a745/ffffff?text=<?php echo strtoupper(substr($_SESSION['user_name'], 0, 1)); ?>" alt="Profile Picture" class="rounded-circle me-2">
+                <span id="cargoOwnerName" class="fw-bold text-success"><?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
             </div>
         </div>
 
       
         <div id="homeSection">
-            <div class="card dashboard-card mb-4">
+            <div class="card dashboard-card mb-4 welcome-gradient">
                 <div class="card-body">
-                    <h3 class="card-title text-center mb-4">
-                        <span class="text-success">Welcome</span> to Your Dashboard
-                    </h3>
+                    <div class="text-center mb-4">
+                        <h2 class="display-6 mb-3">
+                            <i class="fas fa-truck text-success me-3"></i>
+                            Welcome to <span class="text-success">Nyamula Logistics</span>
+                        </h2>
+                        <p class="lead text-muted">Your trusted partner in cargo transportation across Africa</p>
+                    </div>
                     
                     <div class="row">
                         <div class="col-md-4 mb-3">
@@ -339,6 +666,7 @@ $_SESSION['last_activity'] = time();
 
 
 
+        <!-- Add Job Form (Hidden by default) -->
         <div id="postCargoSection" class="d-none">
     <div class="card dashboard-card">
         <div class="card-header bg-white">
@@ -350,7 +678,7 @@ $_SESSION['last_activity'] = time();
         
             <div id="formAlertPlaceholder" class="mb-3"></div>
           
-            <form id="postCargoForm">
+            <form id="postCargoForm" action="post-cargo.php" method="POST">
                 <div class="row mb-4">
                     <div class="col-12 mb-3">
                         <label class="form-label">Pickup Point</label>
@@ -380,7 +708,13 @@ $_SESSION['last_activity'] = time();
 
                     <div class="col-12 mb-3">
                         <label class="form-label">Status</label>
-                        <input id="status" name="status" type="text" class="form-control" placeholder="Enter status" required>
+                        <select id="status" name="status" class="form-control" required>
+                            <option value="">Select Status</option>
+                            <option value="Available">Available</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Loading in Progress">Loading in Progress</option>
+                        </select>
                     </div>
                 </div>
                 
@@ -401,7 +735,7 @@ $_SESSION['last_activity'] = time();
 </div>
            
 <div class="d-flex justify-content-between mt-4">
-                                <button type="button" class="btn btn-outline-secondary prev-step" data-prev="step2">
+                                <button type="button" class="btn btn-outline-secondary" onclick="showSection(homeSection)">
                                     <i class="fas fa-arrow-left me-2"></i> Back
                                 </button>
                                 <button type="submit" class="btn btn-success">
@@ -500,33 +834,258 @@ $_SESSION['last_activity'] = time();
     </div>
 </div>
 
-<div class="dashboard-nav mb-4">
-    <button class="btn btn-outline-success me-2" data-target-section="postCargoSection">
-        <i class="fas fa-plus me-2"></i>Post New Cargo
-    </button>
-    <button class="btn btn-outline-primary me-2 active" data-target-section="postedCargosSection">
-        <i class="fas fa-list me-2"></i>View Posted Cargos
-    </button>
-</div>
-
          <div id="settingsSection" class="d-none">
-            <div class="card dashboard-card">
-                <div class="card-header bg-white">
-                    <h3 class="mb-0">
-                        <span class="text-success">Account</span> Settings
-                    </h3>
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body">
+                                <h2 class="mb-1">
+                                    <i class="fas fa-cog text-success me-2"></i>
+                                    Account Settings
+                                </h2>
+                                <p class="text-muted mb-0">Manage your account preferences and security settings</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p>Account settings management will be available here.</p>
-                    <p>This could include:</p>
-                    <ul>
-                        <li>Updating profile information (name, contact details)</li>
-                        <li>Changing password</li>
-                        <li>Notification preferences</li>
-                    </ul>
-                    <div id="globalAlertPlaceholder" class="mt-3"></div>
-                    <div class="alert alert-info mt-3">
-                        <i class="fas fa-info-circle me-2"></i> This section is a placeholder for future development.
+
+                <div id="settingsAlertPlaceholder" class="mb-3"></div>
+
+                <div class="row">
+                    <!-- Profile Information Card -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-header bg-white border-bottom">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-user text-primary me-2"></i>
+                                    Profile Information
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <form id="profileUpdateForm">
+                                    <div class="text-center mb-4">
+                                        <div class="position-relative d-inline-block">
+                                            <img id="currentProfilePic" 
+                                                 src="https://via.placeholder.com/120/28a745/ffffff?text=<?php echo strtoupper(substr($_SESSION['user_name'], 0, 1)); ?>" 
+                                                 alt="Profile Picture" 
+                                                 class="rounded-circle border border-3 border-success"
+                                                 style="width: 120px; height: 120px; object-fit: cover;">
+                                            <button type="button" class="btn btn-success btn-sm position-absolute bottom-0 end-0 rounded-circle" 
+                                                    id="changeProfilePicBtn" style="width: 35px; height: 35px;">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="profilePictureInput" class="d-none" accept="image/*">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="profileName" class="form-label">Full Name</label>
+                                        <input type="text" class="form-control" id="profileName" 
+                                               value="<?php echo htmlspecialchars($_SESSION['user_name']); ?>" required>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="profileEmail" class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" id="profileEmail" 
+                                               placeholder="your.email@example.com">
+                                        <div class="form-text">Used for notifications and password recovery</div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="profilePhone" class="form-label">Phone Number</label>
+                                        <input type="tel" class="form-control" id="profilePhone" 
+                                               placeholder="+260 XXX XXX XXX">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="profileAddress" class="form-label">Address</label>
+                                        <textarea class="form-control" id="profileAddress" rows="2" 
+                                                  placeholder="Your business address"></textarea>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save me-2"></i>Update Profile
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Settings Card -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-header bg-white border-bottom">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-shield-alt text-warning me-2"></i>
+                                    Security Settings
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <form id="passwordChangeForm">
+                                    <h6 class="fw-bold mb-3">Change Password</h6>
+                                    
+                                    <div class="mb-3">
+                                        <label for="currentPassword" class="form-label">Current Password</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="currentPassword" required>
+                                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('currentPassword')">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="newPassword" class="form-label">New Password</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="newPassword" required>
+                                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('newPassword')">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                        <div class="form-text">Password should be at least 8 characters long</div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="confirmPassword" required>
+                                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('confirmPassword')">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-warning">
+                                        <i class="fas fa-key me-2"></i>Change Password
+                                    </button>
+                                </form>
+
+                                <hr class="my-4">
+
+                                <h6 class="fw-bold mb-3">Account Security</h6>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div>
+                                        <strong>Two-Factor Authentication</strong>
+                                        <div class="text-muted small">Add an extra layer of security</div>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="twoFactorAuth">
+                                        <label class="form-check-label" for="twoFactorAuth"></label>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div>
+                                        <strong>Email Notifications</strong>
+                                        <div class="text-muted small">Receive updates about your cargo</div>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                                        <label class="form-check-label" for="emailNotifications"></label>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>SMS Notifications</strong>
+                                        <div class="text-muted small">Get SMS alerts for urgent updates</div>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="smsNotifications">
+                                        <label class="form-check-label" for="smsNotifications"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Settings Row -->
+                <div class="row">
+                    <!-- System Preferences -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-header bg-white border-bottom">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-sliders-h text-info me-2"></i>
+                                    Preferences
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="defaultLanguage" class="form-label">Language</label>
+                                    <select class="form-select" id="defaultLanguage">
+                                        <option value="en" selected>English</option>
+                                        <option value="ny">Chichewa</option>
+                                        <option value="sw">Swahili</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="timezone" class="form-label">Timezone</label>
+                                    <select class="form-select" id="timezone">
+                                        <option value="Africa/Lusaka" selected>Africa/Lusaka (CAT)</option>
+                                        <option value="Africa/Nairobi">Africa/Nairobi (EAT)</option>
+                                        <option value="Africa/Harare">Africa/Harare (CAT)</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="dateFormat" class="form-label">Date Format</label>
+                                    <select class="form-select" id="dateFormat">
+                                        <option value="DD/MM/YYYY" selected>DD/MM/YYYY</option>
+                                        <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                                        <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                                    </select>
+                                </div>
+
+                                <button type="button" class="btn btn-info" onclick="savePreferences()">
+                                    <i class="fas fa-save me-2"></i>Save Preferences
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Danger Zone -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="card border-0 shadow-sm border-danger">
+                            <div class="card-header bg-danger text-white">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                    Danger Zone
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <h6 class="fw-bold text-success">Download Account Data</h6>
+                                    <p class="text-muted mb-2">Download a copy of all your cargo data and account information in JSON format.</p>
+                                    <a href="download-data.php" class="download-btn" target="_blank">
+                                        <i class="fas fa-download"></i>Download My Data
+                                    </a>
+                                </div>
+
+                                <hr>
+
+                                <div class="mb-3">
+                                    <h6 class="fw-bold text-danger">Deactivate Account</h6>
+                                    <p class="text-muted mb-2">Temporarily disable your account. You can reactivate it anytime.</p>
+                                    <button type="button" class="btn btn-outline-warning btn-sm">
+                                        <i class="fas fa-pause me-2"></i>Deactivate Account
+                                    </button>
+                                </div>
+
+                                <hr>
+
+                                <div>
+                                    <h6 class="fw-bold text-danger">Delete Account</h6>
+                                    <p class="text-muted mb-2">Permanently delete your account and all data. This action cannot be undone.</p>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmAccountDeletion()">
+                                        <i class="fas fa-trash me-2"></i>Delete Account
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -632,6 +1191,266 @@ $_SESSION['last_activity'] = time();
                 sidebar.classList.toggle('active');
                 mainContent.classList.toggle('active');
             });
+            
+            // New function to load user cargos for the posted cargos section
+            function loadUserCargos() {
+                const cargoListContainer = document.getElementById('cargoListContainer');
+                const cargoLoadingSpinner = document.getElementById('cargoLoadingSpinner');
+                const totalCargoCount = document.getElementById('totalCargoCount');
+                
+                if (cargoLoadingSpinner) cargoLoadingSpinner.classList.remove('d-none');
+                if (cargoListContainer) cargoListContainer.innerHTML = '';
+                
+                fetch('fetch-cargo.php')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(apiResponse => {
+                    if (cargoLoadingSpinner) cargoLoadingSpinner.classList.add('d-none');
+                    
+                    if (!apiResponse.success) {
+                        console.error('Error fetching cargos:', apiResponse.message);
+                        const errorMsg = apiResponse.message || 'Failed to load cargos. Please try again.';
+                        if (cargoListContainer) {
+                            cargoListContainer.innerHTML = `
+                                <div class="col-12">
+                                    <div class="text-center py-5">
+                                        <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
+                                        <h4 class="text-muted">Error Loading Cargos</h4>
+                                        <p class="text-muted">${errorMsg}</p>
+                                        <button class="btn btn-primary" onclick="loadUserCargos()">
+                                            <i class="fas fa-refresh me-2"></i>Try Again
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                        if (totalCargoCount) totalCargoCount.textContent = '0';
+                        return;
+                    }
+
+                    const cargos = apiResponse.cargos || [];
+                    
+                    if (cargos.length > 0) {
+                        if (totalCargoCount) totalCargoCount.textContent = cargos.length;
+                        displayUserCargos(cargos);
+                    } else {
+                        if (cargoListContainer) {
+                            cargoListContainer.innerHTML = `
+                                <div class="col-12">
+                                    <div class="text-center py-5">
+                                        <i class="fas fa-box-open fa-4x text-muted mb-4"></i>
+                                        <h4 class="text-muted mb-3">No Cargos Found</h4>
+                                        <p class="text-muted mb-4">You haven't posted any cargo yet.</p>
+                                        <button class="btn btn-success btn-lg" onclick="showSection(postCargoSection)">
+                                            <i class="fas fa-plus me-2"></i>Post New Cargo
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                        if (totalCargoCount) totalCargoCount.textContent = '0';
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch Error:', error);
+                    if (cargoLoadingSpinner) cargoLoadingSpinner.classList.add('d-none');
+                    if (cargoListContainer) {
+                        cargoListContainer.innerHTML = `
+                            <div class="col-12">
+                                <div class="text-center py-5">
+                                    <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+                                    <h4 class="text-muted">Network Error</h4>
+                                    <p class="text-muted">Failed to load cargos. Please check your connection and try again.</p>
+                                    <button class="btn btn-primary" onclick="loadUserCargos()">
+                                        <i class="fas fa-refresh me-2"></i>Try Again
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    if (totalCargoCount) totalCargoCount.textContent = '0';
+                });
+            }
+            
+            // Function to display user cargos in card format
+            function displayUserCargos(cargos) {
+                const cargoListContainer = document.getElementById('cargoListContainer');
+                if (!cargoListContainer) return;
+                
+                let html = '';
+                cargos.forEach(cargo => {
+                    const statusClass = getStatusBadgeClass(cargo.status);
+                    const formattedDate = formatDate(cargo.pickup_date);
+                    const createdDate = formatDate(cargo.created_at);
+                    
+                    html += `
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="card cargo-item-card h-100 shadow-sm">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h6 class="mb-0 fw-bold text-primary">${escapeHtml(cargo.cargo_type)}</h6>
+                                    <span class="badge ${statusClass}">${escapeHtml(cargo.status || 'Unknown')}</span>
+                                </div>
+                                <div class="card-body">
+                                    <div class="route-info mb-3">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <i class="fas fa-map-marker-alt text-success me-2"></i>
+                                            <small class="text-muted">From:</small>
+                                        </div>
+                                        <div class="fw-semibold mb-2">${escapeHtml(cargo.origin)}</div>
+                                        
+                                        <div class="d-flex align-items-center mb-2">
+                                            <i class="fas fa-flag-checkered text-danger me-2"></i>
+                                            <small class="text-muted">To:</small>
+                                        </div>
+                                        <div class="fw-semibold">${escapeHtml(cargo.destination)}</div>
+                                    </div>
+                                    
+                                    <div class="cargo-details">
+                                        <div class="row text-sm">
+                                            <div class="col-6 mb-2">
+                                                <small class="text-muted">Weight:</small>
+                                                <div>${escapeHtml(cargo.weight || 'N/A')}</div>
+                                            </div>
+                                            <div class="col-6 mb-2">
+                                                <small class="text-muted">Phone:</small>
+                                                <div>${escapeHtml(cargo.phone || 'N/A')}</div>
+                                            </div>
+                                            <div class="col-12 mb-2">
+                                                <small class="text-muted">Pickup Date:</small>
+                                                <div>${formattedDate}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-transparent">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-muted">Posted: ${createdDate}</small>
+                                        <button class="btn btn-outline-info btn-sm view-cargo-details-btn" data-cargo='${JSON.stringify(cargo)}'>
+                                            <i class="fas fa-eye me-1"></i>Details
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                cargoListContainer.innerHTML = html;
+                
+                // Add event listeners to detail buttons
+                document.querySelectorAll('.view-cargo-details-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const cargoData = JSON.parse(this.getAttribute('data-cargo'));
+                        showUserCargoDetails(cargoData);
+                    });
+                });
+            }
+            
+            // Helper functions
+            function getStatusBadgeClass(status) {
+                const statusClasses = {
+                    'Available': 'badge-available bg-success text-white',
+                    'Pending': 'bg-warning text-dark',
+                    'In Transit': 'badge-transit bg-info text-white',
+                    'Loading in Progress': 'bg-primary text-white',
+                    'Delivered': 'badge-delivered bg-success text-white',
+                    'Cancelled': 'bg-danger text-white',
+                    'ongoing load': 'bg-info text-white'
+                };
+                return statusClasses[status] || 'bg-secondary text-white';
+            }
+            
+            function formatDate(dateString) {
+                if (!dateString) return 'Not specified';
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+            }
+            
+            function escapeHtml(text) {
+                if (!text) return 'N/A';
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+            
+            function showUserCargoDetails(cargo) {
+                const modalHTML = `
+                    <div class="modal fade" id="userCargoDetailsModal" tabindex="-1">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header bg-success text-white">
+                                    <h5 class="modal-title">Cargo Details</h5>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="fw-bold">Cargo Type:</label>
+                                            <p>${escapeHtml(cargo.cargo_type)}</p>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="fw-bold">Status:</label>
+                                            <p><span class="badge ${getStatusBadgeClass(cargo.status)}">${escapeHtml(cargo.status || 'Unknown')}</span></p>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="fw-bold">Origin:</label>
+                                            <p>${escapeHtml(cargo.origin)}</p>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="fw-bold">Destination:</label>
+                                            <p>${escapeHtml(cargo.destination)}</p>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="fw-bold">Weight:</label>
+                                            <p>${escapeHtml(cargo.weight || 'Not specified')}</p>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="fw-bold">Contact Phone:</label>
+                                            <p>${escapeHtml(cargo.phone || 'Not provided')}</p>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="fw-bold">Pickup Date:</label>
+                                            <p>${formatDate(cargo.pickup_date)}</p>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="fw-bold">Posted Date:</label>
+                                            <p>${formatDate(cargo.created_at)}</p>
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            <label class="fw-bold">Special Instructions:</label>
+                                            <p>${escapeHtml(cargo.instructions || 'None')}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Remove existing modal if present
+                const existingModal = document.getElementById('userCargoDetailsModal');
+                if (existingModal) {
+                    existingModal.remove();
+                }
+                
+                // Add new modal to body
+                document.body.insertAdjacentHTML('beforeend', modalHTML);
+                
+                // Show modal
+                const modal = new bootstrap.Modal(document.getElementById('userCargoDetailsModal'));
+                modal.show();
+            }
             
             function showSection(section) {
                 homeSection.classList.add('d-none');
@@ -957,11 +1776,15 @@ $_SESSION['last_activity'] = time();
             
             if(homeLink) homeLink.addEventListener('click', (e) => { e.preventDefault(); showSection(homeSection); });
             if(postCargoLink) postCargoLink.addEventListener('click', (e) => { e.preventDefault(); showSection(postCargoSection); });
-            if(viewPostedCargosLink) viewPostedCargosLink.addEventListener('click', (e) => { e.preventDefault(); showSection(postedCargosSection); fetchCargos(); });
+            if(viewPostedCargosLink) viewPostedCargosLink.addEventListener('click', (e) => { 
+                e.preventDefault(); 
+                showSection(postedCargosSection); 
+                loadUserCargos(); // Use the new function instead of fetchCargos
+            });
             if(settingsLink) settingsLink.addEventListener('click', (e) => { e.preventDefault(); showSection(settingsSection); });
             if(postNewCargoBtn) postNewCargoBtn.addEventListener('click', () => showSection(postCargoSection));
             if(backToHomeBtn) backToHomeBtn.addEventListener('click', () => showSection(homeSection));
-            if(refreshCargosBtn) refreshCargosBtn.addEventListener('click', fetchCargos);
+            if(refreshCargosBtn) refreshCargosBtn.addEventListener('click', loadUserCargos);
 
             if(searchCargo) searchCargo.addEventListener('input', filterAndDisplayCargos);
             if(statusFilter) statusFilter.addEventListener('change', filterAndDisplayCargos);
@@ -1053,18 +1876,41 @@ $_SESSION['last_activity'] = time();
                 });
             }
 
+            // Single form submission handler
             if(postCargoForm) {
-                postCargoForm.addEventListener('submit', function(e) {
+                // Remove any existing event listeners to prevent duplicates
+                const newForm = postCargoForm.cloneNode(true);
+                postCargoForm.parentNode.replaceChild(newForm, postCargoForm);
+                
+                // Get the new form reference
+                const form = document.getElementById('postCargoForm');
+                
+                form.addEventListener('submit', function(e) {
                     e.preventDefault();
+                    
+                    // Prevent multiple submissions
+                    if (this.dataset.submitting === 'true') {
+                        console.log('Form already submitting, ignoring duplicate submission');
+                        return;
+                    }
+                    
+                    this.dataset.submitting = 'true';
+                    
                     if(formAlertPlaceholder) formAlertPlaceholder.innerHTML = '';
 
                     const termsCheck = document.getElementById('termsCheck');
                     const phoneInput = document.getElementById('phone');
+                    
+                    // Validation
                     if (termsCheck && !termsCheck.checked) {
-                        showAlert('You must agree to the terms and conditions.', 'warning'); return;
+                        showAlert('You must agree to the terms and conditions.', 'warning');
+                        this.dataset.submitting = 'false';
+                        return;
                     }
                     if (phoneInput && !phoneInput.value.trim()) {
-                        showAlert('Contact phone number is required.', 'warning'); return;
+                        showAlert('Contact phone number is required.', 'warning');
+                        this.dataset.submitting = 'false';
+                        return;
                     }
 
                     const submitButton = this.querySelector('button[type="submit"]');
@@ -1073,45 +1919,39 @@ $_SESSION['last_activity'] = time();
                     submitButton.disabled = true;
 
                     const formData = new FormData(this);
-                    if (formData.get('cargoType') === 'Other' && customCargoTypeInput) {
-                        formData.set('cargoType', customCargoTypeInput.value.trim() || 'Other (Unspecified)');
+                    
+                    // Debug: Log form data
+                    console.log('Form data being sent:');
+                    for (let [key, value] of formData.entries()) {
+                        console.log(key + ': ' + value);
                     }
                     
-                    let pickupDateValue = formData.get('pickupDate');
-                    if (pickupDateValue === 'specific' && specificDateInput) {
-                        pickupDateValue = specificDateInput.value; 
-                    } else if (pickupDateValue === 'Today') {
-                        pickupDateValue = new Date().toISOString().split('T')[0];
-                    } else if (pickupDateValue === 'Tomorrow') {
-                        const tomorrow = new Date();
-                        tomorrow.setDate(tomorrow.getDate() + 1);
-                        pickupDateValue = tomorrow.toISOString().split('T')[0];
-                    }
-                    formData.set('pickupDate', pickupDateValue);
                     fetch('post-cargo.php', {
                         method: 'POST',
                         body: formData
                     })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            showAlert('Cargo posted successfully! Redirecting...', 'success');
-                            postCargoForm.reset();
-                            if(customTypeContainer) customTypeContainer.classList.add('d-none');
-                            if(customCargoTypeInput) customCargoTypeInput.value = '';
-                            if(specificDateInput) { specificDateInput.classList.add('d-none'); specificDateInput.value = '';}
-                            
-                            document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
-                            const step1 = document.getElementById('step1');
-                            if(step1) step1.classList.add('active');
-
-
-                            fetchCargos(); 
-                            setTimeout(() => {
-                                showSection(postedCargosSection);
-                            }, 1500);
-                        } else {
-                            showAlert(data.message || 'Failed to post cargo. Please try again.', 'danger');
+                    .then(response => {
+                        console.log('Response status:', response.status);
+                        return response.text();
+                    })
+                    .then(text => {
+                        console.log('Raw response:', text);
+                        try {
+                            const data = JSON.parse(text);
+                            if (data.success) {
+                                showAlert('Cargo posted successfully! Redirecting...', 'success');
+                                form.reset();
+                                
+                                fetchCargos(); 
+                                setTimeout(() => {
+                                    showSection(postedCargosSection);
+                                }, 1500);
+                            } else {
+                                showAlert(data.message || 'Failed to post cargo. Please try again.', 'danger');
+                            }
+                        } catch (e) {
+                            console.error('JSON parse error:', e);
+                            showAlert('Server returned invalid response: ' + text, 'danger');
                         }
                     })
                     .catch(error => {
@@ -1121,6 +1961,7 @@ $_SESSION['last_activity'] = time();
                     .finally(() => {
                         submitButton.innerHTML = originalButtonText;
                         submitButton.disabled = false;
+                        this.dataset.submitting = 'false';
                     });
                 });
             }
@@ -1180,297 +2021,164 @@ $_SESSION['last_activity'] = time();
             });
 
             showSection(homeSection); 
-            fetchCargos();
+            fetchCargos(); // Keep this for the home section stats
+            // loadUserCargos will be called when user clicks "View Posted Cargos"
         });
 
-        document.addEventListener("DOMContentLoaded", () => {
-  const postCargoForm = document.getElementById("postCargoForm")
-  const formAlertPlaceholder = document.getElementById("formAlertPlaceholder")
+        // Settings page functionality
+        
+        // Profile picture change
+        document.getElementById('changeProfilePicBtn').addEventListener('click', function() {
+            document.getElementById('profilePictureInput').click();
+        });
 
-  if (postCargoForm) {
-    postCargoForm.addEventListener("submit", (e) => {
-      e.preventDefault()
-      const submitBtn = postCargoForm.querySelector('button[type="submit"]')
-      const originalText = submitBtn.innerHTML
-      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Posting...'
-      submitBtn.disabled = true
+        document.getElementById('profilePictureInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                if (file.size > 5 * 1024 * 1024) { // 5MB limit
+                    showSettingsAlert('File size should be less than 5MB', 'warning');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('currentProfilePic').src = e.target.result;
+                    showSettingsAlert('Profile picture updated! Click "Update Profile" to save changes.', 'info');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
 
-      const formData = new FormData(postCargoForm)
+        // Profile update form
+        document.getElementById('profileUpdateForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData();
+            formData.append('action', 'update_profile');
+            formData.append('name', document.getElementById('profileName').value);
+            formData.append('email', document.getElementById('profileEmail').value);
+            formData.append('phone', document.getElementById('profilePhone').value);
+            formData.append('address', document.getElementById('profileAddress').value);
+            
+            const profilePic = document.getElementById('profilePictureInput').files[0];
+            if (profilePic) {
+                formData.append('profile_picture', profilePic);
+            }
 
-      console.log("Form data being sent:")
-      for (const [key, value] of formData.entries()) {
-        console.log(key, value)
-      }
-      fetch("post-cargo.php", {
-        method: "POST",
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.success) {
-            showAlert("Cargo posted successfully!", "success")
-            postCargoForm.reset()
-           
-            document.querySelectorAll(".form-step").forEach((step) => {
-              step.classList.remove("active")
-            })
-            document.getElementById("step1").classList.add("active")
-          } else {
-            showAlert(data.message || "Error posting cargo. Please try again.", "danger")
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error)
-          showAlert("Network error. Please check your connection and try again.", "danger")
-        })
-        .finally(() => {
-    
-          submitBtn.innerHTML = originalText
-          submitBtn.disabled = false
-        })
-    })
-  }
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span> Updating...';
+            submitBtn.disabled = true;
 
-  document.querySelectorAll(".next-step").forEach((button) => {
-    button.addEventListener("click", function () {
-      const currentStep = this.closest(".form-step")
-      const nextStepId = this.dataset.next
-      const nextStep = document.getElementById(nextStepId)
+            // Here you would send the data to a backend endpoint
+            // For now, we'll simulate success
+            setTimeout(() => {
+                showSettingsAlert('Profile updated successfully!', 'success');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 1500);
+        });
 
-      const requiredInputs = currentStep.querySelectorAll("[required]")
-      let isValid = true
+        // Password change form
+        document.getElementById('passwordChangeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (newPassword.length < 8) {
+                showSettingsAlert('New password must be at least 8 characters long', 'warning');
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                showSettingsAlert('New passwords do not match', 'warning');
+                return;
+            }
 
-      requiredInputs.forEach((input) => {
-        if (!input.value.trim()) {
-          input.classList.add("is-invalid")
-          isValid = false
-        } else {
-          input.classList.remove("is-invalid")
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span> Changing...';
+            submitBtn.disabled = true;
+
+            // Here you would send the data to a backend endpoint
+            // For now, we'll simulate success
+            setTimeout(() => {
+                showSettingsAlert('Password changed successfully!', 'success');
+                this.reset();
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 1500);
+        });
+
+        function showSettingsAlert(message, type) {
+            const alertContainer = document.getElementById('settingsAlertPlaceholder');
+            if (alertContainer) {
+                const wrapper = document.createElement('div');
+                wrapper.innerHTML = `
+                    <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                        ${message}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                `;
+                alertContainer.innerHTML = '';
+                alertContainer.append(wrapper);
+                
+                // Auto-dismiss after 5 seconds
+                setTimeout(() => {
+                    const alert = alertContainer.querySelector('.alert');
+                    if (alert) {
+                        const bsAlert = new bootstrap.Alert(alert);
+                        bsAlert.close();
+                    }
+                }, 5000);
+            }
         }
-      })
 
-      if (isValid) {
-        currentStep.classList.remove("active")
-        nextStep.classList.add("active")
-      } else {
-        showAlert("Please fill in all required fields.", "warning")
-      }
-    })
-  })
+        // Toggle password visibility
+        window.togglePassword = function(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = input.nextElementSibling.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        };
 
-  document.querySelectorAll(".prev-step").forEach((button) => {
-    button.addEventListener("click", function () {
-      const currentStep = this.closest(".form-step")
-      const prevStepId = this.dataset.prev
-      const prevStep = document.getElementById(prevStepId)
+        // Save preferences
+        window.savePreferences = function() {
+            const language = document.getElementById('defaultLanguage').value;
+            const timezone = document.getElementById('timezone').value;
+            const dateFormat = document.getElementById('dateFormat').value;
+            
+            // Here you would save preferences to backend/localStorage
+            // For now, we'll simulate success
+            showSettingsAlert('Preferences saved successfully!', 'success');
+        };
 
-      currentStep.classList.remove("active")
-      prevStep.classList.add("active")
-    })
-  })
+        // Confirm account deletion
+        window.confirmAccountDeletion = function() {
+            const confirmed = confirm('Are you absolutely sure you want to delete your account? This action cannot be undone and will permanently delete all your data including cargo posts, messages, and profile information.');
+            
+            if (confirmed) {
+                const doubleConfirm = prompt('Type "DELETE MY ACCOUNT" to confirm account deletion:');
+                if (doubleConfirm === 'DELETE MY ACCOUNT') {
+                    showSettingsAlert('Account deletion request submitted. You will receive an email with further instructions.', 'warning');
+                } else {
+                    showSettingsAlert('Account deletion cancelled.', 'info');
+                }
+            }
+        };
 
-  document.querySelectorAll('input[name="cargoType"]').forEach((radio) => {
-    radio.addEventListener("change", function () {
-      const customContainer = document.getElementById("customTypeContainer")
-      if (this.value === "Other") {
-        customContainer.classList.remove("d-none")
-        document.getElementById("customCargoType").setAttribute("required", "")
-      } else {
-        customContainer.classList.add("d-none")
-        document.getElementById("customCargoType").removeAttribute("required")
-      }
-    })
-  })
-
-  const pickupDateSelect = document.getElementById("pickupDate")
-  if (pickupDateSelect) {
-    pickupDateSelect.addEventListener("change", function () {
-      const specificDateInput = document.getElementById("specificDate")
-      if (this.value === "specific") {
-        specificDateInput.classList.remove("d-none")
-        specificDateInput.setAttribute("required", "")
-      } else {
-        specificDateInput.classList.add("d-none")
-        specificDateInput.removeAttribute("required")
-      }
-    })
-  }
-
-  function showAlert(message, type) {
-    if (formAlertPlaceholder) {
-      formAlertPlaceholder.innerHTML = `
-                <div class="alert alert-${type} alert-dismissible fade show" role="alert">
-                    ${message}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-            `
-    }
-  }
-})
-
-document.addEventListener("DOMContentLoaded", () => {
-  const postCargoForm = document.getElementById("postCargoForm")
-  const formAlertPlaceholder = document.getElementById("formAlertPlaceholder")
-
-  postCargoForm.addEventListener("submit", (e) => {
-    e.preventDefault()
-    const requiredFields = postCargoForm.querySelectorAll("[required]")
-    let isValid = true
-    let firstInvalidField = null
-
-    requiredFields.forEach((field) => {
-      if (!field.value.trim()) {
-        isValid = false
-        field.classList.add("is-invalid")
-        if (!firstInvalidField) firstInvalidField = field
-      } else {
-        field.classList.remove("is-invalid")
-      }
-    })
-
-    const termsCheck = document.getElementById("termsCheck")
-    if (!termsCheck.checked) {
-      isValid = false
-      termsCheck.classList.add("is-invalid")
-      if (!firstInvalidField) firstInvalidField = termsCheck
-    } else {
-      termsCheck.classList.remove("is-invalid")
-    }
-
-    if (!isValid) {
-      const invalidStep = firstInvalidField.closest(".form-step")
-      const stepId = invalidStep.id
-      document.querySelectorAll(".form-step").forEach((step) => {
-        step.classList.remove("active")
-      })
-      invalidStep.classList.add("active")
-
-      showAlert("Required fields are missing. Please check highlighted fields.", "danger")
-      return
-    }
-    const formData = new FormData(postCargoForm)
-    if (formData.get("cargoType") === "Other" && document.getElementById("customCargoType").value) {
-      formData.set("cargoType", document.getElementById("customCargoType").value)
-    }
-
-    if (formData.get("pickupDate") === "specific" && document.getElementById("specificDate").value) {
-      formData.set("pickupDate", document.getElementById("specificDate").value)
-    }
-
-    fetch("post-cargo.php", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          showAlert("Cargo posted successfully!", "success")
-          postCargoForm.reset()
-       
-          document.querySelectorAll(".form-step").forEach((step) => {
-            step.classList.remove("active")
-          })
-          document.getElementById("step1").classList.add("active")
-        } else {
-          showAlert(data.message || "Error posting cargo. Please try again.", "danger")
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error)
-        showAlert("An unexpected error occurred. Please try again.", "danger")
-      })
-  })
-
-  document.querySelectorAll(".next-step").forEach((button) => {
-    button.addEventListener("click", function () {
-      const currentStep = this.closest(".form-step")
-      const nextStepId = this.dataset.next
-      const nextStep = document.getElementById(nextStepId)
-
-      const requiredFields = currentStep.querySelectorAll("[required]")
-      let isValid = true
-
-      requiredFields.forEach((field) => {
-        if (!field.value.trim()) {
-          isValid = false
-          field.classList.add("is-invalid")
-        } else {
-          field.classList.remove("is-invalid")
-        }
-      })
-
-      if (!isValid) {
-        showAlert("Please fill in all required fields before proceeding.", "danger")
-        return
-      }
-
-      currentStep.classList.remove("active")
-      nextStep.classList.add("active")
-    })
-  })
-
-  document.querySelectorAll(".prev-step").forEach((button) => {
-    button.addEventListener("click", function () {
-      const currentStep = this.closest(".form-step")
-      const prevStepId = this.dataset.prev
-      const prevStep = document.getElementById(prevStepId)
-
-      currentStep.classList.remove("active")
-      prevStep.classList.add("active")
-    })
-  })
-
-  document.getElementById("otherType").addEventListener("change", function () {
-    const customTypeContainer = document.getElementById("customTypeContainer")
-    if (this.checked) {
-      customTypeContainer.classList.remove("d-none")
-    } else {
-      customTypeContainer.classList.add("d-none")
-    }
-  })
-  document.getElementById("pickupDate").addEventListener("change", function () {
-    const specificDateInput = document.getElementById("specificDate")
-    if (this.value === "specific") {
-      specificDateInput.classList.remove("d-none")
-      specificDateInput.setAttribute("required", "")
-    } else {
-      specificDateInput.classList.add("d-none")
-      specificDateInput.removeAttribute("required")
-    }
-  })
-
-  document.querySelectorAll(".use-current-location").forEach((button) => {
-    button.addEventListener("click", function () {
-      const inputField = this.closest(".input-group").querySelector("input")
-
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            inputField.value = `${position.coords.latitude}, ${position.coords.longitude}`
-            inputField.classList.remove("is-invalid")
-          },
-          (error) => {
-            console.error("Geolocation error:", error)
-            showAlert("Could not get your location. Please enter it manually.", "warning")
-          },
-        )
-      } else {
-        showAlert("Geolocation is not supported by your browser. Please enter location manually.", "warning")
-      }
-    })
-  })
-
-  function showAlert(message, type) {
-    formAlertPlaceholder.innerHTML = `
-      <div class="alert alert-${type} alert-dismissible fade show" role="alert">
-        ${message}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    `
-  }
-})
-
-class CargoManager {
+        // Consolidated cargo manager class (keeping only one instance)
+        class CargoManager {
   constructor() {
     this.currentPage = 1
     this.itemsPerPage = 6

@@ -84,7 +84,7 @@ if (!isset($_SESSION['user_name'])) {
     <div class="p-4">
       <h2 class="text-2xl font-bold text-center mb-6">Transporter Dashboard</h2>
       <a href="transporter-dashboard.php" class="block py-2 px-4 hover:bg-primary-700 rounded transition-colors mb-1"><i class="fas fa-home mr-2"></i> Home</a>
-      <a href="job-post.php" class="block py-2 px-4 hover:bg-primary-700 rounded transition-colors mb-1"><i class="fas fa-truck mr-2"></i> Available Loads</a>
+      <a href="job-board.php" class="block py-2 px-4 hover:bg-primary-700 rounded transition-colors mb-1"><i class="fas fa-truck mr-2"></i> Available Loads</a>
       <a href="my-trips.php" class="block py-2 px-4 bg-primary-700 rounded transition-colors mb-1"><i class="fas fa-route mr-2"></i> My Trips</a>
       <a href="settings.php" class="block py-2 px-4 hover:bg-primary-700 rounded transition-colors mb-1"><i class="fas fa-cogs mr-2"></i> Settings</a>
       <a href="index.php" class="block py-2 px-4 hover:bg-primary-700 rounded transition-colors"><i class="fas fa-sign-out-alt mr-2"></i> Logout</a>
