@@ -821,6 +821,30 @@
                 display: flex;
             }
 
+            .dropdown {
+                width: 100%;
+            }
+
+            .dropbtn {
+                width: 100%;
+                text-align: left;
+                justify-content: space-between;
+                background: var(--background);
+                border: 1px solid var(--border-color);
+                border-radius: 0.5rem;
+                margin-bottom: 0.5rem;
+                padding: 0.75rem 1rem;
+                font-size: 1rem;
+                transition: all 0.3s ease;
+            }
+
+            .dropbtn:active,
+            .dropbtn:focus {
+                background: var(--primary-color);
+                color: var(--white);
+                outline: none;
+            }
+
             .dropdown-content {
                 position: static;
                 box-shadow: none;
@@ -828,10 +852,23 @@
                 background: var(--background);
                 border-radius: 0.75rem;
                 margin-top: 0.5rem;
+                border: 1px solid var(--border-color);
             }
 
             .dropdown-content.active {
                 display: block;
+                animation: fadeInUp 0.3s ease;
+            }
+
+            .dropdown-content a {
+                padding: 0.75rem 1rem;
+                font-size: 0.95rem;
+            }
+
+            .dropdown-content a:hover {
+                background: var(--primary-color);
+                color: var(--white);
+                transform: none;
             }
 
             .hero {
@@ -1332,6 +1369,14 @@
             btn.addEventListener('click', function(e) {
                 if (window.innerWidth <= 768) {
                     e.preventDefault();
+                    // Close all other dropdowns first
+                    document.querySelectorAll('.dropdown-content').forEach(function(content) {
+                        if (content !== this.nextElementSibling) {
+                            content.classList.remove('active');
+                        }
+                    }.bind(this));
+                    
+                    // Toggle the clicked dropdown
                     const dropdownContent = this.nextElementSibling;
                     dropdownContent.classList.toggle('active');
                 }
@@ -1344,7 +1389,9 @@
                 const isClickInsideDropdown = e.target.closest('.dropdown');
                 const isClickInsideNavToggle = e.target.closest('.nav-toggle');
                 const isClickInsideNavLinks = e.target.closest('.nav-links');
+                const isClickOnDropbtn = e.target.closest('.dropbtn');
                 
+                // If clicking outside navigation area, close everything
                 if (!isClickInsideDropdown && !isClickInsideNavToggle && !isClickInsideNavLinks) {
                     navLinks.classList.remove('active');
                     navToggle.classList.remove('active');
@@ -1352,7 +1399,30 @@
                         content.classList.remove('active');
                     });
                 }
+                // If clicking inside dropdown but not on button, keep dropdown open
+                else if (isClickInsideDropdown && !isClickOnDropbtn) {
+                    // Do nothing - let dropdown stay open when clicking on links
+                }
             }
+        });
+
+        // Add touch event support for better mobile experience
+        document.querySelectorAll('.dropbtn').forEach(function(btn) {
+            btn.addEventListener('touchstart', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    // Close all other dropdowns first
+                    document.querySelectorAll('.dropdown-content').forEach(function(content) {
+                        if (content !== this.nextElementSibling) {
+                            content.classList.remove('active');
+                        }
+                    }.bind(this));
+                    
+                    // Toggle the clicked dropdown
+                    const dropdownContent = this.nextElementSibling;
+                    dropdownContent.classList.toggle('active');
+                }
+            });
         });
 
     
