@@ -7,6 +7,10 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
+// Set session timeout and last activity
+$_SESSION['last_activity'] = time();
+$_SESSION['user_type'] = 'admin';
+
 require_once 'db.php';
 
 function getCount($conn, $table) {
@@ -508,6 +512,7 @@ $conn->close();
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/session-manager.js"></script>
     <script>
         // Toggle sidebar for mobile
         function toggleSidebar() {

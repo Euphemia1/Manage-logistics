@@ -6,6 +6,7 @@ if (!isset($_SESSION['user_name'])) {
 }
 
 $_SESSION['last_activity'] = time();
+$_SESSION['user_type'] = 'cargo_owner';
 ?>
 
 <!DOCTYPE html>
@@ -1147,6 +1148,7 @@ $_SESSION['last_activity'] = time();
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/session-manager.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function () {

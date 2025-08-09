@@ -6,6 +6,10 @@ if (!isset($_SESSION['user_name'])) {
     exit();
 }
 
+// Set session timeout and last activity
+$_SESSION['last_activity'] = time();
+$_SESSION['user_type'] = 'transporter';
+
 // Include database connection
 require_once 'db.php';
 
@@ -628,6 +632,7 @@ $conn->close();
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/session-manager.js"></script>
   
   <script>
     // Toggle sidebar for mobile
