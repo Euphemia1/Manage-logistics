@@ -1,4 +1,8 @@
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Database connection
 $servername = "srv941.hstgr.io";
 $username = "u178619125_nyamula";
