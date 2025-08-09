@@ -1,6 +1,6 @@
 <?php
 // Database connection
-$servername = "localhost";
+$servername = "srv941.hstgr.io";
 $username = "u178619125_nyamula";
 $password = "@BluDiamon0100";
 $dbname = "u178619125_nyamula";
