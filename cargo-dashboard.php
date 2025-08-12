@@ -372,15 +372,13 @@ $_SESSION['user_type'] = 'cargo_owner';
             background: var(--very-light-green);
             border-top: 1px solid var(--border-color);
         }
-        
-        /* Filters */
+
         .cargo-filter-btn.active {
             background: var(--primary-green) !important;
             color: var(--white) !important;
             border-color: var(--primary-green) !important;
         }
-        
-        /* Mobile Responsiveness */
+
         #sidebarCollapse {
             display: none;
             background: var(--primary-green);
@@ -393,7 +391,6 @@ $_SESSION['user_type'] = 'cargo_owner';
             background: var(--dark-green);
         }
 
-        /* Modal */
         .modal-header {
             background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
             border-bottom: none;
@@ -411,8 +408,7 @@ $_SESSION['user_type'] = 'cargo_owner';
             background: var(--very-light-green);
             border-radius: 0 0 15px 15px;
         }
-        
-        /* Form Switches */
+
         .form-check-input:checked {
             background-color: var(--primary-green);
             border-color: var(--primary-green);
@@ -421,8 +417,7 @@ $_SESSION['user_type'] = 'cargo_owner';
         .form-check-input:focus {
             box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.25);
         }
-        
-        /* Pagination */
+ 
         .page-link {
             color: var(--primary-green);
             border-color: var(--border-color);
@@ -444,8 +439,7 @@ $_SESSION['user_type'] = 'cargo_owner';
             color: var(--text-muted);
             background-color: var(--light-gray);
         }
-        
-        /* Header styling */
+
         h1, h2, h3, h4, h5, h6 {
             color: var(--text-dark);
             font-weight: 600;
