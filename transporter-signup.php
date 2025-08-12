@@ -7,8 +7,6 @@ $password = "";
 $dbname = "logistics";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
-
-
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -30,8 +28,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             die("Error: transporter_name cannot be empty.");
         }
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-        
         if ($stmt->execute()) {
             
             $notificationData = [
@@ -46,8 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                              "This is an automated notification from Nyamula Logistics System.",
                 '_recipient' => 'admin@nyamula.com'
             ];
-            
-           
             $ch = curl_init('https://formspree.io/f/mzzrrzww');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_POST, true);
@@ -58,16 +52,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             $response = curl_exec($ch);
             curl_close($ch);
-
-
- 
  $_SESSION['signup_success'] = [
     'name' => $transporter_name,
     'email' => $email,
     'type' => 'transporter'
 ];
-
-            
+    
             header("Location: transporter-login.php");
             exit();
         } else {
