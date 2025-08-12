@@ -13,16 +13,16 @@ class SessionManager {
     }
     
     init() {
-        // Start session checking
+        
         this.startSessionCheck();
         
-        // Track user activity
+        
         this.trackUserActivity();
         
-        // Handle page visibility changes
+        
         this.handlePageVisibility();
         
-        // Handle window focus/blur
+        
         this.handleWindowFocus();
     }
     
