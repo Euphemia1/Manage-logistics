@@ -1,14 +1,12 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-
 $config = [
     'host' => 'localhost',
     'dbname' => 'logistics', 
     'username' => 'root',
     'password' => ''
 ];
-
 try {
     $dsn = "mysql:host={$config['host']};dbname={$config['dbname']};charset=utf8mb4";
     $db = new PDO($dsn, $config['username'], $config['password']);
@@ -18,7 +16,6 @@ try {
     echo json_encode(['success' => false, 'message' => 'Database connection failed']);
     exit;
 }
-
 $method = $_SERVER['REQUEST_METHOD'];
 $action = $_GET['action'] ?? '';
 
@@ -45,7 +42,6 @@ switch ($method) {
         http_response_code(405);
         echo json_encode(['success' => false, 'message' => 'Method not allowed']);
 }
-
 function getCargoDetails($db) {
     $id = $_GET['id'] ?? 0;
     
@@ -87,7 +83,6 @@ function getCargoDetails($db) {
         echo json_encode(['success' => false, 'message' => 'Database error: ' . $e->getMessage()]);
     }
 }
-
 function updateCargo($db) {
     $input = json_decode(file_get_contents('php://input'), true);
     $id = $input['id'] ?? 0;
@@ -139,9 +134,7 @@ function updateCargo($db) {
     } catch (PDOException $e) {
         echo json_encode(['success' => false, 'message' => 'Database error: ' . $e->getMessage()]);
     }
-}
-
-function deleteCargo($db) {
+}function deleteCargo($db) {
     $id = $_GET['id'] ?? 0;
     
     if (!$id) {
