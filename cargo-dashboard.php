@@ -638,10 +638,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                 </div>
             </div>
         </div>
-
-
-
-        <!-- Add Job Form (Hidden by default) -->
         <div id="postCargoSection" class="d-none">
     <div class="card dashboard-card">
         <div class="card-header bg-white">
@@ -828,7 +824,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                 <div id="settingsAlertPlaceholder" class="mb-3"></div>
 
                 <div class="row">
-                    <!-- Profile Information Card -->
                     <div class="col-lg-6 mb-4">
                         <div class="card border-0 shadow-sm h-100">
                             <div class="card-header bg-white border-bottom">
@@ -886,8 +881,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                             </div>
                         </div>
                     </div>
-
-                    <!-- Security Settings Card -->
                     <div class="col-lg-6 mb-4">
                         <div class="card border-0 shadow-sm h-100">
                             <div class="card-header bg-white border-bottom">
@@ -975,10 +968,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                         </div>
                     </div>
                 </div>
-
-                <!-- Additional Settings Row -->
                 <div class="row">
-                    <!-- System Preferences -->
                     <div class="col-lg-6 mb-4">
                         <div class="card border-0 shadow-sm">
                             <div class="card-header bg-white border-bottom">
@@ -1021,8 +1011,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                             </div>
                         </div>
                     </div>
-
-                    <!-- Danger Zone -->
                     <div class="col-lg-6 mb-4">
                         <div class="card border-0 shadow-sm border-danger">
                             <div class="card-header bg-danger text-white">
