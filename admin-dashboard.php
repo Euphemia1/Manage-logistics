@@ -132,14 +132,12 @@ $conn->close();
             text-align: center;
         }
 
-        /* Main Content */
         .main-content {
             margin-left: 280px;
             padding: 2rem;
             min-height: 100vh;
         }
 
-        /* Header */
         .page-header {
             background: var(--white);
             border-radius: var(--border-radius);
@@ -177,7 +175,6 @@ $conn->close();
             font-size: 1.2rem;
         }
 
-        /* Dashboard Cards */
         .dashboard-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -289,8 +286,6 @@ $conn->close();
             color: var(--dark-green);
             transform: translateX(5px);
         }
-
-        /* Mobile Responsive */
         .mobile-toggle {
             display: none;
             position: fixed;
@@ -336,8 +331,6 @@ $conn->close();
                 grid-template-columns: 1fr;
             }
         }
-
-        /* Loading Animation */
         .loading {
             opacity: 0.6;
             pointer-events: none;
@@ -354,7 +347,7 @@ $conn->close();
     </style>
 </head>
 <body>
-    <!-- Mobile Toggle Button -->
+   
     <button class="mobile-toggle" onclick="toggleSidebar()">
         <i class="fas fa-bars"></i>
     </button>
