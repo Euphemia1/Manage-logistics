@@ -2074,19 +2074,12 @@ $_SESSION['user_type'] = 'cargo_owner';
                 icon.classList.add('fa-eye');
             }
         };
-
-        // Save preferences
         window.savePreferences = function() {
             const language = document.getElementById('defaultLanguage').value;
             const timezone = document.getElementById('timezone').value;
             const dateFormat = document.getElementById('dateFormat').value;
-            
-            // Here you would save preferences to backend/localStorage
-            // For now, we'll simulate success
             showSettingsAlert('Preferences saved successfully!', 'success');
         };
-
-        // Confirm account deletion
         window.confirmAccountDeletion = function() {
             const confirmed = confirm('Are you absolutely sure you want to delete your account? This action cannot be undone and will permanently delete all your data including cargo posts, messages, and profile information.');
             
@@ -2099,8 +2092,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                 }
             }
         };
-
-        // Consolidated cargo manager class (keeping only one instance)
         class CargoManager {
   constructor() {
     this.currentPage = 1
@@ -2305,9 +2296,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                 </button>
             </li>
         `
-
-
-
     const startPage = Math.max(1, pagination.current_page - 2)
     const endPage = Math.min(pagination.total_pages, pagination.current_page + 2)
 
