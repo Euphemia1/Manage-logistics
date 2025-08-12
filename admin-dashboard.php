@@ -1,13 +1,10 @@
 <?php
 session_start();
-
-// Check if admin is logged in
 if (!isset($_SESSION['admin_id'])) {
     header('Location: admin-login.php');
     exit();
 }
 
-// Set session timeout and last activity
 $_SESSION['last_activity'] = time();
 $_SESSION['user_type'] = 'admin';
 
@@ -69,8 +66,6 @@ $conn->close();
             color: var(--gray-dark);
             line-height: 1.6;
         }
-
-        /* Sidebar Styles */
         .sidebar {
             background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
             color: var(--white);
