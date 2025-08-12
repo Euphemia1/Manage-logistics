@@ -4,11 +4,9 @@ if (!isset($_SESSION['user_name'])) {
     header("Location: cargo-owner-login.php"); 
     exit();
 }
-
 $_SESSION['last_activity'] = time();
 $_SESSION['user_type'] = 'cargo_owner';
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -514,7 +512,6 @@ $_SESSION['user_type'] = 'cargo_owner';
     </style>
 </head>
 <body>
-  
     <nav id="sidebar" class="sidebar">
         <div class="p-4">
             <h3 class="text-center mb-4">Cargo Owner Dashboard</h3>
@@ -548,13 +545,9 @@ $_SESSION['user_type'] = 'cargo_owner';
             </ul>
         </div>
     </nav>
-
- 
     <button type="button" id="sidebarCollapse" class="btn btn-success">
         <i class="fas fa-bars"></i>
     </button>
-
-   
     <div class="main-content">
       
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -564,8 +557,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                 <span id="cargoOwnerName" class="fw-bold text-success"><?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
             </div>
         </div>
-
-      
         <div id="homeSection">
             <div class="card dashboard-card mb-4 welcome-gradient">
                 <div class="card-body">
@@ -704,7 +695,6 @@ $_SESSION['user_type'] = 'cargo_owner';
         </div>
     </div>
 </div>
-           
 <div class="d-flex justify-content-between mt-4">
                                 <button type="button" class="btn btn-outline-secondary" onclick="showSection(homeSection)">
                                     <i class="fas fa-arrow-left me-2"></i> Back
@@ -717,7 +707,6 @@ $_SESSION['user_type'] = 'cargo_owner';
         </div>
     </div>
 </div>
-      
 <div id="postedCargosSection" class="dashboard-section d-none">
     <div class="container-fluid">
       
@@ -804,7 +793,6 @@ $_SESSION['user_type'] = 'cargo_owner';
         </div>
     </div>
 </div>
-
          <div id="settingsSection" class="d-none">
             <div class="container-fluid">
                 <div class="row mb-4">
@@ -1055,7 +1043,6 @@ $_SESSION['user_type'] = 'cargo_owner';
         </div>
 
     </div>
-
     <div class="modal fade" id="cargoDetailsModal" tabindex="-1" aria-labelledby="cargoDetailsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
@@ -1108,7 +1095,6 @@ $_SESSION['user_type'] = 'cargo_owner';
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/session-manager.js"></script>
     
@@ -1536,7 +1522,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                     allFetchedCargos = [];
                 });
             }
-
             function filterAndDisplayCargos() {
                 if (!searchCargo || !statusFilter) return;
                 const searchTerm = searchCargo.value.toLowerCase();
@@ -1554,7 +1539,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                 });
                 displayCargosList(filteredCargos);
             }
-            
             function updateRecentActivity(cargos) {
                 if (!recentActivity) return;
 
@@ -1568,7 +1552,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                     recentActivity.innerHTML = '<p class="text-center text-muted py-3">No recent activity</p>';
                     return;
                 }
-                
                 recentActivity.innerHTML = '';
                 
                 recentCargos.forEach(cargo => {
@@ -1602,7 +1585,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                 });
                 setupViewDetailsButtons(allFetchedCargos);
             }
-            
             function displayCargosList(cargosToDisplay) {
                 if (!cargoList) return;
 
@@ -1625,7 +1607,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                     }
                     return;
                 }
-                
                 cargoList.innerHTML = '';
                 
                 cargosToDisplay.forEach(cargo => {
@@ -1685,7 +1666,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                 });
                 setupViewDetailsButtons(allFetchedCargos);
             }
-            
             function showCargoDetails(cargo) {
                 if (!cargoDetailsModalInstance) return;
 
@@ -1707,7 +1687,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                 
                 cargoDetailsModalInstance.show();
             }
-            
             function setupViewDetailsButtons(cargosSource) {
                 document.querySelectorAll('.view-details-btn').forEach(button => {
                     const newButton = button.cloneNode(true);
@@ -1725,7 +1704,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                     });
                 });
             }
-            
             if(homeLink) homeLink.addEventListener('click', (e) => { e.preventDefault(); showSection(homeSection); });
             if(postCargoLink) postCargoLink.addEventListener('click', (e) => { e.preventDefault(); showSection(postCargoSection); });
             if(viewPostedCargosLink) viewPostedCargosLink.addEventListener('click', (e) => { 
@@ -1791,7 +1769,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                     }
                 });
             });
-
             const cargoTypeRadios = document.querySelectorAll('input[name="cargoType"]');
             const customTypeContainer = document.getElementById('customTypeContainer');
             const customCargoTypeInput = document.getElementById('customCargoType');
@@ -1810,7 +1787,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                     }
                 });
             });
-
             const pickupDateSelect = document.getElementById('pickupDate');
             const specificDateInput = document.getElementById('specificDate');
 
@@ -1907,7 +1883,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                     });
                 });
             }
-
             const useCurrentLocationButtons = document.querySelectorAll('.use-current-location');
             useCurrentLocationButtons.forEach(button => {
                 button.addEventListener('click', function() {
@@ -2105,9 +2080,7 @@ $_SESSION['user_type'] = 'cargo_owner';
     this.bindEvents()
     this.setupNavigation()
   }
-
   bindEvents() {
-   
     const searchInput = document.getElementById("cargoSearchInput")
     if (searchInput) {
       searchInput.addEventListener(
@@ -2138,7 +2111,6 @@ $_SESSION['user_type'] = 'cargo_owner';
       })
     })
   }
-
   showSection(sectionId) {
     document.querySelectorAll(".dashboard-section").forEach((section) => {
       section.classList.add("d-none")
@@ -2153,7 +2125,6 @@ $_SESSION['user_type'] = 'cargo_owner';
     })
     document.querySelector(`[data-target-section="${sectionId}"]`)?.classList.add("active")
   }
-
   async loadCargoList(page = 1) {
     if (this.isLoading) return
 
@@ -2185,7 +2156,6 @@ $_SESSION['user_type'] = 'cargo_owner';
       this.hideLoadingState()
     }
   }
-
   renderCargoList(cargos) {
     const container = document.getElementById("cargoListContainer")
     if (!container) return
@@ -2194,10 +2164,8 @@ $_SESSION['user_type'] = 'cargo_owner';
       this.showEmptyState()
       return
     }
-
     container.innerHTML = cargos.map((cargo) => this.createCargoCard(cargo)).join("")
   }
-
   createCargoCard(cargo) {
     const statusClass = this.getStatusClass(cargo.status)
     const formattedDate = this.formatDate(cargo.pickup_date)
@@ -2277,17 +2245,13 @@ $_SESSION['user_type'] = 'cargo_owner';
             </div>
         `
   }
-
   renderPagination(pagination) {
     const container = document.getElementById("paginationContainer")
     if (!container || pagination.total_pages <= 1) {
       container.innerHTML = ""
       return
     }
-
     let paginationHTML = `<nav aria-label="Cargo pagination"><ul class="pagination justify-content-center">`
-
-
     paginationHTML += `
             <li class="page-item ${!pagination.has_prev ? "disabled" : ""}">
                 <button class="page-link" onclick="cargoManager.loadCargoList(${pagination.current_page - 1})" 
@@ -2317,7 +2281,6 @@ $_SESSION['user_type'] = 'cargo_owner';
     paginationHTML += `</ul></nav>`
     container.innerHTML = paginationHTML
   }
-
   showLoadingState() {
     const container = document.getElementById("cargoListContainer")
     const spinner = document.getElementById("cargoLoadingSpinner")
@@ -2350,7 +2313,6 @@ $_SESSION['user_type'] = 'cargo_owner';
             </div>
         `
   }
-
   showErrorState(message) {
     const container = document.getElementById("cargoListContainer")
     if (!container) return
@@ -2375,7 +2337,6 @@ $_SESSION['user_type'] = 'cargo_owner';
       statsElement.textContent = totalCount
     }
   }
-
   handleSearch(searchTerm) {
     this.searchTerm = searchTerm
     this.currentPage = 1
@@ -2404,7 +2365,6 @@ $_SESSION['user_type'] = 'cargo_owner';
   }
 
   showCargoDetailsModal(cargo) {
-    
     const modalHTML = `
             <div class="modal fade" id="cargoDetailsModal" tabindex="-1">
                 <div class="modal-dialog modal-lg">
@@ -2492,7 +2452,6 @@ $_SESSION['user_type'] = 'cargo_owner';
       this.showAlert("Network error occurred", "danger")
     }
   }
-
   editCargo(cargoId) {
 
     this.showAlert("Edit functionality coming soon!", "info")
@@ -2506,7 +2465,6 @@ $_SESSION['user_type'] = 'cargo_owner';
     }
     return statusClasses[status?.toLowerCase()] || "bg-secondary text-white"
   }
-
   formatDate(dateString) {
     if (!dateString) return "Not specified"
     const date = new Date(dateString)
@@ -2516,13 +2474,11 @@ $_SESSION['user_type'] = 'cargo_owner';
       day: "numeric",
     })
   }
-
   escapeHtml(text) {
     const div = document.createElement("div")
     div.textContent = text
     return div.innerHTML
   }
-
   debounce(func, wait) {
     let timeout
     return function executedFunction(...args) {
@@ -2534,7 +2490,6 @@ $_SESSION['user_type'] = 'cargo_owner';
       timeout = setTimeout(later, wait)
     }
   }
-
   showAlert(message, type) {
     const alertContainer = document.getElementById("alertContainer")
     if (!alertContainer) return
@@ -2545,7 +2500,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         `
-
     alertContainer.innerHTML = alertHTML
     setTimeout(() => {
       const alert = alertContainer.querySelector(".alert")
@@ -2556,7 +2510,6 @@ $_SESSION['user_type'] = 'cargo_owner';
     }, 5000)
   }
 }
-
 document.addEventListener("DOMContentLoaded", () => {
   window.cargoManager = new CargoManager()
 })
