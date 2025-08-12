@@ -1,12 +1,9 @@
-/**
- * Session Manager for Auto-logout functionality
- * Handles 2-minute session timeout and page visibility changes
- */
+
 
 class SessionManager {
     constructor() {
-        this.sessionTimeout = 120000; // 2 minutes in milliseconds
-        this.checkInterval = 30000; // Check every 30 seconds
+        this.sessionTimeout = 120000; 
+        this.checkInterval = 30000; 
         this.lastActivity = Date.now();
         this.checkTimer = null;
         this.isPageVisible = true;
