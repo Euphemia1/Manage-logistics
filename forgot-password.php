@@ -1,7 +1,5 @@
 <?php
 session_start();
-
-// Include the Composer autoloader
 require_once 'vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -82,9 +80,6 @@ if ($user) {
             'type' => $type
         ]);
     }
-
-
-    // Try to send email
     $emailSent = false;
     $emailBody = "
 Dear User,
@@ -101,8 +96,6 @@ If you did not request this password reset, please ignore this email.
 Best regards,
 Nyamula Logistics Team
 ";
-
-    // Try PHPMailer first
     try {
         $phpMailer = new PHPMailer(true);
         
@@ -122,7 +115,7 @@ Nyamula Logistics Team
             )
         );
         
-        $phpMailer->isHTML(false); // Use plain text for better compatibility
+        $phpMailer->isHTML(false); 
         $phpMailer->CharSet = "UTF-8";
         $phpMailer->setFrom('bervinitsolutions@zohomail.com', 'Nyamula Logistics');
         $phpMailer->addAddress($email);
@@ -133,7 +126,6 @@ Nyamula Logistics Team
         $emailSent = true;
         
     } catch (Exception $e) {
-        // If PHPMailer fails, try PHP's built-in mail() function
         error_log("PHPMailer failed: " . $e->getMessage());
         
         $headers = "From: Nyamula Logistics <noreply@nyamula-logistics.com>\r\n";

@@ -1,11 +1,8 @@
 <?php
-// Include database connection
-require_once 'db.php'; // Ensure this path is correct relative to get-dashboard-counts.php
 
-// Set header to return JSON
+require_once 'db.php'; 
+
 header('Content-Type: application/json');
-
-// Function to get count from a table
 function getCount($conn, $table) {
     $query = "SELECT COUNT(*) as count FROM $table";
     $result = $conn->query($query);
@@ -18,22 +15,15 @@ function getCount($conn, $table) {
     return 0;
 }
 
-// Get counts from database
 $cargoOwnersCount = getCount($conn, 'cargo_owners');
 $transportersCount = getCount($conn, 'transporters');
-$ordersCount = getCount($conn, 'jobs'); // <<<--- THIS IS THE CRUCIAL CHANGE
-
-// Create response array
+$ordersCount = getCount($conn, 'jobs'); 
 $response = [
     'cargoOwnersCount' => $cargoOwnersCount,
     'transportersCount' => $transportersCount,
     'ordersCount' => $ordersCount,
     'timestamp' => date('Y-m-d H:i:s')
 ];
-
-// Close connection
 $conn->close();
-
-// Return JSON response
 echo json_encode($response);
 ?>
