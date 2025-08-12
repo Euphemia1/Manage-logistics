@@ -232,19 +232,16 @@
             color: #dc3545;
             border: 1px solid rgba(220, 53, 69, 0.3);
         }
-
         .password-requirements {
             font-size: 12px;
             color: var(--text-light);
             margin-top: 5px;
             line-height: 1.4;
         }
-
         .requirement {
             margin: 2px 0;
             transition: var(--transition);
         }
-
         .requirement.met {
             color: var(--primary-color);
         }
@@ -302,7 +299,6 @@
                         <i class="fas fa-user input-icon"></i>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label for="email">Email Address</label>
                     <div class="input-wrapper">
@@ -310,7 +306,6 @@
                         <i class="fas fa-envelope input-icon"></i>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label for="password">Password</label>
                     <div class="input-wrapper">
@@ -324,7 +319,6 @@
                         <div class="requirement" id="number">One number</div>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label for="confirmPassword">Confirm Password</label>
                     <div class="input-wrapper">
@@ -338,7 +332,6 @@
                     Create Admin Account
                 </button>
             </form>
-
             <div class="divider">
                 <span>or</span>
             </div>
@@ -348,9 +341,7 @@
             </div>
         </div>
     </div>
-
     <script>
-        // Password visibility toggle
         function togglePassword(fieldId) {
             const field = document.getElementById(fieldId);
             const icon = field.nextElementSibling;
@@ -365,36 +356,26 @@
                 icon.classList.add('fa-eye');
             }
         }
-
-        // Password strength checker
         document.getElementById('password').addEventListener('input', function() {
             const password = this.value;
-            
-            // Check length
             const lengthReq = document.getElementById('length');
             if (password.length >= 8) {
                 lengthReq.classList.add('met');
             } else {
                 lengthReq.classList.remove('met');
             }
-            
-            // Check uppercase
             const uppercaseReq = document.getElementById('uppercase');
             if (/[A-Z]/.test(password)) {
                 uppercaseReq.classList.add('met');
             } else {
                 uppercaseReq.classList.remove('met');
             }
-            
-            // Check lowercase
             const lowercaseReq = document.getElementById('lowercase');
             if (/[a-z]/.test(password)) {
                 lowercaseReq.classList.add('met');
             } else {
                 lowercaseReq.classList.remove('met');
             }
-            
-            // Check number
             const numberReq = document.getElementById('number');
             if (/[0-9]/.test(password)) {
                 numberReq.classList.add('met');
@@ -402,20 +383,13 @@
                 numberReq.classList.remove('met');
             }
         });
-
-        // Form submission
         document.getElementById('registerForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
             const formData = new FormData(this);
             const submitBtn = document.getElementById('submitBtn');
             const alert = document.getElementById('alert');
-            
-            // Show loading state
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
-            
-            // Hide previous alerts
             alert.style.display = 'none';
             
             fetch('add-admin.php', {
@@ -428,11 +402,7 @@
                     alert.className = 'alert success';
                     alert.textContent = data.message;
                     alert.style.display = 'block';
-                    
-                    // Reset form
                     this.reset();
-                    
-                    // Redirect after success
                     if (data.redirect) {
                         setTimeout(() => {
                             window.location.href = data.redirect;
@@ -451,13 +421,10 @@
                 alert.style.display = 'block';
             })
             .finally(() => {
-                // Restore button
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Create Admin Account';
             });
         });
-
-        // Real-time validation
         document.getElementById('confirmPassword').addEventListener('input', function() {
             const password = document.getElementById('password').value;
             const confirmPassword = this.value;
@@ -468,7 +435,6 @@
                 this.style.borderColor = '#e0e0e0';
             }
         });
-
         document.getElementById('email').addEventListener('input', function() {
             const email = this.value;
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
