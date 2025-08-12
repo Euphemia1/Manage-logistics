@@ -1827,20 +1827,13 @@ $_SESSION['user_type'] = 'cargo_owner';
                     }
                 });
             }
-
-            // Single form submission handler
             if(postCargoForm) {
-                // Remove any existing event listeners to prevent duplicates
                 const newForm = postCargoForm.cloneNode(true);
                 postCargoForm.parentNode.replaceChild(newForm, postCargoForm);
-                
-                // Get the new form reference
                 const form = document.getElementById('postCargoForm');
                 
                 form.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    
-                    // Prevent multiple submissions
                     if (this.dataset.submitting === 'true') {
                         console.log('Form already submitting, ignoring duplicate submission');
                         return;
@@ -1852,8 +1845,6 @@ $_SESSION['user_type'] = 'cargo_owner';
 
                     const termsCheck = document.getElementById('termsCheck');
                     const phoneInput = document.getElementById('phone');
-                    
-                    // Validation
                     if (termsCheck && !termsCheck.checked) {
                         showAlert('You must agree to the terms and conditions.', 'warning');
                         this.dataset.submitting = 'false';
@@ -1871,8 +1862,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                     submitButton.disabled = true;
 
                     const formData = new FormData(this);
-                    
-                    // Debug: Log form data
+
                     console.log('Form data being sent:');
                     for (let [key, value] of formData.entries()) {
                         console.log(key + ': ' + value);
@@ -1973,13 +1963,8 @@ $_SESSION['user_type'] = 'cargo_owner';
             });
 
             showSection(homeSection); 
-            fetchCargos(); // Keep this for the home section stats
-            // loadUserCargos will be called when user clicks "View Posted Cargos"
+            fetchCargos(); 
         });
-
-        // Settings page functionality
-        
-        // Profile picture change
         document.getElementById('changeProfilePicBtn').addEventListener('click', function() {
             document.getElementById('profilePictureInput').click();
         });
@@ -1987,7 +1972,7 @@ $_SESSION['user_type'] = 'cargo_owner';
         document.getElementById('profilePictureInput').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
-                if (file.size > 5 * 1024 * 1024) { // 5MB limit
+                if (file.size > 5 * 1024 * 1024) { 
                     showSettingsAlert('File size should be less than 5MB', 'warning');
                     return;
                 }
@@ -2000,8 +1985,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                 reader.readAsDataURL(file);
             }
         });
-
-        // Profile update form
         document.getElementById('profileUpdateForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
