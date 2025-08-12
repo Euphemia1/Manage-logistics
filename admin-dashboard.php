@@ -514,13 +514,10 @@ $conn->close();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/session-manager.js"></script>
     <script>
-        // Toggle sidebar for mobile
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('active');
         }
-
-        // Close sidebar when clicking outside on mobile
         document.addEventListener('click', function(event) {
             const sidebar = document.getElementById('sidebar');
             const mobileToggle = document.querySelector('.mobile-toggle');
@@ -532,7 +529,6 @@ $conn->close();
             }
         });
 
-        // Fetch updated counts
         function fetchCounts() {
             fetch('get-dashboard-counts.php')
                 .then(response => {
@@ -565,10 +561,10 @@ $conn->close();
             }
         }
 
-        // Auto-refresh counts every 30 seconds
+       
         setInterval(fetchCounts, 30000);
         
-        // Initial fetch after 5 seconds
+     
         setTimeout(fetchCounts, 5000);
     </script>
 </body>
