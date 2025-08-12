@@ -981,9 +981,7 @@ if ($result) {
                             <p>There are no jobs matching your search criteria. Try adjusting your filters or add a new job.</p>
                         </div>
                     </td>
-                `;
-                
-                // Remove any existing empty row first
+                `
                 const existingEmptyRow = document.getElementById('emptyRow');
                 if (existingEmptyRow) {
                     existingEmptyRow.remove();
@@ -991,33 +989,29 @@ if ($result) {
                 
                 document.getElementById('jobsTableBody').appendChild(emptyRow);
             } else {
-                // Remove empty row if it exists
+                
                 const existingEmptyRow = document.getElementById('emptyRow');
                 if (existingEmptyRow) {
                     existingEmptyRow.remove();
                 }
             }
         }
-
-        // Clear search fields
         function clearSearch() {
             document.getElementById('pickup').value = '';
             document.getElementById('dropoff').value = '';
             
-            // Show all rows
             const rows = document.querySelectorAll('#jobsTableBody tr');
             rows.forEach(row => {
                 row.style.display = '';
             });
             
-            // Remove empty row if it exists
+           
             const existingEmptyRow = document.getElementById('emptyRow');
             if (existingEmptyRow) {
                 existingEmptyRow.remove();
             }
         }
 
-        // Initialize date picker with today's date
         document.addEventListener('DOMContentLoaded', function() {
             const today = new Date();
             const formattedDate = today.toISOString().split('T')[0];
@@ -1026,22 +1020,18 @@ if ($result) {
                 startDateInput.value = formattedDate;
             }
             
-            // Add form submission handler
             const jobForm = document.getElementById('jobForm');
             if (jobForm) {
                 jobForm.addEventListener('submit', function(e) {
                     e.preventDefault();
                     
-                    // Show loading state
                     const submitBtn = this.querySelector('button[type="submit"]');
                     const originalText = submitBtn.innerHTML;
                     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Saving...';
                     submitBtn.disabled = true;
                     
-                    // Create FormData object
                     const formData = new FormData(this);
                     
-                    // Submit to post-cargo.php
                     fetch('post-cargo.php', {
                         method: 'POST',
                         body: formData
