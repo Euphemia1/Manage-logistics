@@ -68,8 +68,7 @@ class SessionManager {
                 this.pageHiddenTime = Date.now();
             } else {
                 this.isPageVisible = true;
-                
-                // If page was hidden for more than 2 minutes, check session immediately
+        
                 if (this.pageHiddenTime && (Date.now() - this.pageHiddenTime) > this.sessionTimeout) {
                     this.checkSession();
                 }
@@ -81,28 +80,23 @@ class SessionManager {
     
     handleWindowFocus() {
         window.addEventListener('focus', () => {
-            // Check session when window regains focus
             this.checkSession();
         });
         
         window.addEventListener('blur', () => {
-            // Optional: Pause session checking when window loses focus
-            // this.pauseSessionCheck();
+  
         });
     }
     
     handleSessionExpired(redirectUrl) {
-        // Clear the interval
         if (this.checkTimer) {
             clearInterval(this.checkTimer);
         }
-        
-        // Show alert to user
         this.showSessionExpiredModal(redirectUrl);
     }
     
     showSessionExpiredModal(redirectUrl) {
-        // Create modal backdrop
+     
         const backdrop = document.createElement('div');
         backdrop.className = 'session-expired-backdrop';
         backdrop.style.cssText = `
@@ -118,7 +112,6 @@ class SessionManager {
             align-items: center;
         `;
         
-        // Create modal
         const modal = document.createElement('div');
         modal.className = 'session-expired-modal';
         modal.style.cssText = `
