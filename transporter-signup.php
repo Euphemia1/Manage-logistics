@@ -6,15 +6,12 @@ $username = "root";
 $password = ""; 
 $dbname = "logistics";
 
-
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
-
 $stmt = $conn->prepare("INSERT INTO transporters (transporter_name, email, phone_number, password, company) VALUES (?, ?, ?, ?, ?)");
 $stmt->bind_param("sssss", $transporter_name, $email, $phone_number, $hashed_password, $company);
 
@@ -32,8 +29,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($transporter_name)) {
             die("Error: transporter_name cannot be empty.");
         }
-
-        
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         
@@ -82,8 +77,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error: All fields are required.";
     }
 }
-
-
 $stmt->close();
 $conn->close();
 ?>
