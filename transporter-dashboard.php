@@ -645,22 +645,13 @@ $conn->close();
     document.getElementById('statusToggle').addEventListener('change', function() {
       const isAvailable = this.checked;
       console.log('Availability status:', isAvailable ? 'Available' : 'Unavailable');
-      
-      // Here you would send an AJAX request to update the status in the database
-      // For now, just show visual feedback
       const statusText = isAvailable ? 'You are now available for jobs' : 'You are now unavailable for jobs';
-      
-      // You could show a toast notification here
+
       console.log(statusText);
     });
-
-    // Auto-refresh notifications every 30 seconds
     setInterval(function() {
-      // In a real application, you would make an AJAX call to check for new notifications
       console.log('Checking for new notifications...');
     }, 30000);
-
-    // Close sidebar when clicking outside on mobile
     document.addEventListener('click', function(event) {
       const sidebar = document.getElementById('sidebar');
       const mobileToggle = document.querySelector('.mobile-toggle');
@@ -671,8 +662,6 @@ $conn->close();
         sidebar.classList.remove('active');
       }
     });
-
-    // Hide notifications panel when clicking outside
     document.addEventListener('click', function(event) {
       const panel = document.getElementById('notificationsPanel');
       const bell = document.querySelector('.notification-bell');
