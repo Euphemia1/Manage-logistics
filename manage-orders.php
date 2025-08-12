@@ -1,10 +1,7 @@
 <?php
-require_once 'db.php'; // Include your database connection
+require_once 'db.php'; 
 
-// Fetch orders with cargo owner details from the database
-// Fetch orders with cargo owner details from the database
-
-require_once 'db.php'; // Include your database connection
+require_once 'db.php'; 
 
 $result = $conn->query("
     SELECT 
@@ -31,8 +28,6 @@ if ($result && $result->num_rows > 0) {
     }
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -413,7 +408,6 @@ if ($result && $result->num_rows > 0) {
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
     <nav style="background-color: var(--primary-color); padding: 1rem 0; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
         <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
             <div style="display: flex; align-items: center; gap: 15px;">
@@ -488,7 +482,6 @@ if ($result && $result->num_rows > 0) {
                         <?php if (!empty($orders)): ?>
                             <?php foreach ($orders as $order): ?>
                                 <?php 
-                                    // Determine status class
                                     $statusClass = strtolower(str_replace(' ', '-', $order['status']));
                                 ?>
                                 <tr data-status="<?php echo $statusClass; ?>">
@@ -553,8 +546,7 @@ if ($result && $result->num_rows > 0) {
             </ul>
         </div>
     </div>
-    
-    <!-- Delete Confirmation Modal -->
+
     <div id="deleteModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal('deleteModal')">&times;</span>
@@ -570,49 +562,40 @@ if ($result && $result->num_rows > 0) {
     </div>
 
     <script>
-        // Function to handle order editing
         function editOrder(orderId) {
             window.location.href = `edit-order.php?id=${orderId}`;
         }
         
-        // Function to handle order viewing
         function viewOrder(orderId) {
             window.location.href = `view-order.php?id=${orderId}`;
         }
-        
-        // Function to show delete confirmation modal
+
         function confirmDelete(orderId) {
             const modal = document.getElementById('deleteModal');
             const confirmBtn = document.getElementById('confirmDeleteBtn');
             
             modal.style.display = 'block';
             
-            // Set up the confirm button to actually delete when clicked
             confirmBtn.onclick = function() {
                 deleteOrder(orderId);
             };
         }
-        
-        // Function to close any modal
+
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
         }
         
-        // Function to handle order deletion
+
         function deleteOrder(orderId) {
-            // Close the modal
             closeModal('deleteModal');
-            
-            // Redirect to delete order page
+
             window.location.href = `delete-order.php?id=${orderId}`;
         }
         
-        // Function to add a new order
         function addOrder() {
             window.location.href = 'add-order.php';
         }
-        
-        // Search functionality
+
         document.getElementById('searchInput').addEventListener('keyup', function() {
             const searchValue = this.value.toLowerCase();
             const table = document.getElementById('ordersTable');
@@ -633,15 +616,12 @@ if ($result && $result->num_rows > 0) {
                 rows[i].style.display = found ? '' : 'none';
             }
         });
-        
-        // Filter functionality
+
         const filterButtons = document.querySelectorAll('.filter-btn');
         filterButtons.forEach(button => {
             button.addEventListener('click', function() {
-                // Remove active class from all buttons
                 filterButtons.forEach(btn => btn.classList.remove('active'));
-                
-                // Add active class to clicked button
+
                 this.classList.add('active');
                 
                 const filter = this.getAttribute('data-filter');
@@ -657,8 +637,6 @@ if ($result && $result->num_rows > 0) {
                 });
             });
         });
-        
-        // Close modal when clicking outside of it
         window.onclick = function(event) {
             const modals = document.getElementsByClassName('modal');
             for (let i = 0; i < modals.length; i++) {
