@@ -1,7 +1,5 @@
 <?php
 require 'db.php';
-
-// Check if admins table exists and show all admin records
 try {
     $query = "SELECT * FROM admins";
     $result = $conn->query($query);
@@ -29,8 +27,6 @@ try {
     } else {
         echo "<p style='color: red;'>❌ No admin records found in the database!</p>";
         echo "<p>The admins table might be empty. You need to create an admin account first.</p>";
-        
-        // Offer to create a default admin
         echo "<hr>";
         echo "<h3>Create Default Admin Account:</h3>";
         echo "<form method='POST'>";
@@ -43,8 +39,6 @@ try {
 } catch (Exception $e) {
     echo "<p style='color: red;'>❌ Error: " . $e->getMessage() . "</p>";
     echo "<p>The admins table might not exist. Creating it now...</p>";
-    
-    // Try to create the admins table
     $createTable = "
         CREATE TABLE IF NOT EXISTS admins (
             id INT AUTO_INCREMENT PRIMARY KEY,
@@ -67,8 +61,6 @@ try {
         echo "<p style='color: red;'>❌ Failed to create admins table: " . $conn->error . "</p>";
     }
 }
-
-// Handle admin creation
 if (isset($_POST['create_admin'])) {
     $username = trim($_POST['username']);
     $password = $_POST['password'];
