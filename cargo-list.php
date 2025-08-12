@@ -1,19 +1,14 @@
 <?php
-// api/cargo-list.php
 session_start();
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET');
-
-// Database configuration
 $config = [
     'host' => 'localhost',
     'dbname' => 'logistics',
     'username' => 'root',
     'password' => ''
 ];
-
-
 try {
     $dsn = "mysql:host={$config['host']};dbname={$config['dbname']};charset=utf8mb4";
     $db = new PDO($dsn, $config['username'], $config['password']);
@@ -24,18 +19,13 @@ try {
     echo json_encode(['error' => 'Database connection failed', 'details' => $e->getMessage()]);
     exit;
 }
-
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     try {
-        // Get pagination parameters
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
         $offset = ($page - 1) * $limit;
-        
-        // Get search parameter
         $search = isset($_GET['search']) ? trim($_GET['search']) : '';
         
-        // Build query
         $whereClause = '';
         $params = [];
         
@@ -43,14 +33,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $whereClause = "WHERE item LIKE :search OR pickup LIKE :search OR dropoff LIKE :search";
             $params[':search'] = "%{$search}%";
         }
-        
-        // Get total count
+
         $countQuery = "SELECT COUNT(*) as total FROM jobs {$whereClause}";
         $countStmt = $db->prepare($countQuery);
         $countStmt->execute($params);
         $totalRecords = $countStmt->fetch()['total'];
-        
-        // Get paginated results
+
         $query = "
             SELECT 
                 id,
@@ -81,8 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $stmt->execute();
         
         $cargos = $stmt->fetchAll();
-        
-        // Format the response
+    
         $response = [
             'success' => true,
             'data' => [
@@ -98,7 +85,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             ],
             'message' => 'Cargos retrieved successfully'
         ];
-        
         echo json_encode($response);
         
     } catch (PDOException $e) {
