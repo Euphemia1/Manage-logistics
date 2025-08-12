@@ -2004,17 +2004,12 @@ $_SESSION['user_type'] = 'cargo_owner';
             const originalText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span> Updating...';
             submitBtn.disabled = true;
-
-            // Here you would send the data to a backend endpoint
-            // For now, we'll simulate success
             setTimeout(() => {
                 showSettingsAlert('Profile updated successfully!', 'success');
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
             }, 1500);
         });
-
-        // Password change form
         document.getElementById('passwordChangeForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -2036,9 +2031,6 @@ $_SESSION['user_type'] = 'cargo_owner';
             const originalText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span> Changing...';
             submitBtn.disabled = true;
-
-            // Here you would send the data to a backend endpoint
-            // For now, we'll simulate success
             setTimeout(() => {
                 showSettingsAlert('Password changed successfully!', 'success');
                 this.reset();
@@ -2059,8 +2051,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                 `;
                 alertContainer.innerHTML = '';
                 alertContainer.append(wrapper);
-                
-                // Auto-dismiss after 5 seconds
                 setTimeout(() => {
                     const alert = alertContainer.querySelector('.alert');
                     if (alert) {
@@ -2070,8 +2060,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                 }, 5000);
             }
         }
-
-        // Toggle password visibility
         window.togglePassword = function(inputId) {
             const input = document.getElementById(inputId);
             const icon = input.nextElementSibling.querySelector('i');
