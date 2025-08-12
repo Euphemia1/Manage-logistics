@@ -2,9 +2,7 @@
 session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-// session_start();
 require 'db.php';
-
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
@@ -30,15 +28,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $error = "Invalid email or password";
     }
-// Set session to expire quickly (e.g., 5 minutes) or when browser closes
-
     if (isset($error)) {
         $_SESSION['login_error'] = $error;
         header("Location: cargo-owner-login.php");
         exit();
     }
 
-    $_SESSION['last_activity'] = time(); // Track activity time
-$_SESSION['expire_after'] = 300; // 5 minutes (adjust as needed)
+    $_SESSION['last_activity'] = time(); 
+$_SESSION['expire_after'] = 300; 
 }
 ?>
