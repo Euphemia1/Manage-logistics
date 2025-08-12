@@ -153,17 +153,14 @@ class SessionManager {
         
         backdrop.appendChild(modal);
         document.body.appendChild(backdrop);
-        
-        // Prevent scrolling
+    
         document.body.style.overflow = 'hidden';
-        
-        // Auto-redirect after 10 seconds
+    
         setTimeout(() => {
             window.location.href = redirectUrl;
         }, 10000);
     }
     
-    // Method to manually logout
     async logout(redirectUrl) {
         try {
             await fetch('logout.php', {
@@ -178,22 +175,19 @@ class SessionManager {
             window.location.href = redirectUrl;
         }
     }
-    
-    // Method to extend session (if needed)
+
     extendSession() {
         this.lastActivity = Date.now();
         this.checkSession();
     }
 }
 
-// Initialize session manager when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     window.sessionManager = new SessionManager();
 });
 
-// Also handle logout buttons
 document.addEventListener('DOMContentLoaded', () => {
-    // Find all logout buttons and add click handlers
+  
     const logoutButtons = document.querySelectorAll('[href*="logout"], [onclick*="logout"], .logout-btn');
     
     logoutButtons.forEach(button => {
@@ -201,8 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             
             let redirectUrl = 'index.php';
-            
-            // Determine redirect URL based on current page or button attributes
+
             if (window.location.pathname.includes('admin')) {
                 redirectUrl = 'admin-login.php';
             } else if (window.location.pathname.includes('cargo')) {
@@ -211,7 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 redirectUrl = 'transporter-login.php';
             }
             
-            // Get redirect URL from button if specified
             const buttonRedirect = button.getAttribute('data-redirect');
             if (buttonRedirect) {
                 redirectUrl = buttonRedirect;
