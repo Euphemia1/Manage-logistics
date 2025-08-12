@@ -9,8 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "<h2>Login Debug Information</h2>";
     echo "<p><strong>Entered Username:</strong> '" . htmlspecialchars($username) . "'</p>";
     echo "<p><strong>Entered Password:</strong> '" . htmlspecialchars($password) . "'</p>";
-    
-    // Check if user exists
     $stmt = $conn->prepare('SELECT * FROM admins WHERE username = ?');
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -21,8 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<p style='color: green;'>✅ User found in database!</p>";
         echo "<p><strong>Database Username:</strong> '" . htmlspecialchars($admin['username']) . "'</p>";
         echo "<p><strong>Database Password Hash:</strong> " . substr($admin['password'], 0, 30) . "...</p>";
-        
-        // Test password verification
         if (password_verify($password, $admin['password'])) {
             echo "<p style='color: green;'>✅ Password verification successful!</p>";
             echo "<p>Login should work. Redirecting to dashboard...</p>";
@@ -38,15 +34,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             echo "<p style='color: red;'>❌ Password verification failed!</p>";
             echo "<p>The password you entered doesn't match the stored hash.</p>";
-            
-            // Show what the password hash should be for the entered password
             $testHash = password_hash($password, PASSWORD_DEFAULT);
             echo "<p><strong>Hash for entered password would be:</strong> " . substr($testHash, 0, 30) . "...</p>";
         }
     } else {
         echo "<p style='color: red;'>❌ No user found with username: '" . htmlspecialchars($username) . "'</p>";
-        
-        // Show all available usernames
+
         $allUsers = $conn->query("SELECT username FROM admins");
         if ($allUsers && $allUsers->num_rows > 0) {
             echo "<p><strong>Available usernames in database:</strong></p>";
