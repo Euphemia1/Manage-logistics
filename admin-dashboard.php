@@ -4,12 +4,9 @@ if (!isset($_SESSION['admin_id'])) {
     header('Location: admin-login.php');
     exit();
 }
-
 $_SESSION['last_activity'] = time();
 $_SESSION['user_type'] = 'admin';
-
 require_once 'db.php';
-
 function getCount($conn, $table) {
     $query = "SELECT COUNT(*) as count FROM $table";
     $result = $conn->query($query);
@@ -21,14 +18,12 @@ function getCount($conn, $table) {
     
     return 0;
 }
-
 $cargoOwnersCount = getCount($conn, 'cargo_owners');
 $transportersCount = getCount($conn, 'transporters');
 $ordersCount = getCount($conn, 'jobs');
 
 $conn->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -342,18 +337,14 @@ $conn->close();
     </style>
 </head>
 <body>
-   
     <button class="mobile-toggle" onclick="toggleSidebar()">
         <i class="fas fa-bars"></i>
     </button>
-
-
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h3><i class="fas fa-shield-alt"></i> Admin Panel</h3>
             <p>Nyamula Logistics</p>
         </div>
-        
         <nav>
             <div class="nav-item">
                 <a href="admin-dashboard.php" class="nav-link active">
