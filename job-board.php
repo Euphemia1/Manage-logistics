@@ -1040,11 +1040,11 @@ if ($result) {
                     .then(data => {
                         if (data.success) {
                             alert('Job posted successfully!');
-                            // Reset form and hide it
+                            
                             jobForm.reset();
                             document.getElementById('formStartDate').value = formattedDate;
                             toggleJobForm();
-                            // Reload page to show new job
+                           
                             window.location.reload();
                         } else {
                             alert('Error: ' + (data.message || 'Failed to post job'));
@@ -1055,7 +1055,7 @@ if ($result) {
                         alert('Network error occurred. Please try again.');
                     })
                     .finally(() => {
-                        // Restore button
+                      
                         submitBtn.innerHTML = originalText;
                         submitBtn.disabled = false;
                     });
