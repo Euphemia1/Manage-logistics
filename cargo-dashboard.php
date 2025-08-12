@@ -260,8 +260,7 @@ $_SESSION['user_type'] = 'cargo_owner';
             background: var(--text-muted) !important;
             color: var(--white) !important;
         }
-        
-        /* Forms */
+
         .form-control, .form-select {
             border: 2px solid var(--border-color);
             border-radius: 10px;
@@ -281,8 +280,7 @@ $_SESSION['user_type'] = 'cargo_owner';
             font-weight: 500;
             margin-bottom: 8px;
         }
-        
-        /* Alerts */
+
         .alert {
             border-radius: 10px;
             border: none;
@@ -312,8 +310,7 @@ $_SESSION['user_type'] = 'cargo_owner';
             color: #721c24;
             border-left: 4px solid #dc3545;
         }
-        
-        /* Text Colors */
+
         .text-success, .text-primary {
             color: var(--primary-green) !important;
         }
@@ -329,8 +326,6 @@ $_SESSION['user_type'] = 'cargo_owner';
         .text-warning {
             color: var(--primary-green) !important;
         }
-        
-        /* Icons */
         .fa, .fas {
             color: inherit;
         }
@@ -346,8 +341,7 @@ $_SESSION['user_type'] = 'cargo_owner';
         .text-purple .fa, .text-purple .fas {
             color: var(--primary-green) !important;
         }
-        
-        /* Loading Spinner */
+
         .spinner-border {
             color: var(--primary-green);
         }
@@ -355,13 +349,11 @@ $_SESSION['user_type'] = 'cargo_owner';
         .spinner-border-sm {
             color: var(--white);
         }
-        
-        /* Profile Picture */
+    
         .rounded-circle {
             border: 3px solid var(--primary-green) !important;
         }
-        
-        /* Cargo Item Cards */
+
         .cargo-item-card {
             transition: all 0.3s ease;
             border: 1px solid var(--border-color);
