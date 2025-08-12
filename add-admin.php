@@ -1,7 +1,6 @@
 <?php
 header('Content-Type: application/json');
 
-
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
@@ -9,7 +8,6 @@ define('DB_NAME', 'logistics');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        
         $username = $_POST['username'] ?? '';
         $email = $_POST['email'] ?? '';
         $password = $_POST['password'] ?? '';
@@ -31,8 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($password !== $confirmPassword) {
             throw new Exception('Passwords do not match');
         }
-        
-      
         $pdo = new PDO(
             "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME,
             DB_USER,
@@ -42,23 +38,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
             ]
         );
-        
-       
         $stmt = $pdo->prepare("SELECT id FROM admins WHERE username = ? OR email = ?");
         $stmt->execute([$username, $email]);
         
         if ($stmt->rowCount() > 0) {
             throw new Exception('Username or email already exists');
         }
-        
-   
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         
        
         $stmt = $pdo->prepare("INSERT INTO admins (username, password, email) VALUES (?, ?, ?)");
         $stmt->execute([$username, $hashedPassword, $email]);
-        
-       
         echo json_encode([
             'success' => true,
             'message' => 'Registration successful! Redirecting to dashboard...',
