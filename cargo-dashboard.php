@@ -1393,17 +1393,13 @@ $_SESSION['user_type'] = 'cargo_owner';
                         </div>
                     </div>
                 `;
-                
-                // Remove existing modal if present
                 const existingModal = document.getElementById('userCargoDetailsModal');
                 if (existingModal) {
                     existingModal.remove();
                 }
-                
-                // Add new modal to body
+
                 document.body.insertAdjacentHTML('beforeend', modalHTML);
-                
-                // Show modal
+
                 const modal = new bootstrap.Modal(document.getElementById('userCargoDetailsModal'));
                 modal.show();
             }
@@ -1704,7 +1700,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                 document.getElementById('modalOrigin').textContent = cargo.origin || 'N/A';
                 document.getElementById('modalDestination').textContent = cargo.destination || 'N/A';
                 document.getElementById('modalPickupDate').textContent = cargo.pickup_date || 'N/A';
-                document.getElementById('modalWeight').textContent = cargo.weight ? `${cargo.weight}` : 'N/A'; // Assuming weight includes 'kg'
+                document.getElementById('modalWeight').textContent = cargo.weight ? `${cargo.weight}` : 'N/A'; 
                 document.getElementById('modalDimensions').textContent = cargo.dimensions || 'N/A';
                 document.getElementById('modalPhone').textContent = cargo.phone || 'N/A';
                 document.getElementById('modalInstructions').textContent = cargo.instructions || 'No special instructions provided.';
@@ -1735,7 +1731,7 @@ $_SESSION['user_type'] = 'cargo_owner';
             if(viewPostedCargosLink) viewPostedCargosLink.addEventListener('click', (e) => { 
                 e.preventDefault(); 
                 showSection(postedCargosSection); 
-                loadUserCargos(); // Use the new function instead of fetchCargos
+                loadUserCargos(); 
             });
             if(settingsLink) settingsLink.addEventListener('click', (e) => { e.preventDefault(); showSection(settingsSection); });
             if(postNewCargoBtn) postNewCargoBtn.addEventListener('click', () => showSection(postCargoSection));
