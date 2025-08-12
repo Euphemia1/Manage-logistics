@@ -359,7 +359,7 @@ $conn->close();
         <i class="fas fa-bars"></i>
     </button>
 
-    <!-- Sidebar -->
+
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h3><i class="fas fa-shield-alt"></i> Admin Panel</h3>
@@ -405,10 +405,7 @@ $conn->close();
             </div>
         </nav>
     </div>
-
-    <!-- Main Content -->
     <div class="main-content">
-        <!-- Page Header -->
         <div class="page-header">
             <h1 class="header-title">
                 <i class="fas fa-tachometer-alt me-2"></i>
@@ -426,8 +423,6 @@ $conn->close();
                 </div>
             </div>
         </div>
-
-        <!-- Dashboard Cards -->
         <div class="dashboard-cards">
             <div class="dashboard-card cargo-owners">
                 <div class="card-icon">
@@ -466,7 +461,7 @@ $conn->close();
             </div>
         </div>
 
-        <!-- Recent Activity Section -->
+       
         <div class="dashboard-card">
             <h3 class="card-title">
                 <i class="fas fa-clock me-2"></i>
