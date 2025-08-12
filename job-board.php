@@ -32,11 +32,11 @@ $totalJobs = $countRow['total'];
 
 echo "<!-- Total jobs found: " . $totalJobs . " -->";
 
-// Fetch jobs
+
 $query = "SELECT * FROM jobs ORDER BY start_date DESC";
 $result = mysqli_query($conn, $query);
 
-// Debug: Show query result
+
 if ($result) {
     echo "<!-- Query successful. Rows found: " . mysqli_num_rows($result) . " -->";
 } else {
@@ -467,7 +467,7 @@ if ($result) {
             border-color: var(--primary-color);
         }
 
-        /* Form styling */
+      
         .hidden {
             display: none;
         }
@@ -641,7 +641,7 @@ if ($result) {
             background-color: var(--primary-dark);
         }
 
-        /* Responsive Styles */
+      
         @media (min-width: 768px) {
             .md\:grid-cols-2 {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -726,7 +726,7 @@ if ($result) {
 </head>
 
 <body>
-    <!-- Navigation Bar -->
+  
     <nav style="background-color: var(--primary-color); padding: 1rem 0; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
         <div class="container" style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
             <div style="display: flex; align-items: center; gap: 15px;">
@@ -768,8 +768,6 @@ if ($result) {
                 <button class="btn btn-primary" onclick="toggleJobForm()"><i class="fas fa-plus"></i> Add New Job</button>
             </div>
         </div>
-
-        <!-- Add Job Form (Hidden by default) -->
         <div id="jobFormPanel" class="bg-white rounded-lg shadow-md p-4 mb-6 hidden">
             <h2 class="text-lg font-semibold mb-4 text-gray-800 flex items-center">
                 <i class="fas fa-plus-circle mr-2 text-primary-600"></i> Add New Job
@@ -913,7 +911,6 @@ if ($result) {
                                         <i class="fas fa-box-open"></i>
                                         <h3>No Jobs Available</h3>
                                         <p>There are currently no jobs posted. Check back later or post a new job.</p>
-                                        <!-- Debug info -->
                                         <small style="color: #999;">
                                             Debug: Total jobs in DB = <?php echo $totalJobs; ?>, 
                                             Query result = <?php echo $result ? 'Success' : 'Failed'; ?>
@@ -935,7 +932,7 @@ if ($result) {
             <button class="pagination-btn"><i class="fas fa-ellipsis-h"></i></button>
             <button class="pagination-btn">10</button>
         </div>
-    </div>  -->
+    </div> 
 
     <script>
         // Toggle job form visibility
