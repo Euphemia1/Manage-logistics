@@ -1,8 +1,6 @@
 <?php
 session_start();
 require_once 'db.php';
-
-// Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Content-Type: application/json');
     echo json_encode(['success' => false, 'message' => 'User not logged in']);
@@ -13,7 +11,7 @@ $user_id = $_SESSION['user_id'];
 $user_name = $_SESSION['user_name'];
 
 try {
-    // Get user's cargo data
+
     $stmt = $conn->prepare("
         SELECT 
             id,
@@ -39,8 +37,6 @@ try {
     while ($row = $result->fetch_assoc()) {
         $cargo_data[] = $row;
     }
-    
-    // Prepare export data
     $export_data = [
         'user_info' => [
             'user_id' => $user_id,
@@ -56,10 +52,9 @@ try {
             'delivered_cargo' => array_filter($cargo_data, function($item) { return $item['status'] === 'Delivered'; })
         ]
     ];
-    
-    // Set headers for download
+
     $filename = 'nyamula_logistics_data_' . $user_name . '_' . date('Y-m-d') . '.json';
-    $filename = preg_replace('/[^a-zA-Z0-9._-]/', '_', $filename); // Clean filename
+    $filename = preg_replace('/[^a-zA-Z0-9._-]/', '_', $filename); 
     
     header('Content-Type: application/json');
     header('Content-Disposition: attachment; filename="' . $filename . '"');
