@@ -1,12 +1,12 @@
 <?php
 session_start();
-// Check if the user is logged in
+
 if (!isset($_SESSION['user_name'])) {
-    header("Location: transporter-login.php"); // Redirect to login if not logged in
+    header("Location: transporter-login.php"); 
     exit();
 }
 
-// Set session timeout and last activity
+
 $_SESSION['last_activity'] = time();
 $_SESSION['user_type'] = 'transporter';
 
