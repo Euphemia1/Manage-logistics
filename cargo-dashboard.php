@@ -44,7 +44,6 @@ $_SESSION['user_type'] = 'cargo_owner';
             min-height: 100vh;
         }
         
-        /* Sidebar Styling */
         .sidebar {
             background: linear-gradient(180deg, var(--primary-green) 0%, var(--dark-green) 100%);
             color: var(--white);
@@ -85,16 +84,13 @@ $_SESSION['user_type'] = 'cargo_owner';
             font-weight: 600;
             letter-spacing: 0.5px;
         }
-        
-        /* Main Content */
+
         .main-content {
             margin-left: 250px;
             padding: 30px;
             transition: all 0.3s ease;
             min-height: 100vh;
         }
-        
-        /* Cards */
         .dashboard-card, .card {
             border-radius: 15px;
             box-shadow: var(--shadow);
@@ -113,8 +109,7 @@ $_SESSION['user_type'] = 'cargo_owner';
             border-bottom: 1px solid var(--border-color);
             border-radius: 15px 15px 0 0 !important;
         }
-      
-        /* Stats Cards */
+
         .stats-card {
             border-left: 4px solid var(--primary-green);
             padding: 20px;
@@ -131,8 +126,7 @@ $_SESSION['user_type'] = 'cargo_owner';
             color: var(--primary-green);
             font-weight: 700;
         }
-        
-        /* Buttons */
+
         .btn {
             border-radius: 10px;
             font-weight: 500;
@@ -225,8 +219,7 @@ $_SESSION['user_type'] = 'cargo_owner';
         .btn-info:hover {
             background: var(--dark-green);
         }
-        
-        /* Badges */
+
         .badge {
             border-radius: 8px;
             font-weight: 500;
