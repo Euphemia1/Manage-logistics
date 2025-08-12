@@ -1,16 +1,11 @@
 <?php
-session_start(); // This must be the very first line
-
-// Check for signup success message
+session_start(); 
 if (isset($_SESSION['signup_success'])) {
     $signup_name = htmlspecialchars($_SESSION['signup_success']['name']);
     $signup_email = htmlspecialchars($_SESSION['signup_success']['email']);
     $user_type = $_SESSION['signup_success']['type'];
     
     unset($_SESSION['signup_success']);
-    
-    // The modal HTML was removed as per the instruction to only return the corrected PHP file content.
-    // If a modal is desired, its HTML and JavaScript logic would need to be added here.
 }
 ?>
 
@@ -27,43 +22,43 @@ if (isset($_SESSION['signup_success'])) {
   <style>
     body {
         font-family: 'Roboto', sans-serif;
-        background: linear-gradient(135deg, #e0ffe0 0%, #f0fff0 100%); /* Light green gradient */
+        background: linear-gradient(135deg, #e0ffe0 0%, #f0fff0 100%); 
         color: #333;
     }
     .signup-card {
         transition: all 0.3s ease;
         box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
-        border: 1px solid rgba(0, 128, 0, 0.1); /* Subtle green border */
+        border: 1px solid rgba(0, 128, 0, 0.1); 
     }
     .signup-card:hover {
         box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
     }
     .input-field {
-        border-color: #d1d5db; /* Default border color */
+        border-color: #d1d5db; 
         transition: all 0.2s ease-in-out;
     }
     .input-field:focus {
         outline: none;
-        border-color: #4CAF50; /* Green border on focus */
-        box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2); /* Green glow on focus */
+        border-color: #4CAF50; 
+        box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2); 
     }
     .btn-primary {
-        background-color: #4CAF50; /* Green button */
+        background-color: #4CAF50; 
         transition: background-color 0.3s ease, transform 0.2s ease;
     }
     .btn-primary:hover {
-        background-color: #45a049; /* Darker green on hover */
+        background-color: #45a049; 
         transform: translateY(-2px);
     }
     .btn-primary:active {
         transform: translateY(0);
     }
     .text-link {
-        color: #2e7d32; /* Darker green for links */
+        color: #2e7d32; 
         transition: color 0.3s ease;
     }
     .text-link:hover {
-        color: #1b5e20; /* Even darker green on hover */
+        color: #1b5e20; 
         text-decoration: underline;
     }
     .feature-card {
@@ -231,7 +226,6 @@ if (isset($_SESSION['signup_success'])) {
     </div>
   </div>
   <script>
-    // Initialize Lucide icons
     lucide.createIcons();
   </script>
 </body>
