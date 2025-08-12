@@ -3,30 +3,33 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Database connection
-$servername = "srv941.hstgr.io";
+
+$servername = "89.117.139.204";
 $username = "u178619125_nyamula";
-$password = "@BluDiamon0100";
+$password = "@BluDiamond0100";
 $dbname = "u178619125_nyamula";
 
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
 
-// Check connection
+$conn = mysqli_connect($servername, 
+$username, 
+$password,
+ $dbname);
+
+
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-// Debug: Show connection status
+
 echo "<!-- Database connection successful -->";
 
-// Count total jobs
+
 $countQuery = "SELECT COUNT(*) as total FROM jobs";
 $countResult = mysqli_query($conn, $countQuery);
 $countRow = mysqli_fetch_assoc($countResult);
 $totalJobs = $countRow['total'];
 
-// Debug: Show job count
+
 echo "<!-- Total jobs found: " . $totalJobs . " -->";
 
 // Fetch jobs
