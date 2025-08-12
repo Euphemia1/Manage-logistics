@@ -7,7 +7,7 @@ $query = "SELECT transporter_id, transporter_name, email, company FROM transport
 $result = $conn->query($query);
 
 if ($result === false) {
-    // Handle the error, e.g., log it or display a message
+
     die("Database query failed: " . $conn->error);
 }
 
