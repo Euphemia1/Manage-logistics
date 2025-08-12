@@ -425,8 +425,6 @@ $conn->close();
   <button class="mobile-toggle" onclick="toggleSidebar()">
     <i class="fas fa-bars"></i>
   </button>
-
-  <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <h3><i class="fas fa-truck"></i> Transporter</h3>
@@ -460,17 +458,13 @@ $conn->close();
       </div>
     </nav>
   </div>
-
-  <!-- Main Content -->
   <div class="main-content">
-    <!-- Dashboard Header -->
     <div class="dashboard-header">
       <div>
         <h1 class="header-title">Dashboard Overview</h1>
         <p class="header-subtitle">Welcome back, <?php echo htmlspecialchars($transporter_name); ?>! Here's what's happening today.</p>
       </div>
       <div class="header-actions">
-        <!-- Notification Bell -->
         <div class="notification-container">
           <button class="notification-bell" onclick="toggleNotifications()">
             <i class="fas fa-bell"></i>
@@ -479,16 +473,12 @@ $conn->close();
             <?php endif; ?>
           </button>
         </div>
-        
-        <!-- Status Toggle -->
         <div class="form-check form-switch">
           <input class="form-check-input" type="checkbox" id="statusToggle" checked>
           <label class="form-check-label" for="statusToggle">Available for Jobs</label>
         </div>
       </div>
     </div>
-
-    <!-- Stats Grid -->
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-icon">
@@ -514,8 +504,6 @@ $conn->close();
         <div class="stat-label">Recent Notifications</div>
       </div>
     </div>
-
-    <!-- Notifications Panel -->
     <div class="notifications-panel" id="notificationsPanel" style="display: none;">
       <h2 class="panel-title">
         <i class="fas fa-bell"></i>
@@ -559,8 +547,6 @@ $conn->close();
         </a>
       </div>
     </div>
-
-    <!-- Quick Actions -->
     <div class="notifications-panel">
       <h2 class="panel-title">
         <i class="fas fa-bolt"></i>
@@ -612,25 +598,18 @@ $conn->close();
       </div>
     </div>
   </div>
-
-  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/session-manager.js"></script>
   
   <script>
-    // Toggle sidebar for mobile
     function toggleSidebar() {
       const sidebar = document.getElementById('sidebar');
       sidebar.classList.toggle('active');
     }
-
-    // Toggle notifications panel
     function toggleNotifications() {
       const panel = document.getElementById('notificationsPanel');
       panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
     }
-
-    // Mark notification as read
     function markAsRead(loadId) {
       // Here you would typically make an AJAX call to mark the notification as read
       console.log('Marking load ' + loadId + ' as read');
