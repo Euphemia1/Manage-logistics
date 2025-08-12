@@ -45,8 +45,6 @@ try {
 } catch (Exception $e) {
     echo "<p style='color: red;'>Error: " . $e->getMessage() . "</p>";
 }
-
-// Option to create a simple admin account
 echo "<hr>";
 echo "<h3>Create Simple Admin Account</h3>";
 echo "<p>If you want a simple username like 'admin', I can create one for you:</p>";
@@ -78,14 +76,12 @@ if (isset($_POST['create_simple_admin'])) {
         echo "<p style='color: red;'>Error creating admin: " . $e->getMessage() . "</p>";
     }
 }
-
 echo "<form method='POST'>";
 echo "<button type='submit' name='create_simple_admin' style='background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 3px;' onclick='return confirm(\"Create admin account with username: admin and password: admin123?\")'>Create Simple Admin Account</button>";
 echo "</form>";
 
 $conn->close();
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
