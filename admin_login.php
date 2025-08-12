@@ -5,8 +5,6 @@ require 'db.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username']);
     $password = $_POST['password'];
-
-    // Validate inputs
     if (empty($username) || empty($password)) {
         $_SESSION['login_error'] = "Please enter both username and password.";
         header('Location: admin-login.php');
