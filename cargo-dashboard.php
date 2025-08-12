@@ -444,8 +444,6 @@ $_SESSION['user_type'] = 'cargo_owner';
             color: var(--text-dark);
             font-weight: 600;
         }
-
-        /* Welcome section enhancement */
         .welcome-gradient {
             background: linear-gradient(135deg, var(--very-light-green) 0%, var(--white) 100%);
             border-left: 5px solid var(--primary-green);
@@ -477,8 +475,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                 z-index: 1100;
             }
         }
-
-        /* Enhanced animations */
         @keyframes fadeIn {
             from { 
                 opacity: 0; 
@@ -494,7 +490,6 @@ $_SESSION['user_type'] = 'cargo_owner';
             animation: fadeIn 0.5s ease-out;
         }
 
-        /* Download button styling */
         .download-btn {
             background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
             color: var(--white);
