@@ -935,7 +935,7 @@ if ($result) {
     </div> 
 
     <script>
-        // Toggle job form visibility
+      
         function toggleJobForm() {
             const jobFormPanel = document.getElementById('jobFormPanel');
             if (jobFormPanel.classList.contains('hidden')) {
@@ -945,15 +945,15 @@ if ($result) {
             }
         }
 
-        // Search jobs functionality
+      
         function searchJobs() {
             const pickupValue = document.getElementById('pickup').value.toLowerCase();
             const dropoffValue = document.getElementById('dropoff').value.toLowerCase();
             
-            // Get all rows in the table
+          
             const rows = document.querySelectorAll('#jobsTableBody tr');
             
-            // Loop through rows and hide/show based on search criteria
+          
             rows.forEach(row => {
                 const pickup = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
                 const dropoff = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
@@ -967,11 +967,10 @@ if ($result) {
                     row.style.display = 'none';
                 }
             });
-            
-            // Check if any rows are visible
+           
             const visibleRows = document.querySelectorAll('#jobsTableBody tr:not([style*="display: none"])');
             if (visibleRows.length === 0) {
-                // No matching jobs found, show empty state
+              
                 const emptyRow = document.createElement('tr');
                 emptyRow.id = 'emptyRow';
                 emptyRow.innerHTML = `
