@@ -497,7 +497,6 @@ $conn->close();
                 sidebar.classList.remove('active');
             }
         });
-
         function fetchCounts() {
             fetch('get-dashboard-counts.php')
                 .then(response => {
@@ -515,7 +514,6 @@ $conn->close();
                     console.error('Error fetching counts:', error);
                 });
         }
-
         function updateCountDisplay(elementId, newCount) {
             const countElement = document.getElementById(elementId);
             const currentCount = parseInt(countElement.textContent);
@@ -529,11 +527,7 @@ $conn->close();
                 }, 1000);
             }
         }
-
-       
         setInterval(fetchCounts, 30000);
-        
-     
         setTimeout(fetchCounts, 5000);
     </script>
 </body>
