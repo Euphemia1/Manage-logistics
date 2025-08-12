@@ -439,15 +439,12 @@ $conn->close();
                 </a>
             </div>
         </div>
-
-       
         <div class="dashboard-card">
             <h3 class="card-title">
                 <i class="fas fa-clock me-2"></i>
                 Recent Activity
             </h3>
             <div class="card-subtitle">Latest system activities and updates</div>
-            
             <div style="margin-top: 1.5rem;">
                 <div style="display: flex; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border-light);">
                     <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--light-green); display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
@@ -459,7 +456,6 @@ $conn->close();
                     </div>
                     <div style="font-size: 0.75rem; color: var(--gray-medium);">2 hours ago</div>
                 </div>
-                
                 <div style="display: flex; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border-light);">
                     <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(52, 152, 219, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
                         <i class="fas fa-briefcase" style="color: #3498db;"></i>
@@ -484,7 +480,6 @@ $conn->close();
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/session-manager.js"></script>
     <script>
