@@ -1,7 +1,5 @@
 <?php
 session_start();
-
-// Handle any login error messages that might be set
 $login_error = '';
 if (isset($_SESSION['login_error'])) {
     $login_error = $_SESSION['login_error'];
@@ -36,7 +34,6 @@ if (isset($_SESSION['login_error'])) {
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, var(--light-green) 0%, var(--white) 100%);
@@ -46,7 +43,6 @@ if (isset($_SESSION['login_error'])) {
             justify-content: center;
             padding: 1rem;
         }
-
         .admin-login-container {
             background: var(--white);
             border-radius: 1rem;
@@ -56,14 +52,12 @@ if (isset($_SESSION['login_error'])) {
             max-width: 450px;
             border: 1px solid var(--border-light);
         }
-
         .admin-login-header {
             background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
             color: var(--white);
             padding: 2rem;
             text-align: center;
         }
-
         .admin-login-header h2 {
             font-size: 1.75rem;
             font-weight: 600;
@@ -73,17 +67,14 @@ if (isset($_SESSION['login_error'])) {
             justify-content: center;
             gap: 0.5rem;
         }
-
         .admin-login-header p {
             margin: 0.5rem 0 0 0;
             opacity: 0.9;
             font-size: 0.9rem;
         }
-
         .admin-login-body {
             padding: 2rem;
         }
-
         .alert {
             border: none;
             border-radius: 0.5rem;
@@ -92,12 +83,10 @@ if (isset($_SESSION['login_error'])) {
             align-items: center;
             gap: 0.5rem;
         }
-
         .alert-danger {
             background-color: #FFF5F5;
             color: #C53030;
         }
-
         .form-label {
             color: var(--gray-dark);
             font-weight: 500;
@@ -106,7 +95,6 @@ if (isset($_SESSION['login_error'])) {
             align-items: center;
             gap: 0.5rem;
         }
-
         .form-control {
             border: 1px solid var(--border-light);
             border-radius: 0.5rem;
@@ -114,12 +102,10 @@ if (isset($_SESSION['login_error'])) {
             font-size: 1rem;
             transition: all 0.3s ease;
         }
-
         .form-control:focus {
             border-color: var(--primary-green);
             box-shadow: 0 0 0 0.2rem rgba(43, 198, 82, 0.25);
         }
-
         .btn-primary {
             background: var(--primary-green);
             border: none;
@@ -133,29 +119,23 @@ if (isset($_SESSION['login_error'])) {
             justify-content: center;
             gap: 0.5rem;
         }
-
         .btn-primary:hover {
             background: var(--dark-green);
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
-
         .text-center {
             text-align: center;
         }
-
         .text-muted {
             color: var(--gray-medium) !important;
         }
-
         .mt-3 {
             margin-top: 1rem;
         }
-
         .mb-3 {
             margin-bottom: 1rem;
         }
-
         .admin-badge {
             background: rgba(255, 255, 255, 0.2);
             border-radius: 2rem;
@@ -165,12 +145,10 @@ if (isset($_SESSION['login_error'])) {
             margin-top: 0.5rem;
             display: inline-block;
         }
-
         @media (max-width: 576px) {
             .admin-login-container {
                 margin: 1rem;
             }
-            
             .admin-login-header,
             .admin-login-body {
                 padding: 1.5rem;
@@ -228,7 +206,6 @@ if (isset($_SESSION['login_error'])) {
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
