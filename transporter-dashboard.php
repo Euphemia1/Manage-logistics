@@ -611,14 +611,10 @@ $conn->close();
       panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
     }
     function markAsRead(loadId) {
-      // Here you would typically make an AJAX call to mark the notification as read
       console.log('Marking load ' + loadId + ' as read');
-      
-      // Visual feedback
+
       event.target.closest('.notification-item').classList.remove('new');
       event.target.closest('.notification-item').style.opacity = '0.7';
-      
-      // Update notification count
       const badge = document.querySelector('.notification-badge');
       if (badge) {
         let count = parseInt(badge.textContent) - 1;
@@ -629,18 +625,14 @@ $conn->close();
         }
       }
     }
-
-    // Update location function
     function updateLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
-          
-          // Here you would send the coordinates to your server
+
           console.log('Location updated:', lat, lng);
-          
-          // Show success message
+
           alert('Location updated successfully!');
         }, function(error) {
           console.error('Error getting location:', error);
@@ -650,8 +642,6 @@ $conn->close();
         alert('Geolocation is not supported by this browser.');
       }
     }
-
-    // Status toggle functionality
     document.getElementById('statusToggle').addEventListener('change', function() {
       const isAvailable = this.checked;
       console.log('Availability status:', isAvailable ? 'Available' : 'Unavailable');
