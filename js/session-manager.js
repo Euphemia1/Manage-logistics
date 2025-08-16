@@ -1,9 +1,12 @@
-
+/**
+ * Session Manager for Auto-logout functionality
+ * Handles 2-minute session timeout and page visibility changes
+ */
 
 class SessionManager {
     constructor() {
-        this.sessionTimeout = 120000; 
-        this.checkInterval = 30000; 
+        this.sessionTimeout = 120000; // 2 minutes in milliseconds
+        this.checkInterval = 30000; // Check every 30 seconds
         this.lastActivity = Date.now();
         this.checkTimer = null;
         this.isPageVisible = true;
@@ -13,16 +16,16 @@ class SessionManager {
     }
     
     init() {
-        
+        // Start session checking
         this.startSessionCheck();
         
-        
+        // Track user activity
         this.trackUserActivity();
         
-        
+        // Handle page visibility changes
         this.handlePageVisibility();
         
-        
+        // Handle window focus/blur
         this.handleWindowFocus();
     }
     
@@ -68,7 +71,8 @@ class SessionManager {
                 this.pageHiddenTime = Date.now();
             } else {
                 this.isPageVisible = true;
-        
+                
+                // If page was hidden for more than 2 minutes, check session immediately
                 if (this.pageHiddenTime && (Date.now() - this.pageHiddenTime) > this.sessionTimeout) {
                     this.checkSession();
                 }
@@ -80,23 +84,28 @@ class SessionManager {
     
     handleWindowFocus() {
         window.addEventListener('focus', () => {
+            // Check session when window regains focus
             this.checkSession();
         });
         
         window.addEventListener('blur', () => {
-  
+            // Optional: Pause session checking when window loses focus
+            // this.pauseSessionCheck();
         });
     }
     
     handleSessionExpired(redirectUrl) {
+        // Clear the interval
         if (this.checkTimer) {
             clearInterval(this.checkTimer);
         }
+        
+        // Show alert to user
         this.showSessionExpiredModal(redirectUrl);
     }
     
     showSessionExpiredModal(redirectUrl) {
-     
+        // Create modal backdrop
         const backdrop = document.createElement('div');
         backdrop.className = 'session-expired-backdrop';
         backdrop.style.cssText = `
@@ -112,6 +121,7 @@ class SessionManager {
             align-items: center;
         `;
         
+        // Create modal
         const modal = document.createElement('div');
         modal.className = 'session-expired-modal';
         modal.style.cssText = `
@@ -153,14 +163,17 @@ class SessionManager {
         
         backdrop.appendChild(modal);
         document.body.appendChild(backdrop);
-    
+        
+        // Prevent scrolling
         document.body.style.overflow = 'hidden';
-    
+        
+        // Auto-redirect after 10 seconds
         setTimeout(() => {
             window.location.href = redirectUrl;
         }, 10000);
     }
     
+    // Method to manually logout
     async logout(redirectUrl) {
         try {
             await fetch('logout.php', {
@@ -175,19 +188,22 @@ class SessionManager {
             window.location.href = redirectUrl;
         }
     }
-
+    
+    // Method to extend session (if needed)
     extendSession() {
         this.lastActivity = Date.now();
         this.checkSession();
     }
 }
 
+// Initialize session manager when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     window.sessionManager = new SessionManager();
 });
 
+// Also handle logout buttons
 document.addEventListener('DOMContentLoaded', () => {
-  
+    // Find all logout buttons and add click handlers
     const logoutButtons = document.querySelectorAll('[href*="logout"], [onclick*="logout"], .logout-btn');
     
     logoutButtons.forEach(button => {
@@ -195,7 +211,8 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             
             let redirectUrl = 'index.php';
-
+            
+            // Determine redirect URL based on current page or button attributes
             if (window.location.pathname.includes('admin')) {
                 redirectUrl = 'admin-login.php';
             } else if (window.location.pathname.includes('cargo')) {
@@ -204,6 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 redirectUrl = 'transporter-login.php';
             }
             
+            // Get redirect URL from button if specified
             const buttonRedirect = button.getAttribute('data-redirect');
             if (buttonRedirect) {
                 redirectUrl = buttonRedirect;

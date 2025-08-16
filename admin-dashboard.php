@@ -1,12 +1,18 @@
 <?php
 session_start();
+
+// Check if admin is logged in
 if (!isset($_SESSION['admin_id'])) {
     header('Location: admin-login.php');
     exit();
 }
+
+// Set session timeout and last activity
 $_SESSION['last_activity'] = time();
 $_SESSION['user_type'] = 'admin';
+
 require_once 'db.php';
+
 function getCount($conn, $table) {
     $query = "SELECT COUNT(*) as count FROM $table";
     $result = $conn->query($query);
@@ -18,12 +24,14 @@ function getCount($conn, $table) {
     
     return 0;
 }
+
 $cargoOwnersCount = getCount($conn, 'cargo_owners');
 $transportersCount = getCount($conn, 'transporters');
 $ordersCount = getCount($conn, 'jobs');
 
 $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,6 +69,8 @@ $conn->close();
             color: var(--gray-dark);
             line-height: 1.6;
         }
+
+        /* Sidebar Styles */
         .sidebar {
             background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
             color: var(--white);
@@ -122,12 +132,14 @@ $conn->close();
             text-align: center;
         }
 
+        /* Main Content */
         .main-content {
             margin-left: 280px;
             padding: 2rem;
             min-height: 100vh;
         }
 
+        /* Header */
         .page-header {
             background: var(--white);
             border-radius: var(--border-radius);
@@ -165,6 +177,7 @@ $conn->close();
             font-size: 1.2rem;
         }
 
+        /* Dashboard Cards */
         .dashboard-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -276,6 +289,8 @@ $conn->close();
             color: var(--dark-green);
             transform: translateX(5px);
         }
+
+        /* Mobile Responsive */
         .mobile-toggle {
             display: none;
             position: fixed;
@@ -321,6 +336,8 @@ $conn->close();
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Loading Animation */
         .loading {
             opacity: 0.6;
             pointer-events: none;
@@ -337,14 +354,18 @@ $conn->close();
     </style>
 </head>
 <body>
+    <!-- Mobile Toggle Button -->
     <button class="mobile-toggle" onclick="toggleSidebar()">
         <i class="fas fa-bars"></i>
     </button>
+
+    <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h3><i class="fas fa-shield-alt"></i> Admin Panel</h3>
             <p>Nyamula Logistics</p>
         </div>
+        
         <nav>
             <div class="nav-item">
                 <a href="admin-dashboard.php" class="nav-link active">
@@ -384,7 +405,10 @@ $conn->close();
             </div>
         </nav>
     </div>
+
+    <!-- Main Content -->
     <div class="main-content">
+        <!-- Page Header -->
         <div class="page-header">
             <h1 class="header-title">
                 <i class="fas fa-tachometer-alt me-2"></i>
@@ -402,6 +426,8 @@ $conn->close();
                 </div>
             </div>
         </div>
+
+        <!-- Dashboard Cards -->
         <div class="dashboard-cards">
             <div class="dashboard-card cargo-owners">
                 <div class="card-icon">
@@ -439,12 +465,15 @@ $conn->close();
                 </a>
             </div>
         </div>
+
+        <!-- Recent Activity Section -->
         <div class="dashboard-card">
             <h3 class="card-title">
                 <i class="fas fa-clock me-2"></i>
                 Recent Activity
             </h3>
             <div class="card-subtitle">Latest system activities and updates</div>
+            
             <div style="margin-top: 1.5rem;">
                 <div style="display: flex; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border-light);">
                     <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--light-green); display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
@@ -456,6 +485,7 @@ $conn->close();
                     </div>
                     <div style="font-size: 0.75rem; color: var(--gray-medium);">2 hours ago</div>
                 </div>
+                
                 <div style="display: flex; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border-light);">
                     <div style="width: 40px; height: 40px; border-radius: 50%; background: rgba(52, 152, 219, 0.1); display: flex; align-items: center; justify-content: center; margin-right: 1rem;">
                         <i class="fas fa-briefcase" style="color: #3498db;"></i>
@@ -480,13 +510,17 @@ $conn->close();
             </div>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/session-manager.js"></script>
     <script>
+        // Toggle sidebar for mobile
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('active');
         }
+
+        // Close sidebar when clicking outside on mobile
         document.addEventListener('click', function(event) {
             const sidebar = document.getElementById('sidebar');
             const mobileToggle = document.querySelector('.mobile-toggle');
@@ -497,6 +531,8 @@ $conn->close();
                 sidebar.classList.remove('active');
             }
         });
+
+        // Fetch updated counts
         function fetchCounts() {
             fetch('get-dashboard-counts.php')
                 .then(response => {
@@ -514,6 +550,7 @@ $conn->close();
                     console.error('Error fetching counts:', error);
                 });
         }
+
         function updateCountDisplay(elementId, newCount) {
             const countElement = document.getElementById(elementId);
             const currentCount = parseInt(countElement.textContent);
@@ -527,7 +564,11 @@ $conn->close();
                 }, 1000);
             }
         }
+
+        // Auto-refresh counts every 30 seconds
         setInterval(fetchCounts, 30000);
+        
+        // Initial fetch after 5 seconds
         setTimeout(fetchCounts, 5000);
     </script>
 </body>

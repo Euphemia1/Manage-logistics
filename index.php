@@ -409,87 +409,6 @@
             text-align: center;
         }
 
-      
-        .team {
-            padding: 6rem 0;
-            background-color: var(--background);
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-        }
-
-        .team-member {
-            background: var(--white);
-            border-radius: 2rem;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            border: 1px solid var(--border-color);
-        }
-
-        .team-member:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .team-member-image {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .team-member:hover .team-member-image {
-            transform: scale(1.05);
-        }
-
-        .team-member-info {
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .team-member-name {
-            font-size: 1.375rem;
-            font-weight: 600;
-            color: var(--text-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .team-member-title {
-            color: var(--primary-color);
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .team-social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .team-social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--background);
-            color: var(--text-light);
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .team-social-link:hover {
-            background: var(--primary-color);
-            color: var(--white);
-            transform: translateY(-2px);
-        }
-
        
         .countries-section {
             padding: 6rem 0;
@@ -901,11 +820,6 @@
                 justify-content: center;
             }
 
-            .team-grid {
-                grid-template-columns: 1fr;
-                padding: 0 1rem;
-            }
-
             .feature-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -972,6 +886,13 @@
                 <a href="#" class="nav-link">HOME</a>
                 <a href="#services" class="nav-link">SERVICES</a>
                 <div class="dropdown">
+                    <button class="dropbtn">ABOUT US</button>
+                    <div class="dropdown-content">
+                        <a href="#about"><i class="fas fa-info-circle"></i> OUR STORY</a>
+                        <a href="team.php"><i class="fas fa-users"></i> OUR TEAM</a>
+                    </div>
+                </div>
+                <div class="dropdown">
                     <button class="dropbtn">CARGO OWNER</button>
                     <div class="dropdown-content">
                         <a href="cargo-signup.php"><i class="fas fa-user-plus"></i> REGISTER</a>
@@ -985,7 +906,7 @@
                         <a href="transporter_login.php"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
                     </div>
                 </div>
-                                <a href="job-board.php" class="nav-link">AVAILABLE LOADS</a>
+                <a href="job-board.php" class="nav-link">AVAILABLE LOADS</a>
             </div>
         </div>
     </nav>
@@ -1057,104 +978,6 @@
                 <p>Nyamula Logistics is a Zambian logistics company tackling the challenge of high carbon emissions in mining and agriculture. We aggregate small-scale truck operators and optimize their routes, while also developing a groundbreaking solution that combines fuel-efficient hardware retrofits for existing trucks with advanced carbon capture technology at mining sites.</p>
                 <br>
                 <p>This integrated approach empowers small-scale operators to optimize their capacity and helps mining companies reduce their carbon footprint, enhancing operational efficiency and promoting sustainability. By collaborating with a network of technology providers across the globe, we deliver cutting-edge solutions tailored to the African context, driving a greener future for the mining and agricultural sectors.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="team" id="team">
-        <div class="container">
-            <div class="section-header fade-in">
-                <h2 class="section-title">Meet Our Team</h2>
-                <p class="section-subtitle">The passionate professionals driving our success</p>
-            </div>
-            <div class="team-grid">
-                <div class="team-member fade-in">
-                    <img src="./images/Faith.jpg" alt="Faith Mukumbiri" class="team-member-image">
-                    <div class="team-member-info">
-                        <h3 class="team-member-name">Faith Mukumbiri</h3>
-                        <p class="team-member-title">Chief Executive Officer</p>
-                        <div class="team-social-links">
-                            <a href="https://www.linkedin.com/in/faith-mukumbiri-909b01105?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="team-social-link" title="LinkedIn">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="https://www.facebook.com/share/15F2CcCCTW/" class="team-social-link" title="Facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="https://www.instagram.com/faffykue?igsh=dnNldXlzbG05MmI=" class="team-social-link" title="Instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="team-member fade-in">
-                    <img src="./images/Muraga.jpg" alt="Stephen Muraga" class="team-member-image">
-                    <div class="team-member-info">
-                        <h3 class="team-member-name">Stephen Muraga</h3>
-                        <p class="team-member-title">Chief Business Development Officer</p>
-                        <div class="team-social-links">
-                            <a href="#" class="team-social-link" title="LinkedIn">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="team-social-link" title="Facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="team-member fade-in">
-                    <img src="./images/Euphemia.jpg" alt="Euphemia Chikungulu" class="team-member-image">
-                    <div class="team-member-info">
-                        <h3 class="team-member-name">Euphemia Chikungulu</h3>
-                        <p class="team-member-title">Chief Technology Officer</p>
-                        <div class="team-social-links">
-                            <a href="https://www.linkedin.com/in/euphemia-chikungulu-a37745349?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="team-social-link" title="LinkedIn">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="https://x.com/tech_em_press?t=CVyhvBemik8OnYbhh7zZvA&s=09" class="team-social-link" title="Twitter">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="https://www.facebook.com/euphemia.willards" class="team-social-link" title="Facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="https://www.instagram.com/_eu_phemia?igsh=MTBsbG5vMXgyex==" class="team-social-link" title="Instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="https://www.tiktok.com/@girl_developer?_r=1&_d=e76fcibdach2c0&sec_uid=MS4wLjABAAAASqg9HuZLzSdn86GtfOVWo3pH7euYLgg4cvcFuDuAusWw8bQyQOu6CvflNAHHw-Sd&share_author_id=6826340459217323013&sharer_language=en&source=h5_m&u_code=dcb9l8ijjj8hhk&timestamp=1738407526&user_id=6826340459217323013&sec_user_id=MS4wLjABAAAASqg9HuZLzSdn86GtfOVWo3pH7euYLgg4cvcFuDuAusWw8bQyQOu6CvflNAHHw-Sd&utm_source=copy&utm_campaign=client_share&utm_medium=android&share_iid=7464515162671646470&share_link_id=5c052ba0-2b5c-44bf-85fa-db8d4c57916d&share_app_id=1233&ugbiz_name=ACCOUNT&ug_btm=b8727%2Cb7360&social_share_type=5&enable_checksum=1" class="team-social-link" title="TikTok">
-                                <i class="fab fa-tiktok"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="team-member fade-in">
-                    <img src="./images/Mtaja.jpg" alt="Faith Mtaja" class="team-member-image">
-                    <div class="team-member-info">
-                        <h3 class="team-member-name">Faith Mtaja</h3>
-                        <p class="team-member-title">Strategic Assistant</p>
-                        <div class="team-social-links">
-                            <a href="https://www.linkedin.com/in/faith-mtaja-a59968263?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="team-social-link" title="LinkedIn">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="https://www.facebook.com/share/15yXkPVMr9/?mibextid=qi2Omg" class="team-social-link" title="Facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="team-member fade-in">
-                    <img src="./images/beatrice.jpg" alt="Beatrice Phiri Ngoma" class="team-member-image">
-                    <div class="team-member-info">
-                        <h3 class="team-member-name">Beatrice Phiri Ngoma</h3>
-                        <p class="team-member-title">Logistics Officer</p>
-                        <div class="team-social-links">
-                            <a href="#" class="team-social-link" title="LinkedIn">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="team-social-link" title="Facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

@@ -2,7 +2,6 @@
 session_start();
 require_once 'db.php'; // Adjust the path to your db.php file
 
-// Fetch transporters
 $query = "SELECT transporter_id, transporter_name, email, company FROM transporters"; // Adjust the query based on your table structure
 $result = $conn->query($query);
 

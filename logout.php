@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+// Determine user type before destroying session
 $redirect_url = 'index.php';
 
 if (isset($_SESSION['admin_id'])) {
@@ -12,7 +13,7 @@ if (isset($_SESSION['admin_id'])) {
         $redirect_url = 'transporter-login.php';
     }
 } elseif (isset($_SESSION['user_name'])) {
-
+    // For backward compatibility
     if (isset($_SESSION['cargo_owner_id'])) {
         $redirect_url = 'cargo-owner-login.php';
     } else {
@@ -20,9 +21,11 @@ if (isset($_SESSION['admin_id'])) {
     }
 }
 
+// Destroy the session
 session_unset();
 session_destroy();
 
+// Handle AJAX requests
 if (isset($_SERVER['HTTP_CONTENT_TYPE']) && $_SERVER['HTTP_CONTENT_TYPE'] === 'application/json') {
     header('Content-Type: application/json');
     echo json_encode([
@@ -32,6 +35,7 @@ if (isset($_SERVER['HTTP_CONTENT_TYPE']) && $_SERVER['HTTP_CONTENT_TYPE'] === 'a
     exit();
 }
 
+// Regular redirect for non-AJAX requests
 header("Location: " . $redirect_url);
 exit();
 ?>

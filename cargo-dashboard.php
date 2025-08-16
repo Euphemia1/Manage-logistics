@@ -4,9 +4,11 @@ if (!isset($_SESSION['user_name'])) {
     header("Location: cargo-owner-login.php"); 
     exit();
 }
+
 $_SESSION['last_activity'] = time();
 $_SESSION['user_type'] = 'cargo_owner';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,6 +44,7 @@ $_SESSION['user_type'] = 'cargo_owner';
             min-height: 100vh;
         }
         
+        /* Sidebar Styling */
         .sidebar {
             background: linear-gradient(180deg, var(--primary-green) 0%, var(--dark-green) 100%);
             color: var(--white);
@@ -82,13 +85,16 @@ $_SESSION['user_type'] = 'cargo_owner';
             font-weight: 600;
             letter-spacing: 0.5px;
         }
-
+        
+        /* Main Content */
         .main-content {
             margin-left: 250px;
             padding: 30px;
             transition: all 0.3s ease;
             min-height: 100vh;
         }
+        
+        /* Cards */
         .dashboard-card, .card {
             border-radius: 15px;
             box-shadow: var(--shadow);
@@ -107,7 +113,8 @@ $_SESSION['user_type'] = 'cargo_owner';
             border-bottom: 1px solid var(--border-color);
             border-radius: 15px 15px 0 0 !important;
         }
-
+      
+        /* Stats Cards */
         .stats-card {
             border-left: 4px solid var(--primary-green);
             padding: 20px;
@@ -124,7 +131,8 @@ $_SESSION['user_type'] = 'cargo_owner';
             color: var(--primary-green);
             font-weight: 700;
         }
-
+        
+        /* Buttons */
         .btn {
             border-radius: 10px;
             font-weight: 500;
@@ -217,7 +225,8 @@ $_SESSION['user_type'] = 'cargo_owner';
         .btn-info:hover {
             background: var(--dark-green);
         }
-
+        
+        /* Badges */
         .badge {
             border-radius: 8px;
             font-weight: 500;
@@ -258,7 +267,8 @@ $_SESSION['user_type'] = 'cargo_owner';
             background: var(--text-muted) !important;
             color: var(--white) !important;
         }
-
+        
+        /* Forms */
         .form-control, .form-select {
             border: 2px solid var(--border-color);
             border-radius: 10px;
@@ -278,7 +288,8 @@ $_SESSION['user_type'] = 'cargo_owner';
             font-weight: 500;
             margin-bottom: 8px;
         }
-
+        
+        /* Alerts */
         .alert {
             border-radius: 10px;
             border: none;
@@ -308,7 +319,8 @@ $_SESSION['user_type'] = 'cargo_owner';
             color: #721c24;
             border-left: 4px solid #dc3545;
         }
-
+        
+        /* Text Colors */
         .text-success, .text-primary {
             color: var(--primary-green) !important;
         }
@@ -324,6 +336,8 @@ $_SESSION['user_type'] = 'cargo_owner';
         .text-warning {
             color: var(--primary-green) !important;
         }
+        
+        /* Icons */
         .fa, .fas {
             color: inherit;
         }
@@ -339,7 +353,8 @@ $_SESSION['user_type'] = 'cargo_owner';
         .text-purple .fa, .text-purple .fas {
             color: var(--primary-green) !important;
         }
-
+        
+        /* Loading Spinner */
         .spinner-border {
             color: var(--primary-green);
         }
@@ -347,11 +362,13 @@ $_SESSION['user_type'] = 'cargo_owner';
         .spinner-border-sm {
             color: var(--white);
         }
-    
+        
+        /* Profile Picture */
         .rounded-circle {
             border: 3px solid var(--primary-green) !important;
         }
-
+        
+        /* Cargo Item Cards */
         .cargo-item-card {
             transition: all 0.3s ease;
             border: 1px solid var(--border-color);
@@ -370,13 +387,15 @@ $_SESSION['user_type'] = 'cargo_owner';
             background: var(--very-light-green);
             border-top: 1px solid var(--border-color);
         }
-
+        
+        /* Filters */
         .cargo-filter-btn.active {
             background: var(--primary-green) !important;
             color: var(--white) !important;
             border-color: var(--primary-green) !important;
         }
-
+        
+        /* Mobile Responsiveness */
         #sidebarCollapse {
             display: none;
             background: var(--primary-green);
@@ -389,6 +408,7 @@ $_SESSION['user_type'] = 'cargo_owner';
             background: var(--dark-green);
         }
 
+        /* Modal */
         .modal-header {
             background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
             border-bottom: none;
@@ -406,7 +426,8 @@ $_SESSION['user_type'] = 'cargo_owner';
             background: var(--very-light-green);
             border-radius: 0 0 15px 15px;
         }
-
+        
+        /* Form Switches */
         .form-check-input:checked {
             background-color: var(--primary-green);
             border-color: var(--primary-green);
@@ -415,7 +436,8 @@ $_SESSION['user_type'] = 'cargo_owner';
         .form-check-input:focus {
             box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.25);
         }
- 
+        
+        /* Pagination */
         .page-link {
             color: var(--primary-green);
             border-color: var(--border-color);
@@ -437,11 +459,14 @@ $_SESSION['user_type'] = 'cargo_owner';
             color: var(--text-muted);
             background-color: var(--light-gray);
         }
-
+        
+        /* Header styling */
         h1, h2, h3, h4, h5, h6 {
             color: var(--text-dark);
             font-weight: 600;
         }
+
+        /* Welcome section enhancement */
         .welcome-gradient {
             background: linear-gradient(135deg, var(--very-light-green) 0%, var(--white) 100%);
             border-left: 5px solid var(--primary-green);
@@ -473,6 +498,8 @@ $_SESSION['user_type'] = 'cargo_owner';
                 z-index: 1100;
             }
         }
+
+        /* Enhanced animations */
         @keyframes fadeIn {
             from { 
                 opacity: 0; 
@@ -488,6 +515,7 @@ $_SESSION['user_type'] = 'cargo_owner';
             animation: fadeIn 0.5s ease-out;
         }
 
+        /* Download button styling */
         .download-btn {
             background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
             color: var(--white);
@@ -512,6 +540,7 @@ $_SESSION['user_type'] = 'cargo_owner';
     </style>
 </head>
 <body>
+  
     <nav id="sidebar" class="sidebar">
         <div class="p-4">
             <h3 class="text-center mb-4">Cargo Owner Dashboard</h3>
@@ -545,9 +574,13 @@ $_SESSION['user_type'] = 'cargo_owner';
             </ul>
         </div>
     </nav>
+
+ 
     <button type="button" id="sidebarCollapse" class="btn btn-success">
         <i class="fas fa-bars"></i>
     </button>
+
+   
     <div class="main-content">
       
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -557,6 +590,8 @@ $_SESSION['user_type'] = 'cargo_owner';
                 <span id="cargoOwnerName" class="fw-bold text-success"><?php echo htmlspecialchars($_SESSION['user_name']); ?></span>
             </div>
         </div>
+
+      
         <div id="homeSection">
             <div class="card dashboard-card mb-4 welcome-gradient">
                 <div class="card-body">
@@ -629,6 +664,10 @@ $_SESSION['user_type'] = 'cargo_owner';
                 </div>
             </div>
         </div>
+
+
+
+        <!-- Add Job Form (Hidden by default) -->
         <div id="postCargoSection" class="d-none">
     <div class="card dashboard-card">
         <div class="card-header bg-white">
@@ -695,6 +734,7 @@ $_SESSION['user_type'] = 'cargo_owner';
         </div>
     </div>
 </div>
+           
 <div class="d-flex justify-content-between mt-4">
                                 <button type="button" class="btn btn-outline-secondary" onclick="showSection(homeSection)">
                                     <i class="fas fa-arrow-left me-2"></i> Back
@@ -707,6 +747,7 @@ $_SESSION['user_type'] = 'cargo_owner';
         </div>
     </div>
 </div>
+      
 <div id="postedCargosSection" class="dashboard-section d-none">
     <div class="container-fluid">
       
@@ -793,6 +834,7 @@ $_SESSION['user_type'] = 'cargo_owner';
         </div>
     </div>
 </div>
+
          <div id="settingsSection" class="d-none">
             <div class="container-fluid">
                 <div class="row mb-4">
@@ -812,6 +854,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                 <div id="settingsAlertPlaceholder" class="mb-3"></div>
 
                 <div class="row">
+                    <!-- Profile Information Card -->
                     <div class="col-lg-6 mb-4">
                         <div class="card border-0 shadow-sm h-100">
                             <div class="card-header bg-white border-bottom">
@@ -869,6 +912,8 @@ $_SESSION['user_type'] = 'cargo_owner';
                             </div>
                         </div>
                     </div>
+
+                    <!-- Security Settings Card -->
                     <div class="col-lg-6 mb-4">
                         <div class="card border-0 shadow-sm h-100">
                             <div class="card-header bg-white border-bottom">
@@ -956,7 +1001,10 @@ $_SESSION['user_type'] = 'cargo_owner';
                         </div>
                     </div>
                 </div>
+
+                <!-- Additional Settings Row -->
                 <div class="row">
+                    <!-- System Preferences -->
                     <div class="col-lg-6 mb-4">
                         <div class="card border-0 shadow-sm">
                             <div class="card-header bg-white border-bottom">
@@ -999,6 +1047,8 @@ $_SESSION['user_type'] = 'cargo_owner';
                             </div>
                         </div>
                     </div>
+
+                    <!-- Danger Zone -->
                     <div class="col-lg-6 mb-4">
                         <div class="card border-0 shadow-sm border-danger">
                             <div class="card-header bg-danger text-white">
@@ -1043,6 +1093,7 @@ $_SESSION['user_type'] = 'cargo_owner';
         </div>
 
     </div>
+
     <div class="modal fade" id="cargoDetailsModal" tabindex="-1" aria-labelledby="cargoDetailsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
@@ -1095,6 +1146,7 @@ $_SESSION['user_type'] = 'cargo_owner';
             </div>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/session-manager.js"></script>
     
@@ -1141,6 +1193,8 @@ $_SESSION['user_type'] = 'cargo_owner';
                 sidebar.classList.toggle('active');
                 mainContent.classList.toggle('active');
             });
+            
+            // New function to load user cargos for the posted cargos section
             function loadUserCargos() {
                 const cargoListContainer = document.getElementById('cargoListContainer');
                 const cargoLoadingSpinner = document.getElementById('cargoLoadingSpinner');
@@ -1223,6 +1277,8 @@ $_SESSION['user_type'] = 'cargo_owner';
                     if (totalCargoCount) totalCargoCount.textContent = '0';
                 });
             }
+            
+            // Function to display user cargos in card format
             function displayUserCargos(cargos) {
                 const cargoListContainer = document.getElementById('cargoListContainer');
                 if (!cargoListContainer) return;
@@ -1286,6 +1342,8 @@ $_SESSION['user_type'] = 'cargo_owner';
                 });
                 
                 cargoListContainer.innerHTML = html;
+                
+                // Add event listeners to detail buttons
                 document.querySelectorAll('.view-cargo-details-btn').forEach(button => {
                     button.addEventListener('click', function() {
                         const cargoData = JSON.parse(this.getAttribute('data-cargo'));
@@ -1293,6 +1351,8 @@ $_SESSION['user_type'] = 'cargo_owner';
                     });
                 });
             }
+            
+            // Helper functions
             function getStatusBadgeClass(status) {
                 const statusClasses = {
                     'Available': 'badge-available bg-success text-white',
@@ -1379,13 +1439,17 @@ $_SESSION['user_type'] = 'cargo_owner';
                         </div>
                     </div>
                 `;
+                
+                // Remove existing modal if present
                 const existingModal = document.getElementById('userCargoDetailsModal');
                 if (existingModal) {
                     existingModal.remove();
                 }
-
+                
+                // Add new modal to body
                 document.body.insertAdjacentHTML('beforeend', modalHTML);
-
+                
+                // Show modal
                 const modal = new bootstrap.Modal(document.getElementById('userCargoDetailsModal'));
                 modal.show();
             }
@@ -1522,6 +1586,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                     allFetchedCargos = [];
                 });
             }
+
             function filterAndDisplayCargos() {
                 if (!searchCargo || !statusFilter) return;
                 const searchTerm = searchCargo.value.toLowerCase();
@@ -1539,6 +1604,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                 });
                 displayCargosList(filteredCargos);
             }
+            
             function updateRecentActivity(cargos) {
                 if (!recentActivity) return;
 
@@ -1552,6 +1618,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                     recentActivity.innerHTML = '<p class="text-center text-muted py-3">No recent activity</p>';
                     return;
                 }
+                
                 recentActivity.innerHTML = '';
                 
                 recentCargos.forEach(cargo => {
@@ -1585,6 +1652,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                 });
                 setupViewDetailsButtons(allFetchedCargos);
             }
+            
             function displayCargosList(cargosToDisplay) {
                 if (!cargoList) return;
 
@@ -1607,6 +1675,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                     }
                     return;
                 }
+                
                 cargoList.innerHTML = '';
                 
                 cargosToDisplay.forEach(cargo => {
@@ -1666,6 +1735,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                 });
                 setupViewDetailsButtons(allFetchedCargos);
             }
+            
             function showCargoDetails(cargo) {
                 if (!cargoDetailsModalInstance) return;
 
@@ -1680,13 +1750,14 @@ $_SESSION['user_type'] = 'cargo_owner';
                 document.getElementById('modalOrigin').textContent = cargo.origin || 'N/A';
                 document.getElementById('modalDestination').textContent = cargo.destination || 'N/A';
                 document.getElementById('modalPickupDate').textContent = cargo.pickup_date || 'N/A';
-                document.getElementById('modalWeight').textContent = cargo.weight ? `${cargo.weight}` : 'N/A'; 
+                document.getElementById('modalWeight').textContent = cargo.weight ? `${cargo.weight}` : 'N/A'; // Assuming weight includes 'kg'
                 document.getElementById('modalDimensions').textContent = cargo.dimensions || 'N/A';
                 document.getElementById('modalPhone').textContent = cargo.phone || 'N/A';
                 document.getElementById('modalInstructions').textContent = cargo.instructions || 'No special instructions provided.';
                 
                 cargoDetailsModalInstance.show();
             }
+            
             function setupViewDetailsButtons(cargosSource) {
                 document.querySelectorAll('.view-details-btn').forEach(button => {
                     const newButton = button.cloneNode(true);
@@ -1704,12 +1775,13 @@ $_SESSION['user_type'] = 'cargo_owner';
                     });
                 });
             }
+            
             if(homeLink) homeLink.addEventListener('click', (e) => { e.preventDefault(); showSection(homeSection); });
             if(postCargoLink) postCargoLink.addEventListener('click', (e) => { e.preventDefault(); showSection(postCargoSection); });
             if(viewPostedCargosLink) viewPostedCargosLink.addEventListener('click', (e) => { 
                 e.preventDefault(); 
                 showSection(postedCargosSection); 
-                loadUserCargos(); 
+                loadUserCargos(); // Use the new function instead of fetchCargos
             });
             if(settingsLink) settingsLink.addEventListener('click', (e) => { e.preventDefault(); showSection(settingsSection); });
             if(postNewCargoBtn) postNewCargoBtn.addEventListener('click', () => showSection(postCargoSection));
@@ -1769,6 +1841,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                     }
                 });
             });
+
             const cargoTypeRadios = document.querySelectorAll('input[name="cargoType"]');
             const customTypeContainer = document.getElementById('customTypeContainer');
             const customCargoTypeInput = document.getElementById('customCargoType');
@@ -1787,6 +1860,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                     }
                 });
             });
+
             const pickupDateSelect = document.getElementById('pickupDate');
             const specificDateInput = document.getElementById('specificDate');
 
@@ -1803,13 +1877,20 @@ $_SESSION['user_type'] = 'cargo_owner';
                     }
                 });
             }
+
+            // Single form submission handler
             if(postCargoForm) {
+                // Remove any existing event listeners to prevent duplicates
                 const newForm = postCargoForm.cloneNode(true);
                 postCargoForm.parentNode.replaceChild(newForm, postCargoForm);
+                
+                // Get the new form reference
                 const form = document.getElementById('postCargoForm');
                 
                 form.addEventListener('submit', function(e) {
                     e.preventDefault();
+                    
+                    // Prevent multiple submissions
                     if (this.dataset.submitting === 'true') {
                         console.log('Form already submitting, ignoring duplicate submission');
                         return;
@@ -1821,6 +1902,8 @@ $_SESSION['user_type'] = 'cargo_owner';
 
                     const termsCheck = document.getElementById('termsCheck');
                     const phoneInput = document.getElementById('phone');
+                    
+                    // Validation
                     if (termsCheck && !termsCheck.checked) {
                         showAlert('You must agree to the terms and conditions.', 'warning');
                         this.dataset.submitting = 'false';
@@ -1838,7 +1921,8 @@ $_SESSION['user_type'] = 'cargo_owner';
                     submitButton.disabled = true;
 
                     const formData = new FormData(this);
-
+                    
+                    // Debug: Log form data
                     console.log('Form data being sent:');
                     for (let [key, value] of formData.entries()) {
                         console.log(key + ': ' + value);
@@ -1883,6 +1967,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                     });
                 });
             }
+
             const useCurrentLocationButtons = document.querySelectorAll('.use-current-location');
             useCurrentLocationButtons.forEach(button => {
                 button.addEventListener('click', function() {
@@ -1938,8 +2023,13 @@ $_SESSION['user_type'] = 'cargo_owner';
             });
 
             showSection(homeSection); 
-            fetchCargos(); 
+            fetchCargos(); // Keep this for the home section stats
+            // loadUserCargos will be called when user clicks "View Posted Cargos"
         });
+
+        // Settings page functionality
+        
+        // Profile picture change
         document.getElementById('changeProfilePicBtn').addEventListener('click', function() {
             document.getElementById('profilePictureInput').click();
         });
@@ -1947,7 +2037,7 @@ $_SESSION['user_type'] = 'cargo_owner';
         document.getElementById('profilePictureInput').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
-                if (file.size > 5 * 1024 * 1024) { 
+                if (file.size > 5 * 1024 * 1024) { // 5MB limit
                     showSettingsAlert('File size should be less than 5MB', 'warning');
                     return;
                 }
@@ -1960,6 +2050,8 @@ $_SESSION['user_type'] = 'cargo_owner';
                 reader.readAsDataURL(file);
             }
         });
+
+        // Profile update form
         document.getElementById('profileUpdateForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -1979,12 +2071,17 @@ $_SESSION['user_type'] = 'cargo_owner';
             const originalText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span> Updating...';
             submitBtn.disabled = true;
+
+            // Here you would send the data to a backend endpoint
+            // For now, we'll simulate success
             setTimeout(() => {
                 showSettingsAlert('Profile updated successfully!', 'success');
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
             }, 1500);
         });
+
+        // Password change form
         document.getElementById('passwordChangeForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -2006,6 +2103,9 @@ $_SESSION['user_type'] = 'cargo_owner';
             const originalText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span> Changing...';
             submitBtn.disabled = true;
+
+            // Here you would send the data to a backend endpoint
+            // For now, we'll simulate success
             setTimeout(() => {
                 showSettingsAlert('Password changed successfully!', 'success');
                 this.reset();
@@ -2026,6 +2126,8 @@ $_SESSION['user_type'] = 'cargo_owner';
                 `;
                 alertContainer.innerHTML = '';
                 alertContainer.append(wrapper);
+                
+                // Auto-dismiss after 5 seconds
                 setTimeout(() => {
                     const alert = alertContainer.querySelector('.alert');
                     if (alert) {
@@ -2035,6 +2137,8 @@ $_SESSION['user_type'] = 'cargo_owner';
                 }, 5000);
             }
         }
+
+        // Toggle password visibility
         window.togglePassword = function(inputId) {
             const input = document.getElementById(inputId);
             const icon = input.nextElementSibling.querySelector('i');
@@ -2049,12 +2153,19 @@ $_SESSION['user_type'] = 'cargo_owner';
                 icon.classList.add('fa-eye');
             }
         };
+
+        // Save preferences
         window.savePreferences = function() {
             const language = document.getElementById('defaultLanguage').value;
             const timezone = document.getElementById('timezone').value;
             const dateFormat = document.getElementById('dateFormat').value;
+            
+            // Here you would save preferences to backend/localStorage
+            // For now, we'll simulate success
             showSettingsAlert('Preferences saved successfully!', 'success');
         };
+
+        // Confirm account deletion
         window.confirmAccountDeletion = function() {
             const confirmed = confirm('Are you absolutely sure you want to delete your account? This action cannot be undone and will permanently delete all your data including cargo posts, messages, and profile information.');
             
@@ -2067,6 +2178,8 @@ $_SESSION['user_type'] = 'cargo_owner';
                 }
             }
         };
+
+        // Consolidated cargo manager class (keeping only one instance)
         class CargoManager {
   constructor() {
     this.currentPage = 1
@@ -2080,7 +2193,9 @@ $_SESSION['user_type'] = 'cargo_owner';
     this.bindEvents()
     this.setupNavigation()
   }
+
   bindEvents() {
+   
     const searchInput = document.getElementById("cargoSearchInput")
     if (searchInput) {
       searchInput.addEventListener(
@@ -2111,6 +2226,7 @@ $_SESSION['user_type'] = 'cargo_owner';
       })
     })
   }
+
   showSection(sectionId) {
     document.querySelectorAll(".dashboard-section").forEach((section) => {
       section.classList.add("d-none")
@@ -2125,6 +2241,7 @@ $_SESSION['user_type'] = 'cargo_owner';
     })
     document.querySelector(`[data-target-section="${sectionId}"]`)?.classList.add("active")
   }
+
   async loadCargoList(page = 1) {
     if (this.isLoading) return
 
@@ -2156,6 +2273,7 @@ $_SESSION['user_type'] = 'cargo_owner';
       this.hideLoadingState()
     }
   }
+
   renderCargoList(cargos) {
     const container = document.getElementById("cargoListContainer")
     if (!container) return
@@ -2164,8 +2282,10 @@ $_SESSION['user_type'] = 'cargo_owner';
       this.showEmptyState()
       return
     }
+
     container.innerHTML = cargos.map((cargo) => this.createCargoCard(cargo)).join("")
   }
+
   createCargoCard(cargo) {
     const statusClass = this.getStatusClass(cargo.status)
     const formattedDate = this.formatDate(cargo.pickup_date)
@@ -2245,13 +2365,17 @@ $_SESSION['user_type'] = 'cargo_owner';
             </div>
         `
   }
+
   renderPagination(pagination) {
     const container = document.getElementById("paginationContainer")
     if (!container || pagination.total_pages <= 1) {
       container.innerHTML = ""
       return
     }
+
     let paginationHTML = `<nav aria-label="Cargo pagination"><ul class="pagination justify-content-center">`
+
+
     paginationHTML += `
             <li class="page-item ${!pagination.has_prev ? "disabled" : ""}">
                 <button class="page-link" onclick="cargoManager.loadCargoList(${pagination.current_page - 1})" 
@@ -2260,6 +2384,9 @@ $_SESSION['user_type'] = 'cargo_owner';
                 </button>
             </li>
         `
+
+
+
     const startPage = Math.max(1, pagination.current_page - 2)
     const endPage = Math.min(pagination.total_pages, pagination.current_page + 2)
 
@@ -2281,6 +2408,7 @@ $_SESSION['user_type'] = 'cargo_owner';
     paginationHTML += `</ul></nav>`
     container.innerHTML = paginationHTML
   }
+
   showLoadingState() {
     const container = document.getElementById("cargoListContainer")
     const spinner = document.getElementById("cargoLoadingSpinner")
@@ -2313,6 +2441,7 @@ $_SESSION['user_type'] = 'cargo_owner';
             </div>
         `
   }
+
   showErrorState(message) {
     const container = document.getElementById("cargoListContainer")
     if (!container) return
@@ -2337,6 +2466,7 @@ $_SESSION['user_type'] = 'cargo_owner';
       statsElement.textContent = totalCount
     }
   }
+
   handleSearch(searchTerm) {
     this.searchTerm = searchTerm
     this.currentPage = 1
@@ -2365,6 +2495,7 @@ $_SESSION['user_type'] = 'cargo_owner';
   }
 
   showCargoDetailsModal(cargo) {
+    
     const modalHTML = `
             <div class="modal fade" id="cargoDetailsModal" tabindex="-1">
                 <div class="modal-dialog modal-lg">
@@ -2452,6 +2583,7 @@ $_SESSION['user_type'] = 'cargo_owner';
       this.showAlert("Network error occurred", "danger")
     }
   }
+
   editCargo(cargoId) {
 
     this.showAlert("Edit functionality coming soon!", "info")
@@ -2465,6 +2597,7 @@ $_SESSION['user_type'] = 'cargo_owner';
     }
     return statusClasses[status?.toLowerCase()] || "bg-secondary text-white"
   }
+
   formatDate(dateString) {
     if (!dateString) return "Not specified"
     const date = new Date(dateString)
@@ -2474,11 +2607,13 @@ $_SESSION['user_type'] = 'cargo_owner';
       day: "numeric",
     })
   }
+
   escapeHtml(text) {
     const div = document.createElement("div")
     div.textContent = text
     return div.innerHTML
   }
+
   debounce(func, wait) {
     let timeout
     return function executedFunction(...args) {
@@ -2490,6 +2625,7 @@ $_SESSION['user_type'] = 'cargo_owner';
       timeout = setTimeout(later, wait)
     }
   }
+
   showAlert(message, type) {
     const alertContainer = document.getElementById("alertContainer")
     if (!alertContainer) return
@@ -2500,6 +2636,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         `
+
     alertContainer.innerHTML = alertHTML
     setTimeout(() => {
       const alert = alertContainer.querySelector(".alert")
@@ -2510,6 +2647,7 @@ $_SESSION['user_type'] = 'cargo_owner';
     }, 5000)
   }
 }
+
 document.addEventListener("DOMContentLoaded", () => {
   window.cargoManager = new CargoManager()
 })

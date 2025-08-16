@@ -1,22 +1,23 @@
 <?php
 session_start();
-
+// Check if the user is logged in
 if (!isset($_SESSION['user_name'])) {
-    header("Location: transporter-login.php"); 
+    header("Location: transporter-login.php"); // Redirect to login if not logged in
     exit();
 }
 
-
+// Set session timeout and last activity
 $_SESSION['last_activity'] = time();
 $_SESSION['user_type'] = 'transporter';
 
-
+// Include database connection
 require_once 'db.php';
 
-
+// Get user information
 $transporter_name = $_SESSION['user_name'];
-$transporter_id = $_SESSION['user_id'] ?? 1; 
+$transporter_id = $_SESSION['user_id'] ?? 1; // Default to 1 if not set
 
+// Fetch available loads count
 $available_loads_count = 0;
 try {
     $stmt = $conn->prepare("SELECT COUNT(*) as count FROM jobs WHERE status = 'available'");
@@ -28,6 +29,7 @@ try {
     error_log("Error fetching available loads count: " . $e->getMessage());
 }
 
+// Fetch recent loads for notifications
 $recent_loads = [];
 try {
     $stmt = $conn->prepare("SELECT id, item, pickup, dropoff, cargo_owner, created_at FROM jobs WHERE status = 'available' ORDER BY created_at DESC LIMIT 5");
@@ -82,6 +84,8 @@ $conn->close();
       color: var(--text-dark);
       line-height: 1.6;
     }
+
+    /* Sidebar Styles */
     .sidebar {
       background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
       color: var(--white);
@@ -143,12 +147,14 @@ $conn->close();
       text-align: center;
     }
 
+    /* Main Content */
     .main-content {
       margin-left: 280px;
       padding: 2rem;
       min-height: 100vh;
     }
 
+    /* Header */
     .dashboard-header {
       background: var(--white);
       border-radius: var(--border-radius);
@@ -178,6 +184,8 @@ $conn->close();
       align-items: center;
       gap: 1rem;
     }
+
+    /* Notification Bell */
     .notification-container {
       position: relative;
     }
@@ -218,6 +226,8 @@ $conn->close();
       font-size: 0.7rem;
       font-weight: 600;
     }
+
+    /* Stats Cards */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -264,6 +274,8 @@ $conn->close();
       color: var(--text-muted);
       font-weight: 500;
     }
+
+    /* Notifications Panel */
     .notifications-panel {
       background: var(--white);
       border-radius: var(--border-radius);
@@ -324,6 +336,7 @@ $conn->close();
       color: var(--text-dark);
     }
 
+    /* Buttons */
     .btn-primary-custom {
       background: var(--primary-green);
       border: none;
@@ -361,6 +374,7 @@ $conn->close();
       color: var(--white);
     }
 
+    /* Responsive Design */
     @media (max-width: 768px) {
       .sidebar {
         transform: translateX(-100%);
@@ -386,6 +400,8 @@ $conn->close();
         grid-template-columns: 1fr;
       }
     }
+
+    /* Mobile Toggle */
     .mobile-toggle {
       display: none;
       position: fixed;
@@ -409,6 +425,7 @@ $conn->close();
       }
     }
 
+    /* Animation for new notifications */
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.05); }
@@ -421,10 +438,12 @@ $conn->close();
   </style>
 </head>
 <body>
- 
+  <!-- Mobile Toggle Button -->
   <button class="mobile-toggle" onclick="toggleSidebar()">
     <i class="fas fa-bars"></i>
   </button>
+
+  <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <h3><i class="fas fa-truck"></i> Transporter</h3>
@@ -458,13 +477,17 @@ $conn->close();
       </div>
     </nav>
   </div>
+
+  <!-- Main Content -->
   <div class="main-content">
+    <!-- Dashboard Header -->
     <div class="dashboard-header">
       <div>
         <h1 class="header-title">Dashboard Overview</h1>
         <p class="header-subtitle">Welcome back, <?php echo htmlspecialchars($transporter_name); ?>! Here's what's happening today.</p>
       </div>
       <div class="header-actions">
+        <!-- Notification Bell -->
         <div class="notification-container">
           <button class="notification-bell" onclick="toggleNotifications()">
             <i class="fas fa-bell"></i>
@@ -473,12 +496,16 @@ $conn->close();
             <?php endif; ?>
           </button>
         </div>
+        
+        <!-- Status Toggle -->
         <div class="form-check form-switch">
           <input class="form-check-input" type="checkbox" id="statusToggle" checked>
           <label class="form-check-label" for="statusToggle">Available for Jobs</label>
         </div>
       </div>
     </div>
+
+    <!-- Stats Grid -->
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-icon">
@@ -504,6 +531,8 @@ $conn->close();
         <div class="stat-label">Recent Notifications</div>
       </div>
     </div>
+
+    <!-- Notifications Panel -->
     <div class="notifications-panel" id="notificationsPanel" style="display: none;">
       <h2 class="panel-title">
         <i class="fas fa-bell"></i>
@@ -547,6 +576,8 @@ $conn->close();
         </a>
       </div>
     </div>
+
+    <!-- Quick Actions -->
     <div class="notifications-panel">
       <h2 class="panel-title">
         <i class="fas fa-bolt"></i>
@@ -598,23 +629,34 @@ $conn->close();
       </div>
     </div>
   </div>
+
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/session-manager.js"></script>
   
   <script>
+    // Toggle sidebar for mobile
     function toggleSidebar() {
       const sidebar = document.getElementById('sidebar');
       sidebar.classList.toggle('active');
     }
+
+    // Toggle notifications panel
     function toggleNotifications() {
       const panel = document.getElementById('notificationsPanel');
       panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
     }
-    function markAsRead(loadId) {
-      console.log('Marking load ' + loadId + ' as read');
 
+    // Mark notification as read
+    function markAsRead(loadId) {
+      // Here you would typically make an AJAX call to mark the notification as read
+      console.log('Marking load ' + loadId + ' as read');
+      
+      // Visual feedback
       event.target.closest('.notification-item').classList.remove('new');
       event.target.closest('.notification-item').style.opacity = '0.7';
+      
+      // Update notification count
       const badge = document.querySelector('.notification-badge');
       if (badge) {
         let count = parseInt(badge.textContent) - 1;
@@ -625,14 +667,18 @@ $conn->close();
         }
       }
     }
+
+    // Update location function
     function updateLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
-
+          
+          // Here you would send the coordinates to your server
           console.log('Location updated:', lat, lng);
-
+          
+          // Show success message
           alert('Location updated successfully!');
         }, function(error) {
           console.error('Error getting location:', error);
@@ -642,16 +688,27 @@ $conn->close();
         alert('Geolocation is not supported by this browser.');
       }
     }
+
+    // Status toggle functionality
     document.getElementById('statusToggle').addEventListener('change', function() {
       const isAvailable = this.checked;
       console.log('Availability status:', isAvailable ? 'Available' : 'Unavailable');
+      
+      // Here you would send an AJAX request to update the status in the database
+      // For now, just show visual feedback
       const statusText = isAvailable ? 'You are now available for jobs' : 'You are now unavailable for jobs';
-
+      
+      // You could show a toast notification here
       console.log(statusText);
     });
+
+    // Auto-refresh notifications every 30 seconds
     setInterval(function() {
+      // In a real application, you would make an AJAX call to check for new notifications
       console.log('Checking for new notifications...');
     }, 30000);
+
+    // Close sidebar when clicking outside on mobile
     document.addEventListener('click', function(event) {
       const sidebar = document.getElementById('sidebar');
       const mobileToggle = document.querySelector('.mobile-toggle');
@@ -662,6 +719,8 @@ $conn->close();
         sidebar.classList.remove('active');
       }
     });
+
+    // Hide notifications panel when clicking outside
     document.addEventListener('click', function(event) {
       const panel = document.getElementById('notificationsPanel');
       const bell = document.querySelector('.notification-bell');
