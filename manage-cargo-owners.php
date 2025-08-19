@@ -1,6 +1,7 @@
 <?php
 session_start();
-require_once 'db.php'; 
+require_once 'db.php';
+ 
 $query = "SELECT cargo_owner_id, cargo_owner_name, email, company FROM cargo_owners"; 
 $result = $conn->query($query);
 
