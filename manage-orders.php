@@ -1,8 +1,6 @@
 <?php
 require_once 'db.php'; 
 
- 
-
 $result = $conn->query("
     SELECT 
         j.id,
