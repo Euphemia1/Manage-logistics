@@ -442,12 +442,11 @@ $conn->close();
   </style>
 </head>
 <body>
-  <!-- Mobile Toggle Button -->
+
   <button class="mobile-toggle" onclick="toggleSidebar()">
     <i class="fas fa-bars"></i>
   </button>
 
-  <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <h3><i class="fas fa-truck"></i> Transporter</h3>
@@ -482,16 +481,15 @@ $conn->close();
     </nav>
   </div>
 
-  <!-- Main Content -->
   <div class="main-content">
-    <!-- Dashboard Header -->
+
     <div class="dashboard-header">
       <div>
         <h1 class="header-title">Dashboard Overview</h1>
         <p class="header-subtitle">Welcome back, <?php echo htmlspecialchars($transporter_name); ?>! Here's what's happening today.</p>
       </div>
       <div class="header-actions">
-        <!-- Notification Bell -->
+
         <div class="notification-container">
           <button class="notification-bell" onclick="toggleNotifications()">
             <i class="fas fa-bell"></i>
@@ -500,8 +498,7 @@ $conn->close();
             <?php endif; ?>
           </button>
         </div>
-        
-        <!-- Status Toggle -->
+
         <div class="form-check form-switch">
           <input class="form-check-input" type="checkbox" id="statusToggle" checked>
           <label class="form-check-label" for="statusToggle">Available for Jobs</label>
@@ -509,7 +506,7 @@ $conn->close();
       </div>
     </div>
 
-    <!-- Stats Grid -->
+
     <div class="stats-grid">
       <div class="stat-card">
         <div class="stat-icon">
@@ -535,8 +532,6 @@ $conn->close();
         <div class="stat-label">Recent Notifications</div>
       </div>
     </div>
-
-    <!-- Notifications Panel -->
     <div class="notifications-panel" id="notificationsPanel" style="display: none;">
       <h2 class="panel-title">
         <i class="fas fa-bell"></i>
