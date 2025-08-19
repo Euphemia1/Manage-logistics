@@ -1194,7 +1194,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                 mainContent.classList.toggle('active');
             });
             
-            // New function to load user cargos for the posted cargos section
+           
             function loadUserCargos() {
                 const cargoListContainer = document.getElementById('cargoListContainer');
                 const cargoLoadingSpinner = document.getElementById('cargoLoadingSpinner');
@@ -1278,7 +1278,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                 });
             }
             
-            // Function to display user cargos in card format
+           
             function displayUserCargos(cargos) {
                 const cargoListContainer = document.getElementById('cargoListContainer');
                 if (!cargoListContainer) return;
@@ -1343,7 +1343,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                 
                 cargoListContainer.innerHTML = html;
                 
-                // Add event listeners to detail buttons
+              
                 document.querySelectorAll('.view-cargo-details-btn').forEach(button => {
                     button.addEventListener('click', function() {
                         const cargoData = JSON.parse(this.getAttribute('data-cargo'));
@@ -1352,7 +1352,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                 });
             }
             
-            // Helper functions
+         
             function getStatusBadgeClass(status) {
                 const statusClasses = {
                     'Available': 'badge-available bg-success text-white',
@@ -1440,16 +1440,16 @@ $_SESSION['user_type'] = 'cargo_owner';
                     </div>
                 `;
                 
-                // Remove existing modal if present
+              
                 const existingModal = document.getElementById('userCargoDetailsModal');
                 if (existingModal) {
                     existingModal.remove();
                 }
                 
-                // Add new modal to body
+              
                 document.body.insertAdjacentHTML('beforeend', modalHTML);
                 
-                // Show modal
+               
                 const modal = new bootstrap.Modal(document.getElementById('userCargoDetailsModal'));
                 modal.show();
             }
