@@ -581,7 +581,6 @@ $conn->close();
       </div>
     </div>
 
-    <!-- Quick Actions -->
     <div class="notifications-panel">
       <h2 class="panel-title">
         <i class="fas fa-bolt"></i>
@@ -633,19 +632,15 @@ $conn->close();
       </div>
     </div>
   </div>
-
-  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/session-manager.js"></script>
   
   <script>
-    // Toggle sidebar for mobile
+
     function toggleSidebar() {
       const sidebar = document.getElementById('sidebar');
       sidebar.classList.toggle('active');
     }
-
-    // Toggle notifications panel
     function toggleNotifications() {
       const panel = document.getElementById('notificationsPanel');
       panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
