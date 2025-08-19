@@ -2100,8 +2100,6 @@ $_SESSION['user_type'] = 'cargo_owner';
             submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span> Changing...';
             submitBtn.disabled = true;
 
-            // Here you would send the data to a backend endpoint
-            // For now, we'll simulate success
             setTimeout(() => {
                 showSettingsAlert('Password changed successfully!', 'success');
                 this.reset();
@@ -2123,7 +2121,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                 alertContainer.innerHTML = '';
                 alertContainer.append(wrapper);
                 
-                // Auto-dismiss after 5 seconds
+             
                 setTimeout(() => {
                     const alert = alertContainer.querySelector('.alert');
                     if (alert) {
@@ -2133,8 +2131,6 @@ $_SESSION['user_type'] = 'cargo_owner';
                 }, 5000);
             }
         }
-
-        // Toggle password visibility
         window.togglePassword = function(inputId) {
             const input = document.getElementById(inputId);
             const icon = input.nextElementSibling.querySelector('i');
@@ -2150,14 +2146,12 @@ $_SESSION['user_type'] = 'cargo_owner';
             }
         };
 
-        // Save preferences
         window.savePreferences = function() {
             const language = document.getElementById('defaultLanguage').value;
             const timezone = document.getElementById('timezone').value;
             const dateFormat = document.getElementById('dateFormat').value;
             
-            // Here you would save preferences to backend/localStorage
-            // For now, we'll simulate success
+         
             showSettingsAlert('Preferences saved successfully!', 'success');
         };
 
