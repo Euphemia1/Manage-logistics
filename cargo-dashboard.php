@@ -2023,13 +2023,10 @@ $_SESSION['user_type'] = 'cargo_owner';
             });
 
             showSection(homeSection); 
-            fetchCargos(); // Keep this for the home section stats
-            // loadUserCargos will be called when user clicks "View Posted Cargos"
+            fetchCargos(); 
         });
 
-        // Settings page functionality
-        
-        // Profile picture change
+      
         document.getElementById('changeProfilePicBtn').addEventListener('click', function() {
             document.getElementById('profilePictureInput').click();
         });
@@ -2037,7 +2034,7 @@ $_SESSION['user_type'] = 'cargo_owner';
         document.getElementById('profilePictureInput').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
-                if (file.size > 5 * 1024 * 1024) { // 5MB limit
+                if (file.size > 5 * 1024 * 1024) { 
                     showSettingsAlert('File size should be less than 5MB', 'warning');
                     return;
                 }
@@ -2051,7 +2048,7 @@ $_SESSION['user_type'] = 'cargo_owner';
             }
         });
 
-        // Profile update form
+       
         document.getElementById('profileUpdateForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -2072,8 +2069,7 @@ $_SESSION['user_type'] = 'cargo_owner';
             submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span> Updating...';
             submitBtn.disabled = true;
 
-            // Here you would send the data to a backend endpoint
-            // For now, we'll simulate success
+          
             setTimeout(() => {
                 showSettingsAlert('Profile updated successfully!', 'success');
                 submitBtn.innerHTML = originalText;
@@ -2081,7 +2077,7 @@ $_SESSION['user_type'] = 'cargo_owner';
             }, 1500);
         });
 
-        // Password change form
+       
         document.getElementById('passwordChangeForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
