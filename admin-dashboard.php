@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-
+require_once 'db.php';
 if (!isset($_SESSION['admin_id'])) {
     header('Location: admin-login.php');
     exit();
@@ -10,7 +10,6 @@ if (!isset($_SESSION['admin_id'])) {
 $_SESSION['last_activity'] = time();
 $_SESSION['user_type'] = 'admin';
 
-require_once 'db.php';
 
 function getCount($conn, $table) {
     $query = "SELECT COUNT(*) as count FROM $table";
@@ -405,9 +404,9 @@ $conn->close();
         </nav>
     </div>
 
-    <!-- Main Content -->
+ 
     <div class="main-content">
-        <!-- Page Header -->
+       
         <div class="page-header">
             <h1 class="header-title">
                 <i class="fas fa-tachometer-alt me-2"></i>
@@ -426,7 +425,7 @@ $conn->close();
             </div>
         </div>
 
-        <!-- Dashboard Cards -->
+        
         <div class="dashboard-cards">
             <div class="dashboard-card cargo-owners">
                 <div class="card-icon">
@@ -465,7 +464,7 @@ $conn->close();
             </div>
         </div>
 
-        <!-- Recent Activity Section -->
+        
         <div class="dashboard-card">
             <h3 class="card-title">
                 <i class="fas fa-clock me-2"></i>
@@ -513,13 +512,13 @@ $conn->close();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/session-manager.js"></script>
     <script>
-        // Toggle sidebar for mobile
+      
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('active');
         }
 
-        // Close sidebar when clicking outside on mobile
+       
         document.addEventListener('click', function(event) {
             const sidebar = document.getElementById('sidebar');
             const mobileToggle = document.querySelector('.mobile-toggle');
@@ -531,7 +530,7 @@ $conn->close();
             }
         });
 
-        // Fetch updated counts
+      
         function fetchCounts() {
             fetch('get-dashboard-counts.php')
                 .then(response => {
@@ -564,10 +563,10 @@ $conn->close();
             }
         }
 
-        // Auto-refresh counts every 30 seconds
+     
         setInterval(fetchCounts, 30000);
         
-        // Initial fetch after 5 seconds
+      
         setTimeout(fetchCounts, 5000);
     </script>
 </body>
