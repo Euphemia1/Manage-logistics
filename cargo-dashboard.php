@@ -1781,7 +1781,7 @@ $_SESSION['user_type'] = 'cargo_owner';
             if(viewPostedCargosLink) viewPostedCargosLink.addEventListener('click', (e) => { 
                 e.preventDefault(); 
                 showSection(postedCargosSection); 
-                loadUserCargos(); // Use the new function instead of fetchCargos
+                loadUserCargos(); 
             });
             if(settingsLink) settingsLink.addEventListener('click', (e) => { e.preventDefault(); showSection(settingsSection); });
             if(postNewCargoBtn) postNewCargoBtn.addEventListener('click', () => showSection(postCargoSection));
@@ -1878,19 +1878,19 @@ $_SESSION['user_type'] = 'cargo_owner';
                 });
             }
 
-            // Single form submission handler
+          
             if(postCargoForm) {
-                // Remove any existing event listeners to prevent duplicates
+               
                 const newForm = postCargoForm.cloneNode(true);
                 postCargoForm.parentNode.replaceChild(newForm, postCargoForm);
                 
-                // Get the new form reference
+               
                 const form = document.getElementById('postCargoForm');
                 
                 form.addEventListener('submit', function(e) {
                     e.preventDefault();
                     
-                    // Prevent multiple submissions
+                  
                     if (this.dataset.submitting === 'true') {
                         console.log('Form already submitting, ignoring duplicate submission');
                         return;
@@ -1903,7 +1903,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                     const termsCheck = document.getElementById('termsCheck');
                     const phoneInput = document.getElementById('phone');
                     
-                    // Validation
+                 
                     if (termsCheck && !termsCheck.checked) {
                         showAlert('You must agree to the terms and conditions.', 'warning');
                         this.dataset.submitting = 'false';
@@ -1922,7 +1922,7 @@ $_SESSION['user_type'] = 'cargo_owner';
 
                     const formData = new FormData(this);
                     
-                    // Debug: Log form data
+                    
                     console.log('Form data being sent:');
                     for (let [key, value] of formData.entries()) {
                         console.log(key + ': ' + value);
