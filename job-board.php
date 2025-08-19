@@ -735,15 +735,6 @@ if ($result) {
                 <a href="job-board.php" style="color: white; text-decoration: none; padding: 8px 16px; border-radius: 5px; transition: background-color 0.3s; display: flex; align-items: center; gap: 8px; background-color: rgba(255,255,255,0.2);">
                     <i class="fas fa-clipboard-list"></i>Job Board
                 </a>
-                <a href="manage-orders.php" style="color: white; text-decoration: none; padding: 8px 16px; border-radius: 5px; transition: background-color 0.3s; display: flex; align-items: center; gap: 8px;">
-                    <i class="fas fa-box"></i>Orders
-                </a>
-                <a href="manage-transporters.php" style="color: white; text-decoration: none; padding: 8px 16px; border-radius: 5px; transition: background-color 0.3s; display: flex; align-items: center; gap: 8px;">
-                    <i class="fas fa-truck"></i>Transporters
-                </a>
-                <a href="manage-cargo-owners.php" style="color: white; text-decoration: none; padding: 8px 16px; border-radius: 5px; transition: background-color 0.3s; display: flex; align-items: center; gap: 8px;">
-                    <i class="fas fa-users"></i>Cargo Owners
-                </a>
                 <a href="admin-logout.php" style="background-color: rgba(255,255,255,0.2); color: white; text-decoration: none; padding: 8px 16px; border-radius: 5px; transition: background-color 0.3s; display: flex; align-items: center; gap: 8px;">
                     <i class="fas fa-sign-out-alt"></i>Logout
                 </a>
