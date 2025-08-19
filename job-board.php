@@ -4,16 +4,10 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 
-$servername = "89.117.139.204";
-$username = "u178619125_nyamula";
-$password = "@BluDiamond0100";
-$dbname = "u178619125_nyamula";
+// Database connection details
+require_once 'db.php';
 
-
-$conn = mysqli_connect($servername, 
-$username, 
-$password,
- $dbname);
+$conn = mysqli_connect($host, $username, $password, $dbname);
 
 
 if (!$conn) {
