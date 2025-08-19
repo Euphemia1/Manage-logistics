@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once 'db.php'; // Adjust the path to your db.php file
+require_once 'db.php'; 
 
-$query = "SELECT transporter_id, transporter_name, email, company FROM transporters"; // Adjust the query based on your table structure
+$query = "SELECT transporter_id, transporter_name, email, company FROM transporters"; 
 $result = $conn->query($query);
 
 if ($result === false) {
