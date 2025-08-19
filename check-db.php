@@ -1,8 +1,9 @@
 <?php
-$host = 'localhost';
-$dbname = 'logistics';
-$username = 'root';
-$password = '';
+// $host = 'localhost';
+// $dbname = 'logistics';
+// $username = 'root';
+// $password = '';
+require_once 'db.php';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
