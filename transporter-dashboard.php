@@ -712,7 +712,6 @@ $conn->close();
       console.log('Checking for new notifications...');
     }, 30000);
 
-    // Close sidebar when clicking outside on mobile
     document.addEventListener('click', function(event) {
       const sidebar = document.getElementById('sidebar');
       const mobileToggle = document.querySelector('.mobile-toggle');
@@ -723,8 +722,6 @@ $conn->close();
         sidebar.classList.remove('active');
       }
     });
-
-    // Hide notifications panel when clicking outside
     document.addEventListener('click', function(event) {
       const panel = document.getElementById('notificationsPanel');
       const bell = document.querySelector('.notification-bell');
@@ -736,9 +733,9 @@ $conn->close();
   </script>
 </body>
 <script>
-// Log out on tab close or navigation away
+
 window.addEventListener('beforeunload', function (e) {
-  // Send logout request (async, may not always complete)
+
   navigator.sendBeacon('logout.php');
 });
 </script>
