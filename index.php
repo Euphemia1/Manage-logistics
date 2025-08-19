@@ -1192,14 +1192,14 @@
             btn.addEventListener('click', function(e) {
                 if (window.innerWidth <= 768) {
                     e.preventDefault();
-                    // Close all other dropdowns first
+                   
                     document.querySelectorAll('.dropdown-content').forEach(function(content) {
                         if (content !== this.nextElementSibling) {
                             content.classList.remove('active');
                         }
                     }.bind(this));
                     
-                    // Toggle the clicked dropdown
+                  
                     const dropdownContent = this.nextElementSibling;
                     dropdownContent.classList.toggle('active');
                 }
@@ -1214,7 +1214,7 @@
                 const isClickInsideNavLinks = e.target.closest('.nav-links');
                 const isClickOnDropbtn = e.target.closest('.dropbtn');
                 
-                // If clicking outside navigation area, close everything
+          
                 if (!isClickInsideDropdown && !isClickInsideNavToggle && !isClickInsideNavLinks) {
                     navLinks.classList.remove('active');
                     navToggle.classList.remove('active');
@@ -1222,26 +1222,26 @@
                         content.classList.remove('active');
                     });
                 }
-                // If clicking inside dropdown but not on button, keep dropdown open
+              
                 else if (isClickInsideDropdown && !isClickOnDropbtn) {
-                    // Do nothing - let dropdown stay open when clicking on links
+                    
                 }
             }
         });
 
-        // Add touch event support for better mobile experience
+      
         document.querySelectorAll('.dropbtn').forEach(function(btn) {
             btn.addEventListener('touchstart', function(e) {
                 if (window.innerWidth <= 768) {
                     e.preventDefault();
-                    // Close all other dropdowns first
+                   
                     document.querySelectorAll('.dropdown-content').forEach(function(content) {
                         if (content !== this.nextElementSibling) {
                             content.classList.remove('active');
                         }
                     }.bind(this));
                     
-                    // Toggle the clicked dropdown
+                 
                     const dropdownContent = this.nextElementSibling;
                     dropdownContent.classList.toggle('active');
                 }
