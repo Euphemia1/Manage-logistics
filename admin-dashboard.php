@@ -1,13 +1,12 @@
 <?php
 session_start();
 
-// Check if admin is logged in
+
 if (!isset($_SESSION['admin_id'])) {
     header('Location: admin-login.php');
     exit();
 }
 
-// Set session timeout and last activity
 $_SESSION['last_activity'] = time();
 $_SESSION['user_type'] = 'admin';
 
