@@ -913,7 +913,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                         </div>
                     </div>
 
-                    <!-- Security Settings Card -->
+                 
                     <div class="col-lg-6 mb-4">
                         <div class="card border-0 shadow-sm h-100">
                             <div class="card-header bg-white border-bottom">
@@ -1002,9 +1002,9 @@ $_SESSION['user_type'] = 'cargo_owner';
                     </div>
                 </div>
 
-                <!-- Additional Settings Row -->
+               
                 <div class="row">
-                    <!-- System Preferences -->
+                
                     <div class="col-lg-6 mb-4">
                         <div class="card border-0 shadow-sm">
                             <div class="card-header bg-white border-bottom">
@@ -1048,7 +1048,7 @@ $_SESSION['user_type'] = 'cargo_owner';
                         </div>
                     </div>
 
-                    <!-- Danger Zone -->
+                 
                     <div class="col-lg-6 mb-4">
                         <div class="card border-0 shadow-sm border-danger">
                             <div class="card-header bg-danger text-white">
