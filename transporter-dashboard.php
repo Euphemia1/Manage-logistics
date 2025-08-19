@@ -1,5 +1,9 @@
 <?php
 session_start();
+// Prevent browser caching
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Cache-Control: post-check=0, pre-check=0', false);
+header('Pragma: no-cache');
 // Check if the user is logged in
 if (!isset($_SESSION['user_name'])) {
     header("Location: transporter-login.php"); // Redirect to login if not logged in
@@ -731,4 +735,11 @@ $conn->close();
     });
   </script>
 </body>
+<script>
+// Log out on tab close or navigation away
+window.addEventListener('beforeunload', function (e) {
+  // Send logout request (async, may not always complete)
+  navigator.sendBeacon('logout.php');
+});
+</script>
 </html>
