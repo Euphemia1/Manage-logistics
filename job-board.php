@@ -724,9 +724,7 @@ if ($result) {
                     <i class="fas fa-clipboard-list"></i>Job Board
                 </a>
                
-                <a href="admin-logout.php" style="background-color: rgba(255,255,255,0.2); color: white; text-decoration: none; padding: 8px 16px; border-radius: 5px; transition: background-color 0.3s; display: flex; align-items: center; gap: 8px;">
-                    <i class="fas fa-sign-out-alt"></i>Logout
-                </a>
+            
             </div>
         </div>
     </nav>
