@@ -702,13 +702,11 @@ $conn->close();
       // For now, just show visual feedback
       const statusText = isAvailable ? 'You are now available for jobs' : 'You are now unavailable for jobs';
       
-      // You could show a toast notification here
+  
       console.log(statusText);
     });
-
-    // Auto-refresh notifications every 30 seconds
     setInterval(function() {
-      // In a real application, you would make an AJAX call to check for new notifications
+   
       console.log('Checking for new notifications...');
     }, 30000);
 
