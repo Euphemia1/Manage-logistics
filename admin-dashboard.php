@@ -1,6 +1,6 @@
 <?php
 session_start();
-// Prevent browser caching
+
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Cache-Control: post-check=0, pre-check=0', false);
 header('Pragma: no-cache');
@@ -72,7 +72,7 @@ $conn->close();
             line-height: 1.6;
         }
 
-        /* Sidebar Styles */
+     
         .sidebar {
             background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
             color: var(--white);
@@ -134,14 +134,14 @@ $conn->close();
             text-align: center;
         }
 
-        /* Main Content */
+  
         .main-content {
             margin-left: 280px;
             padding: 2rem;
             min-height: 100vh;
         }
 
-        /* Header */
+     
         .page-header {
             background: var(--white);
             border-radius: var(--border-radius);
@@ -179,7 +179,7 @@ $conn->close();
             font-size: 1.2rem;
         }
 
-        /* Dashboard Cards */
+      
         .dashboard-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -292,7 +292,6 @@ $conn->close();
             transform: translateX(5px);
         }
 
-        /* Mobile Responsive */
         .mobile-toggle {
             display: none;
             position: fixed;
