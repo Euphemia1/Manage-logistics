@@ -1,9 +1,10 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "logistics";
+// $servername = "localhost";
+// $username = "root";
+// $password = "";
+// $dbname = "logistics";
 
+require_once 'db.php';
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
