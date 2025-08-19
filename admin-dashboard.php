@@ -562,11 +562,7 @@ $conn->close();
                 }, 1000);
             }
         }
-
-     
-        setInterval(fetchCounts, 30000);
-        
-      
+        setInterval(fetchCounts, 30000);   
         setTimeout(fetchCounts, 5000);
     </script>
 </body>
