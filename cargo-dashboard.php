@@ -2155,7 +2155,7 @@ $_SESSION['user_type'] = 'cargo_owner';
             showSettingsAlert('Preferences saved successfully!', 'success');
         };
 
-        // Confirm account deletion
+      
         window.confirmAccountDeletion = function() {
             const confirmed = confirm('Are you absolutely sure you want to delete your account? This action cannot be undone and will permanently delete all your data including cargo posts, messages, and profile information.');
             
@@ -2169,7 +2169,7 @@ $_SESSION['user_type'] = 'cargo_owner';
             }
         };
 
-        // Consolidated cargo manager class (keeping only one instance)
+      
         class CargoManager {
   constructor() {
     this.currentPage = 1
