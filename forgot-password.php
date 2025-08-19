@@ -7,10 +7,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-$host = 'localhost';
-$dbname = 'logistics';
-$username = 'root';
-$password = '';
+// $host = 'localhost';
+// $dbname = 'logistics';
+// $username = 'root';
+// $password = '';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
