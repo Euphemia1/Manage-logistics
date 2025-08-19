@@ -338,7 +338,7 @@ $conn->close();
             }
         }
 
-        /* Loading Animation */
+     
         .loading {
             opacity: 0.6;
             pointer-events: none;
@@ -355,12 +355,11 @@ $conn->close();
     </style>
 </head>
 <body>
-    <!-- Mobile Toggle Button -->
+ 
     <button class="mobile-toggle" onclick="toggleSidebar()">
         <i class="fas fa-bars"></i>
     </button>
 
-    <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h3><i class="fas fa-shield-alt"></i> Admin Panel</h3>
@@ -570,9 +569,9 @@ $conn->close();
     </script>
 </body>
 <script>
-// Log out on tab close or navigation away
+
 window.addEventListener('beforeunload', function (e) {
-    // Send logout request (async, may not always complete)
+   
     navigator.sendBeacon('logout.php');
 });
 </script>
