@@ -672,17 +672,14 @@ $conn->close();
       }
     }
 
-    // Update location function
     function updateLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
-          
-          // Here you would send the coordinates to your server
+
           console.log('Location updated:', lat, lng);
-          
-          // Show success message
+
           alert('Location updated successfully!');
         }, function(error) {
           console.error('Error getting location:', error);
@@ -693,13 +690,10 @@ $conn->close();
       }
     }
 
-    // Status toggle functionality
     document.getElementById('statusToggle').addEventListener('change', function() {
       const isAvailable = this.checked;
       console.log('Availability status:', isAvailable ? 'Available' : 'Unavailable');
-      
-      // Here you would send an AJAX request to update the status in the database
-      // For now, just show visual feedback
+ 
       const statusText = isAvailable ? 'You are now available for jobs' : 'You are now unavailable for jobs';
       
   
