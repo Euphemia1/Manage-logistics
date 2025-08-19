@@ -651,16 +651,13 @@ $conn->close();
       panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
     }
 
-    // Mark notification as read
+
     function markAsRead(loadId) {
-      // Here you would typically make an AJAX call to mark the notification as read
+    
       console.log('Marking load ' + loadId + ' as read');
-      
-      // Visual feedback
+  
       event.target.closest('.notification-item').classList.remove('new');
       event.target.closest('.notification-item').style.opacity = '0.7';
-      
-      // Update notification count
       const badge = document.querySelector('.notification-badge');
       if (badge) {
         let count = parseInt(badge.textContent) - 1;
