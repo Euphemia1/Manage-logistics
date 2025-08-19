@@ -1,27 +1,23 @@
 <?php
 session_start();
-// Prevent browser caching
+
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Cache-Control: post-check=0, pre-check=0', false);
 header('Pragma: no-cache');
-// Check if the user is logged in
+
 if (!isset($_SESSION['user_name'])) {
-    header("Location: transporter-login.php"); // Redirect to login if not logged in
+    header("Location: transporter-login.php"); 
     exit();
 }
 
-// Set session timeout and last activity
 $_SESSION['last_activity'] = time();
 $_SESSION['user_type'] = 'transporter';
 
-// Include database connection
 require_once 'db.php';
 
-// Get user information
 $transporter_name = $_SESSION['user_name'];
-$transporter_id = $_SESSION['user_id'] ?? 1; // Default to 1 if not set
+$transporter_id = $_SESSION['user_id'] ?? 1; 
 
-// Fetch available loads count
 $available_loads_count = 0;
 try {
     $stmt = $conn->prepare("SELECT COUNT(*) as count FROM jobs WHERE status = 'available'");
@@ -33,7 +29,6 @@ try {
     error_log("Error fetching available loads count: " . $e->getMessage());
 }
 
-// Fetch recent loads for notifications
 $recent_loads = [];
 try {
     $stmt = $conn->prepare("SELECT id, item, pickup, dropoff, cargo_owner, created_at FROM jobs WHERE status = 'available' ORDER BY created_at DESC LIMIT 5");
@@ -88,8 +83,6 @@ $conn->close();
       color: var(--text-dark);
       line-height: 1.6;
     }
-
-    /* Sidebar Styles */
     .sidebar {
       background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
       color: var(--white);
@@ -151,14 +144,11 @@ $conn->close();
       text-align: center;
     }
 
-    /* Main Content */
     .main-content {
       margin-left: 280px;
       padding: 2rem;
       min-height: 100vh;
     }
-
-    /* Header */
     .dashboard-header {
       background: var(--white);
       border-radius: var(--border-radius);
@@ -189,7 +179,6 @@ $conn->close();
       gap: 1rem;
     }
 
-    /* Notification Bell */
     .notification-container {
       position: relative;
     }
@@ -230,8 +219,6 @@ $conn->close();
       font-size: 0.7rem;
       font-weight: 600;
     }
-
-    /* Stats Cards */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -278,8 +265,6 @@ $conn->close();
       color: var(--text-muted);
       font-weight: 500;
     }
-
-    /* Notifications Panel */
     .notifications-panel {
       background: var(--white);
       border-radius: var(--border-radius);
@@ -340,7 +325,6 @@ $conn->close();
       color: var(--text-dark);
     }
 
-    /* Buttons */
     .btn-primary-custom {
       background: var(--primary-green);
       border: none;
@@ -378,7 +362,7 @@ $conn->close();
       color: var(--white);
     }
 
-    /* Responsive Design */
+ 
     @media (max-width: 768px) {
       .sidebar {
         transform: translateX(-100%);
@@ -405,7 +389,6 @@ $conn->close();
       }
     }
 
-    /* Mobile Toggle */
     .mobile-toggle {
       display: none;
       position: fixed;
@@ -429,7 +412,6 @@ $conn->close();
       }
     }
 
-    /* Animation for new notifications */
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.05); }
