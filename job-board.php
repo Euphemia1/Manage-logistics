@@ -747,7 +747,12 @@ if ($result) {
                 <input type="text" id="dropoff" placeholder="Drop off location">
                 <button onclick="searchJobs()"><i class="fas fa-search"></i> Search</button>
                 <button class="clear" onclick="clearSearch()"><i class="fas fa-times"></i> Clear</button>
-                <button class="btn btn-primary" onclick="toggleJobForm()"><i class="fas fa-plus"></i> Add New Job</button>
+                <?php
+                if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name']) &&
+                    (strtolower(trim($_SESSION['admin_name'])) === 'faith mukumbiri' || strtolower(trim($_SESSION['admin_name'])) === 'stephen muraga')) {
+                ?>
+                    <button class="btn btn-primary" onclick="toggleJobForm()"><i class="fas fa-plus"></i> Add New Job</button>
+                <?php } ?>
             </div>
         </div>
         <div id="jobFormPanel" class="bg-white rounded-lg shadow-md p-4 mb-6 hidden">
