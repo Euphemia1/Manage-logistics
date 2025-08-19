@@ -293,7 +293,7 @@ $conn->close();
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
+  
     <nav style="background-color: var(--primary-color); padding: 1rem 0; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
         <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
             <div style="display: flex; align-items: center; gap: 15px;">
@@ -395,7 +395,7 @@ $conn->close();
     </div>
 
     <script>
-        // Simple search functionality
+       
         document.getElementById('searchInput').addEventListener('keyup', function() {
             const searchValue = this.value.toLowerCase();
             const table = document.getElementById('transportersTable');
