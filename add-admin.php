@@ -1,10 +1,7 @@
 <?php
 header('Content-Type: application/json');
 
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'logistics');
+require_once 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
