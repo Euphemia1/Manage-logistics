@@ -6,17 +6,10 @@ if (!isset($_SESSION['user_name'])) {
     exit();
 }
 
-// Database connection
-$host = 'localhost';
-$dbname = 'logistics';
-$username = 'root';
-$password = '';
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
+require_once 'db.php';
+if (!isset($pdo)) {
+    die("Database connection failed: No PDO connection available.");
 }
 
 // Fetch transporter's current details

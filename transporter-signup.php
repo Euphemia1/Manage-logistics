@@ -1,12 +1,8 @@
 <?php
 require 'db.php'; 
 
-$servername = "localhost"; 
-$username = "root"; 
-$password = ""; 
-$dbname = "logistics";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+require_once 'db.php';
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }

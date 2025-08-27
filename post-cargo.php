@@ -22,18 +22,11 @@ if ($time_diff < 3) {
 // Update last submission time
 $_SESSION['last_cargo_submission'] = $current_time;
 
-// Database credentials
-$host = 'localhost';
-$dbname = 'logistics';
-$username = 'root';
-$password = '';
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    echo json_encode(['success' => false, 'message' => 'Database connection failed: ' . $e->getMessage()]);
-    exit;
+require_once 'db.php';
+if (!isset($pdo)) {
+    // If db.php only provides $conn, convert to PDO if needed (optional)
+    $pdo = $conn;
 }
 
 // Only accept POST requests
@@ -147,10 +140,16 @@ try {
         ':cargo_owner'     => $cargo_owner_name
     ]);
 
+    $lastId = null;
+    if (isset($pdo) && $pdo instanceof PDO) {
+        $lastId = $pdo->lastInsertId();
+    } elseif (isset($conn) && property_exists($conn, 'insert_id')) {
+        $lastId = $conn->insert_id;
+    }
     echo json_encode([
         'success' => true,
         'message' => 'Cargo posted successfully!',
-        'job_id'  => $pdo->lastInsertId()
+        'job_id'  => $lastId
     ]);
 } catch (PDOException $e) {
     echo json_encode(['success' => false, 'message' => 'Database error: ' . $e->getMessage()]);

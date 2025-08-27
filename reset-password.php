@@ -5,17 +5,10 @@ $token = $_GET['token'] ?? '';
 $email = $_GET['email'] ?? '';
 $type = $_GET['type'] ?? '';
 
-// Database connection parameters
-$host = 'localhost';
-$dbname = 'logistics';
-$username = 'root';
-$password = '';
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    $_SESSION['reset_message'] = "Database connection failed: " . $e->getMessage();
+require_once 'db.php';
+if (!isset($pdo)) {
+    $_SESSION['reset_message'] = "Database connection failed: No PDO connection available.";
     header("Location: forgot-password.php");
     exit();
 }

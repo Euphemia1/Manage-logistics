@@ -1,17 +1,14 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-$config = [
-    'host' => 'localhost',
-    'dbname' => 'logistics', 
-    'username' => 'root',
-    'password' => ''
-];
-try {
-    $dsn = "mysql:host={$config['host']};dbname={$config['dbname']};charset=utf8mb4";
-    $db = new PDO($dsn, $config['username'], $config['password']);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
+$db = null;
+require_once 'db.php';
+if (isset($pdo)) {
+    $db = $pdo;
+} elseif (isset($conn)) {
+    $db = $conn;
+}
+if (!$db) {
     http_response_code(500);
     echo json_encode(['success' => false, 'message' => 'Database connection failed']);
     exit;

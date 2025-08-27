@@ -1,12 +1,8 @@
 <?php
 require 'db.php'; 
 
-$servername = "localhost"; 
-$username = "root"; 
-$password = ""; 
-$dbname = "logistics";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+// DB connection is now handled by db.php
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }

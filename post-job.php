@@ -1,15 +1,8 @@
 <?php
 header('Content-Type: application/json');
 
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "logistics";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
+require_once 'db.php';
 if ($conn->connect_error) {
     echo json_encode(["error" => "Connection failed: " . $conn->connect_error]);
     exit();

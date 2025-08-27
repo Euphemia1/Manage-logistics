@@ -18,62 +18,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['reset_message'] = "Passwords do not match!";
     } else {
         // Database connection
-        $host = 'localhost';
-        $dbname = 'logistics';
-        $username = 'root';
-        $password = '';
+        require_once 'db.php';
+        if (!isset($pdo)) {
+            $_SESSION['reset_message'] = "Database connection failed: No PDO connection available.";
+        } else {
+            try {
+                // Verify token is valid and not expired
+                $stmt = $pdo->prepare("SELECT * FROM password_resets WHERE email = ? AND token = ? AND expires > NOW()");
+                $stmt->execute([$email, $token]);
+                $resetRequest = $stmt->fetch();
 
-        try {
-            $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            
-            // Verify token is valid and not expired
-            $stmt = $pdo->prepare("SELECT * FROM password_resets WHERE email = ? AND token = ? AND expires > NOW()");
-            $stmt->execute([$email, $token]);
-            $resetRequest = $stmt->fetch();
+                if (!$resetRequest) {
+                    $_SESSION['reset_message'] = "Invalid or expired reset link.";
+                } else {
+                    // Validate user type
+                    $validTypes = ['cargo_owners', 'transporters'];
+                    if (!in_array($userType, $validTypes)) {
+                        $_SESSION['reset_message'] = "Invalid user type.";
+                        header("Location: forgot-password.php");
+                        exit();
+                    }
+                    // Use the exact table name
+                    $table = $userType;
+                    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
-            if (!$resetRequest) {
-                $_SESSION['reset_message'] = "Invalid or expired reset link.";
-            } else {
-                // Validate user type
-                $validTypes = ['cargo_owners', 'transporters'];
-                if (!in_array($userType, $validTypes)) {
-                    $_SESSION['reset_message'] = "Invalid user type.";
-                    header("Location: forgot-password.php");
-                    exit();
+                    try {
+                        $pdo->beginTransaction();
+                        // Update password
+                        $stmt = $pdo->prepare("UPDATE $table SET password = ? WHERE email = ?");
+                        $stmt->execute([$hashedPassword, $email]);
+                        // Delete the used token
+                        $stmt = $pdo->prepare("DELETE FROM password_resets WHERE email = ?");
+                        $stmt->execute([$email]);
+                        $pdo->commit();
+                        // Redirect to the CORRECT login page
+                        $_SESSION['login_message'] = "Password updated successfully! Please log in.";
+                        $redirectPage = ($userType === 'cargo_owners') 
+                                    ? "cargo-owner-login.php" 
+                                    : "transporter-login.php";
+                        header("Location: $redirectPage");
+                        exit();
+                    } catch (PDOException $e) {
+                        $pdo->rollBack();
+                        $_SESSION['reset_message'] = "Error updating password: " . $e->getMessage();
+                    }
                 }
-                
-                // Use the exact table name
-                $table = $userType;
-                $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-
-                try {
-                    $pdo->beginTransaction();
-                    
-                    // Update password
-                    $stmt = $pdo->prepare("UPDATE $table SET password = ? WHERE email = ?");
-                    $stmt->execute([$hashedPassword, $email]);
-                    
-                    // Delete the used token
-                    $stmt = $pdo->prepare("DELETE FROM password_resets WHERE email = ?");
-                    $stmt->execute([$email]);
-                    
-                    $pdo->commit();
-                    
-                    // Redirect to the CORRECT login page
-                    $_SESSION['login_message'] = "Password updated successfully! Please log in.";
-                    $redirectPage = ($userType === 'cargo_owners') 
-                                  ? "cargo-owner-login.php" 
-                                  : "transporter-login.php";
-                    header("Location: $redirectPage");
-                    exit();
-                } catch (PDOException $e) {
-                    $pdo->rollBack();
-                    $_SESSION['reset_message'] = "Error updating password: " . $e->getMessage();
-                }
+            } catch (PDOException $e) {
+                $_SESSION['reset_message'] = "Database connection failed: " . $e->getMessage();
             }
-        } catch (PDOException $e) {
-            $_SESSION['reset_message'] = "Database connection failed: " . $e->getMessage();
         }
     }
 }

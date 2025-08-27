@@ -1,17 +1,10 @@
 <?php
 // submit_cargo.php
 
-// Database connection
-$host = 'localhost';
-$dbname = 'logistics';
-$username = 'root';
-$password = '';
 
-try {
-    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Database connection failed: " . $e->getMessage());
+require_once 'db.php';
+if (!isset($conn) && isset($pdo)) {
+    $conn = $pdo;
 }
 
 // Get form data
@@ -32,18 +25,17 @@ $sql = "INSERT INTO orders (order_id, cargo_owner_name, pickup_date, weight, dim
 
 $stmt = $conn->prepare($sql);
 
-// Bind the form data to the SQL query
-$stmt->bindParam(':order_id', $order_id);
-$stmt->bindParam(':cargo_owner_name', $cargo_owner_name);
-$stmt->bindParam(':pickupDate', $pickupDate);
-$stmt->bindParam(':weight', $weight);
-$stmt->bindParam(':dimensions', $dimensions);
-$stmt->bindParam(':cargoType', $cargoType);
-$stmt->bindParam(':origin', $origin);
-$stmt->bindParam(':cargo_owner_id', $cargo_owner_id);
-
 // Execute the query and return a JSON response
-if ($stmt->execute()) {
+if ($stmt->execute([
+    ':order_id' => $order_id,
+    ':cargo_owner_name' => $cargo_owner_name,
+    ':pickupDate' => $pickupDate,
+    ':weight' => $weight,
+    ':dimensions' => $dimensions,
+    ':cargoType' => $cargoType,
+    ':origin' => $origin,
+    ':cargo_owner_id' => $cargo_owner_id
+])) {
     echo json_encode(['status' => 'success', 'message' => 'Cargo posted successfully!']);
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Failed to post cargo.']);

@@ -3,20 +3,11 @@ session_start();
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET');
-$config = [
-    'host' => 'localhost',
-    'dbname' => 'logistics',
-    'username' => 'root',
-    'password' => ''
-];
-try {
-    $dsn = "mysql:host={$config['host']};dbname={$config['dbname']};charset=utf8mb4";
-    $db = new PDO($dsn, $config['username'], $config['password']);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
+require_once 'db.php';
+$db = isset($pdo) ? $pdo : (isset($conn) ? $conn : null);
+if (!$db) {
     http_response_code(500);
-    echo json_encode(['error' => 'Database connection failed', 'details' => $e->getMessage()]);
+    echo json_encode(['error' => 'Database connection failed', 'details' => 'No DB connection available.']);
     exit;
 }
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -68,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
         
-        $cargos = $stmt->fetchAll();
+        $cargos = $stmt->  fetchAll();
     
         $response = [
             'success' => true,
